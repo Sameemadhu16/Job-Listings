@@ -13,7 +13,8 @@
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.10.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

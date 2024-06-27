@@ -1,7 +1,12 @@
 import React from 'react'
+import { BrowserRouter,Routes,Route } from 'react-router-dom'
+import Signup from './Signup'
 
 export default function App() {
-  return (
-    <div className='text-3xl text-red-500'>App</div>
-  )
+  return <BrowserRouter>
+  <Routes>
+    <Route path='/sign-up' element={<Signup/>}/>
+  </Routes>
+</BrowserRouter>
+    
 }
