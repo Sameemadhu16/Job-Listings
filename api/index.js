@@ -6,7 +6,7 @@ import authRoutes from './routes/auth.route.js';
 
 dotenv.config();
 
-mongoose.connect("mongodb+srv://ilakshitha7921:Ishan2001@cluster0.oyqzkn8.mongodb.net/jobwave?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect("mongodb+srv://ilakshitha7921:ilakshitha7921@cluster0.gfhczos.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 .then(() => {
   console.log('MongoDB is conected');
 })
