@@ -1,11 +1,12 @@
 import User from "../models/user.model.js";
 import bcryptjs from 'bcryptjs';
+import { errorHandler } from "../utils/error.js";
 
-export const signup = async (req , res) => {
-    const { username, email, password } = req.body;
+export const signup = async (req , res, next) => {
+    const { username, email, password, role,gender, mobileNumber, birthday, maritalStatus, experience,education,biography,coverLetter,resume,skills,companyName} = req.body;
 
-    if (!username || !email || !password || username === '' || email === '' || password === ''){
-        return res.status(400).json({ message: 'All feilds are requiired'});
+    if (!username || !email || !password || !role || username === '' || email === '' || password === ''|| role === ''){
+        return next(errorHandler(400, 'All feilds are requiired'));
     }
 
     const hashedPassword = bcryptjs.hashSync(password,10);
@@ -14,13 +15,25 @@ export const signup = async (req , res) => {
         username,
         email,
         password: hashedPassword,
+        gender,
+        mobileNumber,
+        birthday,
+        maritalStatus,
+        experience,
+        education,
+        role,
+        companyName: role === 'jobPoster' ? companyName : undefined,
+        biography: role === 'jobPoster' ? biography : undefined,
+        coverLetter: role === 'jobPoster' ? coverLetter : undefined,
+        resume: role === 'jobSeeker' ? resume : undefined,
+        skills: role === 'jobSeeker' ? skills : undefined,
     });
 
     try{
         await newUser.save();
         res.json('Signup successfull');
     } catch (error) {
-        res.status(500).json({message: error.message});
+        next(error);
     }
 
     };
