@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import SignUpStep2 from './SignUpStep2';
 
@@ -39,8 +40,13 @@ const SignUp = () => {
         console.log(formData);
         // Clear form or perform redirect after successful submission
     };
+=======
+import React from 'react'
+>>>>>>> daa10e9 (create basic ui for sign up)
 
+export default function SignUp() {
     return (
+<<<<<<< HEAD
 
         <div className="flex min-h-screen flex-col lg:flex-row bg-gray-100">
             {step === 1 && (
@@ -134,3 +140,8 @@ const SignUp = () => {
 };
 
 export default SignUp;
+=======
+        <div>SignUp Page</div>
+    )
+}
+>>>>>>> daa10e9 (create basic ui for sign up)

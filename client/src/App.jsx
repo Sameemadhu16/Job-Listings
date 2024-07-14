@@ -50,6 +50,12 @@ export default function App() {
         </Route>
         <Route path='settings' element={<PosterSetting />}>
           <Route index element={<PosterCompanyInfo />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/sign-up' element={<SignUp />} />
+          <Route path='/sign-in' element={<SignIn />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+
 
         </Route>
       </Route>
@@ -63,5 +69,9 @@ export default function App() {
     </Routes>
     <Footer />
   </BrowserRouter>
+
+
+
+
 
 }
