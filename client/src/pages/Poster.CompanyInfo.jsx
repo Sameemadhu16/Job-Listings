@@ -23,11 +23,9 @@ export default function PosterCompanyInfo() {
           </Button>
         </div>
         <p className='font-semibold'>About Us:</p>
-        <Textarea placeholder='Write down your company here.Let the candidate know who we are'>
-
-        </Textarea>
+        <Textarea placeholder='Write down your company here.Let the candidate know who we are'></Textarea>
     </form>
-      <Button type='button' className='bg-blue-500 hover:bg-opacity-95 mt-3' >
+      <Button type='button' cols={50} className='bg-blue-500 hover:bg-opacity-95 mt-3' >
           <div className='flex flex-row gap-1 items-center'>
           Save & Next
           <FaArrowRight />
