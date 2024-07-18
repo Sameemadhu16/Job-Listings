@@ -12,6 +12,8 @@ import PosterFountInfo from './pages/Poster.Found-Info';
 import PosterSocailMediaInfo from './pages/Poster.SocailMediaInfo';
 import Contact from './pages/Contact';
 import Finish from './pages/Finish';
+import PosterDashboard from './pages/Poster.Dashboard';
+
 
 export default function App() {
   return <BrowserRouter>
@@ -27,6 +29,7 @@ export default function App() {
     <Route path='/social-info' element={<PosterSocailMediaInfo/>}/>
     <Route path='/contact' element={<Contact/>}/>
     <Route path='/finish' element={<Finish/>}/>
+    <Route path='/poster-dashboard' element={<PosterDashboard/>}/>
   </Routes>
   <Footer/>
 </BrowserRouter>
