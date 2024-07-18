@@ -5,15 +5,15 @@ import { FaArrowRight } from "react-icons/fa";
 export default function PosterCompanyInfo() {
   return (
     <div className='p-3 max-w-3xl mx-auto min-h-screen'>
-      <h1 className='text-3xl font-bold'>
-        Logo & Banner image
-      </h1>
     <form className="flex flex-col gap-4 mt-3" >
+      <h1 className='text-3xl font-bold'>
+          Logo & Banner image :
+      </h1>
         <div className='flex flex-col gap-4 sm:flex-row justify-between'>
           <TextInput type='text' placeholder='Title' required id='title'
           className='flex-1'/>
         </div>
-        <p className='font-semibold'>Banner Image:</p>
+        <p className='font-semibold'>Banner Image :</p>
         <div className='flex gap-4 items-center justify-between border-4
         border-blue-500 border-dotted p-3'
         > 
@@ -22,7 +22,7 @@ export default function PosterCompanyInfo() {
            upload image
           </Button>
         </div>
-        <p className='font-semibold'>About Us:</p>
+        <p className='font-semibold'>About Us :</p>
         <Textarea placeholder='Write down your company here.Let the candidate know who we are'></Textarea>
     </form>
       <Button type='button' cols={50} className='bg-blue-500 hover:bg-opacity-95 mt-3' >
