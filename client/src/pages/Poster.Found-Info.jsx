@@ -4,7 +4,7 @@ import { FaArrowRight } from "react-icons/fa";
 
 export default function PosterCompanyInfo() {
   return (
-    <div className='p-3 max-w-3xl mx-auto min-h-screen'>
+    <div className='p-3 max-w-3xl mx-auto min-h-screen bg-gray-100'>
     <form className="flex flex-col flex-wrap gap-4 m-10" >
         <h1 className='text-3xl font-bold'>
             Found Info :
