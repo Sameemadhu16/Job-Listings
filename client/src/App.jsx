@@ -15,6 +15,7 @@ import Contact from './pages/Contact';
 import Finish from './pages/Finish';
 import PosterDashboard from './pages/Poster.Dashboard';
 import SeekerDashboard from './pages/Seeker.Dashboard';
+import JobPost from './components/JobPost';
 
 
 export default function App() {
@@ -34,6 +35,7 @@ export default function App() {
     <Route path='/finish' element={<Finish/>}/>
     <Route path='/poster-dashboard' element={<PosterDashboard/>}/>
     <Route path='/seeker-dashboard' element={<SeekerDashboard/>}/>
+    <Route path='/job-post' element={<JobPost/>}/>
 
   </Routes>
   <Footer/>
