@@ -20,7 +20,7 @@ export default function SeekerDashSidebar() {
     <Sidebar className="w-full md:w-56">
       <Sidebar.Items>
         <Sidebar.ItemGroup className="flex flex-col gap-1">
-            <Link to="/dashboard?tab=dash">
+            <Link to="/seeker-dashboard?tab=dash">
               <Sidebar.Item
                 active={tab === "dash" || !tab}
                 icon={HiViewGrid}
@@ -29,12 +29,12 @@ export default function SeekerDashSidebar() {
                 Overview
               </Sidebar.Item>
             </Link>
-          <Link to="/dashboard?tab=appliedjobs">
+          <Link to="/seeker-dashboard?tab=appliedjobs">
             <Sidebar.Item active={tab === "appliedjobs"} icon={HiClipboardList} as="div">
               Applied Jobs
             </Sidebar.Item>
           </Link>
-          <Link to="/dashboard?tab=latestjobs">
+          <Link to="/seeker-dashboard?tab=latestjobs">
             <Sidebar.Item active={tab === "latestjobs"} icon={HiClipboardList} as="div">
               Latest Jobs
             </Sidebar.Item>
