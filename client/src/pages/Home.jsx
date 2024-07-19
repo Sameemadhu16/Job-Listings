@@ -13,7 +13,7 @@ export default function Home() {
             type="text"
             placeholder="Search Jobs..."
             rightIcon={AiOutlineSearch}
-            className="mr-4"
+            className="mr-4 w-96"
           />
         </form>
         <Button className="w-12 h-12 lg:hidden focus:outline-none" color="gray" pill>
