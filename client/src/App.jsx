@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import About from './pages/About';
 import Dashboard from './pages/Dashboard';
+import SeekerDashboard from './pages/Seeker.Dashboard'
 import Header from './components/Header';
 import Footer from './components/Footer';
 import PosterCompanyInfo from './pages/Poster.CompanyInfo';
@@ -24,6 +25,7 @@ export default function App() {
     <Route path='/sign-up' element={<SignUp/>}/>
     <Route path='/sign-in' element={<SignIn/>}/>
     <Route path='/dashboard' element={<Dashboard/>}/>
+    <Route path='/seeker-dashboard' element={<SeekerDashboard/>}/>
     <Route path='/company-info' element={<PosterCompanyInfo/>}/>
     <Route path='/found-info' element={<PosterFountInfo/>}/>
     <Route path='/social-info' element={<PosterSocailMediaInfo/>}/>
