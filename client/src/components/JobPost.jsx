@@ -53,7 +53,7 @@ export default function JobPost() {
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-center">
                     <span className="font-semibold">Founded in:</span>
-                    <span className="ml-2">14 June, 2021</span>
+                    <span className="ml-2">14 June, 2024</span>
                   </li>
                   <li className="flex items-center">
                     <span className="font-semibold">Organization Type:</span>
@@ -74,17 +74,17 @@ export default function JobPost() {
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-center">
                     <AiOutlineGlobal className="mr-2" />
-                    <a href="https://www.estherhoward.com" className="text-blue-600">
-                      www.estherhoward.com
+                    <a href="https://www.ishanlakshitha(pvt).com" className="text-blue-600">
+                      www.ishanlakshitha.com
                     </a>
                   </li>
                   <li className="flex items-center">
                     <AiOutlinePhone className="mr-2" />
-                    <span>+1-202-555-0141</span>
+                    <span>0775021865</span>
                   </li>
                   <li className="flex items-center">
                     <AiOutlineMail className="mr-2" />
-                    <span>esther.howard@gmail.com</span>
+                    <span>ilakshitha7921@gmail.com</span>
                   </li>
                 </ul>
               </div>
