@@ -28,8 +28,8 @@ export default function JobPost() {
             <div className="lg:col-span-2">
               <h2 className="text-2xl font-bold mb-4">Description</h2>
               <p className="text-gray-700 mb-4">
-                Fusce et erat et nibh maximus fermentum. Mauris ac justo nibh. Praesent nec lorem lorem. Donec ullamcorper lacus mollis tortor pretium malesuada. In quis porta nisi, quis fringilla orci. Donec porttitor, odio a efficitur blandit, orci nisl porta elit, eget vulputate quam nibh ut tellus. Sed ut posuere risus, vitae commodo velit. Nullam in lorem dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla facilisi. Ut eget quam quis vehicula.
-                Quisque quis sagittis dolor magna. Vivamus elementum eu leo et gravida. Sed dignissim placerat diam, ac laoreet eros rutrum sit amet. Donec imperdiet in leo et imperdiet. In hac habitasse platea dictumst. Sed quis nisl molestie diam ullamcorper condimentum. Sed aliquet, arcu eget pretium bibendum, odio enim rutrum arcu, quis suscipit mauris turpis in neque. Vestibulum id vestibulum odio. Sed dolor felis, iaculis eget turpis eu, lobortis imperdiet massa.
+                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa        dddddddddddddddddddddddddddddddddddddd fffffffffffffffffffffffffffffffffffffffff
+                kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk nnnnnnnnnnnnnnnnnnnnnnnnnn jjjjjjjjjjjjjjjjjjjjjjjj mmmmmmmmmmmmmmmmmmmn  nnnnnnnnnnb           ggggggggggggggggggggg
               </p>
               <h2 className="text-2xl font-bold mb-4">Company Benefits</h2>
               <p className="text-gray-700 mb-4">
