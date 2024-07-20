@@ -3,12 +3,19 @@ import bcryptjs from 'bcryptjs';
 import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
+<<<<<<< HEAD
 
 export const signup = async (req, res, next) => {
     const { username, fullname, email, password, role, gender, mobileNumber, birthday, maritalStatus, experience, education, biography, coverLetter, cv, skills, companyName } = req.body;
 
     if (!username || !fullname || !email || !password || !role || username === '' || fullname === '' || email === '' || password === '' || role === '') {
 
+=======
+export const signup = async (req, res, next) => {
+    const { username, fullname, email, password, role, gender, mobileNumber, birthday, maritalStatus, experience, education, biography, coverLetter, cv, skills, companyName } = req.body;
+
+    if (!username || !fullname || !email || !password || !role || username === '' || fullname === '' || email === '' || password === '' || role === '') {
+>>>>>>> 3502724 (create signin in auth controller)
         return next(errorHandler(400, 'All feilds are requiired'));
     }
 
@@ -41,6 +48,7 @@ export const signup = async (req, res, next) => {
     }
 
 };
+<<<<<<< HEAD
 
 export const signin = async (req, res, next) => {
     const { email, password } = req.body;
@@ -81,3 +89,5 @@ export const signin = async (req, res, next) => {
 
 };
 
+=======
+>>>>>>> 3502724 (create signin in auth controller)
