@@ -6,8 +6,9 @@ import jwt from "jsonwebtoken";
 <<<<<<< HEAD
 
 export const signup = async (req, res, next) => {
-    const { username, email, password, role, gender, mobileNumber, birthday, maritalStatus, experience, education, biography, coverLetter, resume, skills, companyName } = req.body;
+    const { username, fullname, email, password, role, gender, mobileNumber, birthday, maritalStatus, experience, education, biography, coverLetter, cv, skills, companyName } = req.body;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     if (!username || !fullname || !email || !password || !role || username === '' || fullname === '' || email === '' || password === '' || role === '') {
 
@@ -20,6 +21,9 @@ export const signup = async (req, res, next) => {
 =======
     if (!username || fullname || !email || !password || !role || username === '' || fullname === '' || email === '' || password === '' || role === '') {
 >>>>>>> 0be260c (create sign in api route)
+=======
+    if (!username || !fullname || !email || !password || !role || username === '' || fullname === '' || email === '' || password === '' || role === '') {
+>>>>>>> 766004c (create signin in auth controller)
         return next(errorHandler(400, 'All feilds are requiired'));
     }
 
@@ -85,6 +89,7 @@ export const signin = async (req, res, next) => {
         }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         const token = jwt.sign({ id: validUser._id, isAdmin: validUser.isAdmin, isModerator: validUser.isModerator }, process.env.JWT_SECRET);
 
@@ -94,6 +99,9 @@ export const signin = async (req, res, next) => {
 =======
         const token = jwt.sign({ id: validUser._id, isAdmin: validUser.isAdmin }, process.env.JWT_SECRET);
 >>>>>>> 0be260c (create sign in api route)
+=======
+        const token = jwt.sign({ id: validUser._id, isAdmin: validUser.isAdmin, isModerator: validUser.isModerator }, process.env.JWT_SECRET);
+>>>>>>> 766004c (create signin in auth controller)
 
         const { password: pass, ...rest } = validUser._doc;
 
@@ -104,6 +112,7 @@ export const signin = async (req, res, next) => {
         next(error);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 };
@@ -113,3 +122,6 @@ export const signin = async (req, res, next) => {
 =======
 }
 >>>>>>> 0be260c (create sign in api route)
+=======
+};
+>>>>>>> 766004c (create signin in auth controller)
