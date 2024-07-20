@@ -4,9 +4,9 @@ import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
 export const signup = async (req, res, next) => {
-    const { username, email, password, role, gender, mobileNumber, birthday, maritalStatus, experience, education, biography, coverLetter, resume, skills, companyName } = req.body;
+    const { username, fullname, email, password, role, gender, mobileNumber, birthday, maritalStatus, experience, education, biography, coverLetter, cv, skills, companyName } = req.body;
 
-    if (!username || fullname || !email || !password || !role || username === '' || fullname === '' || email === '' || password === '' || role === '') {
+    if (!username || !fullname || !email || !password || !role || username === '' || fullname === '' || email === '' || password === '' || role === '') {
         return next(errorHandler(400, 'All feilds are requiired'));
     }
 
@@ -55,7 +55,7 @@ export const signin = async (req, res, next) => {
         if (!validPassword) {
             return next(errorHandler(400, 'Invalid Password'));
         }
-        const token = jwt.sign({ id: validUser._id, isAdmin: validUser.isAdmin }, process.env.JWT_SECRET);
+        const token = jwt.sign({ id: validUser._id, isAdmin: validUser.isAdmin, isModerator: validUser.isModerator }, process.env.JWT_SECRET);
 
         const { password: pass, ...rest } = validUser._doc;
 
@@ -65,4 +65,4 @@ export const signin = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-}
+};
