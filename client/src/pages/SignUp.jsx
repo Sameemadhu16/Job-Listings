@@ -4,6 +4,7 @@ import SignUpStep2 from './SignUpStep2';
 import { Button, Label, TextInput, Card } from 'flowbite-react';
 
 
+
 const SignUp = () => {
     const [formData, setFormData] = useState({
         fullName: '',
@@ -40,6 +41,7 @@ const SignUp = () => {
     };
 
     return (
+
         <div className="flex min-h-screen flex-col lg:flex-row bg-gray-100">
             {step === 1 && (
                 <div className="flex flex-1 items-center justify-center p-6 sm:p-12">
@@ -58,16 +60,20 @@ const SignUp = () => {
                                 <div className="flex mb-4">
                                     <Button
                                         className={`flex-1 p-3 border rounded-l-lg mr-2 hover:text-white ${formData.role === 'jobPoster' ? ' bg-blue-500 rounded-lg text-white focus:outline-white' : 'bg-blue-200 border-blue-500 text-blue-700'}`}
+
                                         onClick={() => setFormData({ ...formData, role: 'jobPoster' })}
                                     >
                                         Job Poster
                                     </Button>
                                     <Button
+
                                         className={`flex-1 p-3 border rounded-r-lg ml-2 hover:text-white ${formData.role === 'jobSeeker' ? ' bg-blue-500 rounded-lg text-white focus:outline-white' : 'bg-blue-200 border-blue-500 text-blue-700'}`}
+
                                         onClick={() => setFormData({ ...formData, role: 'jobSeeker' })}
                                     >
                                         Job Seeker
                                     </Button>
+
                                 </div>
                                 <div>
                                     <Label htmlFor="fullname" value="Your Full Name" />
@@ -106,6 +112,7 @@ const SignUp = () => {
                             </div>
                         </form>
                     </Card>
+
                 </div>
             )}
             {step === 2 && <SignUpStep2 formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} />}
