@@ -72,6 +72,10 @@ const SignUp = () => {
                                         <TextInput type="text" placeholder="Full Name" id="fullname"  onChange={handleChange} />
                                     </div>
                                     <div className='mb-4'>
+                                        <Label value="Your Username" />
+                                        <TextInput type="text" placeholder="Username" id="username"  onChange={handleChange} />
+                                    </div>
+                                    <div className='mb-4'>
                                         <Label value="Your Email" />
                                         <TextInput type="text" placeholder="Email" id="email" onChange={handleChange} />
                                     </div>
@@ -79,10 +83,7 @@ const SignUp = () => {
                                         <Label value="Your Password" />
                                         <TextInput type="text" placeholder="**********" id="password"  onChange={handleChange} />
                                     </div>
-                                    <div className='mb-4'>
-                                        <Label value="Confirm Password" />
-                                        <TextInput type="text" placeholder="**********" id="confirmpassword"  onChange={handleChange} />
-                                    </div>
+                                    
                                     <div className='mb-4'>
                                         <Label value="Your Mobile Number" />
                                         <TextInput type="text" placeholder="Mobile Number" id="mobilenumber" onChange={handleChange} />
