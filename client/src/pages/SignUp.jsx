@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import SignUpStep2 from './SignUpStep2';
 
@@ -57,8 +58,13 @@ import React from 'react'
 >>>>>>> daa10e9 (create basic ui for sign up)
 =======
 >>>>>>> 084435b (make changes sign up pages)
+=======
+import React from 'react'
+>>>>>>> efbf3a8 (make changes sign up pages)
 
+export default function SignUp() {
     return (
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -246,3 +252,8 @@ export default SignUp;
 >>>>>>> daa10e9 (create basic ui for sign up)
 =======
 >>>>>>> 084435b (make changes sign up pages)
+=======
+        <div>SignUp Page</div>
+    )
+}
+>>>>>>> efbf3a8 (make changes sign up pages)
