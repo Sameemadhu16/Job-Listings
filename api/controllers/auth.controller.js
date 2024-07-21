@@ -4,9 +4,9 @@ import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
 export const signup = async (req , res, next) => {
-    const { username, email, password, role,gender, mobileNumber, birthday, maritalStatus, experience,education,biography,coverLetter,resume,skills,companyName} = req.body;
+    const { username,fullname, email, password, role,gender, mobileNumber, birthday, maritalStatus, experience,education,biography,coverLetter,cv,skills,companyName} = req.body;
 
-    if (!username ||fullname || !email || !password || !role || username === '' || fullname === ''|| email === '' || password === ''|| role === ''){
+    if (!username ||!fullname || !email || !password || !role || username === '' || fullname === ''|| email === '' || password === ''|| role === ''){
         return next(errorHandler(400, 'All feilds are requiired'));
     }
 
@@ -27,7 +27,7 @@ export const signup = async (req , res, next) => {
         companyName: role === 'jobPoster' ? companyName : undefined,
         biography: role === 'jobPoster' ? biography : undefined,
         coverLetter: role === 'jobPoster' ? coverLetter : undefined,
-        resume: role === 'jobSeeker' ? resume : undefined,
+        cv: role === 'jobSeeker' ? cv : undefined,
         skills: role === 'jobSeeker' ? skills : undefined,
     });
 
@@ -47,7 +47,7 @@ export const signin = async (req, res, next)=>{
         next(errorHandler(400, 'All fields are required'));
     }
     try{
-        const validUser = await User.findOne({email });
+        const validUser = await User.findOne({ email });
         if(!validUser){
             return next(errorHandler(400,'User not found'));
         }
@@ -64,4 +64,4 @@ export const signin = async (req, res, next)=>{
         } catch(error){
          next(error);
     }
-}
+};
