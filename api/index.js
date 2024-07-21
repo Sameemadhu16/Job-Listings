@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 import cookieParser from 'cookie-parser';
 import path from 'path';
@@ -11,6 +12,10 @@ import path from 'path';
 import postRoutes from './routes/post.route.js'
 =======
 >>>>>>> 64f0769 (create sign in api route)
+=======
+import cookieParser from 'cookie-parser';
+import path from 'path';
+>>>>>>> 0be260c (create sign in api route)
 
 dotenv.config();
 
@@ -29,10 +34,14 @@ mongoose.connect("mongodb+srv://ilakshitha7921:ilakshitha7921@cluster0.gfhczos.m
   })
   .catch((err) => {
     console.log(err);
+<<<<<<< HEAD
   });
 >>>>>>> 64f0769 (create sign in api route)
 
 const __dirname = path.resolve();
+=======
+  })
+>>>>>>> 0be260c (create sign in api route)
 
 const app = express();
 
@@ -45,10 +54,20 @@ app.listen(4500, () => {
 
 app.use('/api/user', userRoutes);
 <<<<<<< HEAD
+<<<<<<< HEAD
 app.use('/api/auth', authRoutes);
 
 
 
+=======
+app.use('/api/auth', authRoutes);
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
+>>>>>>> 0be260c (create sign in api route)
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
@@ -58,6 +77,7 @@ app.use((err, req, res, next) => {
     statusCode,
     message,
   });
+<<<<<<< HEAD
 });
 
 app.use('/api/post',postRoutes);
@@ -65,3 +85,6 @@ app.use('/api/post',postRoutes);
 =======
 app.use('/api/auth', authRoutes);
 >>>>>>> 64f0769 (create sign in api route)
+=======
+});
+>>>>>>> 0be260c (create sign in api route)
