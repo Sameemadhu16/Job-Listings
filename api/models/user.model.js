@@ -79,10 +79,10 @@ const userSchema = new mongoose.Schema({
         },
 
         //Feild specific to job seeker
-        resume: {
+        cv: {
             type: String,
-            required: function(){
-                return this.role === 'jobSeeker'; 
+            required: function() {
+                return this.role === 'jobSeeker';
             }
         },
             
@@ -92,7 +92,7 @@ const userSchema = new mongoose.Schema({
                 return this.role === 'jobSeeker';
             }
        
-        },
+        }
     },
     {timestamps: true}
 );
