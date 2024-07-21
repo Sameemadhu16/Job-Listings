@@ -3,15 +3,19 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
+<<<<<<< HEAD
 
 import cookieParser from 'cookie-parser';
 import path from 'path';
 
 import postRoutes from './routes/post.route.js'
+=======
+>>>>>>> 64f0769 (create sign in api route)
 
 dotenv.config();
 
 mongoose.connect("mongodb+srv://ilakshitha7921:ilakshitha7921@cluster0.gfhczos.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+<<<<<<< HEAD
 .then(() => {
   console.log('MongoDB is conected');
 })
@@ -19,6 +23,14 @@ mongoose.connect("mongodb+srv://ilakshitha7921:ilakshitha7921@cluster0.gfhczos.m
 {
   console.log(err);
 });
+=======
+  .then(() => {
+    console.log('MongoDB is conected');
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+>>>>>>> 64f0769 (create sign in api route)
 
 const __dirname = path.resolve();
 
@@ -27,11 +39,12 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.listen(4500,() => {
-    console.log('Server is running port 4500');
+app.listen(4500, () => {
+  console.log('Server is running port 4500');
 });
 
 app.use('/api/user', userRoutes);
+<<<<<<< HEAD
 app.use('/api/auth', authRoutes);
 
 
@@ -49,3 +62,6 @@ app.use((err, req, res, next) => {
 
 app.use('/api/post',postRoutes);
 
+=======
+app.use('/api/auth', authRoutes);
+>>>>>>> 64f0769 (create sign in api route)
