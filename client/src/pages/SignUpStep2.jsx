@@ -38,6 +38,7 @@ const SignUpStep2 = ({ formData, setFormData, handleSubmit }) => {
                     {formData.role === 'jobSeeker' && (
                         <div>
                             <div className="mb-4">
+                                <Label value='Add Your CV'/>
                                 <TextInput
                                     type="file"
                                     name="resume"
