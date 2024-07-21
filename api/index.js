@@ -5,17 +5,23 @@ import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1153696 (create sign in api route)
 
 import cookieParser from 'cookie-parser';
 import path from 'path';
 
 import postRoutes from './routes/post.route.js'
+<<<<<<< HEAD
 =======
 >>>>>>> 64f0769 (create sign in api route)
 =======
 import cookieParser from 'cookie-parser';
 import path from 'path';
 >>>>>>> 0be260c (create sign in api route)
+=======
+>>>>>>> 1153696 (create sign in api route)
 
 dotenv.config();
 
@@ -62,6 +68,7 @@ app.use('/api/auth', authRoutes);
 =======
 app.use('/api/auth', authRoutes);
 
+
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
 app.get('*', (req, res) => {
@@ -78,6 +85,7 @@ app.use((err, req, res, next) => {
     message,
   });
 <<<<<<< HEAD
+<<<<<<< HEAD
 });
 
 app.use('/api/post',postRoutes);
@@ -88,3 +96,9 @@ app.use('/api/auth', authRoutes);
 =======
 });
 >>>>>>> 0be260c (create sign in api route)
+=======
+});
+
+app.use('/api/post', postRoutes);
+
+>>>>>>> 1153696 (create sign in api route)

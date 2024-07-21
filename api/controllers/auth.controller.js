@@ -14,8 +14,9 @@ export const signup = async (req, res, next) => {
 
 =======
 export const signup = async (req, res, next) => {
-    const { username, fullname, email, password, role, gender, mobileNumber, birthday, maritalStatus, experience, education, biography, coverLetter, cv, skills, companyName } = req.body;
+    const { username, email, password, role, gender, mobileNumber, birthday, maritalStatus, experience, education, biography, coverLetter, resume, skills, companyName } = req.body;
 
+<<<<<<< HEAD
     if (!username || !fullname || !email || !password || !role || username === '' || fullname === '' || email === '' || password === '' || role === '') {
 >>>>>>> 3502724 (create signin in auth controller)
 =======
@@ -24,6 +25,9 @@ export const signup = async (req, res, next) => {
 =======
     if (!username || !fullname || !email || !password || !role || username === '' || fullname === '' || email === '' || password === '' || role === '') {
 >>>>>>> 766004c (create signin in auth controller)
+=======
+    if (!username || fullname || !email || !password || !role || username === '' || fullname === '' || email === '' || password === '' || role === '') {
+>>>>>>> 1153696 (create sign in api route)
         return next(errorHandler(400, 'All feilds are requiired'));
     }
 
@@ -56,6 +60,7 @@ export const signup = async (req, res, next) => {
     }
 
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -125,3 +130,5 @@ export const signin = async (req, res, next) => {
 =======
 };
 >>>>>>> 766004c (create signin in auth controller)
+=======
+>>>>>>> 1153696 (create sign in api route)
