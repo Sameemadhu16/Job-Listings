@@ -61,9 +61,13 @@ export const signin = async (req, res, next) => {
         if (!validPassword) {
             return next(errorHandler(400, 'Invalid Password'));
         }
+<<<<<<< HEAD
 
         const token = jwt.sign({ id: validUser._id, isAdmin: validUser.isAdmin, isModerator: validUser.isModerator }, process.env.JWT_SECRET);
 
+=======
+        const token = jwt.sign({ id: validUser._id, isAdmin:validUser.isAdmin, isModerator:validUser.isModerator}, process.env.JWT_SECRET);
+>>>>>>> f424d68 (update moderator in user model)
 
         const { password: pass, ...rest } = validUser._doc;
 
