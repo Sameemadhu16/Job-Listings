@@ -54,6 +54,11 @@ const userSchema = new mongoose.Schema({
             type : Boolean,
             default: false,
           },
+
+          isModerator: {
+            type : Boolean,
+            default: false,
+          },
        
 
         //Feild specific to job posters
