@@ -33,18 +33,18 @@ export default function JobPost() {
               </p>
               <h2 className="text-2xl font-bold mb-4">Company Benefits</h2>
               <p className="text-gray-700 mb-4">
-                Donec dignissim nunc eu tellus malesuada fermentum. Sed blandit in magna at accumsan. Etiam imperdiet massa aliquam, consectetur leo in, auctor neque.
+                You can put your any post
               </p>
               <ul className="list-disc list-inside text-gray-700 mb-4">
-                <li>In hac habitasse platea dictumst.</li>
-                <li>Sed quis nisl molestie diam ullamcorper condimentum.</li>
-                <li>Vestibulum id vestibulum odio.</li>
-                <li>Etiam libero ante accumsan id tellus rhoncus volutpat velit.</li>
-                <li>Nam condimentum sit amet ipsum id malesuada.</li>
+                <li>Ishan lakshitha.</li>
+                <li>pitigala.</li>
+                <li>Galle.</li>
+                <li>Srilanka.</li>
+                <li>Globle Asia.</li>
               </ul>
               <h2 className="text-2xl font-bold mb-4">Company Vision</h2>
               <p className="text-gray-700 mb-4">
-                Praesent ultrices mauris at nisi euismod, ut venenatis augue blandit. Etiam massa risus, accumsan nec tempus nec, venenatis in nisl. Nam volutpat, ex blandit in magna id, pellentesque facilisis sapien. In feugiat auctor mi, eget commodo lectus convallis ac.
+                Dont't think about this
               </p>
             </div>
             <div>
