@@ -17,8 +17,12 @@ import Contact from './pages/Contact';
 import Finish from './pages/Finish';
 import PosterDashboard from './pages/Poster.Dashboard';
 import SeekerDashboard from './pages/Seeker.Dashboard';
-import PartTimeJobPost from './components/Post.PartTimeJobPost'
-import FulltimeJobPost from './components/Post.FulltimeJobPost';
+import PosterDashOverview from './components/Poster.DashOverview';
+import PosterSetting from './components/poster.Setting';
+import PosterCompanyInfo from './components/Poster.CompanyInfo';
+import PosterPostjob from './components/Poster.Postjob';
+import PosterFoundInfo from './components/Poster.FoundInfo';
+import PosterSocialMediaInfo from './components/Poster.SocialMediaInfo';
 
 
 
@@ -31,15 +35,24 @@ export default function App() {
       <Route path='/sign-up' element={<SignUp />} />
       <Route path='/sign-in' element={<SignIn />} />
       <Route path='/dashboard' element={<Dashboard />} />
-
-      <Route path='/forgot-password' element={<ForgotPassword />} />
-
-      <Route path='/company-info' element={<PosterCompanyInfo />} />
-      <Route path='/found-info' element={<PosterFountInfo />} />
-      <Route path='/social-info' element={<PosterSocailMediaInfo />} />
       <Route path='/contact' element={<Contact />} />
       <Route path='/finish' element={<Finish />} />
-      <Route path='/poster-dashboard' element={<PosterDashboard />} />
+      <Route path='/poster-dashboard' element={<PosterDashboard />} >
+        <Route index element={<PosterDashOverview />} />
+        <Route path='employeeprofile' element={<PosterDashOverview />} />
+        <Route path='post-jobs' element={<PosterPostjob />} >
+          <Route index element={<PosterCompanyInfo />} />
+          <Route path='founding' element={<PosterFoundInfo />} />
+          <Route path='social-media' element={<PosterSocialMediaInfo />} />
+          <Route path='account-setting' element={<PosterCompanyInfo />} />
+        </Route>
+        <Route path='settings' element={<PosterSetting />}>
+          <Route index element={<PosterCompanyInfo />} />
+
+        </Route>
+      </Route>
+      <Route path='/company' element={<PosterCompanyInfo />} />
+
       <Route path='/seeker-dashboard' element={<SeekerDashboard />} />
       <Route path='/parttime-job-post' element={<PartTimeJobPost />} />
       <Route path='/fulltime-job-post' element={<FulltimeJobPost />} />
