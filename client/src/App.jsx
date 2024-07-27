@@ -14,7 +14,8 @@ import Contact from './pages/Contact';
 import Finish from './pages/Finish';
 import PosterDashboard from './pages/Poster.Dashboard';
 import SeekerDashboard from './pages/Seeker.Dashboard';
-import JobPost from './components/JobPost';
+import PartTimeJobPost from './components/Post.PartTimeJobPost'
+import FulltimeJobPost from './components/Post.FulltimeJobPost';
 
 
 export default function App() {
@@ -32,9 +33,9 @@ export default function App() {
     <Route path='/contact' element={<Contact/>}/>
     <Route path='/finish' element={<Finish/>}/>
     <Route path='/poster-dashboard' element={<PosterDashboard/>}/>
-
     <Route path='/seeker-dashboard' element={<SeekerDashboard/>}/>
-    <Route path='/job-post' element={<JobPost/>}/>
+    <Route path='/parttime-job-post' element={<PartTimeJobPost/>}/>
+    <Route path='/fulltime-job-post' element={<FulltimeJobPost/>}/>
 
   </Routes>
   <Footer/>

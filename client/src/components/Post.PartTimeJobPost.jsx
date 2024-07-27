@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'flowbite-react';
 import { AiOutlineGlobal, AiOutlineMail, AiOutlinePhone, AiFillFacebook, AiFillTwitterCircle, AiFillInstagram, AiFillLinkedin } from 'react-icons/ai';
 
-export default function JobPost() {
+export default function PartTimeJobPost() {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
