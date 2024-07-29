@@ -46,22 +46,22 @@ const SignUp = () => {
                             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Create account</h2>
                             <div className="flex gap-2 text-sm mt-4 mb-3">
                                 <span>Have an account?</span>
-                                <a href="/sign-in" className="font-medium text-blue-500 hover:text-indigo-500">
+                                <a href="/sign-in" className="font-medium text-blue-500 hover:text-indigo-500 hover:underline">
                                     Sign In
                                 </a>
                             </div>
                         </div>
-                        <form onSubmit={handleNextStep} className="mt-8 space-y-6">
+                        <form onSubmit={handleNextStep} className=" space-y-6">
                             <div className="space-y-4">
                                 <div className="flex mb-4">
                                     <Button
-                                        className={`flex-1 p-3 border rounded-l-lg mr-2 ${formData.role === 'jobPoster' ? 'px-2 py-1 bg-blue-500 rounded-lg text-white' : 'bg-violet-300 border-blue-500 text-black'}`}
+                                        className={`flex-1 p-3 border rounded-l-lg mr-2 hover:text-white ${formData.role === 'jobPoster' ? ' bg-blue-500 rounded-lg text-white focus:outline-white' : 'bg-blue-200 border-blue-500 text-blue-700'}`}
                                         onClick={() => setFormData({ ...formData, role: 'jobPoster' })}
                                     >
                                         Job Poster
                                     </Button>
                                     <Button
-                                        className={`flex-1 p-3 border rounded-r-lg ml-2 ${formData.role === 'jobSeeker' ? 'px-2 py-1 bg-blue-500 rounded-lg text-white' : 'bg-violet-300 border-blue-500 text-black'}`}
+                                        className={`flex-1 p-3 border rounded-r-lg ml-2 hover:text-white ${formData.role === 'jobSeeker' ? ' bg-blue-500 rounded-lg text-white focus:outline-white' : 'bg-blue-200 border-blue-500 text-blue-700'}`}
                                         onClick={() => setFormData({ ...formData, role: 'jobSeeker' })}
                                     >
                                         Job Seeker
@@ -107,8 +107,7 @@ const SignUp = () => {
                 </div>
             )}
             {step === 2 && <SignUpStep2 formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} />}
-            <div className="flex lg:w-1/2 bg-cover bg-center items-center justify-center p-6 lg:p-12" style={{ backgroundImage: `url(https://img.freepik.com/free-photo/copy-space-blank-commercial-advertisement_53876-121262.jpg?t=st=1721500082~exp=1721503682~hmac=84ee8a13f47eef8a6ff863cfd1ec73b8c03072111099630aafb8d00e04250362&w=740)` }}>
-            </div>
+            <img className='lg:h-screen mt-12 mr-10 rounded-lg sm:h-20' src="https://img.freepik.com/free-photo/copy-space-blank-commercial-advertisement_53876-121262.jpg?t=st=1721500082~exp=1721503682~hmac=84ee8a13f47eef8a6ff863cfd1ec73b8c03072111099630aafb8d00e04250362&w=740" alt="" />
         </div>
     );
 };

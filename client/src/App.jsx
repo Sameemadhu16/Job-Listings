@@ -7,6 +7,7 @@ import About from './pages/About';
 import Dashboard from './pages/Dashboard';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ForgotPassword from './pages/ForgotPassword';
 
 export default function App() {
   return <BrowserRouter>
@@ -17,6 +18,7 @@ export default function App() {
     <Route path='/sign-up' element={<SignUp/>}/>
     <Route path='/sign-in' element={<SignIn/>}/>
     <Route path='/dashboard' element={<Dashboard/>}/>
+    <Route path='/forgot-password' element={<ForgotPassword/>}/>
 
   </Routes>
   <Footer/>
