@@ -19,7 +19,11 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+<<<<<<< HEAD
+    
+=======
     console.log(formData)
+>>>>>>> fe895e1 (sign in page connect to the backend)
     if (!formData.email || !formData.password) {
       return dispatch(signInFailure('Please fill all the fields'))
     }
