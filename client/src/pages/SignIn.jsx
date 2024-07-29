@@ -25,6 +25,7 @@ const SignIn = () => {
                   type="email"
                   required
                   placeholder="Email address"
+                  
                 />
               </div>
               <div>
