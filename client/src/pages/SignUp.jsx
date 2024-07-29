@@ -41,46 +41,53 @@ const SignUp = () => {
     return (
         <div className="flex flex-col justify-center p-8">
             {step === 1 && (
-                <div className="w-full md:w-1/2 lg:w-1/2 flex flex-col justify-center p-6">
-                    <h2 className="text-3xl font-bold mb-4">Create account.</h2>
-
-                    <div className="flex gap-2 text-sm mt-4 mb-3">
-                        <span className=''>Have an account?</span>
-                        <NavLink to="/sign-in" className="text-blue-500">
-                            Sign In
-                        </NavLink>
-                    </div>
-
-                    <form onSubmit={handleNextStep} className='flex flex-col' >
-                        <div className="flex mb-4 ">
-                            <Button
-                                className={`flex-1 p-3 border rounded-l-lg mr-2 ${formData.role === 'jobPoster' ? 'px-2 py-1 bg-blue-500 rounded-lg ' : 'border-gray-300 bg-gray-100 rounded-lg'}`}
-                                onClick={() => setFormData({ ...formData, role: 'jobPoster' })}
-                            >
-                                Job Poster
-                            </Button>
-                            <Button
-                                className={`flex-1 p-3 border rounded-r-lg ml-2 ${formData.role === 'jobSeeker' ? 'px-2 py-1 bg-blue-500 rounded-lg' : 'border-gray-300 bg-gray-100 rounded-lg'}`}
-                                onClick={() => setFormData({ ...formData, role: 'jobSeeker' })}
-                            >
-                                Job Seeker
-                            </Button>
+                <div className="flex flex-1 items-center justify-center p-6 sm:p-12">
+                    <Card className="w-full max-w-md">
+                        <div className="text-center">
+                            <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Create account</h2>
+                            <div className="flex gap-2 text-sm mt-4 mb-3">
+                                <span>Have an account?</span>
+                                <a href="/sign-in" className="font-medium text-blue-500 hover:text-indigo-500">
+                                    Sign In
+                                </a>
+                            </div>
                         </div>
-                        <div className='gap-2'>
-                            <div className='mb-4'>
-                                <TextInput type="text" placeholder="Full name" id="fullname" onChange={handleChange} />
-                            </div>
-                            <div className='mb-4'>
-                                <TextInput type="text" placeholder="Email" id="email" onChange={handleChange} />
-                            </div>
-                            <div className='mb-4'>
-                                <TextInput type="text" placeholder="Password" id="password" onChange={handleChange} />
-                            </div>
-                            <div className='mb-4'>
-                                <TextInput type="text" placeholder="Confirm Password" id="confirmpassword" onChange={handleChange} />
-                            </div>
-                            <div className='mb-4'>
-                                <TextInput type="text" placeholder="Mobile Number" id="mobilenumber" onChange={handleChange} />
+                        <form onSubmit={handleNextStep} className="mt-8 space-y-6">
+                            <div className="space-y-4">
+                                <div className="flex mb-4">
+                                    <Button
+                                        className={`flex-1 p-3 border rounded-l-lg mr-2 ${formData.role === 'jobPoster' ? 'px-2 py-1 bg-blue-500 rounded-lg text-white' : 'bg-violet-300 border-blue-500 text-black'}`}
+                                        onClick={() => setFormData({ ...formData, role: 'jobPoster' })}
+                                    >
+                                        Job Poster
+                                    </Button>
+                                    <Button
+                                        className={`flex-1 p-3 border rounded-r-lg ml-2 ${formData.role === 'jobSeeker' ? 'px-2 py-1 bg-blue-500 rounded-lg text-white' : 'bg-violet-300 border-blue-500 text-black'}`}
+                                        onClick={() => setFormData({ ...formData, role: 'jobSeeker' })}
+                                    >
+                                        Job Seeker
+                                    </Button>
+                                </div>
+                                <div>
+                                    <Label htmlFor="fullname" value="Your Full Name" />
+                                    <TextInput type="text" placeholder="Full Name" id="fullname" name="fullName" onChange={handleChange} />
+                                </div>
+                                <div>
+                                    <Label htmlFor="username" value="Your Username" />
+                                    <TextInput type="text" placeholder="Username" id="username" name="username" onChange={handleChange} />
+                                </div>
+                                <div>
+                                    <Label htmlFor="email" value="Your Email" />
+                                    <TextInput type="text" placeholder="Email" id="email" name="email" onChange={handleChange} />
+                                </div>
+                                <div>
+                                    <Label htmlFor="password" value="Your Password" />
+                                    <TextInput type="password" placeholder="**********" id="password" name="password" onChange={handleChange} />
+                                </div>
+                                <div>
+                                    <Label htmlFor="mobilenumber" value="Your Mobile Number" />
+                                    <TextInput type="text" placeholder="Mobile Number" id="mobilenumber" name="mobileNumber" onChange={handleChange} />
+                                </div>
                             </div>
                             <div className='mb-4'>
                                 <select
@@ -121,6 +128,8 @@ const SignUp = () => {
                 </div>
             )}
             {step === 2 && <SignUpStep2 formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} />}
+            <div className="flex lg:w-1/2 bg-cover bg-center items-center justify-center p-6 lg:p-12" style={{ backgroundImage: `url(https://img.freepik.com/free-photo/copy-space-blank-commercial-advertisement_53876-121262.jpg?t=st=1721500082~exp=1721503682~hmac=84ee8a13f47eef8a6ff863cfd1ec73b8c03072111099630aafb8d00e04250362&w=740)` }}>
+            </div>
         </div>
     );
 };

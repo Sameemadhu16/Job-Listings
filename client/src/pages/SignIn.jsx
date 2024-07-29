@@ -1,54 +1,15 @@
 import React, { useState } from 'react';
 import { Button, Checkbox, Label, TextInput, Card, Alert } from 'flowbite-react';
-import { signInStart,signInSuccess,signInFailure } from '../redux/user/userSlice';
+import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
-  const [formData, setFormData] = useState({});
-  const {  error: errorMessage } = useSelector((state) => state.user);
-  
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
-  };
-  
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    if (!formData.email || !formData.password) {
-      return dispatch(signInFailure('Please fill all the fields'))
-    }
-    try {
-      dispatch(signInStart());
-      const res = await fetch('/api/auth/signin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if (data.success === false) {
-        dispatch(signInFailure(data.message));
-      }
-
-      if (res.ok) {
-        dispatch(signInSuccess(data));
-        navigate('/');
-      }
-    } catch (error) {
-      dispatch(signInFailure(error.message));
-    }
-  }
-
   return (
     <div className="flex min-h-screen flex-col lg:flex-row bg-gray-100">
       <div className="flex flex-1 items-center justify-center p-6 sm:p-12">
         <Card className="w-full max-w-md">
-          <div className="text-center">  
+          <div className="text-center">
             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Sign in</h2>
             <p className="mt-2 text-sm text-gray-600">
               Don't have an account?{' '}
@@ -57,10 +18,10 @@ const SignIn = () => {
               </a>
             </p>
           </div>
-          <form className="mt-8 space-y-6"  method="POST" onSubmit={handleSubmit}>
+          <form className="mt-8 space-y-6" method="POST" onSubmit={handleSubmit}>
             <div className="space-y-4">
               <div>
-                <Label htmlFor="email-address" value="Email address"  />
+                <Label htmlFor="email-address" value="Email address" />
                 <TextInput
                   id="email"
                   name="email"
@@ -86,8 +47,8 @@ const SignIn = () => {
               <div className='flex text-center items-center'>
                 <Checkbox id="remember_me" name="remember_me" />
                 <Label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
-                Remember me
-              </Label>
+                  Remember me
+                </Label>
               </div>
               <a href="forgot-password" className="text-sm text-blue-500 hover:text-indigo-500">
                 Forgot your password?
@@ -102,7 +63,7 @@ const SignIn = () => {
               <div className="border-t border-gray-300 flex-1"></div>
             </div>
             <div className="flex justify-center mt-6 space-x-4">
-              
+
               <Button outline className=''>
                 <img src="/path/to/google-logo.png" alt="Sign in with Google" className="h-5 w-5" />
                 <span className="ml-2">Sign in with Google</span>
