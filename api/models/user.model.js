@@ -3,8 +3,13 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
         username: {
             type: String,
-            requred: true,
+            required: true,
             unique: true,
+        },
+
+        fullname: {
+            type: String,
+            required: true,
         },
 
         email: {
@@ -40,6 +45,21 @@ const userSchema = new mongoose.Schema({
         experience: {
             type : String,
         },
+        profilePicture: {
+            type: String,
+            default:
+              'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+          },
+          isAdmin: {
+            type : Boolean,
+            default: false,
+          },
+
+          isModerator: {
+            type : Boolean,
+            default: false,
+          },
+       
 
         //Feild specific to job posters
         companyName: {
@@ -64,10 +84,10 @@ const userSchema = new mongoose.Schema({
         },
 
         //Feild specific to job seeker
-        resume: {
+        cv: {
             type: String,
-            required: function(){
-                return this.role === 'jobSeeker'; 
+            required: function() {
+                return this.role === 'jobSeeker';
             }
         },
             
@@ -77,6 +97,7 @@ const userSchema = new mongoose.Schema({
                 return this.role === 'jobSeeker';
             }
        
+
         },
         cart: {
             type: [String],
@@ -86,6 +107,7 @@ const userSchema = new mongoose.Schema({
         appliedJobs: {
             type: [String],
             
+
         }
     },
     {timestamps: true}

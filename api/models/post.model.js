@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { TiThLarge } from "react-icons/ti";
+
 
 const postSchema = new mongoose.Schema(
     {
