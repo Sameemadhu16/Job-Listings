@@ -18,12 +18,6 @@ import Finish from './pages/Finish';
 import PosterDashboard from './pages/Poster.Dashboard';
 import SeekerDashboard from './pages/Seeker.Dashboard';
 import JobPost from './components/JobPost';
-import PosterDashOverview from './components/Poster.DashOverview';
-import PosterSetting from './components/poster.Setting';
-import PosterCompanyInfo from './components/Poster.CompanyInfo';
-import PosterPostjob from './components/Poster.Postjob';
-import PosterFoundInfo from './components/Poster.FoundInfo';
-import PosterSocialMediaInfo from './components/Poster.SocialMediaInfo';
 
 
 export default function App() {
