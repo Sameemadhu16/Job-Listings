@@ -60,11 +60,14 @@ export const deletePost = async(req,res,next) => {
 }
 
 export const getPosts = async  (req,res,next) => {
+    
     try{
         const totalPosts = await Post.countDocuments();
-        
+        const posts = await Post.find().sort({createdAt: -1})
+
         res.status(200).json({
             totalPosts,
+            posts
         })
     }catch (error) {
         next(error);
