@@ -5,8 +5,8 @@ import { MdDateRange } from 'react-icons/md';
 export default function PostCards() {
   return (
     <div className="flex justify-center items-center py-10">
-      <div className="job-card bg-gradient-to-r from-blue-400 to-green-500 p-6 rounded-lg shadow-lg flex m-10 max-w-xl">
-        <div className="image-placeholder bg-gradient-to-r from-green-500 to-blue-500 rounded-lg w-1/3 h-40 flex items-center justify-center">
+      <div className="job-card bg-gray-200 p-6 rounded-lg shadow-lg flex m-10 max-w-xl">
+        <div className="image-placeholder bg-gray-400  rounded-lg w-1/3 h-40 flex items-center justify-center">
           {/* Placeholder for image */}
         </div>
         <div className="content ml-6 flex flex-col justify-between w-2/3">
@@ -20,7 +20,7 @@ export default function PostCards() {
               You can post your jobs on our platform
             </p>
           </div>
-          <Button className="read-more-button self-start  to-red-500 text-white" pill>
+          <Button className="read-more-button self-start text-white" pill>
             READ MORE
           </Button>
         </div>
