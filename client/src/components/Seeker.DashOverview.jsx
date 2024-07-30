@@ -96,11 +96,18 @@ export default function SeekerDashOverview() {
               </Table.Row>
             </Table.Body>
           </Table>*/}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <SeekerCartPost ShowAddcart={true}/>
-            <SeekerCartPost ShowAddcart={true}/>
-            <SeekerCartPost ShowAddcart={true}/>
+         <div className="flex flex-col  gap-2 sm:flex-row sm:gap-2">
+          <div className="">
+            <SeekerCartPost ShowAddcart={true} />
           </div>
+          <div className="w-full sm:w-auto">
+            <SeekerCartPost ShowAddcart={true} />
+          </div>
+          <div className="w-full sm:w-auto">
+            <SeekerCartPost ShowAddcart={true} />
+          </div>
+        </div>
+
         </div>
       </div>
     </div>
