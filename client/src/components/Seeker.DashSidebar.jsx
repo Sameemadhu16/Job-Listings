@@ -1,9 +1,10 @@
 import React from 'react'
 import { Sidebar } from 'flowbite-react'
-import {HiViewGrid,HiClipboardList} from "react-icons/hi"
+import {HiViewGrid,HiClipboardList, HiBell} from "react-icons/hi"
 import {Link, useLocation} from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import {useSelector} from 'react-redux'
+import { FaShoppingCart } from 'react-icons/fa'
 
 export default function SeekerDashSidebar() {
     const location = useLocation();
@@ -41,8 +42,15 @@ export default function SeekerDashSidebar() {
 
           <Link to="/seeker-dashboard?tab=latestjobs">
 
-            <Sidebar.Item active={tab === "latestjobs"} icon={HiClipboardList} as="div">
+            <Sidebar.Item active={tab === "latestjobs"} icon={HiBell} as="div">
               Latest Jobs
+            </Sidebar.Item>
+          </Link>
+
+          <Link to="/seeker-dashboard?tab=cart">
+
+            <Sidebar.Item active={tab === "cart"} icon={FaShoppingCart} as="div">
+              Cart
             </Sidebar.Item>
           </Link>
         </Sidebar.ItemGroup>

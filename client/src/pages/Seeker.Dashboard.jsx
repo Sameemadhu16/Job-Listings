@@ -4,6 +4,7 @@ import SeekerDashSidebar from "../components/Seeker.DashSidebar";
 import SeekerDashOverview from "../components/Seeker.DashOverview";
 import SeekerDashAppliedjobs from "../components/Seeker.DashAppliedjobs";
 import SeekerDashLatestjobs from "../components/Seeker.DashLatestjobs";
+import SeekerDashCart from "../components/Seeker.DashCart";
 
 export default function SeekerDashboard() {
   const location = useLocation();
@@ -27,7 +28,8 @@ export default function SeekerDashboard() {
             {tab === 'appliedjobs' && <SeekerDashAppliedjobs />}
             {/*latest jobs*/}
             {tab === 'latestjobs' && <SeekerDashLatestjobs />}
-        
+            {/*cart*/}
+            {tab === 'cart' && <SeekerDashCart />}
 
     </div>
 

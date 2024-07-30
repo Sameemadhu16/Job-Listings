@@ -97,6 +97,17 @@ const userSchema = new mongoose.Schema({
                 return this.role === 'jobSeeker';
             }
        
+
+        },
+        cart: {
+            type: [String],
+            
+       
+        },
+        appliedJobs: {
+            type: [String],
+            
+
         }
     },
     {timestamps: true}
