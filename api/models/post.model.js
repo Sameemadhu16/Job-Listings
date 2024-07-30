@@ -3,10 +3,10 @@ import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema(
     {
-        /*userId:{
+        userId:{
             type:String,
             required:true
-        },*/
+        },
         title:{
             required:true,
             type:String,
