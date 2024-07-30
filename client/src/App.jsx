@@ -12,9 +12,6 @@ import Contact from './pages/Contact';
 import Finish from './pages/Finish';
 import PosterDashboard from './pages/Poster.Dashboard';
 import SeekerDashboard from './pages/Seeker.Dashboard';
-import PartTimeJobPost from './components/Post.PartTimeJobPost'
-import FulltimeJobPost from './components/Post.FulltimeJobPost';
-import JobPost from './components/JobPost';
 import PosterDashOverview from './components/Poster.DashOverview';
 import PosterSetting from './components/poster.Setting';
 import PosterCompanyInfo from './components/Poster.CompanyInfo';
