@@ -78,6 +78,15 @@ const userSchema = new mongoose.Schema({
             }
        
         },
+        cart: {
+            type: [String],
+            
+       
+        },
+        appliedJobs: {
+            type: [String],
+            
+        }
     },
     {timestamps: true}
 );

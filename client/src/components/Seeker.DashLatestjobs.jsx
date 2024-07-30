@@ -1,8 +1,8 @@
 import { Button, Table } from 'flowbite-react';
 import React, { useState } from 'react';
 import { HiClock, HiCurrencyDollar, HiLocationMarker } from 'react-icons/hi';
-import { Link } from 'react-router-dom';
 import CompanyDetailsModal from './Seeker.CompanyDetailsModal';
+import {FaArrowRight} from 'react-icons/fa'
 
 export default function SeekerDashLatestjobs() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,14 +46,18 @@ export default function SeekerDashLatestjobs() {
                   </div>
                 </div>
               </div>
-              <Button gradientMonochrome="info" onClick={handleModalOpen}>
-                Apply Now
+              <Button className='bg-blue-500 hover:bg-opacity-95'  onClick={handleModalOpen}>
+                 <div className='flex flex-row text-center items-center gap-1'>
+                 <p>Apply Now</p>
+                 <FaArrowRight />
+                 </div>
+                 
               </Button>
             </Table.Cell>
           </Table.Row>
         </Table.Body>
       </Table>
-      <CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} />
+      <CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} showSendCVLink={true}/>
     </div>
   );
 }

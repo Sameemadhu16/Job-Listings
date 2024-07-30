@@ -2,6 +2,8 @@ import { Button, Table } from 'flowbite-react';
 import React from 'react';
 import { HiAnnotation, HiOutlineUserGroup, HiDocumentText } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
+import PostCards from './PostCards';
+import SeekerCartPost from './Seeker.cartPost';
 
 export default function SeekerDashOverview() {
   return (
@@ -59,8 +61,8 @@ export default function SeekerDashOverview() {
         </div>
 
         <div className="flex flex-col w-full shadow-md p-2 rounded-md dark:bg-gray-800">
-          <h1 className="text-center p-2">Recent Applied</h1>
-          <Table hoverable>
+          <h1 className="text-center p-2 font-bold text-slate-800">Latest Jobs</h1>
+          {/*<Table hoverable>
             <Table.Head>
               <Table.HeadCell>Job</Table.HeadCell>
               <Table.HeadCell>Date Applied</Table.HeadCell>
@@ -93,7 +95,12 @@ export default function SeekerDashOverview() {
                 </Table.Cell>
               </Table.Row>
             </Table.Body>
-          </Table>
+          </Table>*/}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <SeekerCartPost ShowAddcart={true}/>
+            <SeekerCartPost ShowAddcart={true}/>
+            <SeekerCartPost ShowAddcart={true}/>
+          </div>
         </div>
       </div>
     </div>
