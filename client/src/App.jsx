@@ -48,8 +48,6 @@ export default function App() {
       <Route path='/company' element={<PosterCompanyInfo />} />
 
       <Route path='/seeker-dashboard' element={<SeekerDashboard />} />
-      <Route path='/parttime-job-post' element={<PartTimeJobPost />} />
-      <Route path='/fulltime-job-post' element={<FulltimeJobPost />} />
 
 
     </Routes>
