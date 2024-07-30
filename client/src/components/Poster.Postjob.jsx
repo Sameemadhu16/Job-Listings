@@ -6,7 +6,7 @@ import PosterCompanyInfo from './Poster.CompanyInfo';
 export default function PosterPostjob() {
 
     return (
-        <div className='min-h-screen flex-col md:flex-row'>
+        <div className='min-h-screen flex-col md:flex-row w-full'>
             <div className='bg-slate-600'>
                 <SettingNavBar />
             </div>

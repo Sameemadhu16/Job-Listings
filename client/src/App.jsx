@@ -49,7 +49,6 @@ export default function App() {
       <Route path='/company' element={<PosterCompanyInfo />} />
 
       <Route path='/seeker-dashboard' element={<SeekerDashboard />} />
-      <Route path='/job-post' element={<JobPost />} />
 
     </Routes>
     <Footer />
