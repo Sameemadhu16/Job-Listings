@@ -14,7 +14,7 @@ export default function SeekerCartPost({ShowAddcart, showApply, showDelete}) {
     setIsModalOpen(false);
   };
   return (
-    <div className='group relative w-1/4 border border-teal-500 hover:border-2 h-[380px] overflow-hidden rounded-lg sm:w-[380px] transition-all'>
+    <div className='group relative w-1/4 border border-teal-500 hover:border-2 h-[400px] overflow-hidden rounded-lg sm:w-[380px] transition-all'>
       <Link to={""}>
         <img src={'https://www.shutterstock.com/image-photo/work-time-art-collage-female-260nw-2361102709.jpg'} alt='post-cover' className='h-[260px] w-full  object-cover group-hover:h-[200px] transition-all duration-300 z-20'/>
       </Link>
