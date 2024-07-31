@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Label, TextInput, Card ,Alert, Spinner} from 'flowbite-react';
-
-
+import { Button, Label, TextInput, Card ,Alert} from 'flowbite-react';
 
 const SignUp = () => {
     const [formData, setFormData] = useState({});
     const [errorMessage, setErrorMessage] = useState(null);
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         setFormData({...formData,[e.target.id]:e.target.value.trim()})
     };
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,25 +18,25 @@ const SignUp = () => {
           return setErrorMessage('Please fill out all fields');
         }
         try {
-            setLoading(true);
-            setErrorMessage(null);
-            const res = await fetch('/api/auth/signup', {
+          
+          setErrorMessage(null);
+          const res = await fetch('/api/auth/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData),
           });
           const data = await res.json();
           if (data.success === false) {
-            setLoading(false);
+            
             return setErrorMessage(data.message);
           }
-          setLoading(false);
+          
           if (res.ok) {
             navigate('/sign-in');
           }
         } catch (error) {
-             setErrorMessage('An error occurred. Please try again.');
-             setLoading(false);
+          setErrorMessage('An error occurred. Please try again.');
+          
         }
       };
 
@@ -94,19 +90,20 @@ const SignUp = () => {
                                     <TextInput type="text" placeholder="Mobile Number" id="mobilenumber" name="mobileNumber" onChange={handleChange} />
                                 </div>
                             </div>
-                            <Button className="bg-blue-500" type="submit" disabled={loading}>
-                                {loading ? (
-                                    <>
-                                        <Spinner size="sm" />
-                                        <span className="pl-3">Loading...</span>
-                                    </>
-                                    ) : (
-                                        'Create Account'
-                                    )}
+                            <Button type="submit" className="w-full" >
+                                Create Account
                             </Button>
-                            
-                            
-                            
+                            <div className="flex items-center justify-center mt-6">
+                                <div className="border-t border-gray-300 flex-1"></div>
+                                <p className="px-3 text-sm text-gray-600">OR</p>
+                                <div className="border-t border-gray-300 flex-1"></div>
+                            </div>
+                            <div className="flex justify-center mt-6 space-x-4">
+                                <Button outline>
+                                    <img src="/path/to/google-logo.png" alt="Sign up with Google" className="h-5 w-5" />
+                                    <span className="ml-2">Sign up with Google</span>
+                                </Button>
+                            </div>
                         </form>
                     </Card>
                     {errorMessage && (
