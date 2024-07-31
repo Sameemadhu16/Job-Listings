@@ -1,45 +1,47 @@
 import React, { useState } from 'react';
-import SignUpStep2 from './SignUpStep2';
-import { Button, Label, TextInput, Card } from 'flowbite-react';
+import { useNavigate } from 'react-router-dom';
+import { Button, Label, TextInput, Card ,Alert} from 'flowbite-react';
 
 const SignUp = () => {
-    const [formData, setFormData] = useState({
-        fullName: '',
-        username: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        role: '',
-        mobileNumber: '',
-        gender: '',
-        birthday: '',
-    });
-
-    const [step, setStep] = useState(1);
+    const [formData, setFormData] = useState({});
+    const [errorMessage, setErrorMessage] = useState(null);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData({
-            ...formData,
-            [name]: type === 'checkbox' ? checked : value
-        });
+        setFormData({...formData,[e.target.id]:e.target.value.trim()})
     };
 
-    const handleNextStep = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setStep(2);
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Handle final form submission here, e.g., send formData to server or process locally
-        console.log(formData);
-        // Clear form or perform redirect after successful submission
-    };
+        console.log(formData.role)
+        if (!formData.fullname || !formData.username || !formData.email || !formData.password || !formData.mobilenumber || !formData.role) {
+          return setErrorMessage('Please fill out all fields');
+        }
+        try {
+          
+          setErrorMessage(null);
+          const res = await fetch('/api/auth/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
+          });
+          const data = await res.json();
+          if (data.success === false) {
+            
+            return setErrorMessage(data.message);
+          }
+          
+          if (res.ok) {
+            navigate('/sign-in');
+          }
+        } catch (error) {
+          setErrorMessage('An error occurred. Please try again.');
+          
+        }
+      };
 
     return (
         <div className="flex min-h-screen flex-col lg:flex-row bg-gray-100">
-            {step === 1 && (
                 <div className="flex flex-1 items-center justify-center p-6 sm:p-12">
                     <Card className="w-full max-w-md">
                         <div className="text-center">
@@ -51,7 +53,7 @@ const SignUp = () => {
                                 </a>
                             </div>
                         </div>
-                        <form onSubmit={handleNextStep} className=" space-y-6">
+                        <form onSubmit={handleSubmit} className=" space-y-6">
                             <div className="space-y-4">
                                 <div className="flex mb-4">
                                     <Button
@@ -77,7 +79,7 @@ const SignUp = () => {
                                 </div>
                                 <div>
                                     <Label htmlFor="email" value="Your Email" />
-                                    <TextInput type="text" placeholder="Email" id="email" name="email" onChange={handleChange} />
+                                    <TextInput type="email" placeholder="Email" id="email" name="email" onChange={handleChange} />
                                 </div>
                                 <div>
                                     <Label htmlFor="password" value="Your Password" />
@@ -88,8 +90,8 @@ const SignUp = () => {
                                     <TextInput type="text" placeholder="Mobile Number" id="mobilenumber" name="mobileNumber" onChange={handleChange} />
                                 </div>
                             </div>
-                            <Button type="submit" className="w-full">
-                                Next
+                            <Button type="submit" className="w-full" >
+                                Create Account
                             </Button>
                             <div className="flex items-center justify-center mt-6">
                                 <div className="border-t border-gray-300 flex-1"></div>
@@ -104,9 +106,13 @@ const SignUp = () => {
                             </div>
                         </form>
                     </Card>
+                    {errorMessage && (
+                        <Alert className="mt-5" color="failure">
+                        {errorMessage}
+                        </Alert>
+                    )}
                 </div>
-            )}
-            {step === 2 && <SignUpStep2 formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} />}
+            
             <img className='lg:h-screen mt-12 mr-10 rounded-lg sm:h-20' src="https://img.freepik.com/free-photo/copy-space-blank-commercial-advertisement_53876-121262.jpg?t=st=1721500082~exp=1721503682~hmac=84ee8a13f47eef8a6ff863cfd1ec73b8c03072111099630aafb8d00e04250362&w=740" alt="" />
         </div>
     );
