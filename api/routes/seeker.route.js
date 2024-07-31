@@ -1,7 +1,7 @@
 import express from 'express'
-import { getjobs } from '../controllers/seeker.controller.js'
+import { getJobs } from '../controllers/seeker.controller.js'
 
 const router = express.Router();
-router.get('/getposts', getposts);
+router.get('/getjobs', getJobs);
 
 export default router;
