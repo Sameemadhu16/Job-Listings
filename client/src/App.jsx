@@ -1,14 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import SignUp from './pages/SignUp';
 import Home from './pages/Home';
-import SignIn from './pages/SignIn';
 import About from './pages/About';
 import Dashboard from './pages/Dashboard';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
-import ForgotPassword from './pages/ForgotPassword';
 
 import Contact from './pages/Contact';
 import Finish from './pages/Finish';
@@ -34,8 +31,7 @@ export default function App() {
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/about' element={<About />} />
-      <Route path='/sign-up' element={<SignUp />} />
-      <Route path='/sign-in' element={<SignIn />} />
+
       <Route path='/dashboard' element={<Dashboard />} />
       <Route path='/contact' element={<Contact />} />
       <Route path='/finish' element={<Finish />} />
@@ -50,11 +46,10 @@ export default function App() {
         </Route>
         <Route path='settings' element={<PosterSetting />}>
           <Route index element={<PosterCompanyInfo />} />
-          <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/sign-up' element={<SignUp />} />
-          <Route path='/sign-in' element={<SignIn />} />
-          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='' element={<Home />} />
+          <Route path='about' element={<About />} />
+
+          <Route path='dashboard' element={<Dashboard />} />
 
 
         </Route>
