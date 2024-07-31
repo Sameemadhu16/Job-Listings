@@ -1,6 +1,9 @@
 import jwt from 'jsonwebtoken';
 import { errorHandler } from './error.js';
+<<<<<<< HEAD
 
+=======
+>>>>>>> 64f0769 (create sign in api route)
 export const verifyToken = (req, res, next) => {
   const token = req.cookies.access_token;
   if (!token) {
