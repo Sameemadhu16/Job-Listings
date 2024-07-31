@@ -10,14 +10,22 @@ import Footer from './components/Footer';
 
 import ForgotPassword from './pages/ForgotPassword';
 
-import PosterCompanyInfo from './pages/Poster.CompanyInfo';
-import PosterFountInfo from './pages/Poster.Found-Info';
-import PosterSocailMediaInfo from './pages/Poster.SocailMediaInfo';
 import Contact from './pages/Contact';
 import Finish from './pages/Finish';
 import PosterDashboard from './pages/Poster.Dashboard';
 import SeekerDashboard from './pages/Seeker.Dashboard';
-import JobPost from './components/JobPost';
+
+import PosterDashOverview from './components/Poster.DashOverview';
+import PosterSetting from './components/poster.Setting';
+import PosterCompanyInfo from './components/Poster.CompanyInfo';
+import PosterPostjob from './components/Poster.Postjob';
+import PosterFoundInfo from './components/Poster.FoundInfo';
+import PosterSocialMediaInfo from './components/Poster.SocialMediaInfo';
+
+import PartTimeJobPost from './components/Post.PartTimeJobPost'
+import FulltimeJobPost from './components/Post.FulltimeJobPost';
+
+
 
 
 export default function App() {
@@ -48,6 +56,8 @@ export default function App() {
       <Route path='/company' element={<PosterCompanyInfo />} />
 
       <Route path='/seeker-dashboard' element={<SeekerDashboard />} />
+      <Route path='/parttime-job-post' element={<PartTimeJobPost />} />
+      <Route path='/fulltime-job-post' element={<FulltimeJobPost />} />
 
 
     </Routes>
