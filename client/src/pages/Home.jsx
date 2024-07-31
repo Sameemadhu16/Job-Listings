@@ -1,12 +1,25 @@
 import { Button, TextInput } from 'flowbite-react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { TbFilterBolt } from "react-icons/tb";
 import PostCards from '../components/PostCards';
+import SeekerCartPost from '../components/Seeker.cartPost';
 
 export default function Home() {
+
+  const [posts,setPosts] = useState([]);
+
+  useEffect(() =>{
+    const fetchPosts = async () => {
+      const res = await fetch('/api/post/get-posts');
+      const data = await res.json();
+      setPosts(data.posts)
+    }
+    fetchPosts();
+  },[])
+
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 ">
       <div className="flex justify-end p-4 bg-white shadow">
         <form className="mr-3 hidden lg:inline-block">
           <TextInput
@@ -25,16 +38,17 @@ export default function Home() {
         </Button>
         <Button className="mx-4">Find Job</Button>
       </div>
-      <div className="p-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <PostCards />
-          <PostCards />
-          <PostCards />
-          <PostCards />
-          <PostCards />
-          <PostCards />
+      {
+        posts && posts.length > 0 && (
+          <div className="p-4">
+        <div className="flex flex-wrap gap-4 ml-40">
+        {posts.map((post)=>(
+          <SeekerCartPost key={post._id} post={post} />
+        ))}
         </div>
       </div>
+        )
+      }
       <div className="flex justify-center py-4">
         <Button.Group>
           <Button color="light">01</Button>
