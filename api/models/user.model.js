@@ -86,9 +86,7 @@ const userSchema = new mongoose.Schema({
         //Feild specific to job seeker
         cv: {
             type: String,
-            required: function() {
-                return this.role === 'jobSeeker';
-            }
+            
         },
             
         skills: {
@@ -104,7 +102,7 @@ const userSchema = new mongoose.Schema({
             
        
         },
-        appliedJobs: {
+        appliedjobs: {
             type: [String],
             
 
