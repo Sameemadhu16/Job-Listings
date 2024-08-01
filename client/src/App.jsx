@@ -18,9 +18,10 @@ import PosterCompanyInfo from './components/Poster.CompanyInfo';
 import PosterPostjob from './components/Poster.Postjob';
 import PosterFoundInfo from './components/Poster.FoundInfo';
 import PosterSocialMediaInfo from './components/Poster.SocialMediaInfo';
-
+import PosterDashMyJobs from './components/Poster.DashMyJobs';
 import PartTimeJobPost from './components/Post.PartTimeJobPost'
 import FulltimeJobPost from './components/Post.FulltimeJobPost';
+
 
 
 
@@ -36,6 +37,7 @@ export default function App() {
       <Route path='/contact' element={<Contact />} />
       <Route path='/finish' element={<Finish />} />
       <Route path='/poster-dashboard' element={<PosterDashboard />} >
+        <Route path='my-jobs' element={<PosterDashMyJobs />} />
         <Route index element={<PosterDashOverview />} />
         <Route path='employeeprofile' element={<PosterDashOverview />} />
         <Route path='post-jobs' element={<PosterPostjob />} >
@@ -46,7 +48,7 @@ export default function App() {
         </Route>
         <Route path='settings' element={<PosterSetting />}>
           <Route index element={<PosterCompanyInfo />} />
-          <Route path='' element={<Home />} />
+
           <Route path='about' element={<About />} />
 
           <Route path='dashboard' element={<Dashboard />} />
