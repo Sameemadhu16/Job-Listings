@@ -5,10 +5,10 @@ import jwt from "jsonwebtoken";
 
 
 export const signup = async (req, res, next) => {
-    const { username, email, password, role, gender, mobileNumber, birthday, maritalStatus, experience, education, biography, coverLetter, resume, skills, companyName } = req.body;
+    const { username,fullname, email, password, role, gender, mobileNumber, birthday, maritalStatus, experience, education, biography, coverLetter, resume, skills, companyName } = req.body;
 
 
-    if (!username || fullname || !email || !password || !role || username === '' || fullname === '' || email === '' || password === '' || role === '') {
+    if (!username || !fullname || !email || !password || !role || username === '' || fullname === '' || email === '' || password === '' || role === '') {
 
         return next(errorHandler(400, 'All feilds are requiired'));
     }
@@ -80,8 +80,6 @@ export const signin = async (req, res, next) => {
         next(error);
     }
 
-
 };
-
 
 
