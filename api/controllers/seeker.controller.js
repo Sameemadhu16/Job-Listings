@@ -85,3 +85,26 @@ export const addappliedjobs = async (req, res, next) => {
     }
 };
 
+
+/*export const getcart = async (req, res, next) => {
+    try {
+        const userId = req.params.userId;
+
+        if (!userId) {
+            return res.status(400).json({ message: "User ID is required" });
+        }
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        
+        const cartPosts = user.cart || [];
+
+        res.status(200).json({ message: "User's cart retrieved successfully", cartPosts });
+    } catch (error) {
+        next(error);
+    }
+};*/
+
