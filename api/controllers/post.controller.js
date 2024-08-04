@@ -31,7 +31,7 @@ export const updatePost = async(req,res,next) => {
             {
                 $set:{
                     title:req.body.title,
-                    essential:req.body.title,
+                    essential:req.body.essential,
                     selectType:req.body.selectType,
                     description:req.body.description
                 }
