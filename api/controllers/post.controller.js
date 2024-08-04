@@ -10,7 +10,7 @@ export const createPost = async(req,res,next) => {
     const newPost = new Post({
         ...req.body,
         slug,
-        //userId:req.user.id,
+        userId:req.user.id,
     });
 
     try{
@@ -22,6 +22,11 @@ export const createPost = async(req,res,next) => {
 }
 
 export const updatePost = async(req,res,next) => {
+
+    if(req.user.id !==req.params.userId){
+        return next(errorHandler(403,'You are not allowed to update this post'))
+    }
+
     try{
         const updatePost = await Post.findByIdAndUpdate(
             req.params.postId,
@@ -41,6 +46,11 @@ export const updatePost = async(req,res,next) => {
 }
 
 export const deletePost = async(req,res,next) => {
+
+    if(req.user.id !== req.params.userId){
+        return next(errorHandler(403,'You are not allowed to delete this post'))
+    }
+
     try{
         const deletePost = await Post.findByIdAndDelete(req.params.postId);
         res.status(200).json('This post has been deleted');
@@ -50,11 +60,14 @@ export const deletePost = async(req,res,next) => {
 }
 
 export const getPosts = async  (req,res,next) => {
+    
     try{
         const totalPosts = await Post.countDocuments();
-        
+        const posts = await Post.find().sort({createdAt: -1})
+
         res.status(200).json({
             totalPosts,
+            posts
         })
     }catch (error) {
         next(error);

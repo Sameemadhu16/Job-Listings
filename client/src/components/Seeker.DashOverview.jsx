@@ -1,11 +1,24 @@
 import { Button, Table } from 'flowbite-react';
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { HiAnnotation, HiOutlineUserGroup, HiDocumentText } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import PostCards from './PostCards';
 import SeekerCartPost from './Seeker.cartPost';
 
-export default function SeekerDashOverview() {
+export default function SeekerDashOverview({}) {
+
+  const [posts,setPosts] = useState([]);
+
+  useEffect(() =>{
+    const fetchPosts = async () => {
+      const res = await fetch('/api/post/get-posts');
+      const data = await res.json();
+      setPosts(data.posts)
+    }
+    fetchPosts();
+  },[])
+
+
   return (
     <div className="p-3 md:mx-auto">
       <div className="flex-wrap flex gap-4 justify-center ">
@@ -96,11 +109,20 @@ export default function SeekerDashOverview() {
               </Table.Row>
             </Table.Body>
           </Table>*/}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <SeekerCartPost ShowAddcart={true}/>
-            <SeekerCartPost ShowAddcart={true}/>
-            <SeekerCartPost ShowAddcart={true}/>
+         <div className="flex flex-col  gap-2 sm:flex-row sm:gap-2">
+         {
+            posts && posts.length > 0 && (
+              <div className="p-4">
+            <div className="flex flex-wrap gap-4 ml-40">
+            {posts.map((post)=>(
+              <SeekerCartPost key={post._id} post={post} ShowAddcart={true}/>
+            ))}
+            </div>
           </div>
+            )
+          }
+        </div>
+
         </div>
       </div>
     </div>

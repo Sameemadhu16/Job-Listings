@@ -60,15 +60,12 @@ const userSchema = new mongoose.Schema({
             default: false,
           },
        
-        
-
-        
         cart: {
             type: [String],
             
        
         },
-        appliedJobs: {
+        appliedjobs: {
             type: [String],
             
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { TextInput,FileInput,Button,Textarea,Select } from 'flowbite-react'
 import { FaArrowRight } from "react-icons/fa";
 
-export default function PosterCompanyInfo() {
+export default function PosterFoundInfo() {
   return (
     <div className='bg-slate-100'>
         <div className='p-3 max-w-3xl mx-auto min-h-screen bg-gray-100'>
