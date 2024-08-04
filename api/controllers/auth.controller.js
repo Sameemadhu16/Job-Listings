@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 
 
 export const signup = async (req, res, next) => {
-    const { username,fullname, email, password, role, mobileNumber,   } = req.body;
+    const { username,fullname, email, password, role, gender, mobileNumber,cart,appliedjobs } = req.body;
 
 
     if (!username || !fullname || !email || !password || !role || username === '' || fullname === '' || email === '' || password === '' || role === '') {
@@ -21,6 +21,7 @@ export const signup = async (req, res, next) => {
         email,
         fullname,
         password: hashedPassword,
+        gender,
         mobileNumber,
         role,
         cart: role === 'jobSeeker' ? cart : undefined,
