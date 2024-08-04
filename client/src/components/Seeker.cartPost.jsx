@@ -41,6 +41,13 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete }) {
             </Button>
           )
         }
+        {
+          showApply && (
+            <Button className='px-20' onClick={''}>
+              Apply
+            </Button>
+          )
+        }
       </div>
       <CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} showSendCVLink={true}/>
     </div>
