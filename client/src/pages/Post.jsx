@@ -1,7 +1,8 @@
 import React ,{useEffect,useState} from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams,useNavigate } from 'react-router-dom'
 import { Button, Spinner } from 'flowbite-react';
 import PostCards from '../components/PostCards';
+
 
 
 export default function Post() {
@@ -11,6 +12,7 @@ export default function Post() {
     const [recentPosts,setRecentPosts]=useState(null);
     const [error,setError] = useState(null);
     const [loading,setLoading] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(()=>{
         const fetchPost = async () => {
@@ -55,6 +57,10 @@ export default function Post() {
         }
     },[]);
 
+    const handleUpdateClick = () => {
+        navigate(`/update-post/${post._id}`); 
+      };
+
     if(loading){
         return <div className='flex justify-center items-center min-h-screen'>
             <Spinner size='xl'/>
@@ -79,8 +85,7 @@ export default function Post() {
         <div className='p-3 max-w-2xl mx-auto w-full post-content' dangerouslySetInnerHTML={{__html:post && post.content}}></div>
         <div className='max-w-4xl mx-auto w-full'>
         <div className='flex flex-col gap-2 justify-around w-full'>
-            <Button className='bg-green-600 hover:bg-opacity-95'>Update</Button>
-            <Button className='bg-red-600 hover:bg-opacity-95'>Delete</Button>
+            <Button className='bg-green-600 hover:bg-opacity-95'onClick={handleUpdateClick} >Update</Button>
         </div>
             
         </div>
