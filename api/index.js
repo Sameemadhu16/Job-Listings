@@ -7,20 +7,13 @@ import seekerRoutes from './routes/seeker.route.js'
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import postRoutes from './routes/post.route.js'
-import cookieParser from 'cookie-parser';
-import path from 'path';
+
 
 dotenv.config();
 
 mongoose.connect("mongodb+srv://ilakshitha7921:ilakshitha7921@cluster0.gfhczos.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
-.then(() => {
-  console.log('MongoDB is conected');
-})
-.catch((err) =>
-{
-  console.log(err);
-})
+
 
   .then(() => {
     console.log('MongoDB is conected');
@@ -50,12 +43,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/seeker', seekerRoutes)
 app.use('/api/auth', authRoutes);
 
-
-app.use(express.static(path.join(__dirname, '/client/dist')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-});
 
 
 app.use((err, req, res, next) => {
