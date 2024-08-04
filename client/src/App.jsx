@@ -19,6 +19,7 @@ import PartTimeJobPost from './components/Post.PartTimeJobPost';
 import FulltimeJobPost from './components/Post.FulltimeJobPost';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
+import CreatePost from './pages/CreatePost';
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path='/create-post' element={<CreatePost/>} />
         <Route path="/about" element={<About />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
