@@ -6,4 +6,5 @@ router.get('/getjobs', getJobs);
 router.get('/getjobs/:postId',getJobs)
 router.post('/addcart/:userId', addcart);
 router.post('/addapplied/:userId', addappliedjobs);
+//router.get('/getcart/:userId', getcart);
 export default router;
