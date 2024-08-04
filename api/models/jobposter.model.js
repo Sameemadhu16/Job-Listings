@@ -1,31 +1,31 @@
 import mongoose from 'mongoose';
 
 const jobposterSchema = new mongoose.Schema({
-    userName:{
+    userName: {
         type: String,
         required: true,
         unique: true,
 
     },
-    email:{
+    email: {
         type: String,
         required: true,
         unique: true,
 
     },
-    password:{
+    password: {
         type: String,
-        required:true,
+        required: true,
     },
-    profilePicture:{
-        type:String,
-        default:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+    profilePicture: {
+        type: String,
+        default: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
     },
 
     webSite: {
         type: String,
         required: true,
-        default:"ishan.lk",
+        default: "ishan.lk",
     },
 
     dateOfBirth: {
@@ -50,7 +50,7 @@ const jobposterSchema = new mongoose.Schema({
         type: String,
         required: true,
 
-        //should add validation
+
 
         // validate: {
         //     validator: function(v) {
@@ -58,12 +58,12 @@ const jobposterSchema = new mongoose.Schema({
         //     },
         //     message: props => `${props.value} is not a valid phone number!`
         //     }
-}
+    }
 
-},{timestamps:true}
+}, { timestamps: true }
 );
 
-const Jobposter = mongoose.model("JobPoster",jobposterSchema);
+const Jobposter = mongoose.model("JobPoster", jobposterSchema);
 export default Jobposter;
 
 // As I think we should add discription and cover letter for this model
