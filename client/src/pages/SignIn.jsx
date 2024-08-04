@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Button, Checkbox, Label, TextInput, Card, Alert } from 'flowbite-react';
+import { Button, Checkbox, Label, TextInput, Card, Alert, Spinner } from 'flowbite-react';
 import { signInStart,signInSuccess,signInFailure } from '../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+
 const SignIn = () => {
   const [formData, setFormData] = useState({});
-  const {  error: errorMessage } = useSelector((state) => state.user);
+  const {loading, error: errorMessage } = useSelector((state) => state.user);
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -82,32 +83,17 @@ const SignIn = () => {
                 />
               </div>
             </div>
-            <div className="flex items-center justify-between">
-              <div className='flex text-center items-center'>
-                <Checkbox id="remember_me" name="remember_me" />
-                <Label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
-                Remember me
-              </Label>
-              </div>
-              <a href="forgot-password" className="text-sm text-blue-500 hover:text-indigo-500">
-                Forgot your password?
-              </a>
-            </div>
-            <Button type="submit" className="w-full hover:bg-opacity-95">
-              Sign In
+            
+            <Button className='bg-blue-500' type="submit" disabled={loading}>
+              {loading ? (
+                <>
+                  <Spinner size="sm" />
+                  <span className="pl-3">Loading...</span>
+                </>
+              ) : (
+                'Sign In'
+              )}
             </Button>
-            <div className="flex items-center justify-center mt-6">
-              <div className="border-t border-gray-300 flex-1"></div>
-              <p className="px-3 text-sm text-gray-600">or</p>
-              <div className="border-t border-gray-300 flex-1"></div>
-            </div>
-            <div className="flex justify-center mt-6 space-x-4">
-              
-              <Button outline className=''>
-                <img src="/path/to/google-logo.png" alt="Sign in with Google" className="h-5 w-5" />
-                <span className="ml-2">Sign in with Google</span>
-              </Button>
-            </div>
           </form>
           {errorMessage && (
             <Alert className="mt-5" color="failure">
