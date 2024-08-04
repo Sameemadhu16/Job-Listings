@@ -37,7 +37,7 @@ export default function PosterDashSidebar() {
               Post a Jobs
             </Sidebar.Item>
           </Link>
-          <Link to="/poster-dashboard/my-jobs">
+          <Link to="/poster-dashboard/myjobs">
 
             <Sidebar.Item icon={HiClipboardList} as="div">
               My Jobs
