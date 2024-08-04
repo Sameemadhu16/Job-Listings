@@ -51,6 +51,7 @@ export default function PostCards({ post }) {
         >
           Apply Now
         </Button>
+
       </div>
     </div>
   );
