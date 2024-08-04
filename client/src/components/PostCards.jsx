@@ -28,7 +28,9 @@ export default function PostCards({ post }) {
       className="group relative w-full border border-teal-500 h-[400px] overflow-hidden
       rounded-lg sm:w-[430px] bg-slate-200"
     >
-      <div className="bg-slate-400 h-[100px] text-center">image</div>
+      <div className="bg-slate-400 h-[100px] text-center">
+        <img src={post.image} alt="post-image" />
+      </div>
       <div className="flex flex-col flex-wrap p-2">
         <p className="font-bold text-center mt-2 text-3xl">{post.title}</p>
         <p className="text-sm mt-2">{post.description}</p>
