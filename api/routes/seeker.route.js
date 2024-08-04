@@ -11,5 +11,4 @@ router.get('/getapplied/:userId', getapplied);
 router.delete('/deletecartpost/:cartPostIdToDelete/:currentUserId',deleteCartpost)
 
 //router.get('/getcart/:userId', getcart);
-
 export default router;
