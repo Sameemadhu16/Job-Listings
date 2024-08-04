@@ -21,6 +21,7 @@ export default function SeekerDashboard() {
         <div className='md:w-56'>
             {/*sidebar*/}
             <SeekerDashSidebar />
+            
         </div>
             {/*dashboard comp*/}
             {tab === 'dash' && <SeekerDashOverview />}

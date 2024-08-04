@@ -4,9 +4,6 @@ import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
 
-
-
-
 export const signup = async (req, res, next) => {
     const { username, email, password, role, gender, mobileNumber, birthday, maritalStatus, experience, education, biography, coverLetter, resume, skills, companyName } = req.body;
 
@@ -35,6 +32,9 @@ export const signup = async (req, res, next) => {
         coverLetter: role === 'jobPoster' ? coverLetter : undefined,
         cv: role === 'jobSeeker' ? cv : undefined,
         skills: role === 'jobSeeker' ? skills : undefined,
+        cart: role === 'jobSeeker' ? cart : undefined,
+        appliedjobs: role === 'jobSeeker' ? appliedjobs : undefined,
+
     });
 
     try {
@@ -45,6 +45,7 @@ export const signup = async (req, res, next) => {
     }
 
 };
+    
 
 
 export const signin = async (req, res, next) => {
@@ -54,14 +55,10 @@ export const signin = async (req, res, next) => {
         next(errorHandler(400, 'All fields are required'));
     }
 
-
     try {
-
         const validUser = await User.findOne({ email });
-
         if (!validUser) {
             return next(errorHandler(400, 'User not found'));
-
 
         }
         const validPassword = bcryptjs.compareSync(password, validUser.password);
@@ -84,6 +81,4 @@ export const signin = async (req, res, next) => {
     }
 
 
-
 };
-
