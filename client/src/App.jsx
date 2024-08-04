@@ -53,5 +53,4 @@ export default function App() {
       <Footer />
     </BrowserRouter>
   );
->>>>>>> 4c788a066c99acb9a9c20c9e247038a80f2d8953
 }
