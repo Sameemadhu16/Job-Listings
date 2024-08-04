@@ -43,7 +43,7 @@ export default function Home() {
           <div className="p-4">
         <div className="flex flex-wrap gap-4 ml-40">
         {posts.map((post)=>(
-          <SeekerCartPost key={post._id} post={post} />
+          <SeekerCartPost key={post._id} post={post} showApply={true}/>
         ))}
         </div>
       </div>
