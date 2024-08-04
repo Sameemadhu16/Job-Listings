@@ -34,7 +34,7 @@ export default function App() {
 
     <Route path='/forgot-password' element={<ForgotPassword/>}/>
 
-    <Route path='/company-info' element={<PosterCompanyInfo/>}/>
+    <Route path='/create-post' element={<PosterCompanyInfo/>}/>
     <Route path='/found-info' element={<PosterFountInfo/>}/>
     <Route path='/social-info' element={<PosterSocailMediaInfo/>}/>
     <Route path='/contact' element={<Contact/>}/>

@@ -1,14 +1,45 @@
-import React from 'react'
-import { TextInput,FileInput,Button,Textarea } from 'flowbite-react'
-import { FaArrowRight } from "react-icons/fa";
+import React, { useState } from 'react'
+import { TextInput,FileInput,Button,Textarea,Select } from 'flowbite-react'
+import { useNavigate } from 'react-router-dom';
 
 export default function PosterCompanyInfo() {
+
+  const [formData,setFormData] = useState({});
+  const [error,setError] = useState(null);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      try{
+        const res = await fetch('/api/post/create-post',{
+          method:"POST",
+          headers:{
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify(formData),
+        });
+        const data = await res.json();
+        
+        if(!res.ok){
+          setError(data.message);
+        }
+
+        if(res.ok){
+          setError(null);
+          navigate('/#');
+
+        }
+      }catch(error){
+        setError(true);
+      }
+    }
   return (
     <div className='bg-slate-100'>
       <div className='p-3 max-w-3xl mx-auto min-h-screen '>
-      <form className="flex flex-col gap-4 mt-3" >
+      <form className="flex flex-col gap-4 mt-3" onSubmit={handleSubmit}>
         <h1 className='text-3xl font-bold'>
-            Logo & Banner image :
+            CREATE POST
         </h1>
           <div className='flex flex-col gap-4 sm:flex-row justify-between'>
             <TextInput type='text' placeholder='Title' required id='title'
@@ -23,15 +54,17 @@ export default function PosterCompanyInfo() {
             upload image
             </Button>
           </div>
-          <p className='font-semibold'>About Us :</p>
+          <p className='font-semibold'>Description :</p>
           <Textarea placeholder='Write down your company here.Let the candidate know who we are'></Textarea>
-      </form>
-        <Button type='button' cols={50} className='bg-blue-500 hover:bg-opacity-95 mt-3' >
-            <div className='flex flex-row gap-1 items-center'>
-            Save & Next
-            <FaArrowRight />
-            </div>
+          <TextInput type='text' placeholder='company'></TextInput>
+          <TextInput type='text' placeholder='essentail'></TextInput>
+          <TextInput type='text' placeholder='select type'></TextInput>
+          <Button type='submit' cols={50} className='bg-blue-500 hover:bg-opacity-95 mt-3' >
+            Submit
         </Button>
+        
+      </form>
+        
     </div>
     </div>
   )
