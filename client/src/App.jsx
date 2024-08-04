@@ -20,6 +20,8 @@ import FulltimeJobPost from './components/Post.FulltimeJobPost';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import CreatePost from './pages/CreatePost';
+import Post from './pages/Post';
+
 
 export default function App() {
   return (
@@ -51,6 +53,7 @@ export default function App() {
         <Route path="/seeker-dashboard" element={<SeekerDashboard />} />
         <Route path="/parttime-job-post" element={<PartTimeJobPost />} />
         <Route path="/fulltime-job-post" element={<FulltimeJobPost />} />
+        <Route path="/post-page/:postslug" element={<Post/>}/>
       </Routes>
       <Footer />
     </BrowserRouter>

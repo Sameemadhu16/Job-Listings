@@ -2,13 +2,14 @@ import { Alert, Button, FileInput, Select, TextInput } from 'flowbite-react'
 import React, { useState } from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-
+import { useNavigate } from 'react-router-dom';
 
 
 export default function CreatePost() {
   
   const [formData,setFormData] = useState({});
   const [publishError,setPublishError] = useState(null);
+  const navigate = useNavigate();
 
 
   const handleSubmit = async (e) =>{
@@ -29,7 +30,9 @@ export default function CreatePost() {
       }
      
       if(res.ok){
+        console.log(data.title);
         setPublishError(null);
+        navigate(`/post-page/${data.title}`);
       }
     }
     catch(error){
