@@ -96,6 +96,7 @@ export const getcart = async (req, res, next) => {
             return res.status(404).json({ message: "User not found" });
         }
 
+
         const cartPostIds = user.cart || [];
         const cartPosts = await Post.find({ _id: { $in: cartPostIds } });
 
