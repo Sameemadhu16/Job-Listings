@@ -10,4 +10,6 @@ router.post('/addapplied/:userId', addappliedjobs);
 
 //router.get('/getcart/:userId', getcart);
 
+//router.get('/getcart/:userId', getcart);
+
 export default router;
