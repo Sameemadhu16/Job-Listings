@@ -1,5 +1,5 @@
 import { Button, Table } from 'flowbite-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { HiClock, HiCurrencyDollar, HiLocationMarker } from 'react-icons/hi';
 import CompanyDetailsModal from './Seeker.CompanyDetailsModal';
 import {FaArrowRight} from 'react-icons/fa'
@@ -14,11 +14,33 @@ export default function SeekerDashLatestjobs() {
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+  
+  const [posts,setPosts] = useState([]);
+
+  useEffect(() =>{
+    const fetchPosts = async () => {
+      const res = await fetch('/api/post/get-posts');
+      const data = await res.json();
+      setPosts(data.posts)
+    }
+    fetchPosts();
+  },[])
+
+
+  const calculateDaysRemaining = (createdAt) => {
+    const createdDate = new Date(createdAt);
+    const currentDate = new Date();
+    const timeDiff = currentDate - createdDate;
+    const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+    return daysDiff;
+  };
 
   return (
     <div className="flex flex-col w-full shadow-md p-2 rounded-md dark:bg-gray-800">
       <h1 className="p-6 font-bold text-slate-600">Latest Jobs</h1>
+      {posts && posts.length > 0 && (
       <Table hoverable>
+      {posts.map((post)=>(
         <Table.Body className="divide-y">
           <Table.Row className="bg-slate-200 dark:border-gray-700 dark:bg-gray-800">
             <Table.Cell className='flex justify-between items-center'>
@@ -29,11 +51,11 @@ export default function SeekerDashLatestjobs() {
                   className="w-10 h-10 rounded-full bg:gray-500"
                 />
                 <div>
-                  <h3 className="font-semibold text-md text-slate-800">Software Engineer</h3>
+                  <h3 className="font-semibold text-md text-slate-800">{post.title}</h3>
                   <div className='flex gap-4'>
                     <div className='flex items-center'>
                       <HiLocationMarker />
-                      Idaho, USA
+                      {post.companyName}
                     </div>
                     <div className='flex items-center'>
                       <HiCurrencyDollar />
@@ -41,7 +63,7 @@ export default function SeekerDashLatestjobs() {
                     </div>
                     <div className='flex items-center'>
                       <HiClock />
-                      4 Day Remaining
+                      {calculateDaysRemaining(post.createdAt)} Days left after created
                     </div>
                   </div>
                 </div>
@@ -56,7 +78,9 @@ export default function SeekerDashLatestjobs() {
             </Table.Cell>
           </Table.Row>
         </Table.Body>
+                  ))}
       </Table>
+      )}
       <CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} showSendCVLink={true}/>
     </div>
   );
