@@ -83,7 +83,7 @@ export const addappliedjobs = async (req, res, next) => {
     }
 };
 
-/*export const getcart = async (req, res, next) => {
+export const getcart = async (req, res, next) => {
     try {
         const userId = req.params.userId;
 
@@ -96,11 +96,33 @@ export const addappliedjobs = async (req, res, next) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        
-        const cartPosts = user.cart || [];
+        const cartPostIds = user.cart || [];
+        const cartPosts = await Post.find({ _id: { $in: cartPostIds } });
 
         res.status(200).json({ message: "User's cart retrieved successfully", cartPosts });
     } catch (error) {
         next(error);
     }
-};*/
+};
+
+export const getapplied = async (req, res, next) => {
+    try {
+        const userId = req.params.userId;
+
+        if (!userId) {
+            return res.status(400).json({ message: "User ID is required" });
+        }
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        const appliedPostIds = user.appliedjobs || [];
+        const appliedPosts = await Post.find({ _id: { $in: appliedPostIds } });
+
+        res.status(200).json({ message: "User's cart retrieved successfully", appliedPosts });
+    } catch (error) {
+        next(error);
+    }
+};
