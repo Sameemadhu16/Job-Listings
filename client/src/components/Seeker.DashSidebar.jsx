@@ -5,7 +5,6 @@ import {Link, useLocation} from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import {useSelector} from 'react-redux'
 import { FaShoppingCart } from 'react-icons/fa'
-import { FaUser } from 'react-icons/fa'
 
 export default function SeekerDashSidebar() {
     const location = useLocation();
@@ -56,7 +55,7 @@ export default function SeekerDashSidebar() {
           </Link>
           
           <Link to="/seeker-dashboard?tab=profile">
-            <Sidebar.Item active={tab === "profile"} icon={FaUser} as="div">
+            <Sidebar.Item active={tab === "profile"} icon={FaShoppingCart} as="div">
               Profile
             </Sidebar.Item>
           </Link>
