@@ -10,6 +10,7 @@ import postRoutes from './routes/post.route.js'
 import jobposterRoutes from './routes/jobposter.route.js'
 
 
+
 dotenv.config();
 
 mongoose.connect("mongodb+srv://ilakshitha7921:ilakshitha7921@cluster0.gfhczos.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
@@ -26,9 +27,6 @@ mongoose.connect("mongodb+srv://ilakshitha7921:ilakshitha7921@cluster0.gfhczos.m
 
 
 
-
-
-
 const app = express();
 
 app.use(express.json());
@@ -40,7 +38,9 @@ app.listen(4500, () => {
 
 app.use('/api/user', userRoutes);
 
+
 app.use('/api/jobposter', jobposterRoutes);
+
 app.use('/api/seeker', seekerRoutes)
 app.use('/api/auth', authRoutes);
 
@@ -60,3 +60,4 @@ app.use((err, req, res, next) => {
 app.use('/api/post',postRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/post', postRoutes);
+
