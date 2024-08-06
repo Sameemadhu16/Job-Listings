@@ -1,16 +1,13 @@
-import { Avatar, Dropdown, Navbar, TextInput, Button, theme } from "flowbite-react";
+import { Avatar, Dropdown, Navbar, TextInput, Button } from "flowbite-react";
 import logo from '../images/Jobpilot.png';
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { signoutSuccess } from "../redux/user/userSlice";
-import { FaMoon, FaSun } from 'react-icons/fa';
-import { toggleTheme } from "../redux/theme/themeSlice";
+import {AiOutlineSearch} from 'react-icons/ai'
+import { IoMdNotifications } from "react-icons/io";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function Header() {
 
   const {currentUser} = useSelector(state => state.user)
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const getProfilePath = (role) => {
     if (role === 'jobPoster') {
@@ -21,49 +18,25 @@ export default function Header() {
     
   };
 
-  const getDashboardPath = () => {
-    if (currentUser?.role === 'jobSeeker') {
-      return '/seeker-dashboard?tab=dash';
-    } else if (currentUser?.role === 'jobPoster') {
-      return '/poster-dashboard?tab=dash';
-    } else {
-      return '#'; // Fallback or default path
-    }
-  };
-
-  const handleSignout = async () => {
-    try {
-      const res = await fetch('/api/jobseeker/seeker-signout', {
-        method: 'POST',
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        console.log(data.message);
-      } else {
-        dispatch(signoutSuccess());
-        navigate('/sign-in');
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
   return (
     <Navbar fluid rounded className="border-b-2">
       <Navbar.Brand href="/">
-        <img src={logo} className="mr-3 h-6 sm:h-14 rounded-full" alt="jobpilot-logo" />
+        <img src={logo} className="mr-3 h-6 sm:h-14" alt="jobpilot-logo" />
         <span className="self-center whitespace-nowrap text-xl font-bold dark:text-white">Jobpilot</span>
-      </Navbar.Brand>  
-      <div className="flex md:order-2">
-        <Button
-          className='w-12 h-10 hidden sm:inline mr-2'
-          color='gray'
-          pill
-          onClick={() => dispatch(toggleTheme())}
-        >
-          {theme === 'light' ? <FaSun /> : <FaMoon />}
+      </Navbar.Brand>
+      <form>
+            <TextInput type='text'
+            placeholder='Search...'
+            rightIcon={AiOutlineSearch}
+            className='hidden lg:inline'/>
+        </form>
+        <Button className='w-12 h-10 lg:hidden focus:outline-none' color='gray' pill>
+            <AiOutlineSearch/>
         </Button>
-
+        <Button className='w-12 h-10  focus:outline-none' color='gray' pill>
+            <IoMdNotifications/>
+        </Button>
+      <div className="flex md:order-2">
         {currentUser ? (
           <Dropdown
           arrowIcon={false}
@@ -82,7 +55,7 @@ export default function Header() {
             <Dropdown.Divider />
           
           <Dropdown.Divider />
-          <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
+          <Dropdown.Item>Sign out</Dropdown.Item>
         </Dropdown>
           ):(
             <Link to='/sign-in'>
@@ -97,14 +70,9 @@ export default function Header() {
         <Navbar.Link href="/" className="active:underline">Home</Navbar.Link>
         <Navbar.Link href="#">Find Job</Navbar.Link>
         <Navbar.Link href="#">Find Employers</Navbar.Link>
-        <Navbar.Link
-          href={getDashboardPath()}
-          className="active:underline active:text-cyan-600"
-        >
-          Dashboard
-        </Navbar.Link>
-        <Navbar.Link href="/contact">Customer Supports</Navbar.Link>
-        <Navbar.Link href="/about">About Us</Navbar.Link>
+        <Navbar.Link href="/dashboard" className="active:underline active:text-cyan-600">Dashboard</Navbar.Link>
+        <Navbar.Link href="#">Job Alerts</Navbar.Link>
+        <Navbar.Link href="#">Customer Supports</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );
