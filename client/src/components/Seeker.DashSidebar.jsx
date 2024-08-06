@@ -53,6 +53,12 @@ export default function SeekerDashSidebar() {
               Cart
             </Sidebar.Item>
           </Link>
+          
+          <Link to="/seeker-dashboard?tab=profile">
+            <Sidebar.Item active={tab === "profile"} icon={FaShoppingCart} as="div">
+              Profile
+            </Sidebar.Item>
+          </Link>
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>
