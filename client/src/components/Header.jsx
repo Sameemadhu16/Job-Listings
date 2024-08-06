@@ -5,9 +5,11 @@ import { IoMdNotifications } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+
 export default function Header() {
 
   const {currentUser} = useSelector(state => state.user)
+
 
   const getProfilePath = (role) => {
     if (role === 'jobPoster') {
@@ -23,19 +25,7 @@ export default function Header() {
       <Navbar.Brand href="/">
         <img src={logo} className="mr-3 h-6 sm:h-14" alt="jobpilot-logo" />
         <span className="self-center whitespace-nowrap text-xl font-bold dark:text-white">Jobpilot</span>
-      </Navbar.Brand>
-      <form>
-            <TextInput type='text'
-            placeholder='Search...'
-            rightIcon={AiOutlineSearch}
-            className='hidden lg:inline'/>
-        </form>
-        <Button className='w-12 h-10 lg:hidden focus:outline-none' color='gray' pill>
-            <AiOutlineSearch/>
-        </Button>
-        <Button className='w-12 h-10  focus:outline-none' color='gray' pill>
-            <IoMdNotifications/>
-        </Button>
+      </Navbar.Brand>  
       <div className="flex md:order-2">
         {currentUser ? (
           <Dropdown
@@ -70,9 +60,14 @@ export default function Header() {
         <Navbar.Link href="/" className="active:underline">Home</Navbar.Link>
         <Navbar.Link href="#">Find Job</Navbar.Link>
         <Navbar.Link href="#">Find Employers</Navbar.Link>
-        <Navbar.Link href="/dashboard" className="active:underline active:text-cyan-600">Dashboard</Navbar.Link>
-        <Navbar.Link href="#">Job Alerts</Navbar.Link>
-        <Navbar.Link href="#">Customer Supports</Navbar.Link>
+        <Navbar.Link
+          href={getDashboardPath()}
+          className="active:underline active:text-cyan-600"
+        >
+          Dashboard
+        </Navbar.Link>
+        <Navbar.Link href="/contact">Customer Supports</Navbar.Link>
+        <Navbar.Link href="/about">About Us</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );
