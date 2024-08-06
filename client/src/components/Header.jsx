@@ -9,8 +9,6 @@ import { toggleTheme } from "../redux/theme/themeSlice";
 export default function Header() {
 
   const {currentUser} = useSelector(state => state.user)
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const getProfilePath = (role) => {
     if (role === 'jobPoster') {
@@ -82,7 +80,7 @@ export default function Header() {
             <Dropdown.Divider />
           
           <Dropdown.Divider />
-          <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
+          <Dropdown.Item>Sign out</Dropdown.Item>
         </Dropdown>
           ):(
             <Link to='/sign-in'>

@@ -3,6 +3,7 @@ import { useEffect, useState ,useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Alert, Button, Modal,  TextInput } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
 import {
   getDownloadURL,
   getStorage,
@@ -47,8 +48,6 @@ export default function SeekerProfile() {
       return;
     }
   }
-
- 
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -133,7 +132,7 @@ export default function SeekerProfile() {
           )}
           <img
             src={imageFileUrl || (currentUser && currentUser.profilePicture) || 'path/to/default/profilePicture.jpg'}
-            alt='seeker'
+            alt='user'
             className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${imageFileUploadProgress && imageFileUploadProgress < 100 && 'opacity-60'}`}
           />
         </div>
@@ -185,7 +184,28 @@ export default function SeekerProfile() {
         >
           {loading ? 'Loading...' : 'Update'}
         </Button>
-        
+        {currentUser?.isAdmin && (
+          <Link to={'/create-post'}>
+            <Button
+              type='button'
+              gradientDuoTone='purpleToPink'
+              className='w-full'
+            >
+              Create a post
+            </Button>
+          </Link>
+        )}
+        {currentUser?.isAdmin && (
+          <Link to={'/create-add'}>
+            <Button
+              type='button'
+              gradientDuoTone='purpleToPink'
+              className='w-full'
+            >
+              Create a add
+            </Button>
+          </Link>
+        )}
       </form>
       <div className='text-red-500 flex justify-between mt-5'>
         <span onClick={() => setShowModal(true)} className='cursor-pointer'>
