@@ -11,14 +11,14 @@ export const getJobPosters = async (req,res,next) =>{
         return next(errorHandler(403, 'you are not allowed to see all user'));
     }
     try {
-        const jobposter = await User.find()
+        const jobposter = await User.find({ role: 'jobPoster' })
 
         const usersWithoutPassword = jobposter.map((user) => {
             const { password, ...rest } = user._doc;
             return rest;
           });
 
-          const totalUsers = await User.countDocuments();
+          const totalUsers = await User.countDocuments({ role: 'jobPoster' });
 
           res.status(200).json({
             jobposter: usersWithoutPassword,
