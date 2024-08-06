@@ -7,6 +7,7 @@ import seekerRoutes from './routes/seeker.route.js'
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import postRoutes from './routes/post.route.js'
+import jobposterRoutes from './routes/jobposter.route.js'
 
 
 dotenv.config();
@@ -39,7 +40,7 @@ app.listen(4500, () => {
 
 app.use('/api/user', userRoutes);
 
-app.use('/api/auth', authRoutes);
+app.use('/api/jobposter', jobposterRoutes);
 app.use('/api/seeker', seekerRoutes)
 app.use('/api/auth', authRoutes);
 
