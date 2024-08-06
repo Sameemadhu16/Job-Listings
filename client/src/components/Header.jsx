@@ -2,8 +2,22 @@ import { Avatar, Dropdown, Navbar, TextInput, Button } from "flowbite-react";
 import logo from '../images/Jobpilot.png';
 import {AiOutlineSearch} from 'react-icons/ai'
 import { IoMdNotifications } from "react-icons/io";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function Header() {
+
+  const {currentUser} = useSelector(state => state.user)
+
+  const getProfilePath = (role) => {
+    if (role === 'jobPoster') {
+      return '/poster-dashboard?tab=profile';
+    } else if (role === 'jobSeeker') {
+      return '/seeker-dashboard?tab=profile';
+    }
+    
+  };
+
   return (
     <Navbar fluid rounded className="border-b-2">
       <Navbar.Brand href="/">
@@ -23,23 +37,33 @@ export default function Header() {
             <IoMdNotifications/>
         </Button>
       <div className="flex md:order-2">
-        <Dropdown
+        {currentUser ? (
+          <Dropdown
           arrowIcon={false}
           inline
           label={
-            <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
+            <Avatar alt="User settings" img={currentUser.profilePicture} rounded />
           }
         >
           <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
-            <span className="block truncate text-sm font-medium">name@flowbite.com</span>
+            <span className="block text-sm">{currentUser.username}</span>
+            <span className="block truncate text-sm font-medium ">{currentUser.email}</span>
           </Dropdown.Header>
-          <Dropdown.Item>Dashboard</Dropdown.Item>
-          <Dropdown.Item>Settings</Dropdown.Item>
-          <Dropdown.Item>Earnings</Dropdown.Item>
+            <Link to={getProfilePath(currentUser.role)}>
+              <Dropdown.Item>Profile</Dropdown.Item>
+            </Link>
+            <Dropdown.Divider />
+          
           <Dropdown.Divider />
           <Dropdown.Item>Sign out</Dropdown.Item>
         </Dropdown>
+          ):(
+            <Link to='/sign-in'>
+            <Button className="bg-blue-500" focus-outline>
+              Sign In
+            </Button>
+          </Link> 
+  )}
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse >
