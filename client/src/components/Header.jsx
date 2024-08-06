@@ -2,15 +2,12 @@ import { Avatar, Dropdown, Navbar, TextInput, Button } from "flowbite-react";
 import logo from '../images/Jobpilot.png';
 import {AiOutlineSearch} from 'react-icons/ai'
 import { IoMdNotifications } from "react-icons/io";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { signoutSuccess } from "../redux/user/userSlice";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function Header() {
 
   const {currentUser} = useSelector(state => state.user)
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const getProfilePath = (role) => {
     if (role === 'jobPoster') {
@@ -19,23 +16,6 @@ export default function Header() {
       return '/seeker-dashboard?tab=profile';
     }
     
-  };
-
-  const handleSignout = async () => {
-    try {
-      const res = await fetch('/api/jobseeker/seeker-signout', {
-        method: 'POST',
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        console.log(data.message);
-      } else {
-        dispatch(signoutSuccess());
-        navigate('/sign-in');
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
   };
 
   return (
@@ -75,7 +55,7 @@ export default function Header() {
             <Dropdown.Divider />
           
           <Dropdown.Divider />
-          <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
+          <Dropdown.Item>Sign out</Dropdown.Item>
         </Dropdown>
           ):(
             <Link to='/sign-in'>

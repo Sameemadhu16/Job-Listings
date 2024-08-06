@@ -1,8 +1,9 @@
+import React from 'react';
 import { useEffect, useState ,useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Alert, Button, Modal,  TextInput } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
 import {
   getDownloadURL,
   getStorage,
@@ -10,9 +11,6 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { app } from '../firebase';
-import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
-import { updateStart, updateSuccess, updateFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure, signoutSuccess } from '../redux/user/userSlice';
 
 
 export default function SeekerProfile() {
@@ -29,11 +27,11 @@ export default function SeekerProfile() {
   const [formData, setFormData] = useState({});
   const filePickerRef = useRef();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,30 +45,25 @@ export default function SeekerProfile() {
       setUpdateUserError('Please wait for image to upload');
       return;
     }
+  }
+
+  const handleDeleteUser = async () => {
+    setShowModal(false);
     try {
-      dispatch(updateStart());
-      const res = await fetch(`/api/jobseeker/update/${currentUser._id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: 'DELETE',
       });
       const data = await res.json();
       if (!res.ok) {
-        dispatch(updateFailure(data.message));
-        setUpdateUserError(data.message);
+        dispatch(deleteUserFailure(data.message));
       } else {
-        dispatch(updateSuccess(data));
-        setUpdateUserSuccess("Seeker's profile updated successfully");
+        dispatch(deleteUserSuccess(data));
       }
     } catch (error) {
-      dispatch(updateFailure(error.message));
-      setUpdateUserError(error.message);
+      dispatch(deleteUserFailure(error.message));
     }
   };
-
- 
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -116,29 +109,9 @@ export default function SeekerProfile() {
     );
   };
 
-  const handleDeleteSeeker = async () => {
-    setShowModal(false);
-    try {
-      dispatch(deleteUserStart());
-      const res = await fetch(`/api/jobseeker/delete/${currentUser._id}`, {
-        method: 'DELETE',
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        dispatch(deleteUserFailure(data.message));
-        
-      } else {
-        dispatch(deleteUserSuccess(data));
-        navigate('/sign-in');
-      }
-    } catch (error) {
-      dispatch(deleteUserFailure(error.message));
-    }
-  };
-
   const handleSignout = async () => {
     try {
-      const res = await fetch('/api/jobseeker/seeker-signout', {
+      const res = await fetch('/api/user/signout', {
         method: 'POST',
       });
       const data = await res.json();
@@ -146,13 +119,12 @@ export default function SeekerProfile() {
         console.log(data.message);
       } else {
         dispatch(signoutSuccess());
-        navigate('/sign-in');
       }
     } catch (error) {
       console.log(error.message);
     }
   };
- 
+
 
 
   return (
@@ -177,11 +149,11 @@ export default function SeekerProfile() {
               strokeWidth={5}
               styles={{
                 root: {
-                  inline_size: '100%',
-                  block_size: '100%',
+                  width: '100%',
+                  height: '100%',
                   position: 'absolute',
-                  in_set_block_start: 0,
-                  in_set_inline_start: 0,
+                  top: 0,
+                  left: 0,
                 },
                 path: {
                   stroke: `rgba(62, 152, 199, ${imageFileUploadProgress / 100})`,
@@ -191,7 +163,7 @@ export default function SeekerProfile() {
           )}
           <img
             src={imageFileUrl || (currentUser && currentUser.profilePicture) || 'path/to/default/profilePicture.jpg'}
-            alt='seeker'
+            alt='user'
             className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${imageFileUploadProgress && imageFileUploadProgress < 100 && 'opacity-60'}`}
           />
         </div>
@@ -225,8 +197,8 @@ export default function SeekerProfile() {
           type='password'
           id='password'
           placeholder='password'
+          defaultValue={currentUser?.password}
           onChange={handleChange}
-          
         />
         <TextInput
           type='text'
@@ -244,7 +216,28 @@ export default function SeekerProfile() {
         >
           {loading ? 'Loading...' : 'Update'}
         </Button>
-        
+        {currentUser?.isAdmin && (
+          <Link to={'/create-post'}>
+            <Button
+              type='button'
+              gradientDuoTone='purpleToPink'
+              className='w-full'
+            >
+              Create a post
+            </Button>
+          </Link>
+        )}
+        {currentUser?.isAdmin && (
+          <Link to={'/create-add'}>
+            <Button
+              type='button'
+              gradientDuoTone='purpleToPink'
+              className='w-full'
+            >
+              Create a add
+            </Button>
+          </Link>
+        )}
       </form>
       <div className='text-red-500 flex justify-between mt-5'>
         <span onClick={() => setShowModal(true)} className='cursor-pointer'>
@@ -283,7 +276,7 @@ export default function SeekerProfile() {
               Are you sure you want to delete your account?
             </h3>
             <div className='flex justify-center gap-4'>
-              <Button color='failure' onClick={handleDeleteSeeker}>
+              <Button color='failure' onClick={handleDeleteUser}>
                 Yes, I'm sure
               </Button>
               <Button color='gray' onClick={() => setShowModal(false)}>
