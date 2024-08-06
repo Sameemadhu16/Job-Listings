@@ -20,6 +20,9 @@ import FulltimeJobPost from './components/Post.FulltimeJobPost';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 
+import PosterDashMyJobs from './components/Poster.DashMyJobs';
+
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -41,6 +44,9 @@ export default function App() {
             <Route path="social-media" element={<PosterSocialMediaInfo />} />
             <Route path="account-setting" element={<PosterCompanyInfo />} />
           </Route>
+
+          <Route path="myjobs" element={<PosterDashMyJobs />} />
+
           <Route path="settings" element={<PosterSetting />}>
             <Route index element={<PosterCompanyInfo />} />
           </Route>
