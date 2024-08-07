@@ -3,7 +3,6 @@ import { useEffect, useState ,useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Alert, Button, Modal,  TextInput } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { Link } from 'react-router-dom';
 import {
   getDownloadURL,
   getStorage,
@@ -11,6 +10,8 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { app } from '../firebase';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 
 export default function SeekerProfile() {
@@ -47,23 +48,7 @@ export default function SeekerProfile() {
     }
   }
 
-  const handleDeleteUser = async () => {
-    setShowModal(false);
-    try {
-      dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
-        method: 'DELETE',
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        dispatch(deleteUserFailure(data.message));
-      } else {
-        dispatch(deleteUserSuccess(data));
-      }
-    } catch (error) {
-      dispatch(deleteUserFailure(error.message));
-    }
-  };
+ 
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -109,22 +94,7 @@ export default function SeekerProfile() {
     );
   };
 
-  const handleSignout = async () => {
-    try {
-      const res = await fetch('/api/user/signout', {
-        method: 'POST',
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        console.log(data.message);
-      } else {
-        dispatch(signoutSuccess());
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
+ 
 
 
   return (
@@ -163,7 +133,7 @@ export default function SeekerProfile() {
           )}
           <img
             src={imageFileUrl || (currentUser && currentUser.profilePicture) || 'path/to/default/profilePicture.jpg'}
-            alt='user'
+            alt='seeker'
             className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${imageFileUploadProgress && imageFileUploadProgress < 100 && 'opacity-60'}`}
           />
         </div>
@@ -197,8 +167,7 @@ export default function SeekerProfile() {
           type='password'
           id='password'
           placeholder='password'
-          defaultValue={currentUser?.password}
-          onChange={handleChange}
+          
         />
         <TextInput
           type='text'
@@ -216,34 +185,13 @@ export default function SeekerProfile() {
         >
           {loading ? 'Loading...' : 'Update'}
         </Button>
-        {currentUser?.isAdmin && (
-          <Link to={'/create-post'}>
-            <Button
-              type='button'
-              gradientDuoTone='purpleToPink'
-              className='w-full'
-            >
-              Create a post
-            </Button>
-          </Link>
-        )}
-        {currentUser?.isAdmin && (
-          <Link to={'/create-add'}>
-            <Button
-              type='button'
-              gradientDuoTone='purpleToPink'
-              className='w-full'
-            >
-              Create a add
-            </Button>
-          </Link>
-        )}
+        
       </form>
       <div className='text-red-500 flex justify-between mt-5'>
         <span onClick={() => setShowModal(true)} className='cursor-pointer'>
           Delete Account
         </span>
-        <span onClick={handleSignout} className='cursor-pointer'>
+        <span  className='cursor-pointer'>
           Sign Out
         </span>
       </div>
@@ -276,7 +224,7 @@ export default function SeekerProfile() {
               Are you sure you want to delete your account?
             </h3>
             <div className='flex justify-center gap-4'>
-              <Button color='failure' onClick={handleDeleteUser}>
+              <Button color='failure' >
                 Yes, I'm sure
               </Button>
               <Button color='gray' onClick={() => setShowModal(false)}>
