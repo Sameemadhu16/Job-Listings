@@ -7,14 +7,12 @@ import seekerRoutes from './routes/seeker.route.js'
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import postRoutes from './routes/post.route.js'
-import jobposterRoutes from './routes/jobposter.route.js'
-
+import commentRoutes from './routes/comment.route.js'
 
 
 dotenv.config();
 
 mongoose.connect("mongodb+srv://ilakshitha7921:ilakshitha7921@cluster0.gfhczos.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-
 
 
   .then(() => {
@@ -24,7 +22,6 @@ mongoose.connect("mongodb+srv://ilakshitha7921:ilakshitha7921@cluster0.gfhczos.m
     console.log(err);
 
   });
-
 
 
 const app = express();
@@ -38,11 +35,11 @@ app.listen(4500, () => {
 
 app.use('/api/user', userRoutes);
 
-
-app.use('/api/jobposter', jobposterRoutes);
-
+app.use('/api/auth', authRoutes);
 app.use('/api/seeker', seekerRoutes)
 app.use('/api/auth', authRoutes);
+app.use('/api/comment',commentRoutes)
+
 
 
 
@@ -60,4 +57,5 @@ app.use((err, req, res, next) => {
 app.use('/api/post',postRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/post', postRoutes);
+
 
