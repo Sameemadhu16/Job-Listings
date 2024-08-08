@@ -1,4 +1,5 @@
 import { useEffect, useState ,useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Alert, Button, Modal,  TextInput } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
@@ -11,7 +12,7 @@ import {
 import { app } from '../firebase';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { updateStart, updateSuccess, updateFailure } from '../redux/user/userSlice';
+import { updateStart, updateSuccess, updateFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure } from '../redux/user/userSlice';
 
 
 export default function SeekerProfile() {
@@ -28,6 +29,7 @@ export default function SeekerProfile() {
   const [formData, setFormData] = useState({});
   const filePickerRef = useRef();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -60,7 +62,7 @@ export default function SeekerProfile() {
         setUpdateUserError(data.message);
       } else {
         dispatch(updateSuccess(data));
-        setUpdateUserSuccess("User's profile updated successfully");
+        setUpdateUserSuccess("Seeker's profile updated successfully");
       }
     } catch (error) {
       dispatch(updateFailure(error.message));
@@ -114,6 +116,25 @@ export default function SeekerProfile() {
     );
   };
 
+  const handleDeleteSeeker = async () => {
+    setShowModal(false);
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/jobseeker/delete/${currentUser._id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        dispatch(deleteUserFailure(data.message));
+        
+      } else {
+        dispatch(deleteUserSuccess(data));
+        navigate('/sign-in');
+      }
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
  
 
 
@@ -245,7 +266,7 @@ export default function SeekerProfile() {
               Are you sure you want to delete your account?
             </h3>
             <div className='flex justify-center gap-4'>
-              <Button color='failure' >
+              <Button color='failure' onClick={handleDeleteSeeker}>
                 Yes, I'm sure
               </Button>
               <Button color='gray' onClick={() => setShowModal(false)}>
