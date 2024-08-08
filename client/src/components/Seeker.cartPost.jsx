@@ -11,6 +11,7 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [cartPostIdToDelete, setCartPostIdToDelete] = useState('');
 
+
   const handleModalOpen = () => {
     setIsModalOpen(true);
   };
