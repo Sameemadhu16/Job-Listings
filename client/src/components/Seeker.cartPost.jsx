@@ -8,6 +8,7 @@ export default function SeekerCartPost({ShowAddcart, showApply, showDelete,post}
     const [isModalOpen, setIsModalOpen] = useState(false);
 
 
+
   const handleModalOpen = () => {
     setIsModalOpen(true);
   };
@@ -43,14 +44,11 @@ export default function SeekerCartPost({ShowAddcart, showApply, showDelete,post}
       <Link to={""}>
 
         <img src={post.image} alt='post-cover' className='h-[260px] w-full  object-cover group-hover:h-[200px] transition-all duration-300 z-20'/>
+
       </Link>
       <div className='p-3 flex flex-col gap-2'>
-        <p className='text-lg font-semibold line-clamp-2'>{post.title}</p>
-        <span className='italic text-sm'>{post.companyName}</span>
-        <div className='flex p-2 font-semibold text-sm justify-between'>
-          <p>{time}</p>
-          <p>{formatDate(post.createdAt)}</p>
-        </div>
+        <p className='text-lg font-semibold line-clamp-2'>post title</p>
+        <span className='italic text-sm'>post company</span>
         {
           showApply && showDelete && (
             <div className='flex items-center gap-2 ml-5'>
@@ -69,6 +67,7 @@ export default function SeekerCartPost({ShowAddcart, showApply, showDelete,post}
               Add to cart
             </Button>
           )
+
         }
         {
           showApply && (
@@ -76,6 +75,7 @@ export default function SeekerCartPost({ShowAddcart, showApply, showDelete,post}
               Apply
             </Button>
           )
+
         }
       </div>
       <CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} showSendCVLink={true}/>

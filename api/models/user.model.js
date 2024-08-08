@@ -61,6 +61,44 @@ const userSchema = new mongoose.Schema({
             default: false,
           },
        
+
+        //Feild specific to job posters
+        companyName: {
+            type: String,
+            required : function(){
+                return this.role === 'jobPoster';
+            }
+            
+        },
+        
+        biography: {
+            type: String,
+            required : function(){
+                return this.role === 'jobPoster';
+            }
+        },
+        coverLetter: {
+            type: String,
+            required : function (){
+                return this.role === 'jobPoster';
+            }
+        },
+
+        //Feild specific to job seeker
+        cv: {
+            type: String,
+            
+        },
+            
+        skills: {
+            type: [String],
+            required: function(){
+                return this.role === 'jobSeeker';
+            }
+       
+
+        },
+
         cart: {
             type: [String],
             
