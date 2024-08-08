@@ -32,15 +32,10 @@ app.listen(4500, () => {
   console.log('Server is running port 4500');
 });
 
-
-
 app.use('/api/auth', authRoutes);
 app.use('/api/seeker', seekerRoutes)
-app.use('/api/auth', authRoutes);
-
-
+app.use('/api/post',postRoutes);
 app.use('/api/jobseeker',jobseekerRoutes);
-
 
 
 app.use((err, req, res, next) => {
@@ -54,7 +49,5 @@ app.use((err, req, res, next) => {
 
 });
 
-app.use('/api/post',postRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/post', postRoutes);
+
 
