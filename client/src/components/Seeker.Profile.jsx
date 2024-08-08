@@ -1,4 +1,3 @@
-import React from 'react';
 import { useEffect, useState ,useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Alert, Button, Modal,  TextInput } from 'flowbite-react';
@@ -12,6 +11,7 @@ import {
 import { app } from '../firebase';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { updateStart, updateSuccess, updateFailure } from '../redux/user/userSlice';
 
 
 export default function SeekerProfile() {
@@ -33,6 +33,7 @@ export default function SeekerProfile() {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,7 +47,28 @@ export default function SeekerProfile() {
       setUpdateUserError('Please wait for image to upload');
       return;
     }
-  }
+    try {
+      dispatch(updateStart());
+      const res = await fetch(`/api/jobseeker/update/${currentUser._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        dispatch(updateFailure(data.message));
+        setUpdateUserError(data.message);
+      } else {
+        dispatch(updateSuccess(data));
+        setUpdateUserSuccess("User's profile updated successfully");
+      }
+    } catch (error) {
+      dispatch(updateFailure(error.message));
+      setUpdateUserError(error.message);
+    }
+  };
 
  
 
@@ -167,6 +189,7 @@ export default function SeekerProfile() {
           type='password'
           id='password'
           placeholder='password'
+          onChange={handleChange}
           
         />
         <TextInput
