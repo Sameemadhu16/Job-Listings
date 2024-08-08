@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Card, Avatar, Badge } from 'flowbite-react';
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
 import { GiWorld } from "react-icons/gi";
 import { FaAddressCard } from "react-icons/fa6";
 import { IoCall } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
+import { useSelector } from 'react-redux';
 
 export default function PosterDashEmployeeProfile() {
+  const {currentUser} = useSelector(state => state.user);
+  const [imageFile,setImageFile] =useState(null)
+
+  const handleImageChange =(e)=>{
+    setImageFile(e.target.file[0]);
+  };
+  console.log(imageFile)
   return (
     <div className='w-full bg-red-800'>
       
@@ -15,16 +23,14 @@ export default function PosterDashEmployeeProfile() {
         {/* Profile Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center">
+            <input type='file' accept='image/*' onChange={handleImageChange}/>
             <Avatar img="https://via.placeholder.com/100" rounded={true} size="xl" />
             <div className="ml-4">
               <h1 className="text-xl font-bold">Ishan Lakshitha</h1>
               <p className="text-gray-600">Website Designer (UI/UX)</p>
             </div>
           </div>
-          <div className="flex space-x-4">
-            <Button color='red'>Send Mail</Button>
-            <Button gradientDuoTone="greenToBlue">Hire Candidates</Button>
-          </div>
+        
         </div>
 
 

@@ -22,6 +22,7 @@ import SignIn from './pages/SignIn';
 
 import PosterDashMyJobs from './components/Poster.DashMyJobs';
 import PosterDashEmployeeProfile from './components/Poster.DashEmployeeProfile';
+import PosterDashSavedCandidate from './components/Poster.DashSavedCandidate';
 
 
 export default function App() {
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="/poster-dashboard" element={<PosterDashboard />}>
           <Route index element={<PosterDashOverview />} />
           <Route path="employeeprofile" element={<PosterDashEmployeeProfile />} />
+          <Route path="saved-candidate" element={<PosterDashSavedCandidate />} />
           <Route path="post-jobs" element={<PosterPostjob />}>
             <Route index element={<PosterCompanyInfo />} />
             <Route path="founding" element={<PosterFoundInfo />} />
