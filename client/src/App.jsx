@@ -46,7 +46,7 @@ export default function App() {
             <Route path="account-setting" element={<PosterCompanyInfo />} />
           </Route>
 
-          <Route path="myjobs" element={<PosterDashMyJobs />} />
+          <Route path="my-jobs" element={<PosterDashMyJobs />} />
 
           <Route path="settings" element={<PosterSetting />}>
             <Route index element={<PosterCompanyInfo />} />
