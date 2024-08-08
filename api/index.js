@@ -5,7 +5,7 @@ import authRoutes from './routes/auth.route.js';
 import seekerRoutes from './routes/seeker.route.js'
 import cookieParser from 'cookie-parser';
 import postRoutes from './routes/post.route.js'
-import commentRoutes from './routes/comment.route.js'
+import jobseekerRoutes from './routes/jobseeker.route.js'
 
 
 
@@ -37,7 +37,6 @@ app.listen(4500, () => {
 app.use('/api/auth', authRoutes);
 app.use('/api/seeker', seekerRoutes)
 app.use('/api/auth', authRoutes);
-app.use('/api/comment',commentRoutes)
 
 
 
@@ -57,4 +56,4 @@ app.use('/api/post',postRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/post', postRoutes);
 
-
+app.use('/api/jobseeker',jobseekerRoutes);
