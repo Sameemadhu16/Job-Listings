@@ -12,7 +12,7 @@ import {
 import { app } from '../firebase';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { updateStart, updateSuccess, updateFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure } from '../redux/user/userSlice';
+import { updateStart, updateSuccess, updateFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure, signoutSuccess } from '../redux/user/userSlice';
 
 
 export default function SeekerProfile() {
@@ -135,6 +135,23 @@ export default function SeekerProfile() {
       dispatch(deleteUserFailure(error.message));
     }
   };
+
+  const handleSignout = async () => {
+    try {
+      const res = await fetch('/api/jobseeker/seeker-signout', {
+        method: 'POST',
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(signoutSuccess());
+        navigate('/sign-in');
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
  
 
 
@@ -233,7 +250,7 @@ export default function SeekerProfile() {
         <span onClick={() => setShowModal(true)} className='cursor-pointer'>
           Delete Account
         </span>
-        <span  className='cursor-pointer'>
+        <span onClick={handleSignout} className='cursor-pointer'>
           Sign Out
         </span>
       </div>
