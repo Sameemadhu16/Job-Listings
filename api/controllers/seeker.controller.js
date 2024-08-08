@@ -126,3 +126,26 @@ export const getapplied = async (req, res, next) => {
         next(error);
     }
 };
+
+export const deleteCartpost = async (req, res, next) => {
+    const { cartPostIdToDelete, currentUserId } = req.params;
+
+    try {
+        // Find the user by _id
+        const user = await User.findById(currentUserId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Remove cartPostIdToDelete from the user's cart array
+        user.cart = user.cart.filter(postId => postId !== cartPostIdToDelete);
+
+        // Save the updated user
+        await user.save();
+
+        res.status(200).json({ message: 'Cart post deleted successfully', user });
+    } catch (error) {
+        next(error); // Pass the error to the error handling middleware
+    }
+}

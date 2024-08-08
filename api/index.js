@@ -7,6 +7,7 @@ import seekerRoutes from './routes/seeker.route.js'
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import postRoutes from './routes/post.route.js'
+import commentRoutes from './routes/comment.route.js'
 
 
 dotenv.config();
@@ -37,6 +38,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/seeker', seekerRoutes)
 app.use('/api/auth', authRoutes);
+app.use('/api/comment',commentRoutes)
 
 
 
