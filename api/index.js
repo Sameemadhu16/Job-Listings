@@ -17,7 +17,6 @@ dotenv.config();
 mongoose.connect("mongodb+srv://ilakshitha7921:ilakshitha7921@cluster0.gfhczos.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
 
-
   .then(() => {
     console.log('MongoDB is conected');
   })
@@ -25,7 +24,6 @@ mongoose.connect("mongodb+srv://ilakshitha7921:ilakshitha7921@cluster0.gfhczos.m
     console.log(err);
 
   });
-
 
 
 const app = express();
