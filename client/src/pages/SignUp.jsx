@@ -91,7 +91,7 @@ const SignUp = () => {
                                 </div>
                                 <div>
                                     <Label htmlFor="mobilenumber" value="Your Mobile Number" />
-                                    <TextInput type="text" placeholder="Mobile Number" id="mobilenumber" name="mobileNumber" onChange={handleChange} />
+                                    <TextInput type="text" placeholder="Mobile Number" id="mobilenumber" name="mobilenumber" onChange={handleChange} />
                                 </div>
                             </div>
                             <Button className="bg-blue-500" type="submit" disabled={loading}>
