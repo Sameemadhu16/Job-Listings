@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import PostCards from './PostCards';
 import SeekerCartPost from './Seeker.cartPost';
 
+
+
 export default function SeekerDashOverview({}) {
 
   const [posts,setPosts] = useState([]);
@@ -17,6 +19,10 @@ export default function SeekerDashOverview({}) {
     }
     fetchPosts();
   },[])
+
+  const handleButtonClick = () => {
+    window.location.href = '/seeker-dashboard?tab=profile';
+  };
 
 
   return (
@@ -67,8 +73,9 @@ export default function SeekerDashOverview({}) {
                 </div>
             </div>
             
-            <Button>
+            <Button onClick={handleButtonClick}>
                 Edit Profile
+
             </Button>
           </div>
         </div>
