@@ -10,6 +10,8 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [cartPostIdToDelete, setCartPostIdToDelete] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+
 
   const handleModalOpen = () => {
     setIsModalOpen(true);
@@ -47,6 +49,13 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
       }
 
       console.log('Post added to cart successfully');
+      setShowAlert(true);
+
+          // Hide the alert after 3 seconds
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+      
     } catch (error) {
       console.error('Error adding post to cart:', error.message);
       // Handle error: display error message or perform other actions
@@ -103,6 +112,12 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
 
   return (
     <div className='group relative w-full sm:w-[380px] border border-teal-500 hover:border-2 h-[380px] overflow-hidden rounded-lg transition-all'>
+      {/* Alert message */}
+    {showAlert && (
+      <div className="absolute top-0 left-0 right-0 bg-green-500 text-white text-center p-2 z-50">
+        Item added to cart!
+      </div>
+    )}
       <Link to={''}>
         <img
           src={post.image}
