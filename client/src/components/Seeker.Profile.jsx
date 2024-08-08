@@ -33,8 +33,6 @@ export default function SeekerProfile() {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  console.log(formData);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setUpdateUserError(null);
@@ -141,11 +139,11 @@ export default function SeekerProfile() {
               strokeWidth={5}
               styles={{
                 root: {
-                  width: '100%',
-                  height: '100%',
+                  inline_size: '100%',
+                  block_size: '100%',
                   position: 'absolute',
-                  top: 0,
-                  left: 0,
+                  in_set_block_start: 0,
+                  in_set_inline_start: 0,
                 },
                 path: {
                   stroke: `rgba(62, 152, 199, ${imageFileUploadProgress / 100})`,
