@@ -1,12 +1,13 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
 import seekerRoutes from './routes/seeker.route.js'
 import cookieParser from 'cookie-parser';
+import path from 'path';
 import postRoutes from './routes/post.route.js'
 import commentRoutes from './routes/comment.route.js'
-
 
 
 dotenv.config();
@@ -32,7 +33,7 @@ app.listen(4500, () => {
   console.log('Server is running port 4500');
 });
 
-
+app.use('/api/user', userRoutes);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/seeker', seekerRoutes)
