@@ -45,7 +45,6 @@ export const getJobPosterByID = async(req,res,next) =>{
 
 }
 
-
 export const updateJobposter = async(req,res,next)=>{
     
     console.log(req.user)
