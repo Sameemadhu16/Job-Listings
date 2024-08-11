@@ -28,86 +28,22 @@ const userSchema = new mongoose.Schema({
             enum: ['jobPoster', 'jobSeeker'],
             required: true,
         },
-
-        gender: {
-            type: String,
-        },
         mobilenumber: {
             type: String,
             required: true,
         },
-        birthday: {
-            trpe: String,
-        },
-        maritalStatus: {
-            type: String,
-            enum: ['married', 'unmarried'],
-        },
-        experience: {
-            type : String,
-        },
-        profilePicture: {
-            type: String,
-            default:
-              'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
-          },
-          isAdmin: {
-            type : Boolean,
-            default: false,
-          },
-
-          isModerator: {
-            type : Boolean,
-            default: false,
-          },
-       
-
-        //Feild specific to job posters
-        companyName: {
-            type: String,
-            required : function(){
-                return this.role === 'jobPoster';
-            }
-            
-        },
         
-        biography: {
-            type: String,
-            required : function(){
-                return this.role === 'jobPoster';
-            }
-        },
-        coverLetter: {
-            type: String,
-            required : function (){
-                return this.role === 'jobPoster';
-            }
-        },
-
-        //Feild specific to job seeker
-        cv: {
-            type: String,
-            
-        },
-            
-        skills: {
-            type: [String],
-            required: function(){
-                return this.role === 'jobSeeker';
-            }
-       
-
+        isAdmin: {
+            type : Boolean,
+            default: false,
         },
 
         cart: {
             type: [String],
-            
-       
         },
+        
         appliedjobs: {
             type: [String],
-            
-
         }
     },
     {timestamps: true}
