@@ -6,6 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { signoutSuccess } from "../redux/user/userSlice";
 
+import { FaMoon, FaSun } from 'react-icons/fa';
+import { toggleTheme } from "../redux/theme/themeSlice";
+
+
 export default function Header() {
 
   const {currentUser} = useSelector(state => state.user)
@@ -74,7 +78,7 @@ export default function Header() {
             <Dropdown.Divider />
           
           <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
+          <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
         </Dropdown>
           ):(
             <Link to='/sign-in'>
