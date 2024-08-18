@@ -19,8 +19,8 @@ export default function Home() {
   },[])
 
   return (
-    <div className="min-h-screen bg-gray-100 ">
-      <div className="flex justify-end p-4 bg-white shadow">
+    <div className="min-h-screen  ">
+      <div className="flex justify-end p-4 ">
         <form className="mr-3 hidden lg:inline-block">
           <TextInput
             type="text"

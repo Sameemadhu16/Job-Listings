@@ -68,3 +68,44 @@ export const seekerSignout= async (req, res, next) => {
     next(error);
   }
 };
+
+export const getJobSeekers = async (req,res,next) =>{
+
+  //check jobseeker true or false
+  try {
+      const jobseeker = await User.find({ role: 'jobSeeker' })
+
+      const usersWithoutPassword = jobseeker.map((user) => {
+          const { password, ...rest } = user._doc;
+          return rest;
+        });
+
+        const totalUsers = await User.countDocuments({ role: 'jobSeeker' });
+
+        res.status(200).json({
+          jobseeker: usersWithoutPassword,
+          totalUsers,
+      }); 
+      
+  } catch (error) {
+      next(error)
+  }
+}
+
+export const getJobSeekerByID = async(req,res,next) =>{
+  const{id} = req.params;
+  console.log(req.user)
+
+  try {
+    const jobseeker = await User.findById(req.user.id);
+
+    if (jobseeker.role!="jobSeeker"){
+        return next(404, "job seeker not found");
+    }
+    const {password, ...rest} =jobseeker._doc;
+    res.status(200).json(rest)
+  } catch (error) {
+    next(error)
+  }
+
+}
