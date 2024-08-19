@@ -1,7 +1,5 @@
 import { Avatar, Dropdown, Navbar, TextInput, Button, theme } from "flowbite-react";
 import logo from '../images/Jobpilot.png';
-import {AiOutlineSearch} from 'react-icons/ai'
-import { IoMdNotifications } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { signoutSuccess } from "../redux/user/userSlice";
@@ -55,17 +53,7 @@ export default function Header() {
       <Navbar.Brand href="/">
         <img src={logo} className="mr-3 h-6 sm:h-14 rounded-full" alt="jobpilot-logo" />
         <span className="self-center whitespace-nowrap text-xl font-bold dark:text-white">Jobpilot</span>
-      </Navbar.Brand>
-      <form>
-            <TextInput type='text'
-            placeholder='Search...'
-            rightIcon={AiOutlineSearch}
-            className='hidden lg:inline'/>
-        </form>
-        <Button className='w-12 h-10 lg:hidden focus:outline-none' color='gray' pill>
-            <AiOutlineSearch/>
-        </Button>
-        
+      </Navbar.Brand>  
       <div className="flex md:order-2">
         <Button
           className='w-12 h-10 hidden sm:inline mr-2'
