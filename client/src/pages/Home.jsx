@@ -49,15 +49,7 @@ export default function Home() {
       </div>
         )
       }
-      <div className="flex justify-center py-4">
-        <Button.Group>
-          <Button color="light">01</Button>
-          <Button color="light">02</Button>
-          <Button color="light">03</Button>
-          <Button color="light">04</Button>
-          <Button color="light">05</Button>
-        </Button.Group>
-      </div>
+      
     </div>
   );
 }

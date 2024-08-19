@@ -23,6 +23,16 @@ export default function Header() {
     
   };
 
+  const getDashboardPath = () => {
+    if (currentUser?.role === 'jobSeeker') {
+      return '/seeker-dashboard?tab=dash';
+    } else if (currentUser?.role === 'jobPoster') {
+      return '/poster-dashboard?tab=dash';
+    } else {
+      return '#'; // Fallback or default path
+    }
+  };
+
   const handleSignout = async () => {
     try {
       const res = await fetch('/api/jobseeker/seeker-signout', {
@@ -55,9 +65,7 @@ export default function Header() {
         <Button className='w-12 h-10 lg:hidden focus:outline-none' color='gray' pill>
             <AiOutlineSearch/>
         </Button>
-        <Button className='w-12 h-10  focus:outline-none' color='gray' pill>
-            <IoMdNotifications/>
-        </Button>
+        
       <div className="flex md:order-2">
         <Button
           className='w-12 h-10 hidden sm:inline mr-2'
@@ -101,9 +109,14 @@ export default function Header() {
         <Navbar.Link href="/" className="active:underline">Home</Navbar.Link>
         <Navbar.Link href="#">Find Job</Navbar.Link>
         <Navbar.Link href="#">Find Employers</Navbar.Link>
-        <Navbar.Link href="/dashboard" className="active:underline active:text-cyan-600">Dashboard</Navbar.Link>
-        <Navbar.Link href="#">Job Alerts</Navbar.Link>
-        <Navbar.Link href="#">Customer Supports</Navbar.Link>
+        <Navbar.Link
+          href={getDashboardPath()}
+          className="active:underline active:text-cyan-600"
+        >
+          Dashboard
+        </Navbar.Link>
+        <Navbar.Link href="/contact">Customer Supports</Navbar.Link>
+        <Navbar.Link href="/about">About Us</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );
