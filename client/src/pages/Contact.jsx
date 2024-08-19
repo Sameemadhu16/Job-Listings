@@ -2,10 +2,13 @@ import React from 'react'
 import { TextInput,FileInput,Button,Textarea,Select } from 'flowbite-react'
 import { FaArrowRight } from "react-icons/fa";
 import { IoIosCloseCircle } from "react-icons/io";
+import { useSelector } from 'react-redux';
 
 export default function PosterCompanyInfo() {
+    const { theme } = useSelector(state => state.theme);
   return (
-    <div className='p-3 max-w-3xl mx-auto min-h-screen bg-gray-100'>
+    <div className={`p-3 max-w-3xl mx-auto min-h-screen ${theme === 'light' ? 'bg-gray-100' : 'bg-none'}`}>
+
     <form className="flex flex-col flex-wrap gap-4 m-10" >
         <h1 className='text-3xl font-bold'>
             Contact :
