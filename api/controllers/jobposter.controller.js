@@ -46,6 +46,7 @@ export const getJobPosterByID = async (req, res, next) => {
 }
 
 
+
 export const updateJobposter = async (req, res, next) => {
 
     const updateData = req.body;
