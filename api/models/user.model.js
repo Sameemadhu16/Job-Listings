@@ -1,27 +1,28 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-        username: {
-            type: String,
-            required: true,
-            unique: true,
-        },
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+    },
 
-        fullname: {
-            type: String,
-            required: true,
-        },
+    fullname: {
+        type: String,
+        required: true,
+    },
 
-        email: {
-            type: String,
-            required: true,
-            unique: true,
-        },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
 
-        password: {
-            type: String,
-            required: true,
-        },
+    password: {
+        type: String,
+        required: true,
+    },
+
 
         role: {
             type: String,
@@ -44,9 +45,68 @@ const userSchema = new mongoose.Schema({
         
         appliedjobs: {
             type: [String],
+
+    },
+    birthday: {
+        type: String,
+    },
+    maritalStatus: {
+        type: String,
+        enum: ['married', 'unmarried'],
+    },
+ 
+  //Feild specific to job posters
+    companyName: {
+        type: String,
+        required: function () {
+            return this.role === 'jobPoster';
+        }
+
+    },
+
+    biography: {
+        type: String,
+        default: "I've been passionate about graphic design and digital art from an early age with a keen interest in Website and Mobile Application User Interfaces...",
+        required: function () {
+            return this.role === 'jobPoster';
+
         }
     },
-    {timestamps: true}
+    coverLetter: {
+        type: String,
+        default: "Dear ABC?",
+        required: function () {
+            return this.role === 'jobPoster';
+        }
+    },
+
+    //Feild specific to job seeker
+    cv: {
+        type: String,
+
+    },
+
+    skills: {
+        type: [String],
+        required: function () {
+            return this.role === 'jobSeeker';
+        }
+
+
+    },
+
+    cart: {
+        type: [String],
+
+
+    },
+    appliedjobs: {
+        type: [String],
+
+
+    }
+},
+    { timestamps: true }
 );
 
 const User = mongoose.model('User', userSchema);
