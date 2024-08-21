@@ -115,7 +115,7 @@ export default function PosterDashEmployeeProfile() {
       }
 
     } catch (error) {
-      dispatch(updateFailure(data.message))
+      dispatch(updateFailure(error.message))
     }
   }
 

@@ -1,14 +1,10 @@
 import { Avatar, Dropdown, Navbar, TextInput, Button, theme } from "flowbite-react";
 import logo from '../images/Jobpilot.png';
-import {AiOutlineSearch} from 'react-icons/ai'
-import { IoMdNotifications } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { signoutSuccess } from "../redux/user/userSlice";
-
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { toggleTheme } from "../redux/theme/themeSlice";
-
 
 export default function Header() {
 
@@ -23,6 +19,16 @@ export default function Header() {
       return '/seeker-dashboard?tab=profile';
     }
     
+  };
+
+  const getDashboardPath = () => {
+    if (currentUser?.role === 'jobSeeker') {
+      return '/seeker-dashboard?tab=dash';
+    } else if (currentUser?.role === 'jobPoster') {
+      return '/poster-dashboard?tab=dash';
+    } else {
+      return '#'; // Fallback or default path
+    }
   };
 
   const handleSignout = async () => {
@@ -49,7 +55,6 @@ export default function Header() {
         <span className="self-center whitespace-nowrap text-xl font-bold dark:text-white">Jobpilot</span>
       </Navbar.Brand>  
       <div className="flex md:order-2">
-
         <Button
           className='w-12 h-10 hidden sm:inline mr-2'
           color='gray'
@@ -58,7 +63,6 @@ export default function Header() {
         >
           {theme === 'light' ? <FaSun /> : <FaMoon />}
         </Button>
-
 
         {currentUser ? (
           <Dropdown

@@ -51,6 +51,8 @@ export const updateJobposter = async (req, res, next) => {
 
 
     const updateData = req.body;
+    console.log(req.body);
+    
 
 
     try {
