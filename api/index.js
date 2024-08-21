@@ -16,6 +16,7 @@ dotenv.config();
 mongoose.connect("mongodb+srv://ilakshitha7921:ilakshitha7921@cluster0.gfhczos.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
 
+
   .then(() => {
     console.log('MongoDB is conected');
   })
@@ -23,6 +24,7 @@ mongoose.connect("mongodb+srv://ilakshitha7921:ilakshitha7921@cluster0.gfhczos.m
     console.log(err);
 
   });
+
 
 
 const app = express();
@@ -37,6 +39,7 @@ app.listen(4500, () => {
 
 
 app.use('/api/auth', authRoutes);
+app.use('/api/jobposter', jobposterRoutes);
 app.use('/api/seeker', seekerRoutes)
 app.use('/api/auth', authRoutes);
 
