@@ -49,7 +49,7 @@ export default function Header() {
   };
 
   return (
-    <Navbar fluid rounded className="border-b-2">
+    <Navbar fluid rounded className="border-b-2 ">
       <Navbar.Brand href="/">
         <img src={logo} className="mr-3 h-6 sm:h-14 rounded-full" alt="jobpilot-logo" />
         <span className="self-center whitespace-nowrap text-xl font-bold dark:text-white">Jobpilot</span>
