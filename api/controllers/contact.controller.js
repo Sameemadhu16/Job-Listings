@@ -1,3 +1,5 @@
+import Contact from "../models/contact.model.js";
+
 export const addContact = async (req, res, next) => {
    try {
     const {name , email, message}= req.body;
