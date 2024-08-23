@@ -3,6 +3,7 @@ import bcryptjs from 'bcryptjs';
 import { errorHandler } from "../utils/error.js";
 
 export const updateSeeker = async (req, res, next) => {
+
     if (req.user.id !== req.params.userId){
         return next(errorHandler(403, "You are not allowed to update this user"));
     }
@@ -44,6 +45,7 @@ export const updateSeeker = async (req, res, next) => {
       } catch (error) {
         next(error);
       }
+
 };
 
 export const deleteSeeker = async (req, res, next) => {
@@ -56,6 +58,7 @@ export const deleteSeeker = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+
 } 
 
 export const seekerSignout= async (req, res, next) => {
@@ -68,6 +71,7 @@ export const seekerSignout= async (req, res, next) => {
     next(error);
   }
 };
+
 
 export const getJobSeekers = async (req,res,next) =>{
 
@@ -99,10 +103,12 @@ export const getJobSeekerByID = async(req,res,next) =>{
   try {
     const jobseeker = await User.findById(req.user.id);
 
+
     if (jobseeker.role!="jobSeeker"){
         return next(404, "job seeker not found");
     }
     const {password, ...rest} =jobseeker._doc;
+
     res.status(200).json(rest)
   } catch (error) {
     next(error)

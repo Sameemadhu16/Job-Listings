@@ -47,7 +47,7 @@ export default function PosterDashSidebar() {
               My Jobs
             </Sidebar.Item>
           </Link>
-          <Link to="/poster-dashboard/myjobs">
+          <Link to="/poster-dashboard/saved-candidate">
 
             <Sidebar.Item icon={RiSave3Fill} as="div">
               Saved Candidate

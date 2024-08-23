@@ -56,7 +56,9 @@ export default function SeekerDashSidebar() {
           </Link>
           
           <Link to="/seeker-dashboard?tab=profile">
+
             <Sidebar.Item active={tab === "profile"} icon={FaUser} as="div">
+
               Profile
             </Sidebar.Item>
           </Link>

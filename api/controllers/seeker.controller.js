@@ -1,5 +1,4 @@
 import Post from "../models/post.model.js";
-
 import User from "../models/user.model.js";
 export const getJobs = async (req, res, next) => {
     try {
@@ -25,7 +24,6 @@ export const getJobs = async (req, res, next) => {
 
             res.status(200).json(posts);
         }
-
     } catch (error) {
         next(error);
     }
@@ -84,6 +82,8 @@ export const addappliedjobs = async (req, res, next) => {
         next(error);
     }
 };
+
+
 
 
 export const getcart = async (req, res, next) => {

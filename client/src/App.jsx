@@ -20,8 +20,10 @@ import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import SeekerProfile from './components/Seeker.Profile';
 
+
 import PosterDashMyJobs from './components/Poster.DashMyJobs';
 import PosterDashEmployeeProfile from './components/Poster.DashEmployeeProfile';
+
 
 
 export default function App() {
@@ -39,16 +41,13 @@ export default function App() {
         <Route path="/finish" element={<Finish />} />
         <Route path="/poster-dashboard" element={<PosterDashboard />}>
           <Route index element={<PosterDashOverview />} />
-          <Route path="employeeprofile" element={<PosterDashEmployeeProfile />} />
+          <Route path="employeeprofile" element={<PosterDashOverview />} />
           <Route path="post-jobs" element={<PosterPostjob />}>
             <Route index element={<PosterCompanyInfo />} />
             <Route path="founding" element={<PosterFoundInfo />} />
             <Route path="social-media" element={<PosterSocialMediaInfo />} />
             <Route path="account-setting" element={<PosterCompanyInfo />} />
           </Route>
-
-          <Route path="my-jobs" element={<PosterDashMyJobs />} />
-
           <Route path="settings" element={<PosterSetting />}>
             <Route index element={<PosterCompanyInfo />} />
           </Route>

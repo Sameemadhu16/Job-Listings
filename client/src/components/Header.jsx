@@ -1,16 +1,20 @@
 import { Avatar, Dropdown, Navbar, TextInput, Button, theme } from "flowbite-react";
 import logo from '../images/Jobpilot.png';
+
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { signoutSuccess } from "../redux/user/userSlice";
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { toggleTheme } from "../redux/theme/themeSlice";
 
+
 export default function Header() {
 
   const {currentUser} = useSelector(state => state.user)
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
 
   const getProfilePath = (role) => {
     if (role === 'jobPoster') {
@@ -20,6 +24,7 @@ export default function Header() {
     }
     
   };
+
 
   const getDashboardPath = () => {
     if (currentUser?.role === 'jobSeeker') {
@@ -48,6 +53,7 @@ export default function Header() {
     }
   };
 
+
   return (
     <Navbar fluid rounded className="border-b-2 ">
       <Navbar.Brand href="/">
@@ -55,6 +61,7 @@ export default function Header() {
         <span className="self-center whitespace-nowrap text-xl font-bold dark:text-white">Jobpilot</span>
       </Navbar.Brand>  
       <div className="flex md:order-2">
+
         <Button
           className='w-12 h-10 hidden sm:inline mr-2'
           color='gray'
@@ -63,6 +70,7 @@ export default function Header() {
         >
           {theme === 'light' ? <FaSun /> : <FaMoon />}
         </Button>
+
 
         {currentUser ? (
           <Dropdown
