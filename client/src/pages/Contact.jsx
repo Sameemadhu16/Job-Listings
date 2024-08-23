@@ -36,7 +36,7 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto p-6">
         
         {/* Header Section */}
-        <h1 className="text-4xl font-bold text-center mb-8 animate-pulse">Customer Support</h1>
+        <h1 className="text-4xl font-bold text-center mb-8 animate-pulse  text-blue-500 dark:text-green-500">Customer Support</h1>
         
         <p className="text-center text-lg mb-10">
           Need help? Our support team is here to assist you. Browse our FAQs or reach out to us via the contact form.
@@ -45,8 +45,8 @@ export default function Contact() {
         <div className="space-y-12">
           {/* FAQ Section */}
           <div className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-lg">
-            <h2 className="text-3xl font-bold mb-6 flex items-center justify-center">
-              <FaQuestionCircle className="mr-2" /> Frequently Asked Questions (FAQ)
+            <h2 className="text-3xl font-bold mb-6 flex items-center justify-center  text-blue-500 dark:text-green-500">
+              <FaQuestionCircle className=" text-blue-500 dark:text-green-500 mr-2 " /> Frequently Asked Questions (FAQ)
             </h2>
             <div className="space-y-4">
               {/* FAQ Item */}
@@ -101,7 +101,7 @@ export default function Contact() {
 
           {/* Contact Us Section */}
           <div className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-lg">
-            <h2 className="text-3xl font-bold mb-6 flex items-center justify-center">
+            <h2 className="text-3xl font-bold mb-6 flex items-center justify-center  text-blue-500 dark:text-green-500">
               <FaEnvelope className="mr-2" /> Contact Us
             </h2>
 
