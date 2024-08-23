@@ -13,6 +13,7 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
   const [showAlert, setShowAlert] = useState(false);
 
 
+
   const handleModalOpen = () => {
     setIsModalOpen(true);
   };

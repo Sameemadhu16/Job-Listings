@@ -83,6 +83,9 @@ export const addappliedjobs = async (req, res, next) => {
     }
 };
 
+
+
+
 export const getcart = async (req, res, next) => {
     try {
         const userId = req.params.userId;
@@ -149,3 +152,4 @@ export const deleteCartpost = async (req, res, next) => {
         next(error); // Pass the error to the error handling middleware
     }
 }
+

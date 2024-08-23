@@ -1,6 +1,7 @@
 import express from 'express'
 import { addappliedjobs, addcart, deleteCartpost, getapplied, getcart, getJobs } from '../controllers/seeker.controller.js'
 
+
 const router = express.Router();
 router.get('/getjobs', getJobs);
 router.get('/getjobs/:postId',getJobs)

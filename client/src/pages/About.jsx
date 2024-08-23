@@ -10,11 +10,13 @@ export default function About() {
     <div className="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 min-h-screen py-10">
       <div className="max-w-6xl mx-auto p-6">
         {/* Header Section */}
-        <h1 className="text-4xl font-bold text-center mb-8 animate-pulse">About Job Pilot</h1>
+
+        <h1 className="text-4xl text-blue-500 dark:text-green-500 font-bold text-center mb-8 animate-pulse">About Job Pilot</h1>
         
         {/* Introduction */}
         <p className="text-center text-lg mb-8">
-          Welcome to <span className="font-semibold">Job Pilot</span>! Your trusted platform for connecting <span className="font-semibold">Job Seekers</span> and <span className="font-semibold">Job Posters</span> in an easy-to-use, feature-rich environment.
+          Welcome to <span className="font-semibold text-blue-500 dark:text-green-500">Job Pilot</span>! Your trusted platform for connecting <span className="font-semibold text-blue-500 dark:text-green-500">Job Seekers</span> and <span className="font-semibold text-blue-500 dark:text-green-500">Job Posters</span> in an easy-to-use, feature-rich environment.
+
         </p>
 
         {/* Interactive sections */}
@@ -26,10 +28,12 @@ export default function About() {
               className="flex items-center justify-between cursor-pointer" 
               onClick={() => setSeekerOpen(!isSeekerOpen)}
             >
-              <h2 className="text-2xl font-bold flex items-center">
+
+              <h2 className="text-2xl font-bold flex items-center text-blue-500 dark:text-green-500">
                 <FaUsers className="mr-2" /> For Job Seekers
               </h2>
-              <span>{isSeekerOpen ? '-' : '+'}</span>
+              <span className='text-red-700 '>{isSeekerOpen ? '-' : '+'}</span>
+
             </div>
             {isSeekerOpen && (
               <p className="mt-4 text-lg leading-7 animate-fade-in">
@@ -44,10 +48,12 @@ export default function About() {
               className="flex items-center justify-between cursor-pointer" 
               onClick={() => setPosterOpen(!isPosterOpen)}
             >
-              <h2 className="text-2xl font-bold flex items-center">
+
+              <h2 className="text-2xl font-bold flex items-center text-blue-500 dark:text-green-500">
                 <FaBriefcase className="mr-2" /> For Job Posters
               </h2>
-              <span>{isPosterOpen ? '-' : '+'}</span>
+              <span className='text-red-700'>{isPosterOpen ? '-' : '+'}</span>
+
             </div>
             {isPosterOpen && (
               <p className="mt-4 text-lg leading-7 animate-fade-in">
@@ -58,7 +64,9 @@ export default function About() {
 
           {/* Mission Section */}
           <div className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold flex items-center">
+
+            <h2 className="text-2xl font-bold flex items-center text-blue-500 dark:text-green-500">
+
               <FaBullseye className="mr-2" /> Our Mission
             </h2>
             <p className="mt-4 text-lg leading-7 animate-fade-in">
@@ -68,8 +76,10 @@ export default function About() {
 
           {/* Why Choose Us Section */}
           <div className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold flex items-center">
-              <AiOutlineCheckCircle className="mr-2" /> Why Choose Job Pilot?
+
+            <h2 className="text-2xl font-bold flex items-center text-blue-500 dark:text-green-500">
+              <AiOutlineCheckCircle className="mr-2 " /> Why Choose Job Pilot?
+
             </h2>
             <ul className="mt-4 space-y-3">
               <li className="flex items-center space-x-2 hover:text-blue-500 transition duration-300">

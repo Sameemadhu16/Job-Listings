@@ -52,23 +52,9 @@ const userSchema = new mongoose.Schema({
         appliedjobs: {
             type: [String],
 
-    },
-    birthday: {
-        type: String,
-    },
-    maritalStatus: {
-        type: String,
-        enum: ['married', 'unmarried'],
-    },
- 
-  //Feild specific to job posters
-    companyName: {
-        type: String,
-        required: function () {
-            return this.role === 'jobPoster';
-        }
+        },
 
-    },
+    
 
     biography: {
         type: String,
