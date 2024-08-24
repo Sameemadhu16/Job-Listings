@@ -83,6 +83,8 @@ export const addappliedjobs = async (req, res, next) => {
     }
 };
 
+
+
 export const getcart = async (req, res, next) => {
     try {
         const userId = req.params.userId;

@@ -2,9 +2,7 @@ import Post from "../models/post.model.js";
 import { errorHandler } from "../utils/error.js";
 
 export const createPost = async(req,res,next) => {
-    if(!req.body.essential){
-        return next(errorHandler(400,'You are not allowed to create a post'))
-    }
+    
 
     const slug = req.body.title.split(' ').join('-').toLowerCase().replace(/[^a-zA-Z0-9-]/g,'-');
     const newPost = new Post({
@@ -33,7 +31,7 @@ export const updatePost = async(req,res,next) => {
             {
                 $set:{
                     title:req.body.title,
-                    essential:req.body.title,
+                    essential:req.body.essential,
                     selectType:req.body.selectType,
                     description:req.body.description
                 }

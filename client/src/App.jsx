@@ -18,10 +18,18 @@ import PartTimeJobPost from './components/Post.PartTimeJobPost';
 import FulltimeJobPost from './components/Post.FulltimeJobPost';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
+
+import CreatePost from './pages/CreatePost';
+import Post from './pages/Post';
+import UpdatePost from './pages/UpdatePost';
+
 import SeekerProfile from './components/Seeker.Profile';
+
 
 import PosterDashMyJobs from './components/Poster.DashMyJobs';
 import PosterDashEmployeeProfile from './components/Poster.DashEmployeeProfile';
+
+
 
 
 export default function App() {
@@ -30,6 +38,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path='/create-post' element={<CreatePost/>} />
         <Route path="/about" element={<About />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
@@ -39,16 +48,13 @@ export default function App() {
         <Route path="/finish" element={<Finish />} />
         <Route path="/poster-dashboard" element={<PosterDashboard />}>
           <Route index element={<PosterDashOverview />} />
-          <Route path="employeeprofile" element={<PosterDashEmployeeProfile />} />
+          <Route path="employeeprofile" element={<PosterDashOverview />} />
           <Route path="post-jobs" element={<PosterPostjob />}>
             <Route index element={<PosterCompanyInfo />} />
             <Route path="founding" element={<PosterFoundInfo />} />
             <Route path="social-media" element={<PosterSocialMediaInfo />} />
             <Route path="account-setting" element={<PosterCompanyInfo />} />
           </Route>
-
-          <Route path="my-jobs" element={<PosterDashMyJobs />} />
-
           <Route path="settings" element={<PosterSetting />}>
             <Route index element={<PosterCompanyInfo />} />
           </Route>
@@ -58,6 +64,8 @@ export default function App() {
         <Route path="/seeker-dashboard?tab=profile" element={<SeekerProfile/>} />
         <Route path="/parttime-job-post" element={<PartTimeJobPost />} />
         <Route path="/fulltime-job-post" element={<FulltimeJobPost />} />
+        <Route path="/post-page/:postslug" element={<Post/>}/>
+        <Route path='/update-post/:postId' element={<UpdatePost/>} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -19,7 +19,7 @@ export default function SeekerDashSidebar() {
         }
     }, [location.search]);
   return (
-    <Sidebar className="w-full md:w-56">
+    <Sidebar className="w-full md:w-56 ">
       <Sidebar.Items>
         <Sidebar.ItemGroup className="flex flex-col gap-1">
     
@@ -56,7 +56,9 @@ export default function SeekerDashSidebar() {
           </Link>
           
           <Link to="/seeker-dashboard?tab=profile">
+
             <Sidebar.Item active={tab === "profile"} icon={FaUser} as="div">
+
               Profile
             </Sidebar.Item>
           </Link>
