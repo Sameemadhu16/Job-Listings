@@ -4,6 +4,10 @@ import { HiViewGrid, HiClipboardList } from "react-icons/hi"
 import { Link, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { CgProfile } from "react-icons/cg";
+import { IoBagCheckSharp } from "react-icons/io5";
+import { RiSave3Fill } from "react-icons/ri";
+import { IoSettingsSharp } from "react-icons/io5";
 
 export default function PosterDashSidebar() {
   const location = useLocation();
@@ -26,7 +30,7 @@ export default function PosterDashSidebar() {
 
           <Link to="/poster-dashboard/employeeprofile">
 
-            <Sidebar.Item icon={HiClipboardList} as="div">
+            <Sidebar.Item icon={CgProfile} as="div">
               Employee Profile
             </Sidebar.Item>
           </Link>
@@ -37,21 +41,21 @@ export default function PosterDashSidebar() {
               Post a Jobs
             </Sidebar.Item>
           </Link>
-          <Link to="/poster-dashboard/myjobs">
+          <Link to="/poster-dashboard/my-jobs">
 
-            <Sidebar.Item icon={HiClipboardList} as="div">
+            <Sidebar.Item icon={IoBagCheckSharp} as="div">
               My Jobs
             </Sidebar.Item>
           </Link>
-          <Link to="/poster-dashboard/myjobs">
+          <Link to="/poster-dashboard/saved-candidate">
 
-            <Sidebar.Item icon={HiClipboardList} as="div">
+            <Sidebar.Item icon={RiSave3Fill} as="div">
               Saved Candidate
             </Sidebar.Item>
           </Link>
           <Link to="/poster-dashboard/settings">
 
-            <Sidebar.Item icon={HiClipboardList} as="div">
+            <Sidebar.Item icon={IoSettingsSharp} as="div">
               Setting
             </Sidebar.Item>
           </Link>

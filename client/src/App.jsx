@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
-import Dashboard from './pages/Dashboard';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Contact from './pages/Contact';
@@ -19,9 +18,18 @@ import PartTimeJobPost from './components/Post.PartTimeJobPost';
 import FulltimeJobPost from './components/Post.FulltimeJobPost';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
+
 import CreatePost from './pages/CreatePost';
 import Post from './pages/Post';
 import UpdatePost from './pages/UpdatePost';
+
+import SeekerProfile from './components/Seeker.Profile';
+
+
+import PosterDashMyJobs from './components/Poster.DashMyJobs';
+import PosterDashEmployeeProfile from './components/Poster.DashEmployeeProfile';
+
+
 
 
 export default function App() {
@@ -34,7 +42,8 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        
+
         <Route path="/contact" element={<Contact />} />
         <Route path="/finish" element={<Finish />} />
         <Route path="/poster-dashboard" element={<PosterDashboard />}>
@@ -52,6 +61,7 @@ export default function App() {
         </Route>
         <Route path="/company" element={<PosterCompanyInfo />} />
         <Route path="/seeker-dashboard" element={<SeekerDashboard />} />
+        <Route path="/seeker-dashboard?tab=profile" element={<SeekerProfile/>} />
         <Route path="/parttime-job-post" element={<PartTimeJobPost />} />
         <Route path="/fulltime-job-post" element={<FulltimeJobPost />} />
         <Route path="/post-page/:postslug" element={<Post/>}/>

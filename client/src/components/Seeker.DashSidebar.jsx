@@ -5,6 +5,7 @@ import {Link, useLocation} from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import {useSelector} from 'react-redux'
 import { FaShoppingCart } from 'react-icons/fa'
+import { FaUser } from 'react-icons/fa'
 
 export default function SeekerDashSidebar() {
     const location = useLocation();
@@ -18,7 +19,7 @@ export default function SeekerDashSidebar() {
         }
     }, [location.search]);
   return (
-    <Sidebar className="w-full md:w-56">
+    <Sidebar className="w-full md:w-56 ">
       <Sidebar.Items>
         <Sidebar.ItemGroup className="flex flex-col gap-1">
     
@@ -51,6 +52,14 @@ export default function SeekerDashSidebar() {
 
             <Sidebar.Item active={tab === "cart"} icon={FaShoppingCart} as="div">
               Cart
+            </Sidebar.Item>
+          </Link>
+          
+          <Link to="/seeker-dashboard?tab=profile">
+
+            <Sidebar.Item active={tab === "profile"} icon={FaUser} as="div">
+
+              Profile
             </Sidebar.Item>
           </Link>
         </Sidebar.ItemGroup>

@@ -1,9 +1,41 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'flowbite-react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function CompanyDetailsModal({ isOpen, onClose, showSendCVLink = true }) {
-  const [contact, setContact] = useState(false)
+  const { currentUser } = useSelector((state) => state.user);
+  const [contact, setContact] = useState(false);
+
+  //when user click send cv button it will go to applied list
+  const handleapplied = async () => {
+    try {
+      if (!currentUser || !currentUser._id) {
+        throw new Error('User ID not available');
+      }
+
+      const res = await fetch(`/api/seeker/addapplied/${currentUser._id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ postId: post._id }), // Assuming post._id is available from props
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.message || 'Failed to add post to applied');
+      }
+
+      console.log('Post added to applied list successfully');
+
+    } catch (error) {
+      console.error('Error adding post to applied list:', error.message);
+      // Handle error: display error message or perform other actions
+    }
+  };
+
+
   return (
     <Modal show={isOpen} onClose={onClose}>
       <Modal.Header>
@@ -69,7 +101,7 @@ export default function CompanyDetailsModal({ isOpen, onClose, showSendCVLink = 
             </Button>
             {/* should hidden this link when it call in AppliedJobs component*/}
             {showSendCVLink && (
-              <Link to={`mailto:irumiaeywickrama@gmail.com?subject=Regarding Software Engineer`} className='bg-slate-800 text-white text-center p-3 uppercase rounded-lg hover:opacity-95'>
+              <Link to={`mailto:irumiaeywickrama@gmail.com?subject=Regarding Software Engineer`} className='bg-slate-800 text-white text-center p-3 uppercase rounded-lg hover:opacity-95' onClick={''}>
                 Send your CV
               </Link>
             )

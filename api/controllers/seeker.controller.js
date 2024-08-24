@@ -82,3 +82,74 @@ export const addappliedjobs = async (req, res, next) => {
         next(error);
     }
 };
+
+
+
+
+export const getcart = async (req, res, next) => {
+    try {
+        const userId = req.params.userId;
+
+        if (!userId) {
+            return res.status(400).json({ message: "User ID is required" });
+        }
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        const cartPostIds = user.cart || [];
+        const cartPosts = await Post.find({ _id: { $in: cartPostIds } });
+
+        res.status(200).json({ message: "User's cart retrieved successfully", cartPosts });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getapplied = async (req, res, next) => {
+    try {
+        const userId = req.params.userId;
+
+        if (!userId) {
+            return res.status(400).json({ message: "User ID is required" });
+        }
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        const appliedPostIds = user.appliedjobs || [];
+        const appliedPosts = await Post.find({ _id: { $in: appliedPostIds } });
+
+        res.status(200).json({ message: "User's cart retrieved successfully", appliedPosts });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const deleteCartpost = async (req, res, next) => {
+    const { cartPostIdToDelete, currentUserId } = req.params;
+
+    try {
+        // Find the user by _id
+        const user = await User.findById(currentUserId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Remove cartPostIdToDelete from the user's cart array
+        user.cart = user.cart.filter(postId => postId !== cartPostIdToDelete);
+
+        // Save the updated user
+        await user.save();
+
+        res.status(200).json({ message: 'Cart post deleted successfully', user });
+    } catch (error) {
+        next(error); // Pass the error to the error handling middleware
+    }
+}
+

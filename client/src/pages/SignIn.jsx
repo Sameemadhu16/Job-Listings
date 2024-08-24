@@ -46,12 +46,12 @@ const SignIn = () => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col lg:flex-row bg-gray-100">
+    <div className="flex min-h-screen flex-col lg:flex-row bg-gray-100 dark:bg-[rgb(16,23,42)]">
       <div className="flex flex-1 items-center justify-center p-6 sm:p-12">
         <Card className="w-full max-w-md">
           <div className="text-center">  
-            <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Sign in</h2>
-            <p className="mt-2 text-sm text-gray-600">
+            <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">Sign in</h2>
+            <p className="mt-2 text-sm text-gray-600 dark:text-white">
               Don't have an account?{' '}
               <a href="sign-up" className="font-medium text-blue-500 hover:text-indigo-500">
                 Create Account

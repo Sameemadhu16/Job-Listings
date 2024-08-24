@@ -45,11 +45,11 @@ const SignUp = () => {
       };
 
     return (
-        <div className="flex min-h-screen flex-col lg:flex-row bg-gray-100">
+        <div className="flex min-h-screen flex-col lg:flex-row bg-gray-100 dark:bg-[rgb(16,23,42)]">
                 <div className="flex flex-1 items-center justify-center p-6 sm:p-12">
                     <Card className="w-full max-w-md">
                         <div className="text-center">
-                            <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Create account</h2>
+                        <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">Create account</h2>
                             <div className="flex gap-2 text-sm mt-4 mb-3">
                                 <span>Have an account?</span>
                                 <a href="/sign-in" className="font-medium text-blue-500 hover:text-indigo-500 hover:underline">
@@ -61,13 +61,13 @@ const SignUp = () => {
                             <div className="space-y-4">
                                 <div className="flex mb-4">
                                     <Button
-                                        className={`flex-1 p-3 border rounded-l-lg mr-2 hover:text-white ${formData.role === 'jobPoster' ? ' bg-blue-500 rounded-lg text-white focus:outline-white' : 'bg-blue-200 border-blue-500 text-blue-700'}`}
+                                        className={`flex-1 p-3 border rounded-l-lg mr-2 hover:text-white ${formData.role === 'jobPoster' ? ' bg-blue-500 rounded-lg text-white dark:text-black focus:outline-white' : 'bg-blue-200 border-blue-500 text-blue-700 dark:text-white'}`}
                                         onClick={() => setFormData({ ...formData, role: 'jobPoster' })}
                                     >
                                         Job Poster
                                     </Button>
                                     <Button
-                                        className={`flex-1 p-3 border rounded-r-lg ml-2 hover:text-white ${formData.role === 'jobSeeker' ? ' bg-blue-500 rounded-lg text-white focus:outline-white' : 'bg-blue-200 border-blue-500 text-blue-700'}`}
+                                        className={`flex-1 p-3 border rounded-r-lg ml-2 hover:text-white ${formData.role === 'jobSeeker' ? ' bg-blue-500 rounded-lg text-white dark:text-black focus:outline-white' : 'bg-blue-200 border-blue-500 text-blue-700 dark:text-white'}`}
                                         onClick={() => setFormData({ ...formData, role: 'jobSeeker' })}
                                     >
                                         Job Seeker
@@ -91,7 +91,7 @@ const SignUp = () => {
                                 </div>
                                 <div>
                                     <Label htmlFor="mobilenumber" value="Your Mobile Number" />
-                                    <TextInput type="text" placeholder="Mobile Number" id="mobilenumber" name="mobileNumber" onChange={handleChange} />
+                                    <TextInput type="text" placeholder="Mobile Number" id="mobilenumber" name="mobilenumber" onChange={handleChange} />
                                 </div>
                             </div>
                             <Button className="bg-blue-500" type="submit" disabled={loading}>

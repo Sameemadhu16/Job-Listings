@@ -29,6 +29,7 @@ export default function Home() {
 
   
   return (
+
     <div>
     <div className='py-28 px-20'>
     <div className='text-3xl lg:text-5xl '>
@@ -49,6 +50,7 @@ export default function Home() {
       </p>
       <Link className='text-blue-800 font-semibold cursor-pointer hover:underline' to={'/search'}>Let's Start now...</Link>
     
+
     </div>
     
     <div>
