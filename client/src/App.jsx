@@ -48,8 +48,8 @@ export default function App() {
         <Route path="/finish" element={<Finish />} />
         <Route path="/poster-dashboard" element={<PosterDashboard />}>
           <Route index element={<PosterDashOverview />} />
-          <Route path="employeeprofile" element={<PosterDashOverview />} />
-          <Route path="post-jobs" element={<PosterPostjob />}>
+          <Route path="employeeprofile" element={<PosterDashEmployeeProfile />} />
+          <Route path="post-jobs" element={<PosterDashMyJobs />}>
             <Route index element={<PosterCompanyInfo />} />
             <Route path="founding" element={<PosterFoundInfo />} />
             <Route path="social-media" element={<PosterSocialMediaInfo />} />
