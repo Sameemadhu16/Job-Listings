@@ -43,9 +43,9 @@ app.listen(4500, () => {
 app.use('/api/auth', authRoutes);
 app.use('/api/jobposter', jobposterRoutes);
 app.use('/api/seeker', seekerRoutes)
-app.use('/api/comment',commentRoutes)
-app.use('/api/post',postRoutes);
-app.use('/api/jobseeker',jobseekerRoutes);
+app.use('/api/comment', commentRoutes)
+app.use('/api/post', postRoutes);
+app.use('/api/jobseeker', jobseekerRoutes);
 app.use('/api/contact', contactRoutes);
 
 
@@ -61,8 +61,4 @@ app.use((err, req, res, next) => {
 
 });
 
-
-app.use('/api/post',postRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/post', postRoutes);
 

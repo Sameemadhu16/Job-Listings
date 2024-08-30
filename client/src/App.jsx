@@ -28,6 +28,7 @@ import SeekerProfile from './components/Seeker.Profile';
 
 import PosterDashMyJobs from './components/Poster.DashMyJobs';
 import PosterDashEmployeeProfile from './components/Poster.DashEmployeeProfile';
+import PosterDashSavedCandidate from './components/Poster.DashSavedCandidate';
 
 
 
@@ -48,13 +49,14 @@ export default function App() {
         <Route path="/finish" element={<Finish />} />
         <Route path="/poster-dashboard" element={<PosterDashboard />}>
           <Route index element={<PosterDashOverview />} />
-          <Route path="employeeprofile" element={<PosterDashOverview />} />
-          <Route path="post-jobs" element={<PosterPostjob />}>
+          <Route path="employeeprofile" element={<PosterDashEmployeeProfile />} />
+          <Route path="post-jobs" element={<PosterDashMyJobs />}>
             <Route index element={<PosterCompanyInfo />} />
             <Route path="founding" element={<PosterFoundInfo />} />
             <Route path="social-media" element={<PosterSocialMediaInfo />} />
             <Route path="account-setting" element={<PosterCompanyInfo />} />
           </Route>
+          <Route path="saved-candidate" element={<PosterDashSavedCandidate />}></Route>
           <Route path="settings" element={<PosterSetting />}>
             <Route index element={<PosterCompanyInfo />} />
           </Route>
