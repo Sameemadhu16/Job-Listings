@@ -71,3 +71,18 @@ export const getPosts = async  (req,res,next) => {
         next(error);
     }
 };
+
+export const getpostForUser = async(req,res,next)=>{
+    try {
+        const { userId } = req.params;
+        //console.log(userId);
+        const allpost = await Post.find({userId});
+        const count = await Post.countDocuments({userId});
+
+        res.status(200).json({ allpost,count });
+
+    } 
+    catch (error) {
+        next(error);
+    }
+}
