@@ -1,10 +1,33 @@
 import { Button, Dropdown, Table } from 'flowbite-react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { HiArrowNarrowRight } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 import { FcApproval } from "react-icons/fc";
+import { useSelector } from 'react-redux';
 
 export default function PosterDashMyJobs() {
+    const{currentUser} = useSelector((state) =>state.user);
+    const [userPost,setuserPost]= useState([]);
+    //console.log(userPost);
+   // console.log(currentUser._id);
+    
+
+    useEffect(()=>{
+        const fetchPost = async() =>{
+            try {
+                const res = await fetch(`/api/post/get-posts?userId=${currentUser._Id}`);
+                const data = await res.json();
+
+                if(res.ok){
+                    setuserPost(data.posts)
+                }
+                
+            } catch (error) {
+                console.log(error.message);
+            }
+        }
+        fetchPost();
+    },[currentUser._id]);
     return (
         <div className='p-10 flex-grow'>
             <div className=''>
