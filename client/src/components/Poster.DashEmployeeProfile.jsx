@@ -189,8 +189,9 @@ export default function PosterDashEmployeeProfile() {
                 <p className="text-gray-600"></p>
               </div>
             </div>
-            <div>
+            <div className='flex'>
               <Button onClick={handleSubmit} className='m-12 bg-blue-500' >update profile</Button>
+              <Button color={'red'} className='m-12 bg-blue-500' >Delete profile</Button>
             </div>
 
           </div>
