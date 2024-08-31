@@ -18,17 +18,28 @@ export default function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Simulate form submission
-    setTimeout(() => {
-      if (formData.name && formData.email && formData.message) {
-        setFormStatus('success'); // Success message if fields are filled
+    console.log(formData);
+    try {
+      const response = await fetch('/api/contact/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setFormStatus('success');
+        setFormData({ name: '', email: '', message: '' }); // Clear form after successful submission
       } else {
-        setFormStatus('error'); // Error message if any field is empty
+        setFormStatus('error');
       }
-    }, 1000);
+    } catch (error) {
+      console.error('Error submitting the form:', error);
+      setFormStatus('error');
+    }
   };
 
   return (
@@ -36,7 +47,9 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto p-6">
         
         {/* Header Section */}
-        <h1 className="text-4xl font-bold text-center mb-8 animate-pulse  text-blue-500 dark:text-green-500">Customer Support</h1>
+        <h1 className="text-4xl font-bold text-center mb-8 animate-pulse text-blue-500 dark:text-green-500">
+          Customer Support
+        </h1>
         
         <p className="text-center text-lg mb-10">
           Need help? Our support team is here to assist you. Browse our FAQs or reach out to us via the contact form.
@@ -45,8 +58,8 @@ export default function Contact() {
         <div className="space-y-12">
           {/* FAQ Section */}
           <div className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-lg">
-            <h2 className="text-3xl font-bold mb-6 flex items-center justify-center  text-blue-500 dark:text-green-500">
-              <FaQuestionCircle className=" text-blue-500 dark:text-green-500 mr-2 " /> Frequently Asked Questions (FAQ)
+            <h2 className="text-3xl font-bold mb-6 flex items-center justify-center text-blue-500 dark:text-green-500">
+              <FaQuestionCircle className="text-blue-500 dark:text-green-500 mr-2" /> Frequently Asked Questions (FAQ)
             </h2>
             <div className="space-y-4">
               {/* FAQ Item */}
@@ -101,20 +114,20 @@ export default function Contact() {
 
           {/* Contact Us Section */}
           <div className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-lg">
-            <h2 className="text-3xl font-bold mb-6 flex items-center justify-center  text-blue-500 dark:text-green-500">
+            <h2 className="text-3xl font-bold mb-6 flex items-center justify-center text-blue-500 dark:text-green-500">
               <FaEnvelope className="mr-2" /> Contact Us
             </h2>
 
             {/* Contact Form */}
             <form className="space-y-4" onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-black dark:text-white">
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
                   placeholder="Your Name"
-                  className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="p-3 border border-gray-300 dark:bg-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 "
                 />
                 <input
                   type="email"
@@ -122,7 +135,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="Your Email"
-                  className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="p-3 border border-gray-300  dark:bg-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
               <textarea
@@ -130,7 +143,7 @@ export default function Contact() {
                 value={formData.message}
                 onChange={handleInputChange}
                 placeholder="Your Message"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-32"
+                className="w-full p-3 border border-gray-300 dark:bg-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-32"
               />
               <button
                 type="submit"

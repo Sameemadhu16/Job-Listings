@@ -36,7 +36,7 @@ export default function SeekerDashLatestjobs() {
   };
 
   return (
-    <div className="flex flex-col w-full shadow-md p-2 rounded-md dark:bg-gray-800">
+    <div className="flex flex-col w-full shadow-md p-2 rounded-md dark:bg-gray-800 dark:text-white">
       <h1 className="p-6 font-bold text-slate-600">Latest Jobs</h1>
       {posts && posts.length > 0 && (
       <Table hoverable>
