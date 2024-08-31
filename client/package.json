@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
+    "axios": "^1.7.5",
     "client": "file:",
     "firebase": "^10.12.4",
     "flowbite": "^2.3.0",
