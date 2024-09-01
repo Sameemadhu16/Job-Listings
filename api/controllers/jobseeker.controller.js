@@ -61,16 +61,7 @@ export const deleteSeeker = async (req, res, next) => {
 
 } 
 
-export const seekerSignout= async (req, res, next) => {
-  try {
-    res
-      .clearCookie('access_token')
-      .status(200)
-      .json('Seeker has been signed out');
-  } catch (error) {
-    next(error);
-  }
-};
+
 
 
 export const getJobSeekers = async (req,res,next) =>{
