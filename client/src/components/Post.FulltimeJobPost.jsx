@@ -16,7 +16,7 @@ export default function FulltimeJobPost() {
     }
 
     return (
-        <div className='min-h-screen bg-slate-100 p-3'>
+        <div className='min-h-screen bg-slate-100 p-3 dark:text-white'>
             <div className='flex flex-col lg:flex-row justify-between items-start lg:items-center'>
                 <div className='flex flex-row items-center gap-2 mb-4 lg:mb-0'>
                     <div>

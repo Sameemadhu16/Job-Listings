@@ -29,9 +29,11 @@ const userSchema = new mongoose.Schema({
             enum: ['jobPoster', 'jobSeeker'],
             required: true,
         },
+
         mobileNumber: {
+
+       
             type: String,
-            required: true,
         },
         
         isAdmin: {
