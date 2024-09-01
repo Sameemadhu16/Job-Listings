@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema({
 
     fullname: {
         type: String,
-        required: true,
     },
 
     email: {
@@ -30,8 +29,10 @@ const userSchema = new mongoose.Schema({
             enum: ['jobPoster', 'jobSeeker'],
             required: true,
         },
-        mobilenumber: {
 
+        mobileNumber: {
+
+       
             type: String,
         },
         
@@ -41,8 +42,7 @@ const userSchema = new mongoose.Schema({
         },
         profilePicture: {
             type: String,
-            default:
-              'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+            default:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
         },
 
         cart: {
