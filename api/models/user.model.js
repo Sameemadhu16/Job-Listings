@@ -31,8 +31,8 @@ const userSchema = new mongoose.Schema({
             required: true,
         },
         mobilenumber: {
+
             type: String,
-            required: true,
         },
         
         isAdmin: {
