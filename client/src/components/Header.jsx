@@ -2,7 +2,7 @@ import { Avatar, Dropdown, Navbar, TextInput, Button, theme } from "flowbite-rea
 import logo from '../images/Jobpilot.png';
 
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,useLocation } from "react-router-dom";
 import { signoutSuccess } from "../redux/user/userSlice";
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { toggleTheme } from "../redux/theme/themeSlice";
@@ -10,7 +10,10 @@ import { toggleTheme } from "../redux/theme/themeSlice";
 
 export default function Header() {
 
-  const {currentUser} = useSelector(state => state.user)
+  const {currentUser} = useSelector(state => state.user);
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -43,13 +46,13 @@ export default function Header() {
       });
       const data = await res.json();
       if (!res.ok) {
-        console.log(data.message);
+       // console.log(data.message);
       } else {
         dispatch(signoutSuccess());
         navigate('/sign-in');
       }
     } catch (error) {
-      console.log(error.message);
+      //console.log(error.message);
     }
   };
 
@@ -58,7 +61,8 @@ export default function Header() {
     <Navbar fluid rounded className="border-b-2 ">
       <Navbar.Brand href="/">
         <img src={logo} className="mr-3 h-6 sm:h-14 rounded-full" alt="jobpilot-logo" />
-        <span className="self-center whitespace-nowrap text-xl font-bold dark:text-white">Jobpilot</span>
+        <span className="self-center whitespace-nowrap text-xl font-bold font-mono dark:text-white">Job</span>
+        <p className="text-blue-600 font-semibold font-mono">listings</p>
       </Navbar.Brand>  
       <div className="flex md:order-2">
 
@@ -101,18 +105,18 @@ export default function Header() {
   )}
         <Navbar.Toggle />
       </div>
-      <Navbar.Collapse >
-        <Navbar.Link href="/" className="active:underline">Home</Navbar.Link>
-        <Navbar.Link href="search">Find Job</Navbar.Link>
-        <Navbar.Link href="create-post">Create Job</Navbar.Link>
+      <Navbar.Collapse className="hover:text-blue-500" >
+        <Navbar.Link href="/"className={`${isActive('/') ? 'text-blue-500 ' : 'text-gray-500'}hover:text-blue-500`}>Home</Navbar.Link>
+        <Navbar.Link href="search" className={`${isActive('/search') ? 'text-blue-500 ' : 'text-gray-500'}`}>Find Job</Navbar.Link>
+        <Navbar.Link href="create-post" className={`${isActive('/create-post') ? 'text-blue-500 ' : 'text-gray-500'}`}>Create Job</Navbar.Link>
         <Navbar.Link
           href={getDashboardPath()}
-          className="active:underline active:text-cyan-600"
+          className={`${isActive('/dashboard') ? 'text-blue-500 ' : 'text-gray-500'}`}
         >
           Dashboard
         </Navbar.Link>
-        <Navbar.Link href="/contact">Customer Supports</Navbar.Link>
-        <Navbar.Link href="/about">About Us</Navbar.Link>
+        <Navbar.Link href="/contact" className={`${isActive('/contact') ? 'text-blue-500 ' : 'text-gray-500'}`}>Customer Supports</Navbar.Link>
+        <Navbar.Link href="/about" className={`${isActive('/about') ? 'text-blue-500 ' : 'text-gray-500'}`}>About Us</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );

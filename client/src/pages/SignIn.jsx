@@ -8,7 +8,8 @@ import logo from '../images/Jobpilot.png';
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
-  const {loading, error: errorMessage } = useSelector((state) => state.user);
+  const {loading } = useSelector((state) => state.user);
+  const [errorMessage,setErrorMessage] = useState('')
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,9 +23,15 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!formData.email || !formData.password) {
-      return dispatch(signInFailure('Please fill all the fields'))
+    if (!formData.email || !formData.password || !formData.confirmPassword) {
+      return setErrorMessage('All feilds are required')
     }
+
+    // Password confirmation check
+    if (formData.password !== formData.confirmPassword) {
+        return setErrorMessage('Passwords does not match');
+    }
+
     try {
       dispatch(signInStart());
       const res = await fetch('/api/auth/signin', {
@@ -109,7 +116,7 @@ const SignIn = () => {
                                 <span className="pl-3">Loading...</span>
                             </div>
                         ) : (
-                            'Register'
+                            'Login'
                         )}
                     </button>
                 </form>
@@ -117,8 +124,8 @@ const SignIn = () => {
                 <div className="text-center mt-4">
                     <p className="text-gray-600">
                         Create an new Account{' '}
-                        <a href="/sign-in" className="text-blue-500 font-semibold hover:underline">
-                            Log In
+                        <a href="/sign-up" className="text-blue-500 font-semibold hover:underline">
+                            Create an Account
                         </a>
                     </p>
                 </div>
