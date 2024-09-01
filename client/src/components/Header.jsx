@@ -103,8 +103,8 @@ export default function Header() {
       </div>
       <Navbar.Collapse >
         <Navbar.Link href="/" className="active:underline">Home</Navbar.Link>
-        <Navbar.Link href="#">Find Job</Navbar.Link>
-        <Navbar.Link href="#">Find Employers</Navbar.Link>
+        <Navbar.Link href="search">Find Job</Navbar.Link>
+        <Navbar.Link href="create-post">Create Job</Navbar.Link>
         <Navbar.Link
           href={getDashboardPath()}
           className="active:underline active:text-cyan-600"

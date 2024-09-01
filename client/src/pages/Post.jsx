@@ -89,7 +89,7 @@ export default function Post() {
         </div>
             
         </div>
-        <div className='flex flex-col justify-center items-center mb-5'>
+        {/* <div className='flex flex-col justify-center items-center mb-5'>
             <h1 className='text-xl mt-8 font-semibold'>
                 Recent Post
             </h1>
@@ -101,7 +101,7 @@ export default function Post() {
                     )
                 }
             </div>
-        </div>
+        </div> */}
     </main>
   )
 }

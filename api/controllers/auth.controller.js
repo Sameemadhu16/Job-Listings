@@ -6,10 +6,10 @@ import jwt from "jsonwebtoken";
 
 
 export const signup = async (req, res, next) => {
-    const { username,fullname, email, password, role, mobilenumber,cart,appliedjobs } = req.body;
+    const { username, email, password, role, mobileNumber,cart,appliedjobs } = req.body;
 
 
-    if (!username || !fullname || !email || !password || !role || !mobilenumber || username === '' || fullname === '' || email === '' || password === '' || role === ''|| mobilenumber === '') {
+    if ( !username || !email || !password || !role || !mobileNumber) {
 
         return next(errorHandler(400, 'All feilds are requiired'));
     }
@@ -19,9 +19,8 @@ export const signup = async (req, res, next) => {
     const newUser = new User({
         username,
         email,
-        fullname,
         password: hashedPassword,
-        mobilenumber,
+        mobileNumber,
         role,
         cart: role === 'jobSeeker' ? cart : undefined,
         appliedjobs: role === 'jobSeeker' ? appliedjobs : undefined,

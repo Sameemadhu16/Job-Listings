@@ -3,6 +3,7 @@ import { Button, Checkbox, Label, TextInput, Card, Alert, Spinner } from 'flowbi
 import { signInStart,signInSuccess,signInFailure } from '../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import logo from '../images/Jobpilot.png';
 
 
 const SignIn = () => {
@@ -46,65 +47,93 @@ const SignIn = () => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col lg:flex-row bg-gray-100 dark:bg-[rgb(16,23,42)]">
-      <div className="flex flex-1 items-center justify-center p-6 sm:p-12">
-        <Card className="w-full max-w-md">
-          <div className="text-center">  
-            <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">Sign in</h2>
-            <p className="mt-2 text-sm text-gray-600 dark:text-white">
-              Don't have an account?{' '}
-              <a href="sign-up" className="font-medium text-blue-500 hover:text-indigo-500">
-                Create Account
-              </a>
-            </p>
-          </div>
-          <form className="mt-8 space-y-6"  method="POST" onSubmit={handleSubmit}>
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="email-address" value="Email address"  />
-                <TextInput
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Email address"
-                  onChange={handleChange}
-                />
-              </div>
-              <div>
-                <Label htmlFor="password" value="Password" />
-                <TextInput
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  placeholder="Password"
-                  onChange={handleChange}
-                />
-              </div>
+    <div className='min-h-screen bg-gray-100 flex'>
+            <div className="w-full md:w-1/2 bg-white p-10 m-20 mr-16 flex flex-col justify-center rounded-lg shadow-lg">
+                <div className="max-w-md mx-auto">
+                    <div className="mb-6">
+                        <img src={logo} alt="Logo" className="h-20" />
+                    </div>
+                    <div className='text-start'>
+                        <h2 className="text-3xl font-bold font-sans">Welcome Back</h2>
+                        <p className="text-gray-500 mb-6">Simplify Your Job Search and Find the Perfect Opportunity</p>
+                    </div>
+                </div>
+
+                <form onSubmit={handleSubmit}>
+
+                    <div className="mb-4">
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            className="w-full py-2 px-4 border border-gray-300 rounded-md"
+                            placeholder="Email"
+                            onChange={handleChange}
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            className="w-full py-2 px-4 border border-gray-300 rounded-md"
+                            placeholder="Password"
+                            onChange={handleChange}
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            className="w-full py-2 px-4 border border-gray-300 rounded-md"
+                            placeholder="Confirm Password"
+                            onChange={handleChange}
+                        />
+                    </div>
+
+                    {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
+
+                    <button
+                        type="submit"
+                        className={`w-full py-2 px-4 bg-blue-500 text-white rounded-md font-semibold transition duration-300 ease-in-out ${
+                            loading ? 'cursor-not-allowed opacity-75' : 'hover:bg-blue-600'
+                        }`}
+                        disabled={loading}
+                    >
+                        {loading ? (
+                            <div className="flex items-center justify-center">
+                                <Spinner size="sm" />
+                                <span className="pl-3">Loading...</span>
+                            </div>
+                        ) : (
+                            'Register'
+                        )}
+                    </button>
+                </form>
+
+                <div className="text-center mt-4">
+                    <p className="text-gray-600">
+                        Create an new Account{' '}
+                        <a href="/sign-in" className="text-blue-500 font-semibold hover:underline">
+                            Log In
+                        </a>
+                    </p>
+                </div>
             </div>
-            
-            <Button className='bg-blue-500' type="submit" disabled={loading}>
-              {loading ? (
-                <>
-                  <Spinner size="sm" />
-                  <span className="pl-3">Loading...</span>
-                </>
-              ) : (
-                'Sign In'
-              )}
-            </Button>
-          </form>
-          {errorMessage && (
-            <Alert className="mt-5" color="failure">
-              {errorMessage}
-            </Alert>
-          )}
-        </Card>
-      </div>
-      <div className="flex lg:w-1/2 bg-cover bg-center items-center justify-center p-6 lg:p-12" style={{ backgroundImage: `url(https://img.freepik.com/free-photo/copy-space-blank-commercial-advertisement_53876-121262.jpg?t=st=1721500082~exp=1721503682~hmac=84ee8a13f47eef8a6ff863cfd1ec73b8c03072111099630aafb8d00e04250362&w=740)` }}>
-      </div>
-    </div>
+
+            <div className="hidden md:block w-1/2 items-center justify-center mr-24 mt-36">
+                <div className="text-center">
+                    <img
+                        src="https://news.umanitoba.ca/wp-content/uploads/2021/11/Career-Month-3-UM-Today--1200x799.png"
+                        alt="Illustration"
+                        className="mx-auto rounded-lg shadow-lg"
+                    />
+                </div>
+            </div>
+        </div>
   );
 };
 
