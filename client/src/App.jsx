@@ -66,6 +66,7 @@ export default function App() {
           <Route path="/fulltime-job-post" element={<FulltimeJobPost />} />
           <Route path="/post-page/:postslug" element={<Post/>}/>
           <Route path='/update-post/:postId' element={<UpdatePost/>}/>
+          <Route path='/create-p-job' element={<CreatePost/>}/>
           
         </Route>
         

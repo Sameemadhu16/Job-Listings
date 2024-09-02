@@ -114,9 +114,13 @@ export default function Header() {
       <Navbar.Collapse className="hover:text-blue-500" >
         <Navbar.Link href="/"className={`${isActive('/') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>Home</Navbar.Link>
         {
-          currentUser.role === 'jobPoster' ?
-          <Navbar.Link href="create-post" className={`${isActive('/create-post') ? 'text-blue-500 dark:text-white ' : 'text-gray-500'}`}>Create Job</Navbar.Link>:
-          <Navbar.Link href="create-post" className={`${isActive('/create-post') ? 'text-blue-500 dark:text-white ' : 'text-gray-500'}`}>Find job</Navbar.Link>
+          currentUser.role === 'jobPoster' ?(
+            <>
+              <Navbar.Link href="/create-p-job" className={`${isActive('/create-p-job') ? 'text-blue-500 dark:text-white ' : 'text-gray-500'}`}>Create a Part time Job</Navbar.Link>
+              <Navbar.Link href="/create-f-job" className={`${isActive('/create-f-job') ? 'text-blue-500 dark:text-white ' : 'text-gray-500'}`}>Create a Full time Job</Navbar.Link>
+            </>
+          ):
+          <Navbar.Link href="/search" className={`${isActive('/search') ? 'text-blue-500 dark:text-white ' : 'text-gray-500'}`}>Find job</Navbar.Link>
         }
         <Navbar.Link href="/contact" className={`${isActive('/contact') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>Customer Supports</Navbar.Link>
         <Navbar.Link href="/about" className={`${isActive('/about') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>About Us</Navbar.Link>

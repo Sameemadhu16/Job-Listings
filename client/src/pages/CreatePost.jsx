@@ -3,17 +3,17 @@ import React, { useState } from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from 'react-router-dom';
-
+import { Spinner } from 'flowbite-react';
 
 export default function CreatePost() {
   
   const [formData,setFormData] = useState({});
   const [publishError,setPublishError] = useState(null);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   
-
-
   const handleSubmit = async (e) =>{
+    console.log(formData);
     e.preventDefault();
     try{
       const res = await fetch('/api/post/create-post',{
@@ -29,7 +29,7 @@ export default function CreatePost() {
         setPublishError(data.message);
         return;
       }
-     
+    
       if(res.ok){
         console.log(data.title);
         setPublishError(null);
@@ -40,42 +40,129 @@ export default function CreatePost() {
       setPublishError('something went wrong')
     }
   };
+
   return (
-    <div className='p-3 max-w-3xl mx-auto min-h-screen'>
-      <h1 className='text-center text-3xl font-semibold'>
-        Create a Post
-      </h1>
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
-          <TextInput type='text' placeholder='Title' required id='title'
-          className='flex-1'
-          onChange={(e) =>{
-            setFormData({
-              ...formData,title:e.target.value
-            })
-          }}
-          />
-        <TextInput type='text' placeholder='company' required id='company'
-        className=''
-        onChange={(e) => {
-            setFormData({
-                ...formData,companyName:e.target.value
-            })
-        }}
-        />
-        </div>
-        <ReactQuill theme='snow'placeholder='Write something...' className='h-72 mb-12' required
-        onChange={(value) =>{
-          setFormData({...formData,essential:value})
-        }}
-        />
-        <Button type='submit'  >
-          Publish
-        </Button>
-        {publishError && <Alert color='failure'>{
-          publishError
-        }</Alert>}
-      </form>
+    <div className="min-h-screen flex items-center justify-center p-10">
+      <div className="w-full md:w-1/2 lg:w-1/3 bg-white p-10 flex flex-col justify-center rounded-lg shadow-xl">
+        <h1 className="text-center p-10 text-5xl font-bold">Part Time Job</h1>
+        <form onSubmit={handleSubmit}>
+
+          <div className="mb-4">
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              placeholder="Title"
+              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="venue">Venue</label>
+            <input
+              type="text"
+              id="venue"
+              name="venue"
+              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              placeholder="Venue"
+              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="date">Date</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              placeholder="Date"
+              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="s-time">Start Time</label>
+            <input
+              type="time"
+              id="s-time"
+              name="s-time"
+              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="e-time">End Time</label>
+            <input
+              type="time"
+              id="e-time"
+              name="e-time"
+              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="salary">Salary</label>
+            <input
+              type="text"
+              id="salary"
+              name="salary"
+              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+            />
+          </div>
+
+          <div className="mb-4 flex gap-2 w-full">
+            <div className="w-1/2">
+              <label htmlFor="members">Members</label>
+              <input
+                type="number"
+                id="members"
+                name="members"
+                max={10}
+                min={1}
+                className="w-full py-2 px-4 border border-gray-300 rounded-md"
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              />
+            </div>
+
+            <div className="flex flex-col w-1/2">
+              <label htmlFor="gender">Gender</label>
+              <select
+                id="gender"
+                name="gender"
+                className="w-full py-2 px-4 border border-gray-300 rounded-md"
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              >
+                <option value="both">Both</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+              </select>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            className={`w-full py-2 px-4 bg-blue-500 text-white rounded-md font-semibold transition duration-300 ease-in-out ${
+              loading ? 'cursor-not-allowed opacity-75' : 'hover:bg-blue-600'
+            }`}
+            disabled={loading}
+          >
+            {loading ? (
+              <div className="flex items-center justify-center">
+                <Spinner size="sm" />
+                <span className="pl-3">Loading...</span>
+              </div>
+            ) : (
+              'Create a Job'
+            )}
+          </button>
+        </form>
+      </div>
     </div>
   )
 }

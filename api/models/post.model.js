@@ -10,12 +10,18 @@ const postSchema = new mongoose.Schema(
         title:{
             required:true,
             type:String,
-            unique:true
         },
-        essential:{
+        
+        type:{
             type:String
         },
-        selectType:{
+        date:{
+            type:Date
+        },
+        startTime :{
+            type:String
+        },
+        endTime:{
             type:String
         },
         description:{
@@ -33,5 +39,5 @@ const postSchema = new mongoose.Schema(
     },{timestamps:true}
 );
 
-const Post = mongoose.model('Post',postSchema);
+const Post = mongoose.model('Job',postSchema);
 export default Post
