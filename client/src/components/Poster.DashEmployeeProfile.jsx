@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Button, Card, Avatar, Badge, Alert, TextInput } from 'flowbite-react';
+import { Button, Card, Avatar, Badge, Alert, TextInput, Modal } from 'flowbite-react';
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
 import { GiWorld } from "react-icons/gi";
 import { FaAddressCard } from "react-icons/fa6";
@@ -9,8 +9,9 @@ import { useSelector } from 'react-redux';
 import { getDownloadURL, getStorage, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
 import { app } from '../firebase';
 import { CircularProgressbar } from 'react-circular-progressbar';
-import { updateStart, updateSuccess, updateFailure } from '../redux/user/userSlice';
+import { updateStart, updateSuccess, updateFailure, deleteUserFailure, deleteUserSuccess } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
+import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
 export default function PosterDashEmployeeProfile() {
   const { currentUser } = useSelector(state => state.user);
@@ -22,6 +23,7 @@ export default function PosterDashEmployeeProfile() {
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
   const [showUploadProgress, setShowUploadProgress] = useState(false);
+  const [showModal, setShowModal] = useState(false)
 
 
 
@@ -119,11 +121,30 @@ export default function PosterDashEmployeeProfile() {
     }
   }
 
+  const handleDelete = async () => {
+    setShowModal(false);
+    try {
+      const res = await fetch(`/api/jobposter/delete/${currentUser._id}`,
+        { method: 'DELETE' }
+      );
+      const data = await res.json();
+      if (res.ok) {
+        dispatch(deleteUserSuccess(data.message))
+      } else {
+        dispatch(deleteUserFailure(data))
+      }
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message))
+    }
+  }
+  console.log(currentUser._id);
+
+
   return (
     <div className='w-full'>
 
-      <div className="bg-gray-100 p-8 min-h-screen">
-        <div className="w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
+      <div className="bg-gray-100 p-8 min-h-screen dark:bg-gray-900">
+        <div className="w-4xl mx-auto bg-white rounded-lg shadow-md p-6  dark:bg-gray-900">
           {/* Profile Header */}
           <div className="flex items-center justify-between">
             <div className="flex items-center">
@@ -185,13 +206,13 @@ export default function PosterDashEmployeeProfile() {
               <div className="ml-4">
                 <h1 className="text-xl font-bold">
 
-                  <input id='username' onChange={handleChange} defaultValue={currentUser.username}/></h1>
+                  <input className='dark:bg-gray-900' id='username' onChange={handleChange} defaultValue={currentUser.username} /></h1>
                 <p className="text-gray-600"></p>
               </div>
             </div>
             <div className='flex'>
               <Button onClick={handleSubmit} className='m-12 bg-blue-500' >update profile</Button>
-              <Button color={'red'} className='m-12 bg-blue-500' >Delete profile</Button>
+              <Button onClick={() => setShowModal(true)} color={'red'} className='m-12 bg-blue-500' >Delete profile</Button>
             </div>
 
           </div>
@@ -204,7 +225,7 @@ export default function PosterDashEmployeeProfile() {
             <div className="lg:col-span-2">
               <Card>
                 <h2 className="text-lg font-semibold mb-2">Biography</h2>
-                <textarea className="text-gray-700  max-h-24 resize-y"
+                <textarea className="dark:bg-gray-800  max-h-24 resize-y"
 
                   id='biography'
                   defaultValue=
@@ -213,9 +234,9 @@ export default function PosterDashEmployeeProfile() {
                 />
               </Card>
               {/* Cover Letter */}
-              <Card className="mt-6">
+              <Card className="mt-6 ">
                 <h2 className="text-lg font-semibold mb-2">Cover Letter</h2>
-                <textarea className="text-gray-700"
+                <textarea className="dark:bg-gray-800"
 
                   id='coverLetter'
                   defaultValue=
@@ -233,9 +254,9 @@ export default function PosterDashEmployeeProfile() {
               <Card>
                 <h2 className="text-lg font-semibold mb-2">Personal Information</h2>
                 <ul className="text-gray-700">
-                  <li className="flex justify-between"><span>Date of Birth:</span> <span ><input id='birthday' className='' onChange={handleChange} defaultValue={typeof currentUser.birthday === 'object' ? '' : currentUser.birthday} /></span></li>
-                  <li className="flex justify-between"><span>Marital Status:</span> <span><input id='maritalStatus' onChange={handleChange} defaultValue={currentUser.maritalStatus} /></span></li>
-                  <li className="flex justify-between"><span>Gender:</span> <span><input id='gender' defaultValue={currentUser.gender} onChange={handleChange} /></span></li>
+                  <li className="flex justify-between dark:text-white"><span>Date of Birth:</span> <span ><input id='birthday' className='dark:bg-gray-800' onChange={handleChange} defaultValue={typeof currentUser.birthday === 'object' ? '' : currentUser.birthday} /></span></li>
+                  <li className="flex justify-between dark:text-white"><span>Marital Status:</span> <span><input id='maritalStatus' className='dark:bg-gray-800' onChange={handleChange} defaultValue={currentUser.maritalStatus} /></span></li>
+                  <li className="flex justify-between dark:text-white"><span>Gender:</span> <span><input id='gender' className='dark:bg-gray-800' defaultValue={currentUser.gender} onChange={handleChange} /></span></li>
                 </ul>
               </Card>
 
@@ -249,10 +270,10 @@ export default function PosterDashEmployeeProfile() {
               <Card className="mt-6">
                 <h2 className="text-lg font-semibold mb-2">Contact Information</h2>
                 <ul className="text-gray-700">
-                  <li className="flex items-center"><span className="mr-2"><GiWorld /></span> {currentUser.email}</li>
+                  <li className="flex items-center dark:text-white"><span className="mr-2"><GiWorld /></span> {currentUser.email}</li>
 
-                  <li className="flex items-center"><span className="mr-2"><IoCall /></span> {currentUser.mobilenumber}</li>
-                  <li className="flex items-center"><span className="mr-2"><MdEmail /></span> {currentUser.fullname}</li>
+                  <li className="flex items-center dark:text-white"><span className="mr-2"><IoCall /></span> {currentUser.mobilenumber}</li>
+                  <li className="flex items-center dark:text-white"><span className="mr-2"><MdEmail /></span> {currentUser.fullname}</li>
                 </ul>
               </Card>
             </div>
@@ -272,6 +293,25 @@ export default function PosterDashEmployeeProfile() {
           </div>
         </div>
       </div>
+      <Modal show={showModal} onClose={() => setShowModal(false)} popup size='md'>
+        <Modal.Header />
+        <Modal.Body>
+          <div className='text-center'>
+            <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
+            <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
+              Are you sure you want to delete your account?
+            </h3>
+            <div className='flex justify-center gap-4'>
+              <Button color='failure' onClick={handleDelete} >
+                Yes, I'm sure
+              </Button>
+              <Button color='gray' onClick={() => setShowModal(false)}>
+                No, cancel
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   )
 }
