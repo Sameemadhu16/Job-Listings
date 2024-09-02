@@ -85,6 +85,8 @@ export const deleteJobposter = async (req, res, next) => {
         res.status(200).json({ message: "Jobposter delete Successfully" })
 
     } catch (error) {
+        console.log(error);
+
         next(error)
     }
 
