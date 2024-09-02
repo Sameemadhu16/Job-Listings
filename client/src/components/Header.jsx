@@ -111,7 +111,8 @@ export default function Header() {
   )}
         <Navbar.Toggle />
       </div>
-      <Navbar.Collapse className="hover:text-blue-500" >
+      {currentUser ? (
+        <Navbar.Collapse className="hover:text-blue-500" >
         <Navbar.Link href="/"className={`${isActive('/') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>Home</Navbar.Link>
         {
           currentUser.role === 'jobPoster' ?(
@@ -125,6 +126,7 @@ export default function Header() {
         <Navbar.Link href="/contact" className={`${isActive('/contact') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>Customer Supports</Navbar.Link>
         <Navbar.Link href="/about" className={`${isActive('/about') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>About Us</Navbar.Link>
       </Navbar.Collapse>
+      ):("")}
     </Navbar>
   );
 }
