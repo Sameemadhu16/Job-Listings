@@ -7,13 +7,13 @@ import { Spinner } from 'flowbite-react';
 
 export default function CreatePost() {
   
-  const [formData,setFormData] = useState({});
+  const [formData,setFormData] = useState([]);
   const [publishError,setPublishError] = useState(null);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   
   const handleSubmit = async (e) =>{
-    console.log(formData);
+    
     e.preventDefault();
     try{
       const res = await fetch('/api/post/create-post',{
@@ -31,7 +31,7 @@ export default function CreatePost() {
       }
     
       if(res.ok){
-        console.log(data.title);
+        
         setPublishError(null);
         navigate(`/post-page/${data.title}`);
       }
@@ -67,7 +67,7 @@ export default function CreatePost() {
               name="venue"
               className="w-full py-2 px-4 border border-gray-300 rounded-md"
               placeholder="Venue"
-              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, venue: e.target.value })}
             />
           </div>
 
@@ -79,29 +79,29 @@ export default function CreatePost() {
               name="date"
               className="w-full py-2 px-4 border border-gray-300 rounded-md"
               placeholder="Date"
-              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, date: e.target.value })}
             />
           </div>
 
           <div className="mb-4">
-            <label htmlFor="s-time">Start Time</label>
+            <label htmlFor="sTime">Start Time</label>
             <input
               type="time"
-              id="s-time"
-              name="s-time"
+              id="sTime"
+              name="sTime"
               className="w-full py-2 px-4 border border-gray-300 rounded-md"
-              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, sTime: e.target.value })}
             />
           </div>
 
           <div className="mb-4">
-            <label htmlFor="e-time">End Time</label>
+            <label htmlFor="eTime">End Time</label>
             <input
               type="time"
-              id="e-time"
-              name="e-time"
+              id="eTime"
+              name="eTime"
               className="w-full py-2 px-4 border border-gray-300 rounded-md"
-              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, eTime: e.target.value })}
             />
           </div>
 
@@ -112,7 +112,7 @@ export default function CreatePost() {
               id="salary"
               name="salary"
               className="w-full py-2 px-4 border border-gray-300 rounded-md"
-              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, salary: e.target.value })}
             />
           </div>
 
@@ -126,7 +126,7 @@ export default function CreatePost() {
                 max={10}
                 min={1}
                 className="w-full py-2 px-4 border border-gray-300 rounded-md"
-                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                onChange={(e) => setFormData({ ...formData, members: e.target.value })}
               />
             </div>
 
@@ -136,7 +136,7 @@ export default function CreatePost() {
                 id="gender"
                 name="gender"
                 className="w-full py-2 px-4 border border-gray-300 rounded-md"
-                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
               >
                 <option value="both">Both</option>
                 <option value="female">Female</option>
@@ -161,6 +161,7 @@ export default function CreatePost() {
               'Create a Job'
             )}
           </button>
+          {publishError && <p className="text-red-500 mt-3">{publishError}</p>}
         </form>
       </div>
     </div>

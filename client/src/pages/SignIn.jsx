@@ -55,12 +55,12 @@ const SignIn = () => {
             
         }
     } catch (error) {
-      dispatch(signInFailure(error.message));
+        dispatch(signInFailure(error.message));
     }
-  }
+}
 
-  return (
-    <div className='min-h-screen bg-gray-100 flex'>
+    return (
+        <div className='min-h-screen bg-gray-100 flex'>
             <div className="w-full md:w-1/2 bg-white p-10 m-20 mr-16 flex flex-col justify-center rounded-lg shadow-lg">
                 <div className="max-w-md mx-auto">
                     <div className="mb-6">

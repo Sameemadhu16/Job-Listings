@@ -3,23 +3,41 @@ import { errorHandler } from "../utils/error.js";
 
 export const createPost = async(req,res,next) => {
     
-    if(req.user.role === "jobPoster"){
+    try{
 
-        const slug = req.body.title.split(' ').join('-').toLowerCase().replace(/[^a-zA-Z0-9-]/g,'-');
-        const newPost = new Post({
-        ...req.body,
-        slug,
-        userId:req.user.id,
-    });
+        const {title,venue,date,sTime,eTime,salary,members,gender} = req.body;
+        const userId = req.user.id;
 
-        try{
-            const savedPost = await newPost.save();
-            res.status(201).json(savedPost);
-        }catch(error){
-            next(error);
+        if (!title || !venue || !date || !sTime || !eTime || !salary,!members, !gender) {
+            return next(errorHandler(400, 'All fields are required'));
         }
-    }else {
-        return next(errorHandler(403,'You are not allowed to create a post'));
+
+        // Create a new post
+        const newPost = new Post({
+            userId,
+            title,
+            venue,
+            date,
+            sTime,
+            eTime,
+            salary,
+            members,
+            gender,
+            createdBy: req.user._id  // Associate the post with the user who created it
+        });
+  
+        // Save the post to the database
+        const savedPost = await newPost.save();
+
+        // Return a success response with the created post
+        res.status(201).json({
+        message: 'Post created successfully',
+        post: savedPost
+      });
+
+    }catch(error){
+        // Handle any server or database errors
+        return next(error);
     }
 }
 

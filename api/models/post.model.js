@@ -15,13 +15,25 @@ const postSchema = new mongoose.Schema(
         type:{
             type:String
         },
+        venue:{
+            type:String
+        },
         date:{
             type:Date
         },
-        startTime :{
+        sTime :{
             type:String
         },
-        endTime:{
+        eTime:{
+            type:String
+        },
+        salary:{
+            type:String
+        },
+        members:{
+            type:Number
+        },
+        gender:{
             type:String
         },
         description:{
@@ -29,7 +41,7 @@ const postSchema = new mongoose.Schema(
         },
         companyName:{
             type:String,
-            required:true
+            
         },
         image:{
             type:String,
@@ -39,5 +51,5 @@ const postSchema = new mongoose.Schema(
     },{timestamps:true}
 );
 
-const Post = mongoose.model('Job',postSchema);
+const Post = mongoose.model('Post',postSchema);
 export default Post
