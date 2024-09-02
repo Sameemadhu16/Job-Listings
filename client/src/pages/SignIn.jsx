@@ -24,7 +24,7 @@ const SignIn = () => {
     e.preventDefault();
     
     if (!formData.email || !formData.password || !formData.confirmPassword) {
-      return setErrorMessage('All feilds are required')
+        return setErrorMessage('All feilds are required')
     }
 
     // Password confirmation check
@@ -46,8 +46,14 @@ const SignIn = () => {
 
       if (res.ok) {
         dispatch(signInSuccess(data));
-        navigate('/');
-      }
+        
+        if(data.role === 'jobPoster'){
+            navigate('/poster-dashboard?tab=profile');
+        }else{
+            navigate('/');
+        }
+            
+        }
     } catch (error) {
       dispatch(signInFailure(error.message));
     }

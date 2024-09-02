@@ -1,4 +1,4 @@
-import { Avatar, Dropdown, Navbar, TextInput, Button, theme } from "flowbite-react";
+import { Avatar, Dropdown, Navbar, TextInput, Button, theme, Label } from "flowbite-react";
 import logo from '../images/Jobpilot.png';
 
 import { useDispatch, useSelector } from "react-redux";
@@ -86,7 +86,13 @@ export default function Header() {
         >
           <Dropdown.Header>
             <span className="block text-sm">{currentUser.username}</span>
-            <span className="block truncate text-sm font-medium ">{currentUser.email}</span>
+            <span className="block truncate text-sm font-medium mb-2">{currentUser.email}</span>
+            {
+              currentUser.role === 'jobSeeker' ?
+              <Label className="text-sm font-bold text-blue-600 border-2 border-blue-400 px-2 py-1">Finder</Label> :
+              <Label className="text-sm font-bold text-blue-600 border-2 border-blue-400 px-2 py-1">Poster</Label>
+            }
+
           </Dropdown.Header>
             <Link to={getProfilePath(currentUser.role)}>
               <Dropdown.Item>Profile</Dropdown.Item>
@@ -106,17 +112,14 @@ export default function Header() {
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse className="hover:text-blue-500" >
-        <Navbar.Link href="/"className={`${isActive('/') ? 'text-blue-500 ' : 'text-gray-500'}hover:text-blue-500`}>Home</Navbar.Link>
-        <Navbar.Link href="search" className={`${isActive('/search') ? 'text-blue-500 ' : 'text-gray-500'}`}>Find Job</Navbar.Link>
-        <Navbar.Link href="create-post" className={`${isActive('/create-post') ? 'text-blue-500 ' : 'text-gray-500'}`}>Create Job</Navbar.Link>
-        <Navbar.Link
-          href={getDashboardPath()}
-          className={`${isActive('/dashboard') ? 'text-blue-500 ' : 'text-gray-500'}`}
-        >
-          Dashboard
-        </Navbar.Link>
-        <Navbar.Link href="/contact" className={`${isActive('/contact') ? 'text-blue-500 ' : 'text-gray-500'}`}>Customer Supports</Navbar.Link>
-        <Navbar.Link href="/about" className={`${isActive('/about') ? 'text-blue-500 ' : 'text-gray-500'}`}>About Us</Navbar.Link>
+        <Navbar.Link href="/"className={`${isActive('/') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>Home</Navbar.Link>
+        {
+          currentUser.role === 'jobPoster' ?
+          <Navbar.Link href="create-post" className={`${isActive('/create-post') ? 'text-blue-500 dark:text-white ' : 'text-gray-500'}`}>Create Job</Navbar.Link>:
+          <Navbar.Link href="create-post" className={`${isActive('/create-post') ? 'text-blue-500 dark:text-white ' : 'text-gray-500'}`}>Find job</Navbar.Link>
+        }
+        <Navbar.Link href="/contact" className={`${isActive('/contact') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>Customer Supports</Navbar.Link>
+        <Navbar.Link href="/about" className={`${isActive('/about') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>About Us</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );
