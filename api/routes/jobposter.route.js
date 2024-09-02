@@ -1,14 +1,14 @@
 import express from 'express';
 
-import { deleteSeeker, getJobSeekerByID, getJobSeekers, updateSeeker } from '../controllers/jobseeker.controller.js';
 import { verifyToken } from '../utils/verifyUser.js';
+import { deleteJobposter, getJobPosterByID, getJobPosters, updateJobposter } from '../controllers/jobposter.controller.js';
 
 const router = express.Router();
 
-router.get('/get',getJobSeekers);  //retrive jobSeekers
-router.get('/get/:userId',verifyToken,getJobSeekerByID)
-router.put('/update/:userId',verifyToken,updateSeeker);
-router.delete('/delete/:userId',verifyToken,deleteSeeker);
+router.get('/get',getJobPosters);  //retrive jobPoster
+router.get('/get/:userId',verifyToken,getJobPosterByID)
+router.put('/update/:userId',verifyToken,updateJobposter);
+router.delete('/delete/:userId',verifyToken,deleteJobposter);
 
 
 

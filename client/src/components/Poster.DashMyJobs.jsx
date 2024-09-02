@@ -8,41 +8,82 @@ import axios from 'axios';
 
 export default function PosterDashMyJobs() {
     const{currentUser} = useSelector((state) =>state.user);
-    const [userPost,setuserPost]= useState({});
-    console.log(userPost);
+    const [userPosts,setUserPosts]= useState([]);
+    
    console.log(currentUser._id);
    const [showMore, setShowMore] = useState(true);
-   const [showModal, setShowModal] = useState(false);
     
 
-    useEffect(()=>{
-        const fetchPost = async() =>{
-            try {
-                
-                    
-                const res = await fetch(`/api/post/get-post/${currentUser._id}`);
-
-                const data = await res.json();
-
-                
-                   
-                
-                if (!res.ok) {
-                    throw new Error(`HTTP error! status: ${res.status}`);
+   useEffect(() => {
+    const fetchPosts = async () => {
+        try {
+            const res = await fetch(`/api/post/get-posts`);
+            const data = await res.json();
+            if (res.ok) {
+                setUserPosts(data.posts);
+                if (data.posts.length < 9) {
+                    setShowMore(false);
                 }
-                setuserPost(data.posts)
-                
-            } catch (error) {
-                console.log(error.message);
             }
+        } catch (error) {
+            console.log(error.message);
         }
-        fetchPost();
-    },[currentUser._id]);
+    };
+    fetchPosts();
+    
+},[currentUser._id]);
+    console.log(userPosts)
 
    
     return (
-        console.log(userPost)
-        
+    <div className='flex flex-wrap gap-4 py-3 mx-auto justify-center m-1 '>
+        <div className='flex flex-wrap gap-4 py-3 mx-auto justify-center w-full ml-2 mr-2'>
+            <div className='flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800 '>
+                <h1 className='font-semibold text-lg'>Rcently Posted Jobs</h1>
+                <Table hoverable className='shadow-md'>
+                        <Table.Head>
+                            <Table.HeadCell>Date updated</Table.HeadCell>
+                            <Table.HeadCell>Post image</Table.HeadCell>
+                            <Table.HeadCell>Post title</Table.HeadCell>
+                            <Table.HeadCell>Category</Table.HeadCell>
+                            
+                        </Table.Head>
+                        {userPosts.map((post) => (
+                            <Table.Body className='divide-y'>
+                                <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+                                    <Table.Cell>
+                                        {new Date(post.updatedAt).toLocaleDateString()}
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        <Link to={`/post/${post.slug}`}>
+                                            <img
+                                                src={post.image}
+                                                alt={post.title}
+                                                className='w-20 h-10 object-cover bg-gray-500'
+                                            />
+                                        </Link>
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        <Link
+                                            className='font-medium text-gray-900 dark:text-white'
+                                            to={`/post/${post.slug}`}
+                                        >
+                                            {post.title}
+                                        </Link>
+                                    </Table.Cell>
+                                    <Table.Cell>{post.category}</Table.Cell>
+                                    
+                                    
+                                </Table.Row>
+                            </Table.Body>
+                        ))}
+                    </Table>
+                    
+            </div>
+
+
+        </div>
+    </div>
         
     )
 }
