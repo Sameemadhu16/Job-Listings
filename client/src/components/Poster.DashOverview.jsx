@@ -1,37 +1,68 @@
-import { Table } from 'flowbite-react'
+import { Table , Modal , Button  } from 'flowbite-react'
 import React, { useEffect, useState } from 'react'
 import { BsCheckCircle } from 'react-icons/bs'
 import { PiHandbagSimpleLight } from 'react-icons/pi'
 import { TiNews } from 'react-icons/ti'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import {HiOutlineExclamationCircle} from 'react-icons/hi'
 
 export default function PosterDashOverview() {
+
     const [showMore, setShowMore] = useState(true);
     const [userPosts, setUserPosts] = useState([]);
-    const [postcount,setpostcount] = useState(0)
+    const [error,setError] = useState(false);
+    const [showModal,setShowModal] = useState(false);
+    const [postIdDelete,setPostIdDelete] = useState(' ')
+    
     const currentUser = useSelector((state) =>state.user)
-//console.log(userPosts);
+
+    
 
     useEffect(() => {
         const fetchPosts = async () => {
+            
             try {
-                const res = await fetch(`/api/post/get-posts`);
+                const res = await fetch(`/api/post/get-post/${currentUser.currentUser._id}`);
                 const data = await res.json();
+
                 if (res.ok) {
-                    setUserPosts(data.posts);
-                    //setUserPosts(data.totalpost)
+                    console.log(data)
+                    setUserPosts(data.allPost);
+
+                    
                     if (data.posts.length < 9) {
                         setShowMore(false);
                     }
                 }
             } catch (error) {
-                console.log(error.message);
+                setError(error)
             }
         };
         fetchPosts();
         
-    },);
+    },[currentUser.currentUser._id]);
+
+    const deleteJob  = async () => {
+        try{
+            const res =  await fetch(`api/post/delete-post/${postIdDelete}/${currentUser.currentUser._id}`,{
+                method:'DELETE',
+            });
+            const data = await res.json();
+
+            if(!res.ok){
+                console.log(data.message);
+            }else{
+                setUserPosts((prev) =>
+                prev.filter((post)=>post._id !== postIdDelete))
+                setShowModal(false);
+            }
+        }catch(error){
+            setError(error);
+        }
+    }
+
+    
 
     
   return (
@@ -45,7 +76,7 @@ export default function PosterDashOverview() {
                         <p className='text-slate-500'>Open Jobs</p>
                     </div>
                     <PiHandbagSimpleLight className='bg-blue-400 text-white rounded-full
-        text-5xl p-3 shadow-lg'/>
+                            text-5xl p-3 shadow-lg'/>
                 </div>
             </div>
             <div className='flex flex-col p-3 bg-orange-100 gap-4 md:w-72 w-full rounded-md shadow-md'>
@@ -55,7 +86,7 @@ export default function PosterDashOverview() {
                         <p className='text-slate-500'>Saved Candidate</p>
                     </div>
                     <TiNews className='bg-orange-400 text-white rounded-full
-        text-5xl p-3 shadow-lg'/>
+                        text-5xl p-3 shadow-lg'/>
                 </div>
             </div>
         </div>
@@ -64,13 +95,14 @@ export default function PosterDashOverview() {
     <div className='flex flex-wrap gap-4 py-3 mx-auto justify-center m-1 '>
         <div className='flex flex-wrap gap-4 py-3 mx-auto justify-center w-full ml-2 mr-2 '>
             <div className='flex flex-col md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800 justify-center w-full'>
-                <h1 className='font-semibold text-lg'>Rcently Posted Jobs</h1>
+                <h1 className='font-bold text-xl mb-3 text-center'>Jobs You Created</h1>
                 <Table hoverable className='shadow-md'>
                         <Table.Head>
                             <Table.HeadCell>Date updated</Table.HeadCell>
                             <Table.HeadCell>Post image</Table.HeadCell>
                             <Table.HeadCell>Post title</Table.HeadCell>
-                            <Table.HeadCell>Category</Table.HeadCell>
+                            <Table.HeadCell>Type</Table.HeadCell>
+                            <Table.HeadCell>Delete</Table.HeadCell>
                             
                         </Table.Head>
                         {userPosts.map((post) => (
@@ -96,7 +128,18 @@ export default function PosterDashOverview() {
                                             {post.title}
                                         </Link>
                                     </Table.Cell>
-                                    <Table.Cell>{post.category}</Table.Cell>
+                                    <Table.Cell>
+                                        <Link
+                                            className='font-medium text-gray-900 dark:text-white'
+                                            to={`/post/${post.slug}`}
+                                        >
+                                            {post.type}
+                                        </Link>
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        <button className='bg-red-700 px-2 py-1 rounded-lg text-white hover:bg-opacity-90' type='button' onClick={() => {setShowModal(true) 
+                                            setPostIdDelete(post._id)}}>Delete</button>
+                                    </Table.Cell>
                                     
                                     
                                 </Table.Row>
@@ -104,11 +147,32 @@ export default function PosterDashOverview() {
                         ))}
                     </Table>
                     
+                </div>
             </div>
-
-
         </div>
+
+        <Modal show = {showModal} onClose={() => setShowModal(false)} popupsize='md'>
+            <Modal.Header/>
+            <Modal.Body>
+                <div className='text-center'>
+                    <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400
+                    dark:text-gray-200 mb-4 mx-auto'/>
+                    <h3 className='mb-5 text-gray-500 text-lg'>
+                        Are you sure you want to delete this post?
+                    </h3>
+                    <div className='flex justify-center gap-4'>
+                        <Button color='failure' onClick={deleteJob}>
+                            Yes, I'm sure
+                        </Button>
+                        <Button 
+                        color = 'gray' onClick={() => setShowModal(false)}>
+                            No, cancel 
+
+                        </Button>
+                    </div>
+                </div>
+            </Modal.Body>
+        </Modal>
     </div>
-    </div>
-  )
+    )
 }

@@ -16,7 +16,9 @@ export default function CreatePost() {
     
     e.preventDefault();
     try{
-      const res = await fetch('/api/post/create-post',{
+
+        formData.type = 'part';
+        const res = await fetch('/api/post/create-post',{
         method:'POST',
         headers:{
           'Content-Type':'application/json'
@@ -31,9 +33,9 @@ export default function CreatePost() {
       }
     
       if(res.ok){
-        
+
         setPublishError(null);
-        navigate(`/post-page/${data.title}`);
+        navigate('/poster-dashboard?tab=profile');
       }
     }
     catch(error){

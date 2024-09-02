@@ -9,7 +9,7 @@ router.post('/create-post',verifyToken,createPost);
 router.put('/update-post/:postId/:userId',verifyToken,updatePost);
 router.delete('/delete-post/:postId/:userId',verifyToken,deletePost);
 router.get('/get-posts',getPosts);
-router.get('/get-post/:userId',getpostForUser);
+router.get('/get-post/:userId',verifyToken,getpostForUser);
 
 export default router;
 

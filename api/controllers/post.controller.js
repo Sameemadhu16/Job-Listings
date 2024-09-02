@@ -5,7 +5,7 @@ export const createPost = async(req,res,next) => {
     
     try{
 
-        const {title,venue,date,sTime,eTime,salary,members,gender} = req.body;
+        const {title,venue,date,sTime,eTime,salary,members,gender,type} = req.body;
         const userId = req.user.id;
 
         if (!title || !venue || !date || !sTime || !eTime || !salary,!members, !gender) {
@@ -23,6 +23,7 @@ export const createPost = async(req,res,next) => {
             salary,
             members,
             gender,
+            type,
             createdBy: req.user._id  // Associate the post with the user who created it
         });
   
@@ -96,12 +97,12 @@ export const getPosts = async  (req,res,next) => {
 
 export const getpostForUser = async(req,res,next)=>{
     try {
-        const { userId } = req.params;
-        //console.log(userId);
-        const allpost = await Post.find({userId});
+        const  userId  = req.user.id;
+        
+        const allPost = await Post.find({userId});
         const count = await Post.countDocuments({userId});
 
-        res.status(200).json({ allpost,count });
+        res.status(200).json({ allPost,count });
 
     } 
     catch (error) {
