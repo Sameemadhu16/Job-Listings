@@ -14,6 +14,8 @@ export default function PosterDashOverview() {
     const [error,setError] = useState(false);
     const [showModal,setShowModal] = useState(false);
     const [postIdDelete,setPostIdDelete] = useState(' ')
+    const [pJob,setPJpb] = useState(0);
+    const [fJob,setFJpb] = useState(0);
     
     const currentUser = useSelector((state) =>state.user)
 
@@ -30,6 +32,14 @@ export default function PosterDashOverview() {
                     console.log(data)
                     setUserPosts(data.allPost);
 
+                    const part = data.allPost.filter(post => post.type == 'part');
+                    const pJob = part.length;
+                    setPJpb(pJob);
+
+                    const full = data.allPost.filter(post => post.type == 'full');
+                    const fJob = part.length;
+                    setPJpb(fJob);
+
                     
                     if (data.posts.length < 9) {
                         setShowMore(false);
@@ -40,7 +50,6 @@ export default function PosterDashOverview() {
             }
         };
         fetchPosts();
-
         
     },[currentUser.currentUser._id]);
 
@@ -73,8 +82,8 @@ export default function PosterDashOverview() {
             <div className='flex flex-col p-3 bg-blue-100 gap-4 md:w-72 w-full rounded-md shadow-md'>
                 <div className='flex flex-wrap justify-between'>
                     <div className=''>
-                        <h3 className='text-black text-xl font-semibold'>123</h3>
-                        <p className='text-slate-500'>Open Jobs</p>
+                        <h3 className='text-black text-xl font-semibold'>{pJob}</h3>
+                        <p className='text-slate-500'>Your Part Time Jobs</p>
                     </div>
                     <PiHandbagSimpleLight className='bg-blue-400 text-white rounded-full
                             text-5xl p-3 shadow-lg'/>
@@ -83,8 +92,8 @@ export default function PosterDashOverview() {
             <div className='flex flex-col p-3 bg-orange-100 gap-4 md:w-72 w-full rounded-md shadow-md'>
                 <div className='flex flex-wrap justify-between'>
                     <div className=''>
-                        <h3 className='text-black text-xl font-semibold'>589</h3>
-                        <p className='text-slate-500'>Saved Candidate</p>
+                        <h3 className='text-black text-xl font-semibold'>{fJob}</h3>
+                        <p className='text-slate-500'>Your Full Time Jobs</p>
                     </div>
                     <TiNews className='bg-orange-400 text-white rounded-full
                         text-5xl p-3 shadow-lg'/>
@@ -105,16 +114,10 @@ export default function PosterDashOverview() {
                             <Table.HeadCell>Type</Table.HeadCell>
                             <Table.HeadCell>Delete</Table.HeadCell>
                             
-
-
-
-
-
                         </Table.Head>
-
-                        {userPosts.map((post, index) => (
-                            <Table.Body key={index} className='divide-y'>
-                                <Table.Row className='bg-slate-300 dark:border-gray-700 dark:bg-gray-800'>
+                        {userPosts.map((post) => (
+                            <Table.Body className='divide-y'>
+                                <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
                                     <Table.Cell>
                                         {new Date(post.updatedAt).toLocaleDateString()}
                                     </Table.Cell>
@@ -135,14 +138,24 @@ export default function PosterDashOverview() {
                                             {post.title}
                                         </Link>
                                     </Table.Cell>
-
-                                    <Table.Cell>{post.category}</Table.Cell>
-
+                                    <Table.Cell>
+                                        <Link
+                                            className='font-medium text-gray-900 dark:text-white'
+                                            to={`/post/${post._id}`}
+                                        >
+                                            {post.type}
+                                        </Link>
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        <button className='bg-red-700 px-2 py-1 rounded-lg text-white hover:bg-opacity-90' type='button' onClick={() => {setShowModal(true) 
+                                            setPostIdDelete(post._id)}}>Delete</button>
+                                    </Table.Cell>
+                                    
+                                    
                                 </Table.Row>
                             </Table.Body>
                         ))}
                     </Table>
-
                     
                 </div>
             </div>
@@ -171,7 +184,5 @@ export default function PosterDashOverview() {
             </Modal.Body>
         </Modal>
     </div>
-
-
     )
 }

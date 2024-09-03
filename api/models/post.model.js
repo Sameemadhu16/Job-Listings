@@ -45,7 +45,7 @@ const postSchema = new mongoose.Schema(
         },
         image:{
             type:String,
-            default:'https://www.shutterstock.com/image-photo/work-time-art-collage-female-260nw-2361102709.jpg'
+            default:'https://sebringohio.net/wp-content/uploads/2021/03/job_posting.jpg'
         }
 
     },{timestamps:true}

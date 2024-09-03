@@ -1,10 +1,10 @@
 import React ,{useEffect,useState} from 'react'
 import { Link, useParams,useNavigate } from 'react-router-dom'
 import { Button, Spinner } from 'flowbite-react';
-import PostCards from '../components/PostCards';
 import JobPostCard from '../components/JobPostCard';
 import { useSelector } from 'react-redux'
-import { Card, Label } from 'flowbite-react'
+import {FaMapMarkerAlt,FaBath,FaBed,FaChair,FaParking, FaClock, FaStopwatch, FaUser, FaCalendar, FaMale, FaGenderless} from 'react-icons/fa'
+
 
 
 
@@ -63,39 +63,87 @@ export default function Post() {
 
     const handleUpdateClick = () => {
         navigate(`/update-post/${post._id}`); 
-      };
+    };
 
     if(loading){
         return <div className='flex justify-center items-center min-h-screen'>
             <Spinner size='xl'/>
         </div>
     }
+    
+    
+
+
 
     return (
-        <div className="bg-slate-100 min-h-screen flex items-center justify-center">
-            <div className="bg-white p-8 rounded-lg shadow-lg max-w-4xl w-3/4">
-                <div className="flex flex-col md:flex-row justify-between items-center">
-                    <div className="text-center md:text-left mb-6 md:mb-0 md:w-1/2">
-                        <div className='flex flex-row justify-between'>
-                            <h2 className="text-3xl font-bold mb-4">{post.title}</h2>
-                            {post.type == "part" ? (
-                            <Label className="text-sm font-bold text-blue-600 border-2 border-blue-400 px-2 py-1 h-9">Part Time</Label>
-                            ):(<Label className="text-sm font-bold text-blue-600 border-2 border-blue-400 px-2 py-1 h-9">Full Time</Label>)}
-                        </div>
-                    </div>
-                    <div className="md:w-1/2">
-                        <div className="relative  p-10 rounded-lg text-center text-white">
-                            <p className="text-lg mb-4">Your Message Has Been Sent</p>
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <img src={post.image} alt="Envelope" className=" h-48" />
-                            </div>
-                            <button className="mt-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-                                Send Again
-                            </button>
-                        </div>
-                    </div>
-                </div>
+        <main>
+        {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
+        {error && <p className='text-center my-7 text-2xl text-red-600'>something went wrong!</p>}
+        {post && !loading && !error &&(
+            <>
+            <div className='h-[300px]' style={{background:`url(${post.image})`, backgroundSize:'cover',backgroundRepeat: 'no-repeat' , backgroundPosition: 'center' }}></div>
+            <div className='p-4'>
+            <h1 className='text-3xl font-semibold'>
+                {post.title}{' - LKR '}{post.salary}
+            </h1>
+            <p className='flex items-center text-center  gap-1 text-slate-600  text-sm'>
+                <FaMapMarkerAlt className='text-green-700' />
+                {post.venue}
+            </p>
+            <div className='flex gap-4 py-3'>
+                <p className='bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md'>
+                {post.type === 'part' ? 'Part Time' : 'For Sale'}
+                </p>
+
+                <button type='button' onClick={handleUpdateClick} className='bg-green-700 w-full max-w-[200px] hover:bg-green-800 text-white text-center p-1 rounded-md'>
+                    Change Details
+                </button>
+                
             </div>
-        </div>
+            
+            <ul className='flex gap-4 text-green-800 text-sm flex-wrap items-center font-semibold mt-4'>
+                <li className='flex items-center gap-1 whitespace-nowrap '>
+                    <FaCalendar className='text-lg' />
+                        Date : {new Date(post.date).toLocaleDateString()}
+                </li>
+                <li className='flex items-center gap-1 whitespace-nowrap '>
+
+                <li className='flex items-center gap-1 whitespace-nowrap '>
+                    <FaClock className='text-lg' />
+                        Start At : {post.sTime}
+                </li>
+
+                    <FaClock className='text-lg' />
+                    End At : {post.eTime }
+                </li>
+                <li className='flex items-center gap-1 whitespace-nowrap '>
+                    <FaStopwatch className='text-lg' />
+                        Duration : {
+                            parseInt(post.sTime) < parseInt(post.eTime) ?  parseInt(post.eTime)-parseInt(post.sTime): 24 - parseInt(post.sTime) - parseInt(post.eTime)
+                        }h
+                </li>
+                <li className='flex items-center gap-1 whitespace-nowrap '>
+                <FaUser className='text-lg' />
+                    Members : {post.members}
+                </li>
+
+                <li className='flex items-center gap-1 whitespace-nowrap '>
+                    <FaMale className='text-lg' />
+                    { 
+                        post.gender === 'male' ? 'Male' : 
+                        post.gender === 'female' ? 'Female' : 
+                        'Both'
+                    }
+
+                </li>
+            </ul>
+            
+        
+            </div>
+
+            </>
+        )}
+        
+    </main>
     )
 }
