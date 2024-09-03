@@ -40,6 +40,7 @@ export default function PosterDashOverview() {
             }
         };
         fetchPosts();
+
         
     },[currentUser.currentUser._id]);
 
@@ -104,10 +105,16 @@ export default function PosterDashOverview() {
                             <Table.HeadCell>Type</Table.HeadCell>
                             <Table.HeadCell>Delete</Table.HeadCell>
                             
+
+
+
+
+
                         </Table.Head>
-                        {userPosts.map((post) => (
-                            <Table.Body className='divide-y'>
-                                <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+
+                        {userPosts.map((post, index) => (
+                            <Table.Body key={index} className='divide-y'>
+                                <Table.Row className='bg-slate-300 dark:border-gray-700 dark:bg-gray-800'>
                                     <Table.Cell>
                                         {new Date(post.updatedAt).toLocaleDateString()}
                                     </Table.Cell>
@@ -128,24 +135,14 @@ export default function PosterDashOverview() {
                                             {post.title}
                                         </Link>
                                     </Table.Cell>
-                                    <Table.Cell>
-                                        <Link
-                                            className='font-medium text-gray-900 dark:text-white'
-                                            to={`/post/${post._id}`}
-                                        >
-                                            {post.type}
-                                        </Link>
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        <button className='bg-red-700 px-2 py-1 rounded-lg text-white hover:bg-opacity-90' type='button' onClick={() => {setShowModal(true) 
-                                            setPostIdDelete(post._id)}}>Delete</button>
-                                    </Table.Cell>
-                                    
-                                    
+
+                                    <Table.Cell>{post.category}</Table.Cell>
+
                                 </Table.Row>
                             </Table.Body>
                         ))}
                     </Table>
+
                     
                 </div>
             </div>
@@ -174,5 +171,7 @@ export default function PosterDashOverview() {
             </Modal.Body>
         </Modal>
     </div>
+
+
     )
 }
