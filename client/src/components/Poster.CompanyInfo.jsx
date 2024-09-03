@@ -2,6 +2,10 @@ import React, { useState } from 'react'
 import { TextInput,FileInput,Button,Textarea,Select } from 'flowbite-react'
 import { useNavigate } from 'react-router-dom';
 import { IoIosCloseCircle } from "react-icons/io";
+import {getDownloadURL, getStorage, uploadBytesResumable,ref} from 'firebase/storage'
+import {app} from '../firebase'
+import   {CircularProgressbar} from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 export default function PosterCompanyInfo() {
 
@@ -9,11 +13,58 @@ export default function PosterCompanyInfo() {
   const [error,setError] = useState(null);
   const navigate = useNavigate();
   const [publishError,setPublishError] = useState(null);
+  const [imageUploadProgress,setImageUploadProgress] = useState(null);
+  const [imageUploadProgressFailure,setImageUploadFailure] = useState(null);
+  const [file,setFile] = useState(null)
 
+
+  const handleUploadImage = async()=>{
+    try{
+      if(!file){
+        setImageUploadFailure('Please select an image')
+        return ;
+      }
+      setImageUploadFailure(null);
+      const storage=getStorage(app);
+      const fileName = new Date().getTime()+'-'+file.name;
+      const storageRef = ref(storage,fileName);
+      const uploadTask = uploadBytesResumable(storageRef,file);
+      uploadTask.on(
+        'state_changed',
+        (snapshot) =>{
+          const progress = 
+          (snapshot.bytesTransferred/snapshot.totalBytes) *100;
+          setImageUploadProgress(progress.toFixed(0));
+        },
+        (error) =>{
+          setImageUploadFailure('Image upload fial')
+          setImageUploadProgress(null);
+        },
+        ()=>{
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
+        {
+          setImageUploadProgress(null);
+          setImageUploadFailure(null);
+          setFormData({...formData,image:downloadURL});
+        });
+
+      }
+      )
+
+    }
+    catch(error){
+      console.log(error);
+      setImageUploadFailure("Image upload Failed")
+      setImageUploadProgress(null);
+      console.log(error);
+    }
+  }
   const handleSubmit = async (e) => {
       e.preventDefault();
-
-      
+    
+      if (!formData.title || !formData.companyName || !formData.essential || !formData.requirement || !formData.members) {
+        return setPublishError('All fields are required');
+    }
 
       try{
         formData.type = 'full';
@@ -54,10 +105,15 @@ export default function PosterCompanyInfo() {
           <div className='flex gap-4 items-center justify-between border-4
           border-blue-500 border-dotted p-3'
           > 
-            <FileInput type="file" accept='image/*' />
-            <Button type='button' className='bg-blue-500 hover:bg-blue-500 text-white' size='sm' outline >
-            upload image
-            </Button>
+            <FileInput type="file" accept='image/*' onChange={(e) => setFile(e.target.files[0])}/>
+            <button type='button' onClick={handleUploadImage} className='bg-blue-500 hover:bg-blue-600 px-1 py-2 rounded-lg text-white' size='sm' outline >
+            {
+            imageUploadProgress  ? (
+              <div>
+              <CircularProgressbar className='h-20 text-white bg-white' value={imageUploadProgress} text={`${imageUploadProgress||0}%`}/>
+              </div>):('Upload image')
+            }
+            </button>
           </div>
           <p className='font-semibold'>Description :</p>
           <Textarea placeholder='Write down your company here.Let the candidate know who we are' onChange={(e) => setFormData({ ...formData, description: e.target.value })}></Textarea>
