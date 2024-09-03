@@ -119,7 +119,7 @@ export default function Post() {
                 <li className='flex items-center gap-1 whitespace-nowrap '>
                     <FaStopwatch className='text-lg' />
                         Duration : {
-                            parseInt(post.sTime) < parseInt(post.eTime) ?  parseInt(post.eTime)-parseInt(post.sTime): 24 - parseInt(post.sTime) - parseInt(post.eTime)
+                            parseInt(post.sTime) < parseInt(post.eTime) ?  parseInt(post.eTime)-parseInt(post.sTime): 24 - (parseInt(post.sTime) - parseInt(post.eTime))
                         }h
                 </li>
                 <li className='flex items-center gap-1 whitespace-nowrap '>

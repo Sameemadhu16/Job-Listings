@@ -43,7 +43,7 @@ export const createPost = async(req,res,next) => {
 }
 
 export const updatePost = async(req,res,next) => {
-    console.log(req.user);
+    
     if(req.user.id !==req.params.userId){
         return next(errorHandler(403,'You are not allowed to update this post'))
     }
@@ -54,9 +54,13 @@ export const updatePost = async(req,res,next) => {
             {
                 $set:{
                     title:req.body.title,
-                    essential:req.body.essential,
-                    selectType:req.body.selectType,
-                    description:req.body.description
+                    venue:req.body.venue,
+                    date:req.body.date,
+                    sTime:req.body.sTime,
+                    eTime : req.body.eTime,
+                    salary:req.body.salary,
+                    members:req.body.members,
+                    gender:req.body.gender
                 }
             },{new:true}
         )

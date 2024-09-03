@@ -1,4 +1,4 @@
-import { Alert, Button, FileInput, Select, TextInput } from 'flowbite-react'
+import { Alert, Button, FileInput, Select, TextInput    } from 'flowbite-react'
 import React, { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -9,44 +9,69 @@ import { useNavigate } from 'react-router-dom';
 
 
 export default function CreatePost() {
-  
-  const [formData,setFormData] = useState({});
+
   const [publishError,setPublishError] = useState(null);
   const {postId} = useParams();
   const {currentUser}= useSelector((state)=>state.user);
   const navigate = useNavigate();
+  const [loading,setLoading] = useState(false);
+  const userId = currentUser._id
 
-  useEffect(()=>{
+  const [post, setPost] = useState({
+    title: '',
+    venue: '',
+    date: '',
+    sTime: '',
+    eTime: '',
+    salary: '',
+    members: '',
+    gender: 'both'
+  });
+
+  useEffect(() => {
+        
     try{
-        const fetchPost = async () => {
-            const res = await fetch(`/api/post/get-posts?postId=${postId}`);
+        const fetchJobs = async () => {
+            const res = await fetch(`/api/post/get-post/${postId}`)
             const data = await res.json();
+            
 
-            if(!res.ok){
-                console.log(data.message);
-                setPublishError(data.message)
-                return;
-            }
-            if(res.ok && data.posts && data.posts.length > 0){
-                setPublishError(null);
-                setFormData(data.posts[0]);
+            if(res.ok){
+                setLoading(false)
+                setPost(data.allPost[0])
+                //console.log(post)
+                
             }
         }
-        fetchPost();
+        fetchJobs();
     }catch(error){
-        console.log(error.message);
+        console.log(error)
     }
-  },[postId])
+
+    
+
+},[postId])
+
+  const handleChange = (e) =>{
+
+    if(e.target.type === 'number' || e.target.type === 'text' || e.target.type === 'time' || e.target.type === 'date'){
+      setPost({
+          ...post,
+          [e.target.id]:e.target.value
+      })
+  }
+  }
   
   const handleSubmit = async (e) =>{
     e.preventDefault();
+    console.log(post)
     try{
       const res = await fetch(`/api/post/update-post/${postId}/${currentUser._id}`,{
         method:'PUT',
         headers:{
           'Content-Type':'application/json'
         },
-        body:JSON.stringify(formData),
+        body:JSON.stringify(post),
       });
       const data = await res.json();
       if(!res.ok){
@@ -56,7 +81,7 @@ export default function CreatePost() {
      
       if(res.ok){
         setPublishError(null);
-        navigate(`/post-page/${data.title}`);
+        navigate(`/post/${post._id}`);
       }
     }
     catch(error){
@@ -65,44 +90,135 @@ export default function CreatePost() {
   };
 
   return (
-    <div className='p-3 max-w-3xl mx-auto min-h-screen'>
-      <h1 className='text-center text-3xl font-semibold'>
-        Update a Post
-      </h1>
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
-          <TextInput type='text' placeholder='Title' required id='title'
-          className='flex-1'
-          value={formData.title}
-          onChange={(e) =>{
-            setFormData({
-              ...formData,title:e.target.value
-            })
-          }}
-          />
-        <TextInput type='text' placeholder='company' required id='company'
-        className=''
-        value={formData.companyName}
-        onChange={(e) => {
-            setFormData({
-                ...formData,companyName:e.target.value
-            })
-        }}
-        />
-        </div>
-        <ReactQuill theme='snow'placeholder='Write something...' className='h-72 mb-12' required
-        value={formData.essential}
-        onChange={(value) =>{
-          setFormData({...formData,essential:value})
-        }}
-        />
-        <Button type='submit'  >
-          Publish
-        </Button>
-        {publishError && <Alert color='failure'>{
-          publishError
-        }</Alert>}
-      </form>
+    <div className="min-h-screen flex items-center justify-center p-10">
+      <div className="w-full md:w-1/2 lg:w-1/3 bg-white p-10 flex flex-col justify-center rounded-lg shadow-xl">
+        <h1 className="text-center p-10 text-5xl font-bold">Part Time Job</h1>
+        <form onSubmit={handleSubmit}>
+
+          <div className="mb-4">
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              placeholder="Title"
+              onChange={handleChange}
+              value={post.title}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="venue">Venue</label>
+            <input
+              type="text"
+              id="venue"
+              name="venue"
+              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              placeholder="Venue"
+              onChange={handleChange}
+              value={post.venue}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="date">Date</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              placeholder="Date"
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="sTime">Start Time</label>
+            <input
+              type="time"
+              id="sTime"
+              name="sTime"
+              value={post.sTime}
+              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="eTime">End Time</label>
+            <input
+              type="time"
+              id="eTime"
+              name="eTime"
+              value={post.eTime}
+              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="salary">Salary</label>
+            <input
+              type="text"
+              id="salary"
+              name="salary"
+              value={post.salary}
+              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="mb-4 flex gap-2 w-full">
+            <div className="w-1/2">
+              <label htmlFor="members">Members</label>
+              <input
+                type="number"
+                id="members"
+                name="members"
+                max={10}
+                min={1}
+                value={post.members}
+                className="w-full py-2 px-4 border border-gray-300 rounded-md"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="flex flex-col w-1/2">
+              <label htmlFor="gender">Gender</label>
+              <select
+                id="gender"
+                name="gender"
+                value={post.gender}
+                className="w-full py-2 px-4 border border-gray-300 rounded-md"
+                onChange={handleChange}
+              >
+                <option value="both">Both</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+              </select>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            className={`w-full py-2 px-4 bg-blue-500 text-white rounded-md font-semibold transition duration-300 ease-in-out ${
+              loading ? 'cursor-not-allowed opacity-75' : 'hover:bg-blue-600'
+            }`}
+            disabled={loading}
+          >
+            {loading ? (
+              <div className="flex items-center justify-center">
+                <Spinner size="sm" />
+                <span className="pl-3">Loading...</span>
+              </div>
+            ) : (
+              'Change Details'
+            )}
+          </button>
+          {publishError && <p className="text-red-500 mt-3">{publishError}</p>}
+        </form>
+      </div>
     </div>
   )
 }
