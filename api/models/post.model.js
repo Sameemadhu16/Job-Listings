@@ -15,6 +15,18 @@ const postSchema = new mongoose.Schema(
         type:{
             type:String
         },
+        essential:{
+            type:String
+        },
+        requirement:{
+            type:String
+        },
+        companyLink:{
+            type:String
+        },
+        companyEmail:{
+            type:String
+        },
         venue:{
             type:String
         },

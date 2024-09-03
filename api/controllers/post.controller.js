@@ -5,12 +5,27 @@ export const createPost = async(req,res,next) => {
     
     try{
 
-        const {title,venue,date,sTime,eTime,salary,members,gender,type} = req.body;
+        const {
+            title,
+            venue,
+            date,
+            sTime,
+            eTime,
+            salary,
+            members,
+            gender,
+            type,
+            description,
+            companyName,
+            companyLink,
+            companyEmail,
+            essential,
+            requirement
+        } = req.body;
         const userId = req.user.id;
 
-        if (!title || !venue || !date || !sTime || !eTime || !salary,!members, !gender) {
-            return next(errorHandler(400, 'All fields are required'));
-        }
+        
+            
 
         // Create a new post
         const newPost = new Post({
@@ -24,6 +39,12 @@ export const createPost = async(req,res,next) => {
             members,
             gender,
             type,
+            companyEmail,
+            companyLink,
+            companyName,
+            requirement,
+            essential,
+            description,
             createdBy: req.user._id  // Associate the post with the user who created it
         });
   

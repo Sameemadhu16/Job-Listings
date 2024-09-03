@@ -13,8 +13,12 @@ export default function CreatePost() {
   const [loading, setLoading] = useState(false);
   
   const handleSubmit = async (e) =>{
-    
     e.preventDefault();
+console.log(formData)
+    if (!formData.title || !formData.venue || !formData.date || !formData.sTime || !formData.eTime || !formData.salary,!formData.members, !formData.gender) {
+      return setPublishError('All fields are required');
+  
+}
     try{
 
         formData.type = 'part';

@@ -20,17 +20,17 @@ export default function Post() {
     const userId = currentUser.currentUser._id
     
     useEffect(() => {
-        
+        console.log(postId)
             try{
                 const fetchJobs = async () => {
-                    const res = await fetch(`/api/post/get-post/${postId}`)
+                    const res = await fetch(`/api/post/get-job/${postId}`)
                     const data = await res.json();
                     
     
                     if(res.ok){
                         setLoading(false)
-                        setPost(data.allPost[0])
-                        //console.log(post)
+                        setPost(data)
+                        
                         
                     }
                 }
@@ -81,7 +81,10 @@ export default function Post() {
         {error && <p className='text-center my-7 text-2xl text-red-600'>something went wrong!</p>}
         {post && !loading && !error &&(
             <>
-            <div className='h-[300px]' style={{background:`url(${post.image})`, backgroundSize:'cover',backgroundRepeat: 'no-repeat' , backgroundPosition: 'center' }}></div>
+            <div className='flex items-center justify-center'>
+                <img src={post.image} alt="" className='max-w-full max-h-full' />
+            </div>
+            
             <div className='p-4'>
             <h1 className='text-3xl font-semibold'>
                 {post.title}{' - LKR '}{post.salary}

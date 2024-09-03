@@ -67,17 +67,16 @@ export default function PosterFoundInfo() {
         
     </form>
         <div className='flex gap-3 m-10'>
-            <Button type='button' cols={50} className='mt-3 bg-slate-400 px-5' >
+        <a href='/create-f-job'  cols={50} className='bg-slate-400  hover:bg-slate-500 px-2 h-10 w-28 text-white rounded-lg flex items-center justify-center' >
                 <div className='flex flex-row gap-1 items-center'>
-                Previous
+                    previous
                 </div>
-            </Button>
-            <Button type='button' cols={50} className='bg-blue-500 hover:bg-opacity-95 mt-3' >
+            </a>
+            <a href='/social-info' className='bg-blue-500 hover:bg-blue-600 px-2 h-10 w-28 text-white rounded-lg flex items-center justify-center' >
                 <div className='flex flex-row gap-1 items-center'>
-                Save & Next
-                <FaArrowRight />
+                Next
                 </div>
-            </Button>
+            </a>
         </div>
     </div>
     </div>

@@ -41,7 +41,7 @@ export default function PosterDashSidebar() {
               Create Part Time Job
             </Sidebar.Item>
           </Link>
-          <Link to="/create-p-job">
+          <Link to="/create-f-job">
 
             <Sidebar.Item icon={IoBagCheckSharp} as="div">
               Create Full Time Job

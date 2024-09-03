@@ -29,15 +29,16 @@ export default function PosterDashOverview() {
                 const data = await res.json();
 
                 if (res.ok) {
-                    console.log(data)
+                    
                     setUserPosts(data.allPost);
+                    console.log(data.allPost.length)
 
-                    const part = data.allPost.filter(post => post.type == 'part');
+                    const part = data.allPost.filter(post => post.type === 'part');
                     const pJob = part.length;
                     setPJpb(pJob);
 
                     const full = data.allPost.filter(post => post.type == 'full');
-                    const fJob = part.length;
+                    const fJob = full.length;
                     setPJpb(fJob);
 
                     

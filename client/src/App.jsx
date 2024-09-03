@@ -66,6 +66,11 @@ export default function App() {
           <Route path="/fulltime-job-post" element={<FulltimeJobPost />} />
           <Route path='/update-post/:postId' element={<UpdatePost/>}/>
           <Route path='/create-p-job' element={<CreatePost/>}/>
+
+          <Route path = '/create-f-job' element={<PosterCompanyInfo/>}/>
+          <Route path = '/found-info' element={<PosterFoundInfo/>}/>
+          <Route path = '/social-info' element={<PosterSocialMediaInfo/>}/>
+
           <Route path='/post/:postId' element={<Post/>}/>
           
         </Route>

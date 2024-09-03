@@ -27,29 +27,28 @@ export default function CreatePost() {
     members: '',
     gender: 'both'
   });
-
   useEffect(() => {
-        
-    try{
-        const fetchJobs = async () => {
-            const res = await fetch(`/api/post/get-post/${postId}`)
-            const data = await res.json();
-            
-
-            if(res.ok){
-                setLoading(false)
-                setPost(data.allPost[0])
-                //console.log(post)
+    console.log(postId)
+        try{
+            const fetchJobs = async () => {
+                const res = await fetch(`/api/post/get-job/${postId}`)
+                const data = await res.json();
                 
+
+                if(res.ok){
+                    setLoading(false)
+                    setPost(data)
+                    
+                    
+                }
             }
+            fetchJobs();
+        }catch(error){
+            console.log(error)
         }
-        fetchJobs();
-    }catch(error){
-        console.log(error)
-    }
 
+        
     
-
 },[postId])
 
   const handleChange = (e) =>{
@@ -187,6 +186,7 @@ export default function CreatePost() {
             <div className="flex flex-col w-1/2">
               <label htmlFor="gender">Gender</label>
               <select
+              type="text"
                 id="gender"
                 name="gender"
                 value={post.gender}
