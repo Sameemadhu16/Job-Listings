@@ -25,8 +25,9 @@ export default function CreatePost() {
     eTime: '',
     salary: '',
     members: '',
-    gender: 'both'
+    gender: ''
   });
+
   useEffect(() => {
     console.log(postId)
         try{
@@ -58,7 +59,7 @@ export default function CreatePost() {
           ...post,
           [e.target.id]:e.target.value
       })
-  }
+    }
   }
   
   const handleSubmit = async (e) =>{
@@ -91,7 +92,7 @@ export default function CreatePost() {
   return (
     <div className="min-h-screen flex items-center justify-center p-10">
       <div className="w-full md:w-1/2 lg:w-1/3 bg-white p-10 flex flex-col justify-center rounded-lg shadow-xl">
-        <h1 className="text-center p-10 text-5xl font-bold">Part Time Job</h1>
+        <h1 className="text-center p-10 text-5xl font-bold">Change Job details</h1>
         <form onSubmit={handleSubmit}>
 
           <div className="mb-4">

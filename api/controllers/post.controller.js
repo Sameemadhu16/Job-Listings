@@ -83,7 +83,14 @@ export const updatePost = async(req,res,next) => {
                     eTime : req.body.eTime,
                     salary:req.body.salary,
                     members:req.body.members,
-                    gender:req.body.gender
+                    gender:req.body.gender,
+                    companyName:req.body.companyName,
+                    companyEmail:req.body.companyEmail,
+                    companyLink:req.body.companyLink,
+                    description:req.body.description,
+                    essential:req.body.essential,
+                    requirement:req.body.requirement,
+                    image:req.body.image
                 }
             },{new:true}
         )

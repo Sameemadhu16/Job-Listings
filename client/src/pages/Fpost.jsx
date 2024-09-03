@@ -109,13 +109,6 @@ export default function Fpost() {
                     <FaCalendar className='text-lg' />
                         Date : {new Date(post.date).toLocaleDateString()}
                 </li>
-                
-                <li className='flex items-center gap-1 whitespace-nowrap '>
-                    <FaStopwatch className='text-lg' />
-                        Duration : {
-                            parseInt(post.sTime) < parseInt(post.eTime) ?  parseInt(post.eTime)-parseInt(post.sTime): 24 - (parseInt(post.sTime) - parseInt(post.eTime))
-                        }h
-                </li>
                 <li className='flex items-center gap-1 whitespace-nowrap '>
                 <FaUser className='text-lg' />
                     Members : {post.members}
