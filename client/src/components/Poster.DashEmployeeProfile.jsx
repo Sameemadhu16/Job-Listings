@@ -46,7 +46,7 @@ export default function PosterDashEmployeeProfile() {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0]
-    if (File) {
+    if (file) {
       setImageFile(file);
       setImageFileUrl(URL.createObjectURL(file));
     }
@@ -60,9 +60,9 @@ export default function PosterDashEmployeeProfile() {
 
   const uploadImage = async () => {
     setImageFileUploadError(null);
-    const storsge = getStorage(app);
+    const storage = getStorage(app);
     const fileName = new Date().getTime() + imageFile.name;
-    const storageRef = ref(storsge, fileName);
+    const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, imageFile);
     uploadTask.on(
       'state_changed',
@@ -125,15 +125,17 @@ export default function PosterDashEmployeeProfile() {
     setShowModal(false);
     try {
       const res = await fetch(`/api/jobposter/delete/${currentUser._id}`,
-        { method: 'DELETE' }
+        { method: 'DELETE', credentials: "same-origin" }
       );
       const data = await res.json();
+
       if (res.ok) {
         dispatch(deleteUserSuccess(data.message))
       } else {
         dispatch(deleteUserFailure(data))
       }
     } catch (error) {
+
       dispatch(deleteUserFailure(error.message))
     }
   }
