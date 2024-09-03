@@ -14,8 +14,8 @@ export default function PosterDashOverview() {
     const [error,setError] = useState(false);
     const [showModal,setShowModal] = useState(false);
     const [postIdDelete,setPostIdDelete] = useState(' ')
-    const [pJob,setPJpb] = useState(0);
-    const [fJob,setFJpb] = useState(0);
+    const [pJob,setPJob] = useState(0);
+    const [fJob,setFJob] = useState(0);
     
     const currentUser = useSelector((state) =>state.user)
 
@@ -35,11 +35,11 @@ export default function PosterDashOverview() {
 
                     const part = data.allPost.filter(post => post.type === 'part');
                     const pJob = part.length;
-                    setPJpb(pJob);
+                    setPJob(pJob);
 
                     const full = data.allPost.filter(post => post.type == 'full');
                     const fJob = full.length;
-                    setPJpb(fJob);
+                    setFJob(fJob);
 
                     
                     if (data.posts.length < 9) {
@@ -123,7 +123,7 @@ export default function PosterDashOverview() {
                                         {new Date(post.updatedAt).toLocaleDateString()}
                                     </Table.Cell>
                                     <Table.Cell>
-                                        <Link to={`/post/${post._id}`}>
+                                        <Link to={post.type === 'part' ? `/post/${post._id}` : `/full-post/${post._id}`}>
                                             <img
                                                 src={post.image}
                                                 alt={post.title}
@@ -134,7 +134,7 @@ export default function PosterDashOverview() {
                                     <Table.Cell>
                                         <Link
                                             className='font-medium text-gray-900 dark:text-white'
-                                            to={`/post/${post._id}`}
+                                            to={post.type === 'part' ? `/post/${post._id}` : `/full-post/${post._id}`}
                                         >
                                             {post.title}
                                         </Link>
@@ -142,7 +142,7 @@ export default function PosterDashOverview() {
                                     <Table.Cell>
                                         <Link
                                             className='font-medium text-gray-900 dark:text-white'
-                                            to={`/post/${post._id}`}
+                                            to={post.type === 'part' ? `/post/${post._id}` : `/full-post/${post._id}`}
                                         >
                                             {post.type}
                                         </Link>

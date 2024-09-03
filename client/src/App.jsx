@@ -26,6 +26,7 @@ import UpdatePost from './pages/UpdatePost';
 import SeekerDashboard from './pages/Seeker.Dashboard';
 import SeekerProfile from './components/Seeker.Profile';
 import PrivateRoute from './components/PrivateRoute';
+import Fpost from './pages/Fpost';
 
 
 
@@ -68,8 +69,9 @@ export default function App() {
           <Route path='/create-p-job' element={<CreatePost/>}/>
 
           <Route path = '/create-f-job' element={<PosterCompanyInfo/>}/>
-          <Route path = '/found-info' element={<PosterFoundInfo/>}/>
-          <Route path = '/social-info' element={<PosterSocialMediaInfo/>}/>
+          <Route path = '/full-post/:postId' element={<Fpost/>}/>
+          
+
 
           <Route path='/post/:postId' element={<Post/>}/>
           
