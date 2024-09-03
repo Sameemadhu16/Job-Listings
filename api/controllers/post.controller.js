@@ -96,6 +96,7 @@ export const getPosts = async  (req,res,next) => {
 };
 
 export const getpostForUser = async(req,res,next)=>{
+    
     try {
         const  userId  = req.user.id;
         
@@ -109,3 +110,21 @@ export const getpostForUser = async(req,res,next)=>{
         next(error);
     }
 }
+
+export const getPostById = async (req, res, next) => {
+    try {
+      const postId = req.params.postId // Get the postId from the request parameters
+      
+      const post = await Post.findById(postId); // Find the post by its ID
+      
+      if (!post) {
+        return res.status(404).json({ message: 'Post not found' }); // Handle case where post is not found
+      }
+  
+      res.status(200).json(post); // Respond with the post data
+    } 
+    catch (error) {
+      next(error); // Pass any errors to the error handler middleware
+    }
+  };
+  

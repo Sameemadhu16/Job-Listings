@@ -104,12 +104,16 @@ export default function Header() {
         </Dropdown>
           ):(
             <Link to='/sign-in'>
-            <Button className="bg-blue-500" focus-outline>
+            <button className="bg-blue-500 px-3 py-2 rounded-lg text-white hover:bg-blue-600" focus-outline>
               Sign In
-            </Button>
+            </button>
           </Link> 
   )}
-        <Navbar.Toggle />
+        {
+          currentUser ? (
+            <Navbar.Toggle className=""/>
+          ):('')
+        }
       </div>
       {currentUser ? (
         <Navbar.Collapse className="hover:text-blue-500" >
