@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaQuestionCircle, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import axios from 'axios';
 
 export default function Contact() {
   const [openQuestion, setOpenQuestion] = useState(null);
@@ -21,27 +22,47 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    try {
-      const response = await fetch('/api/contact/create', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
 
-      if (response.ok) {
-        setFormStatus('success');
-        setFormData({ name: '', email: '', message: '' }); // Clear form after successful submission
-      } else {
-        setFormStatus('error');
-      }
+    const serviceId = 'service_yt21wmj';
+    const templateId = 'template_otwk3vs';
+    const publicId = 'MeDCdS9kWidDEbOSA';
+
+    const data = {
+        service_id: serviceId,
+        template_id: templateId,
+        user_id: publicId,
+        template_params: {
+            from_name: formData.name,
+            from_email: formData.email,
+            to_name: 'ishan',
+            message: formData.message,
+        },
+    };
+
+    try {
+      const response = await axios.post(
+        'https://api.emailjs.com/api/v1.0/email/send',
+        data,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+    );
+
+        if (response.status === 200) { // Check if the response status is 200 (OK)
+            setFormStatus('success');
+            setFormData({ name: '', email: '', message: '' }); // Clear form after successful submission
+        } else {
+            setFormStatus('error');
+        }
     } catch (error) {
-      console.error('Error submitting the form:', error);
-      setFormStatus('error');
+        console.error('Error submitting the form:', error);
+        setFormStatus('error');
     }
-  };
-   console.log(formData);
+};
+
+   //console.log(formData);
    
   return (
     <div className="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 min-h-screen py-10">
