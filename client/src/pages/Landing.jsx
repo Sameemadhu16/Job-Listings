@@ -6,12 +6,12 @@ export default function Home() {
       <style>
         {`
         @keyframes fadeInOut {
-          0%, 100% { opacity: 0; }
+          0%, 100% { opacity: 0.3; }
           50% { opacity: 1; }
         }
 
         @keyframes fadeInOutDelay {
-          0%, 30%, 100% { opacity: 0; }
+          0%, 30%, 100% { opacity: 0.3; }
           60% { opacity: 1; }
         }
 
