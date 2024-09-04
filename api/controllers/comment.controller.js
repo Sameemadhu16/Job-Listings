@@ -2,6 +2,7 @@ import Comment from "../models/comment.model.js";
 import { errorHandler } from "../utils/error.js";
 
 export const createComment = async  (req, res, next) => {
+    console.log(req.body)
     try {
         const { content, postId, userId } = req.body;
         if(userId !== req.user.id){

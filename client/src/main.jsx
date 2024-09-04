@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <ThemeProvider>
         <App />
       </ThemeProvider>
-  </Provider>,
+  </Provider>
   </PersistGate>
   
 );

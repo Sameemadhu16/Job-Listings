@@ -24,7 +24,7 @@ export const signup = async (req, res, next) => {
         mobileNumber,
 
         role,
-        companyName: role === 'jobPoster' ? companyName : undefined,
+        
         biography: role === 'jobPoster' ? biography : undefined,
         coverLetter: role === 'jobPoster' ? coverLetter : undefined,
         cv: role === 'jobSeeker' ? cv : undefined,
