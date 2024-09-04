@@ -2,9 +2,10 @@ import { Button, Label } from 'flowbite-react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CompanyDetailsModal from './Seeker.CompanyDetailsModal';
+import SeekerPartTimeDetailsModel from './Seeker.PartTimeDetailsModel';
 import { useSelector } from 'react-redux';
 import DashComments from './Seeker.commentsection';
-import SeekerPartTimeDetailsModel from './Seeker.PartTimeDetailsModel';
+
 
 export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, post }) {
   const { currentUser } = useSelector((state) => state.user);
