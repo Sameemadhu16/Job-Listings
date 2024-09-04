@@ -31,6 +31,7 @@ import Fpost from './pages/Fpost';
 import FpostUpdate from './pages/FpostUpdate';
 import Landing from './pages/Landing';
 import Homeh from './pages/Home'
+import Search from './pages/Search';
 
 
 
@@ -69,6 +70,7 @@ export default function App() {
           </Route>
           <Route path="/company" element={<PosterCompanyInfo />} />
           <Route path="/finish" element={<Finish />} />
+          <Route path='/search' element={<Search/>}></Route>
 
           <Route path="/parttime-job-post" element={<PartTimeJobPost />} />
           <Route path="/fulltime-job-post" element={<FulltimeJobPost />} />

@@ -116,7 +116,7 @@ export default function PosterDashOverview() {
                             <Table.HeadCell>Delete</Table.HeadCell>
                             
                         </Table.Head>
-                        {userPosts.map((post) => (
+                        {userPosts && userPosts.map((post) => (
                             <Table.Body className='divide-y'>
                                 <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
                                     <Table.Cell>
