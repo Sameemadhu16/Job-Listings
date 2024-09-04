@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SearchCard from '../components/SearchCard';
+import { Spinner } from 'flowbite-react';
 
 export default function Search() {
     const [posts, setPosts] = useState([]);
@@ -52,9 +53,17 @@ export default function Search() {
     };
 
     return (
+
         <div className="bg-blue-50 min-h-screen">
+             {loading && (
+                <div className="flex justify-center items-center min-h-screen">
+                    <Spinner className="text-center" />
+                </div>
+            )}
             {/* Main content */}
             <main className="max-w-4xl mx-auto py-12">
+
+            
                 <h1 className="text-center text-3xl font-bold text-blue-800">
                     Finding jobs made easy
                 </h1>
