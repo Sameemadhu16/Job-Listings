@@ -65,7 +65,7 @@ const Home = () => {
 
     
     <div className="relative flex flex-col items-center bg-blue-50 min-h-screen p-4 lg:p-10">
-       {loading && (
+      {loading && (
                 <div className="flex justify-center items-center min-h-screen">
                     <Spinner className="text-center" />
                 </div>
@@ -142,7 +142,7 @@ const Home = () => {
                 <FaUserTie className="text-blue-500" size={24} />
                 <span className="block text-2xl font-bold text-gray-800">586k+</span>
             </div>
-            <span className="text-gray-500">Jobseekers</span>
+            <span className="text-gray-500">Users</span>
           </div>
         </div>
       </footer>
