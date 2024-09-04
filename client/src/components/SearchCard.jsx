@@ -45,7 +45,7 @@ export default function SearchCard({ ShowAddcart, showApply, showDelete, post })
                 
             </div>
             <button className="text-white bg-blue-700 px-2 py-1 rounded-lg  hover:scale-105 transition-transform duration-150" onClick={() =>
-                post.type === 'part-time'
+                post.type === 'part'
                 ? handleModalOpenPart(post)
                 : handleModalOpen(post)}>Apply</button>
             <CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} showSendCVLink={true} post={post}/>
