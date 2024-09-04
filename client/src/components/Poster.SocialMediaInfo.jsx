@@ -18,14 +18,13 @@ export default function PosterSocialMediaInfo() {
                         <div className='flex items-center gap-3'>
                             <Select className='w-1/4'>
                                 <option value="uncategorized">Select a category</option>
-                                <option value="javascript">JavaScript</option>
-                                <option value="react.js">React.js</option>
-                                <option value="next.js">Next.js</option>
-                                <option value="node.js">node.js</option>
-                                <option value="dart">Dart</option>
+                                <option value="facebook">Facebook</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="linkedln">Next.js</option>
+                                <option value="utube">YouTube</option>
                             </Select>
                             <TextInput className='w-3/4' />
-                            <Button className='bg-slate-200 hover:bg-slate-300'><IoIosCloseCircle className='h-6 w-6 text-black ' /></Button>
+                            <button className='bg-slate-200 w-14 h-14 flex justify-center rounded-lg items-center hover:bg-slate-300'><IoIosCloseCircle className='h-6 w-6 text-black ' /></button>
                         </div>
                     </div>
                     <div className=''>
@@ -40,7 +39,7 @@ export default function PosterSocialMediaInfo() {
                                 <option value="dart">Dart</option>
                             </Select>
                             <TextInput className='w-3/4' />
-                            <Button className='bg-slate-200 hover:bg-slate-300'><IoIosCloseCircle className='h-6 w-6 text-black ' /></Button>
+                            <button className='bg-slate-200 w-14 h-14 flex justify-center rounded-lg items-center hover:bg-slate-300'><IoIosCloseCircle className='h-6 w-6 text-black ' /></button>
                         </div>
                     </div>
 
@@ -56,7 +55,7 @@ export default function PosterSocialMediaInfo() {
                                 <option value="dart">Dart</option>
                             </Select>
                             <TextInput className='w-3/4' />
-                            <Button className='bg-slate-200 hover:bg-slate-300'><IoIosCloseCircle className='h-6 w-6 text-black ' /></Button>
+                            <button className='bg-slate-200 w-14 h-14 flex justify-center rounded-lg items-center hover:bg-slate-300'><IoIosCloseCircle className='h-6 w-6 text-black ' /></button>
                         </div>
                     </div>
 
@@ -72,28 +71,22 @@ export default function PosterSocialMediaInfo() {
                                 <option value="dart">Dart</option>
                             </Select>
                             <TextInput className='w-3/4' />
-                            <Button className='bg-slate-200 hover:text-white'><IoIosCloseCircle className='h-6 w-6 text-black ' /></Button>
+                            <button className='bg-slate-200 w-14 h-14 flex justify-center rounded-lg items-center hover:bg-slate-300'><IoIosCloseCircle className='h-6 w-6 text-black ' /></button>
                         </div>
                     </div>
-                    <Button className='bg-slate-200'>
-                        <span className='flex gap-2'>
-                            <IoIosCloseCircle className='h-6 w-6 text-black' />
-                            <p className='text-black'>Add New Social Link</p>
-                        </span>
-                    </Button>
+
                 </form>
                 <div className='flex gap-3 m-10'>
-                    <Button type='button' cols={50} className='mt-3 bg-slate-400 px-5  hover:bg-slate-500' >
+                    <a href='/create-f-job'  cols={50} className='bg-slate-400  hover:bg-slate-500 px-2 h-10 w-28 text-white rounded-lg flex items-center justify-center' >
                         <div className='flex flex-row gap-1 items-center'>
-                            Previous
+                            previous
                         </div>
-                    </Button>
-                    <Button type='button' cols={50} className='bg-blue-500 hover:bg-opacity-95 mt-3' >
+                    </a>
+                    <a href='/social-info' className='bg-blue-500 hover:bg-blue-600 px-2 h-10 w-28 text-white rounded-lg flex items-center justify-center' >
                         <div className='flex flex-row gap-1 items-center'>
-                            Save & Next
-                            <FaArrowRight />
+                            Next
                         </div>
-                    </Button>
+                    </a>
                 </div>
             </div>
         </div>

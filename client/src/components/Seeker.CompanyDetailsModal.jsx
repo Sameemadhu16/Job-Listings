@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Modal, Button } from 'flowbite-react';
+import { Modal, Button, Label } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { FaMagento, FaPaperPlane } from 'react-icons/fa';
 
-export default function CompanyDetailsModal({ isOpen, onClose, showSendCVLink = true }) {
+export default function CompanyDetailsModal({ isOpen, onClose, showSendCVLink = true , post }) {
   const { currentUser } = useSelector((state) => state.user);
   const [contact, setContact] = useState(false);
 
@@ -39,15 +40,17 @@ export default function CompanyDetailsModal({ isOpen, onClose, showSendCVLink = 
   return (
     <Modal show={isOpen} onClose={onClose}>
       <Modal.Header>
-        <div className='flex items-center'>
+        <div className='flex items-center justify-between'>
           <div className='text-green-500 font-medium'>
             WE ARE <span className='text-green-800 font-bold'>HIRING </span>
             <br />
-            <span className='text-slate-900'>Software Engineers</span>
+            <span className='text-slate-900'>{post.title}</span>
           </div>
-          <div className='font-extrabold mx-20 text-blue-900'>
-            i-Wonder Sri Lanka
+          <div className='font-extrabold text-4xl mx-20 text-blue-900 flex gap-2 items-center justify-center'>
+            <FaPaperPlane/>
+            {post.companyName}
           </div>
+          <Label className='border-2 border-blue-700 py-1 px-2 text-blue-700'>{post.type == 'full' ? 'FULL TIME' : 'PART TIME'}</Label>
         </div>
       </Modal.Header>
       <Modal.Body>
@@ -58,34 +61,32 @@ export default function CompanyDetailsModal({ isOpen, onClose, showSendCVLink = 
                 Requirements:
               </h3>
               <ul className="list-disc list-inside pl-5 text-gray-500 space-y-1">
-                <li>Experience in C#, .NET, Angular</li>
-                <li>JavaScript, CSS, HTML</li>
-                <li>SQL server, Mongo DB</li>
-                <li>Angular</li>
+                <li>{post.requirement}</li>
+                
               </ul>
             </div>
             <div>
               <h3 className='font-semibold'>
                 Essencial Traits:
               </h3>
-              <ul className="list-disc list-inside pl-5 text-gray-500 space-y-1">
-                <li>Good communication skills</li>
-                <li>Genuine love of coding</li>
+              <ul className="list-disc list-inside  text-gray-500 space-y-1">
+                <li>{post.essential}</li>
+                
               </ul>
             </div>
             <div>
               <h3 className='font-semibold'>
-                How to get selected:
+                Description:
               </h3>
               <ul className="list-disc list-inside pl-5 text-gray-500 space-y-1">
-                <li>Pass the phone interview</li>
-                <li>Face a tecnical test based on Angular and .NET</li>
+                <li>{post.description}</li>
+                
               </ul>
             </div>
           </div>
-          <div className="w-1/2 flex justify-center items-center">
+          <div className="w-1/2 flex justify-center items-center ml-32">
             <img 
-              src='https://static.vecteezy.com/system/resources/previews/020/962/925/non_2x/software-engineer-graphic-clipart-design-free-png.png'
+              src={post.image}
               alt='image-poster'
               className='rounded-full bg-gray-500'
 
@@ -96,9 +97,9 @@ export default function CompanyDetailsModal({ isOpen, onClose, showSendCVLink = 
       <Modal.Footer>
         <div className='flex justify-between w-full'>
           
-            <Button onClick={onClose}>
+            <button onClick={onClose} className='bg-blue-500 py-2 px-10 text-white hover:bg-blue-600 rounded-lg ' >
               Close
-            </Button>
+            </button>
             {/* should hidden this link when it call in AppliedJobs component*/}
             {showSendCVLink && (
               <Link to={`mailto:irumiaeywickrama@gmail.com?subject=Regarding Software Engineer`} className='bg-slate-800 text-white text-center p-3 uppercase rounded-lg hover:opacity-95' onClick={''}>
