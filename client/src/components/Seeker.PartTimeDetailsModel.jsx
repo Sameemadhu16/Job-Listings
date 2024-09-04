@@ -68,7 +68,7 @@ return (
                 <div>
                     <h3 className='font-semibold flex gap-1 items-center'>
                         <FaCalendar/>
-                        Date: {new Date(post.date).toLocaleDateString()}
+                        Date: <p className='text-gray-500 text-sm'>{new Date(post.date).toLocaleDateString()}</p>
                     </h3>
                 
                 </div>
@@ -76,21 +76,21 @@ return (
                 <div>
                     <h3 className='font-semibold flex gap-1 items-center'>
                         <FaClock/>
-                        Start At: {post.sTime}
+                        Start At: <p className='text-gray-500 text-sm'>{post.sTime}</p>
                     </h3>
                     
                 </div>
             <div>
                 <h3 className='font-semibold flex gap-1 items-center'>
                     <FaClock/>
-                    End At: {post.eTime}
+                    End At: <p className='text-gray-500 text-sm'>{post.eTime}</p>
                 </h3>
             
             </div>
             <div>
                 <h3 className='font-semibold flex gap-1 items-center'>
                     <FaUser/>
-                    Members: {post.members}
+                    Members: <p className='text-gray-500 text-sm'>{post.members}</p>
                 </h3>
             
             </div>
@@ -98,14 +98,14 @@ return (
             <div>
                 <h3 className='font-semibold flex gap-1 items-center'>
                     <FaMale/>
-                    Gender: {post.gender == 'male' ? "Male" : "Female"}
+                    Gender: <p className='text-gray-500 text-sm'>{post.gender == 'male' ? "Male" : "Female"}</p>
                 </h3>
             
             </div>
             <div>
                 <h3 className='font-semibold flex gap-1 items-center'>
                     <FaMapMarked/>
-                    Venue: {post.venue}
+                    Venue: <p p className='text-gray-500 text-sm'>{post.venue}</p>
                 </h3>
             
             </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Label } from 'flowbite-react';
 
 const JobPostCard = ({post}) => {
   return (
@@ -10,6 +11,7 @@ const JobPostCard = ({post}) => {
       />
       <div className="p-6">
         <h2 className="font-bold text-xl mb-2">{post.title}</h2>
+        <Label className='border-2 border-blue-700 py-1 px-2 text-blue-700'>{post.type == 'full' ? 'FULL TIME' : 'PART TIME'}</Label>
         <div className="flex items-center mb-4">
         
         <div className="ml-3">
@@ -18,7 +20,7 @@ const JobPostCard = ({post}) => {
           </div>
         </div>
         <p className="text-gray-700 text-base">
-         {post.description}</p>
+          {post.description}</p>
       </div>
     </div>
   );
