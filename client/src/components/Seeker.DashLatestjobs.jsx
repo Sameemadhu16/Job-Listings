@@ -1,21 +1,39 @@
-import { Button, Table } from 'flowbite-react';
+import { Button, Table , Label} from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
 import { HiClock, HiCurrencyDollar, HiLocationMarker } from 'react-icons/hi';
 import CompanyDetailsModal from './Seeker.CompanyDetailsModal';
+import SeekerPartTimeDetailsModel from './Seeker.PartTimeDetailsModel';
 import {FaArrowRight} from 'react-icons/fa'
 
 export default function SeekerDashLatestjobs() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleModalOpen = () => {
+  const [posts,setPosts] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenPart, setIsModalOpenPart] = useState(false);
+  const [selectedJob, setSelectedJob] = useState({});
+
+  const handleModalOpen = (job) => {
+    setSelectedJob(job);
     setIsModalOpen(true);
   };
 
-  const handleModalClose = () => {
+  const handleModalClose = (job) => {
     setIsModalOpen(false);
   };
+
+ 
+  const handleModalOpenPart = (job) => {
+    setSelectedJob(job);
+    setIsModalOpenPart(true);
+  };
+
+  const handleModalClosePart = () => {
+    setIsModalOpenPart(false);
+  };
   
-  const [posts,setPosts] = useState([]);
+  
+
+  
 
   useEffect(() =>{
     const fetchPosts = async () => {
@@ -51,24 +69,39 @@ export default function SeekerDashLatestjobs() {
                   className="w-10 h-10 rounded-full bg:gray-500"
                 />
                 <div>
-                  <h3 className="font-semibold text-md text-slate-800">{post.title}</h3>
-                  <div className='flex gap-4'>
-                    <div className='flex items-center'>
-                      <HiLocationMarker />
-                      {/* {post.companyName} */}
-                    </div>
-                    <div className='flex items-center'>
-                      <HiCurrencyDollar />
-                      $15K-20K
-                    </div>
-                    <div className='flex items-center'>
+                  <h3 className="font-semibold text-md text-slate-800 mb-2">{post.title}</h3>
+                  <Label className="border-2 border-blue-700 py-1 px-2 text-blue-700 mt-3">
+                    {post.type === 'full' ? 'FULL' : 'PART'}
+                  </Label>
+                  <div className='flex gap-4 mt-2'>
+                    
+                    {
+                      post.type == 'part' && 
+                        <>
+                          <div className='flex items-center'>
+                        <HiLocationMarker />
+                        {post.venue}
+                      </div>
+
+                        <div className='flex items-center mt-2'>
+                        <HiCurrencyDollar />
+                        LKR{post.salary}
+                      </div>
+                        </>
+                      
+                    }
+                    <div className='flex items-center gap-1'>
                       <HiClock />
-                      {/* {calculateDaysRemaining(post.createdAt)} Days left after created */}
+                      {new Date(post.createdAt).toLocaleDateString()}
                     </div>
                   </div>
                 </div>
               </div>
-              <button className='bg-blue-500 hover:bg-blue-500 text-white py-2 px-2 rounded-lg'  onClick={handleModalOpen}>
+              <button className='bg-blue-500 hover:bg-blue-500 text-white py-2 px-2 rounded-lg'  onClick={() =>
+                      post.type === 'part'
+                        ? handleModalOpenPart(post)
+                        : handleModalOpen(post)
+                    }>
                   <div className='flex flex-row text-center items-center gap-1'>
                   <p>Apply Now</p>
                 </div>
@@ -79,7 +112,17 @@ export default function SeekerDashLatestjobs() {
                   ))}
       </Table>
       )}
-      {<CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} showSendCVLink={true} post/>}
+        <SeekerPartTimeDetailsModel
+          isOpen={isModalOpenPart}
+          onClose={handleModalClosePart}
+          post={selectedJob}
+        />
+        <CompanyDetailsModal
+          isOpen={isModalOpen}
+          onClose={handleModalClose}
+          showSendCVLink={false}
+          post={selectedJob}
+      />
     </div>
   );
 }
