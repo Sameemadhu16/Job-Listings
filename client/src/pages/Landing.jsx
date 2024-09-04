@@ -1,6 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import JobPostCard from "../components/JobPostCard";
 
-export default function Home() {
+export default function Landing() {
+
+  const [first,setFirst] = useState([]);
+  const [fJob,setFJob] = useState(0);
+  const [posts,setPosts] = useState([]);
+
+  useEffect(()=>{
+
+    const fetchPosts = async () => {
+        
+        
+        const res = await fetch(`/api/post/get-posts`);
+        const data = await res.json();
+        
+        
+        if(res.ok){
+            
+            setPosts(data.posts);
+            
+            const full = data.posts.filter(post => post.type == 'full');
+            const fJob = full.length;
+            setFJob(fJob);
+            
+            // Sort by 'createdAt' (assuming 'createdAt' is a date string)
+            const sortedFull = full.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+            // Get the first 3 most recent posts
+            const recentFullPosts = sortedFull.slice(0, 6);
+            setFirst(recentFullPosts)
+            
+        }
+        if(!res.ok){
+          console.log(data.message);
+          setLoading(false);
+        }
+    };
+    fetchPosts();
+},[posts._id])
+
   return (
     <div>
       <style>
@@ -61,6 +100,16 @@ export default function Home() {
           What You'll Find in Our <span className='text-teal-500'> Resource Center</span>
         </h2>
       </div>
+      <div className="flex gap-2 mt-3">
+      {
+        first.map((post)=>(
+          <JobPostCard post={post}/>
+        ))
+      }
+      
+    </div>
+      
+
     </div>
   );
 }

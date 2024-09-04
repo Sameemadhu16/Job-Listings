@@ -1,34 +1,75 @@
 import React, { useEffect, useState } from "react";
 import seekerImage from "../images/seeker.jpg"; // Path to the job seeker image
 import ringsImage from "../images/ring-r.png"; // Path to the new rings image with transparent background
-import { Button, TextInput } from "flowbite-react";
+import { Spinner } from "flowbite-react";
 import { FaBriefcase } from 'react-icons/fa';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { FaUserTie } from 'react-icons/fa'
+import { useNavigate } from "react-router-dom";
+import JobPostCard from "../components/JobPostCard";
 
 const Home = () => {
     const [loading,setLoading] = useState(false);
     const [showMore,setShowMore] = useState(false);
     const [posts,setPosts] = useState([]);
+    const navigate = useNavigate();
+    const [pJob,setPJob] = useState(0);
+    const [fJob,setFJob] = useState(0);
+    const [tPosts,setTPosts] = useState(0);
+    const [first,setFirst] = useState([]);
+
     useEffect(()=>{
         const fetchPosts = async () => {
             setLoading(true);
             setShowMore(false);
             const res = await fetch(`/api/post/get-posts`);
             const data = await res.json();
-            if(data.length > 8){
+            
+            
+            if(res.ok){
                 setShowMore(true);
-            }
-            else{
-                setShowMore(false);
-            }
-                setPosts(data);
+                setPosts(data.posts);
+                setTPosts(data.totalPosts);
                 setLoading(false);
+                const part = data.posts.filter(post => post.type === 'part');
+                
+                const pJob = part.length;
+                setPJob(pJob);
+
+                const full = data.posts.filter(post => post.type == 'full');
+                const fJob = full.length;
+                setFJob(fJob);
+
+                
+
+                // Sort by 'createdAt' (assuming 'createdAt' is a date string)
+                const sortedFull = full.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+                // Get the first 3 most recent posts
+                const recentFullPosts = sortedFull.slice(0, 6);
+                setFirst(recentFullPosts)
+                
+            }
+            if(!res.ok){
+              console.log(data.message);
+              setLoading(false);
+            }
         };
         fetchPosts();
     },[posts._id])
+
+    const hanldeNavigate = () => {
+      navigate('/search')
+    }
   return (
+
+    
     <div className="relative flex flex-col items-center bg-blue-50 min-h-screen p-4 lg:p-10">
+       {loading && (
+                <div className="flex justify-center items-center min-h-screen">
+                    <Spinner className="text-center" />
+                </div>
+            )}
       {/* Main Header Section */}
         <div className="flex flex-col lg:flex-row justify-between items-center w-full lg:w-10/12 mx-auto">
             {/* Text Section */}
@@ -41,14 +82,10 @@ const Home = () => {
                     Resources to Discover, Apply, and Secure Their Dream Jobs.
                 </p>
                 <div className=" mt-6  flex flex-col items-center lg:flex-row gap-2">
-                    <TextInput
-                    type="text"
-                    placeholder="Job Title Keywords"
-                    className="px-4 py-2 rounded-l-md w-full max-w-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    <Button gradientMonochrome="teal" className="hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
-                    Explore
-                    </Button>
+                    
+                    <button onClick={hanldeNavigate}   className="px-10 text-blue-800 font-bold text-lg rounded-lg">
+                    Explore...
+                    </button>
                 </div>
             </div>
 
@@ -76,7 +113,7 @@ const Home = () => {
                 {/* Job Posts Info Box */}
                 <div className="absolute top-0 right-0 bg-white p-2 rounded shadow-md mt-4 mr-10">
                     <span className="block text-sm z-10 font-medium text-gray-800">
-                    120+ Jobs Post Daily
+                    {tPosts}+ All Jobs Post 
                     </span>
                 </div>
             </div>
@@ -88,27 +125,36 @@ const Home = () => {
         <div className="flex justify-around w-full lg:w-10/12 mx-auto">
           <div className="text-center">
             <div className=" flex items-center gap-1">
-                <FaBriefcase className="text-teal-500" size={24} />
-                <span className="block text-2xl font-bold text-gray-800">586k+</span>
+                <FaBriefcase className="text-blue-500" size={24} />
+                <span className="block text-2xl font-bold text-gray-800">{fJob}+</span>
             </div>
-            <span className="text-gray-500">Fulltime Jobs</span>
+            <span className="text-gray-500">Full Time Jobs</span>
           </div>
           <div className="text-center ">
             <div className="flex items-center gap-1">
-                <AiOutlineClockCircle className="text-teal-500" size={24} />
-                <span className="block text-2xl font-bold text-gray-800">586k+</span>
+                <FaBriefcase className="text-blue-500" size={24} />
+                <span className="block text-2xl font-bold text-gray-800">{pJob}+</span>
             </div>
-            <span className="text-gray-500">Parttime Jobs</span>
+            <span className="text-gray-500">Part Time Jobs</span>
           </div>
           <div className="text-center">
             <div className="flex items-center gap-1">
-                <FaUserTie className="text-teal-500" size={24} />
+                <FaUserTie className="text-blue-500" size={24} />
                 <span className="block text-2xl font-bold text-gray-800">586k+</span>
             </div>
             <span className="text-gray-500">Jobseekers</span>
           </div>
         </div>
       </footer>
+
+    <div className="flex gap-2 mt-3">
+      {
+        first.map((post)=>(
+          <JobPostCard post={post}/>
+        ))
+      }
+      
+    </div>
     </div>
   );
 };
