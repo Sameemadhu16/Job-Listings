@@ -1,8 +1,31 @@
-import React from 'react'
+import React ,{useState}from 'react'
 import { Link } from 'react-router-dom'
 import {Label} from 'flowbite-react'
+import CompanyDetailsModal from './Seeker.CompanyDetailsModal';
+import SeekerPartTimeDetailsModel from './Seeker.PartTimeDetailsModel';
 
-export default function SearchCard({post}) {
+export default function SearchCard({ ShowAddcart, showApply, showDelete, post }) {
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpenPart, setIsModalOpenPart] = useState(false);
+
+        const handleModalOpen = () => {
+            setIsModalOpen(true);
+        };
+        
+        
+        const handleModalClose = () => {
+            setIsModalOpen(false);
+        };
+        
+        const handleModalOpenPart = () => {
+            setIsModalOpenPart(true);
+        };
+        
+        const handleModalClosePart = () => {
+            setIsModalOpenPart(false);
+        };
+        
     return (
         <Link  className="p-4 bg-blue-50 rounded-md flex items-center justify-between shadow hover:scale-105 transition-transform duration-150">
             <div className="flex items-center ">
@@ -21,7 +44,12 @@ export default function SearchCard({post}) {
                     
                 
             </div>
-            <button className="text-blue-700 font-semibold">Apply</button>
+            <button className="text-white bg-blue-700 px-2 py-1 rounded-lg  hover:scale-105 transition-transform duration-150" onClick={() =>
+                post.type === 'part-time'
+                ? handleModalOpenPart(post)
+                : handleModalOpen(post)}>Apply</button>
+            <CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} showSendCVLink={true} post={post}/>
+            <SeekerPartTimeDetailsModel isOpen={isModalOpenPart} onClose={handleModalClosePart}post={post}/>
         </Link>
     )
 }

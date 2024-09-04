@@ -1,8 +1,8 @@
 import { Button, Table , Label} from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
 import { HiClock, HiCurrencyDollar, HiLocationMarker } from 'react-icons/hi';
-import CompanyDetailsModal from './Seeker.CompanyDetailsModal';
-import SeekerPartTimeDetailsModel from './Seeker.PartTimeDetailsModel';
+import CompanyDetailsModal from '../components/Seeker.CompanyDetailsModal'
+import SeekerPartTimeDetailsModel from '../components/Seeker.PartTimeDetailsModel';
 import {FaArrowRight} from 'react-icons/fa'
 
 export default function SeekerDashLatestjobs() {
@@ -17,7 +17,7 @@ export default function SeekerDashLatestjobs() {
     setIsModalOpen(true);
   };
 
-  const handleModalClose = (job) => {
+  const handleModalClose = () => {
     setIsModalOpen(false);
   };
 
@@ -97,7 +97,8 @@ export default function SeekerDashLatestjobs() {
                   </div>
                 </div>
               </div>
-              <button className='bg-blue-500 hover:bg-blue-500 text-white py-2 px-2 rounded-lg'  onClick={() =>
+              <button className='bg-blue-500 hover:bg-blue-500 text-white py-2 px-2 rounded-lg'  
+                    onClick={() =>
                       post.type === 'part'
                         ? handleModalOpenPart(post)
                         : handleModalOpen(post)
