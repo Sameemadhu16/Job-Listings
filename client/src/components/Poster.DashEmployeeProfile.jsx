@@ -165,7 +165,7 @@ export default function PosterDashEmployeeProfile() {
                 ref={filePickerRef}
                 hidden
               />
-              <div className='relative'>
+              <div className='relative cursor-pointer'>
                 {/* Profile picture */}
                 <Avatar
                   img={imageFileUrl || currentUser.profilePicture}
@@ -220,9 +220,9 @@ export default function PosterDashEmployeeProfile() {
                 <p className="text-gray-600"></p>
               </div>
             </div>
-            <div className='flex'>
-              <Button onClick={handleSubmit} className='m-12 bg-blue-500' >update profile</Button>
-              <Button onClick={() => setShowModal(true)} color={'red'} className='m-12 bg-blue-500' >Delete profile</Button>
+            <div className='flex gap-1'>
+              <button onClick={handleSubmit} className='bg-green-500  h-10 px-1 text-white rounded-lg hover:bg-green-600' >update profile</button>
+              <button onClick={() => setShowModal(true)} color={'red'} className='bg-red-700  h-10 px-1 text-white rounded-lg hover:bg-red-800' >Delete profile</button>
             </div>
 
           </div>

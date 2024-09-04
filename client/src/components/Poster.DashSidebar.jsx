@@ -31,7 +31,7 @@ export default function PosterDashSidebar() {
           <Link to="/poster-dashboard/employeeprofile">
 
             <Sidebar.Item icon={CgProfile} as="div">
-              Employee Profile
+              My Profile
             </Sidebar.Item>
           </Link>
 
