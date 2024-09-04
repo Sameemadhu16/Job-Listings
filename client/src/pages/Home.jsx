@@ -65,7 +65,7 @@ const Home = () => {
 
     
     <div className="relative flex flex-col items-center bg-blue-50 min-h-screen p-4 lg:p-10">
-       {loading && (
+      {loading && (
                 <div className="flex justify-center items-center min-h-screen">
                     <Spinner className="text-center" />
                 </div>
