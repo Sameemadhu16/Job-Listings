@@ -30,6 +30,7 @@ import PrivateRoute from './components/PrivateRoute';
 import Fpost from './pages/Fpost';
 import FpostUpdate from './pages/FpostUpdate';
 import Landing from './pages/Landing';
+import Homeh from './pages/Home'
 
 
 
@@ -44,6 +45,7 @@ export default function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/landing" element={<Landing />} />
+        
         
         <Route element={<PrivateRoute/>}>
           <Route path="/contact" element={<Contact />} /> 
