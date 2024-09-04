@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Modal, Button } from 'flowbite-react';
+import { Modal, Button, Label } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { FaMagento, FaPaperPlane } from 'react-icons/fa';
 
 export default function CompanyDetailsModal({ isOpen, onClose, showSendCVLink = true , post }) {
   const { currentUser } = useSelector((state) => state.user);
@@ -39,15 +40,17 @@ export default function CompanyDetailsModal({ isOpen, onClose, showSendCVLink = 
   return (
     <Modal show={isOpen} onClose={onClose}>
       <Modal.Header>
-        <div className='flex items-center'>
+        <div className='flex items-center justify-between'>
           <div className='text-green-500 font-medium'>
             WE ARE <span className='text-green-800 font-bold'>HIRING </span>
             <br />
             <span className='text-slate-900'>{post.title}</span>
           </div>
-          <div className='font-extrabold mx-20 text-blue-900'>
+          <div className='font-extrabold text-4xl mx-20 text-blue-900 flex gap-2 items-center justify-center'>
+            <FaPaperPlane/>
             {post.companyName}
           </div>
+          <Label className='border-2 border-blue-700 py-1 px-2 text-blue-700'>{post.type == 'full' ? 'FULL TIME' : 'PART TIME'}</Label>
         </div>
       </Modal.Header>
       <Modal.Body>
@@ -66,7 +69,7 @@ export default function CompanyDetailsModal({ isOpen, onClose, showSendCVLink = 
               <h3 className='font-semibold'>
                 Essencial Traits:
               </h3>
-              <ul className="list-disc list-inside pl-5 text-gray-500 space-y-1">
+              <ul className="list-disc list-inside  text-gray-500 space-y-1">
                 <li>{post.essential}</li>
                 
               </ul>
