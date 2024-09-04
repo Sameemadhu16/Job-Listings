@@ -60,10 +60,10 @@ export default function App() {
           <Route path="social-media" element={<PosterSocialMediaInfo />} />
           <Route path="account-setting" element={<PosterCompanyInfo />} />
           </Route>
-            <Route path="saved-candidate" element={<PosterDashSavedCandidate />}></Route>
-            <Route path="settings" element={<PosterSetting />}>
-            <Route index element={<PosterCompanyInfo />} />
-            </Route>
+          <Route path="saved-candidate" element={<PosterDashSavedCandidate />}></Route>
+          <Route path="settings" element={<PosterSetting />}>
+          <Route index element={<PosterCompanyInfo />} />
+          </Route>
           </Route>
           <Route path="/company" element={<PosterCompanyInfo />} />
           <Route path="/finish" element={<Finish />} />

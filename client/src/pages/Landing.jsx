@@ -40,7 +40,7 @@ export default function Home() {
               className='text-3xl lg:text-5xl text-slate-500 font-bold animate-fadeInOut' 
               style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}
             >
-                Welcome to Jobpilot 
+                Welcome to Joblistings
             </span>
             <br/><br/>
             <span 

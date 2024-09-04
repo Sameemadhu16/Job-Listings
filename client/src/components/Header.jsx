@@ -29,15 +29,7 @@ export default function Header() {
   };
 
 
-  const getDashboardPath = () => {
-    if (currentUser?.role === 'jobSeeker') {
-      return '/seeker-dashboard?tab=dash';
-    } else if (currentUser?.role === 'jobPoster') {
-      return '/poster-dashboard?tab=dash';
-    } else {
-      return '#'; // Fallback or default path
-    }
-  };
+  
 
   const handleSignout = async () => {
     try {
@@ -94,8 +86,9 @@ export default function Header() {
             }
 
           </Dropdown.Header>
-            <Link to={getProfilePath(currentUser.role)}>
-              <Dropdown.Item>Profile</Dropdown.Item>
+            <Link to={currentUser.role == 'jobSeeker' ? '/seeker-dashboard?tab=dash' : '/poster-dashboard?tab=profile'}>
+              <Dropdown.Item className="">{
+                currentUser.role == 'jobSeekeeker' ? 'Profile': 'Dashboard'}</Dropdown.Item>
             </Link>
             <Dropdown.Divider />
           
@@ -103,9 +96,9 @@ export default function Header() {
           <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
         </Dropdown>
           ):(
-            <Link to='/sign-in'>
+            <Link to='/sign-up'>
             <button className="bg-blue-500 px-3 py-2 rounded-lg text-white hover:bg-blue-600" focus-outline>
-              Sign In
+              Register
             </button>
           </Link> 
   )}
