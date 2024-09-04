@@ -48,7 +48,7 @@ const Home = () => {
                 // Get the first 3 most recent posts
                 const recentFullPosts = sortedFull.slice(0, 6);
                 setFirst(recentFullPosts)
-                console.log(first)
+                
             }
             if(!res.ok){
               console.log(data.message);
