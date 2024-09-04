@@ -25,12 +25,12 @@ export const signup = async (req, res, next) => {
 
         role,
         
-        biography: role === 'jobPoster' ? biography : undefined,
-        coverLetter: role === 'jobPoster' ? coverLetter : undefined,
-        cv: role === 'jobSeeker' ? cv : undefined,
-        skills: role === 'jobSeeker' ? skills : undefined,
-        cart: role === 'jobSeeker' ? cart : undefined,
-        appliedjobs: role === 'jobSeeker' ? appliedjobs : undefined,
+        // biography: role === 'jobPoster' ? biography : " ",
+        // coverLetter: role === 'jobPoster' ? coverLetter : undefined,
+        // cv: role === 'jobSeeker' ? cv : undefined,
+        // skills: role === 'jobSeeker' ? skills : undefined,
+        // cart: role === 'jobSeeker' ? cart : undefined,
+        // appliedjobs: role === 'jobSeeker' ? appliedjobs : undefined,
 
     });
 

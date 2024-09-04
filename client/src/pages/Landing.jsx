@@ -89,9 +89,11 @@ export default function Landing() {
             </span>
           </p>
         </div>
-        <p className='text-gray-600 mt-4 items-center'>
+        <p className='text-gray-600 mt-4 items-center mb-3'>
         Join a community where job seekers and employers come together to build successful careers. <br/>With our expert support and cutting-edge technology, finding the right job or the right hire has never been easier.
         </p>
+
+        <a href="/sign-up" className="text-bold text-xl text-white mt-3 bg-blue-800 px-2 py-1 rounded-lg font-bold">REGISTER</a>
         
       </div>
 
