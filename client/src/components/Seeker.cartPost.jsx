@@ -130,7 +130,7 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
   };
 
   return (
-    <div className='group relative w-full sm:w-[380px] border border-blue-500 hover:border-2 h-[380px] overflow-hidden rounded-lg transition-all'>
+    <div className='group relative w-full sm:w-[400px] border border-blue-500 hover:border-2 h-[400px] overflow-hidden rounded-lg transition-all'>
       {/* Alert message */}
     {showAlert && (
       <div className="absolute top-0 left-0 right-0 bg-green-500 text-white text-center p-2 z-50">

@@ -1,14 +1,16 @@
-import { Button, Table } from 'flowbite-react';
+import { Button, Label, Table } from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
 import { HiArrowNarrowRight } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import CompanyDetailsModal from './Seeker.CompanyDetailsModal';
+import SeekerPartTimeDetailsModel from './Seeker.PartTimeDetailsModel';
 import { useSelector } from 'react-redux';
 
 export default function SeekerDashAppliedjobs() {
   const { currentUser } = useSelector((state) => state.user);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userappliedjobs, setUserappliedjobs] = useState([]);
+  const [isModalOpenPart, setIsModalOpenPart] = useState(false);
 
   const handleModalOpen = () => {
     setIsModalOpen(true);
@@ -16,6 +18,14 @@ export default function SeekerDashAppliedjobs() {
 
   const handleModalClose = () => {
     setIsModalOpen(false);
+  };
+
+  const handleModalOpenPart = () => {
+    setIsModalOpenPart(true);
+  };
+
+  const handleModalClosePart = () => {
+    setIsModalOpenPart(false);
   };
 
   useEffect(() => {
@@ -46,6 +56,7 @@ export default function SeekerDashAppliedjobs() {
         <Table hoverable>
         <Table.Head>
           <Table.HeadCell>Job</Table.HeadCell>
+          <Table.HeadCell>Type</Table.HeadCell>
           <Table.HeadCell>Date posted</Table.HeadCell>
           <Table.HeadCell>Company Name</Table.HeadCell>
           <Table.HeadCell>Action</Table.HeadCell>
@@ -62,6 +73,9 @@ export default function SeekerDashAppliedjobs() {
               {appliedjob.title}
             </Table.Cell>
             <Table.Cell>
+            <Label className='border-2 border-blue-700 py-1 px-2 text-blue-700'>{appliedjob.type == 'full' ? 'FULL' : 'PART'}</Label>
+            </Table.Cell>
+            <Table.Cell>
               
             {new Date(appliedjob.createdAt).toLocaleDateString()}
             </Table.Cell>
@@ -71,8 +85,8 @@ export default function SeekerDashAppliedjobs() {
             </Table.Cell>
             <Table.Cell>
               <Button gradientDuoTone="purpleToBlue">
-                <Link onClick={handleModalOpen} className='flex items-center gap-3'>
-                  View Details
+                <Link onClick={appliedjob.type == 'full' ? "FULL" : "PART"} className='flex items-center gap-3 w-10'>
+                  Details
                   <HiArrowNarrowRight />
                 </Link>
               </Button>
@@ -82,8 +96,8 @@ export default function SeekerDashAppliedjobs() {
        ))}
       </Table>
       )}
-      
-      <CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} showSendCVLink={false}/>
+      <SeekerPartTimeDetailsModel isOpen={isModalOpenPart} onClose={handleModalClosePart} post = {userappliedjobs}/>
+      <CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} showSendCVLink={false}  post = {userappliedjobs}/>
     </div>
   );
 }
