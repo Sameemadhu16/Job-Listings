@@ -16,6 +16,7 @@ export default function SeekerDashCart() {
         console.log(data);
         if (res.ok) {
           setUserCart(data);
+          console.log(data)
           
         }
       } catch (error) {

@@ -88,7 +88,7 @@ export default function Header() {
           </Dropdown.Header>
             <Link to={currentUser.role == 'jobSeeker' ? '/seeker-dashboard?tab=dash' : '/poster-dashboard?tab=profile'}>
               <Dropdown.Item className="">{
-                currentUser.role == 'jobSeekeeker' ? 'Profile': 'Dashboard'}</Dropdown.Item>
+                currentUser.role == 'jobSeeker' ? 'Dashboard': 'Dashboard'}</Dropdown.Item>
             </Link>
             <Dropdown.Divider />
           

@@ -112,7 +112,7 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
   };
 
   return (
-    <div className='group relative w-full sm:w-[380px] border border-teal-500 hover:border-2 h-[380px] overflow-hidden rounded-lg transition-all'>
+    <div className='group relative w-full sm:w-[380px] border border-blue-500 hover:border-2 h-[380px] overflow-hidden rounded-lg transition-all'>
       {/* Alert message */}
     {showAlert && (
       <div className="absolute top-0 left-0 right-0 bg-green-500 text-white text-center p-2 z-50">
@@ -135,12 +135,12 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
         </div>
         {showApply && showDelete && (
           <div className='flex items-center text-center gap-2 ml-5'>
-            <Button className='px-8 bg-slate-500' onClick={handleCommentModalOpen}>
+            <button className='px-8 bg-slate-500 hover:bg-slate-600 text-white py-2 rounded-lg' onClick={handleCommentModalOpen}>
               comments
-            </Button>
-            <Button className='px-10' onClick={handleApplyButtonClick}>
+            </button>
+            <button className='px-10 bg-blue-500 hover:bg-blue-600 py-2 rounded-lg text-white' onClick={handleApplyButtonClick}>
               Apply
-            </Button>
+            </button>
           </div>
         )}
         {ShowAddcart && (
@@ -154,7 +154,7 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
           </Button>
         )}
       </div>
-      <CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} showSendCVLink={true} />
+      <CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} showSendCVLink={true} post={post}/>
       <DashComments isOpen={isCommentModalOpen} onClose={handleCommentModalClose} postId={post._id}/>
     </div>
   );
