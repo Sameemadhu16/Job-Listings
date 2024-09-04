@@ -55,7 +55,7 @@ export default function SeekerDashLatestjobs() {
                   <div className='flex gap-4'>
                     <div className='flex items-center'>
                       <HiLocationMarker />
-                      {post.companyName}
+                      {/* {post.companyName} */}
                     </div>
                     <div className='flex items-center'>
                       <HiCurrencyDollar />
@@ -63,25 +63,23 @@ export default function SeekerDashLatestjobs() {
                     </div>
                     <div className='flex items-center'>
                       <HiClock />
-                      {calculateDaysRemaining(post.createdAt)} Days left after created
+                      {/* {calculateDaysRemaining(post.createdAt)} Days left after created */}
                     </div>
                   </div>
                 </div>
               </div>
-              <Button className='bg-blue-500 hover:bg-opacity-95'  onClick={handleModalOpen}>
-                 <div className='flex flex-row text-center items-center gap-1'>
-                 <p>Apply Now</p>
-                 <FaArrowRight />
-                 </div>
-                 
-              </Button>
+              <button className='bg-blue-500 hover:bg-blue-500 text-white py-2 px-2 rounded-lg'  onClick={handleModalOpen}>
+                  <div className='flex flex-row text-center items-center gap-1'>
+                  <p>Apply Now</p>
+                </div>
+              </button>
             </Table.Cell>
           </Table.Row>
         </Table.Body>
                   ))}
       </Table>
       )}
-      <CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} showSendCVLink={true}/>
+      {<CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} showSendCVLink={true} post/>}
     </div>
   );
 }

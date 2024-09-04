@@ -26,8 +26,12 @@ import UpdatePost from './pages/UpdatePost';
 import SeekerDashboard from './pages/Seeker.Dashboard';
 import SeekerProfile from './components/Seeker.Profile';
 import PrivateRoute from './components/PrivateRoute';
+
+import Fpost from './pages/Fpost';
+import FpostUpdate from './pages/FpostUpdate';
 import Landing from './pages/Landing';
 import Homeh from './pages/Home'
+
 
 
 
@@ -58,18 +62,27 @@ export default function App() {
           <Route path="social-media" element={<PosterSocialMediaInfo />} />
           <Route path="account-setting" element={<PosterCompanyInfo />} />
           </Route>
-            <Route path="saved-candidate" element={<PosterDashSavedCandidate />}></Route>
-            <Route path="settings" element={<PosterSetting />}>
-            <Route index element={<PosterCompanyInfo />} />
-            </Route>
+          <Route path="saved-candidate" element={<PosterDashSavedCandidate />}></Route>
+          <Route path="settings" element={<PosterSetting />}>
+          <Route index element={<PosterCompanyInfo />} />
+          </Route>
           </Route>
           <Route path="/company" element={<PosterCompanyInfo />} />
           <Route path="/finish" element={<Finish />} />
 
           <Route path="/parttime-job-post" element={<PartTimeJobPost />} />
           <Route path="/fulltime-job-post" element={<FulltimeJobPost />} />
-          <Route path="/post-page/:postslug" element={<Post/>}/>
           <Route path='/update-post/:postId' element={<UpdatePost/>}/>
+          <Route path='/create-p-job' element={<CreatePost/>}/>
+
+          <Route path = '/create-f-job' element={<PosterCompanyInfo/>}/>
+          <Route path = '/full-post/:postId' element={<Fpost/>}/>
+          <Route path = '/update-full-post/:postId' element={<FpostUpdate/>}/>
+
+          
+
+
+          <Route path='/post/:postId' element={<Post/>}/>
           
         </Route>
         

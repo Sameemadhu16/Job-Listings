@@ -35,16 +35,16 @@ export default function PosterDashSidebar() {
             </Sidebar.Item>
           </Link>
 
-          <Link to="/poster-dashboard/post-jobs">
+          <Link to="/create-p-job">
 
             <Sidebar.Item icon={HiClipboardList} as="div">
-              Post a Jobs
+              Create Part Time Job
             </Sidebar.Item>
           </Link>
-          <Link to="/poster-dashboard/my-jobs">
+          <Link to="/create-f-job">
 
             <Sidebar.Item icon={IoBagCheckSharp} as="div">
-              My Jobs
+              Create Full Time Job
             </Sidebar.Item>
           </Link>
           <Link to="/poster-dashboard/saved-candidate">
