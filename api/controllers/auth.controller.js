@@ -94,3 +94,17 @@ export const signout= async (req, res, next) => {
     }
   };
 
+export const getUser = async (req,res,next) => {
+    try{
+        const totalUsers = await User.countDocuments();
+        const users = await User.find().sort({createdAt: -1})
+
+        res.status(200).json({
+            totalUsers,
+            users
+        })
+    }catch (error) {
+        next(error);
+    }
+}
+

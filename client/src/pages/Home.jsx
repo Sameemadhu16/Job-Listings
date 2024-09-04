@@ -17,6 +17,7 @@ const Home = () => {
     const [fJob,setFJob] = useState(0);
     const [tPosts,setTPosts] = useState(0);
     const [first,setFirst] = useState([]);
+    const [users,setUsers] = useState(0);
 
     useEffect(()=>{
         const fetchPosts = async () => {
@@ -61,6 +62,24 @@ const Home = () => {
     const hanldeNavigate = () => {
       navigate('/search')
     }
+
+    useEffect(() => {
+      setLoading(true);
+      const fetchUsers = async () => {
+        const res = await fetch('/api/auth/get-users');
+        const data = await res.json();
+
+        if(res.ok){
+          setUsers(data.totalUsers);
+          setLoading(false);
+        }
+        if(!res.ok){
+          setLoading(false);
+          console.log(data.message);
+        }
+      }
+      fetchUsers();
+    },[])
   return (
 
     
@@ -140,7 +159,7 @@ const Home = () => {
           <div className="text-center">
             <div className="flex items-center gap-1">
                 <FaUserTie className="text-blue-500" size={24} />
-                <span className="block text-2xl font-bold text-gray-800">586k+</span>
+                <span className="block text-2xl font-bold text-gray-800">{users}+</span>
             </div>
             <span className="text-gray-500">Users</span>
           </div>
