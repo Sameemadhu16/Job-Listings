@@ -33,10 +33,16 @@ import Landing from './pages/Landing';
 import Homeh from './pages/Home'
 import Search from './pages/Search';
 
+import { useSelector } from 'react-redux'
+
 
 
 
 export default function App() {
+
+  
+  const {currentUser}= useSelector((state) => state.user)
+  const role = currentUser ? currentUser.role : '';
   return (
     <BrowserRouter>
       <Header />
@@ -49,43 +55,52 @@ export default function App() {
         
         
         <Route element={<PrivateRoute/>}>
-        <Route path='/' element={<Home/>}/>
-          <Route path="/contact" element={<Contact />} /> 
+          <Route path='/' element={<Home/>}/>
+          <Route path="/contact" element={<Contact />} />
+          <Route path='/search' element={<Search/>}></Route> 
 
-          <Route path="/seeker-dashboard" element={<SeekerDashboard />} />
-          <Route path="/seeker-dashboard?tab=profile" element={<SeekerProfile/>} />
+          {
+            role == 'jobSeeker' && 
+            <>
+              <Route path="/seeker-dashboard" element={<SeekerDashboard />} />
+              <Route path="/seeker-dashboard?tab=profile" element={<SeekerProfile/>} />
+            </>
+            
+          }
 
-          <Route path="/poster-dashboard" element={<PosterDashboard />}>
-          <Route index element={<PosterDashOverview />} />
-          <Route path="employeeprofile" element={<PosterDashEmployeeProfile />} />
-          <Route path="my-jobs" element={<PosterDashMyJobs />}>
-          <Route index element={<PosterCompanyInfo />} />
-          <Route path="founding" element={<PosterFoundInfo />} />
-          <Route path="social-media" element={<PosterSocialMediaInfo />} />
-          <Route path="account-setting" element={<PosterCompanyInfo />} />
-          </Route>
-          <Route path="saved-candidate" element={<PosterDashSavedCandidate />}></Route>
-          <Route path="settings" element={<PosterSetting />}>
-          <Route index element={<PosterCompanyInfo />} />
-          </Route>
-          </Route>
-          <Route path="/company" element={<PosterCompanyInfo />} />
-          <Route path="/finish" element={<Finish />} />
-          <Route path='/search' element={<Search/>}></Route>
+          {
+            role == 'jobPoster' && 
+            <>
+              <Route path="/poster-dashboard" element={<PosterDashboard />}>
+              <Route index element={<PosterDashOverview />} />
+              <Route path="employeeprofile" element={<PosterDashEmployeeProfile />} />
+              <Route path="my-jobs" element={<PosterDashMyJobs />}>
+              <Route index element={<PosterCompanyInfo />} />
+              <Route path="founding" element={<PosterFoundInfo />} />
+              <Route path="social-media" element={<PosterSocialMediaInfo />} />
+              <Route path="account-setting" element={<PosterCompanyInfo />} />
+              </Route>
+              <Route path="saved-candidate" element={<PosterDashSavedCandidate />}></Route>
+              <Route path="settings" element={<PosterSetting />}>
+              <Route index element={<PosterCompanyInfo />} />
+              </Route>
+              </Route>
 
-          <Route path="/parttime-job-post" element={<PartTimeJobPost />} />
-          <Route path="/fulltime-job-post" element={<FulltimeJobPost />} />
-          <Route path='/update-post/:postId' element={<UpdatePost/>}/>
-          <Route path='/create-p-job' element={<CreatePost/>}/>
+              <Route path="/parttime-job-post" element={<PartTimeJobPost />} />
+              <Route path="/fulltime-job-post" element={<FulltimeJobPost />} />
+              <Route path='/update-post/:postId' element={<UpdatePost/>}/>
+              <Route path='/create-p-job' element={<CreatePost/>}/>
 
-          <Route path = '/create-f-job' element={<PosterCompanyInfo/>}/>
-          <Route path = '/full-post/:postId' element={<Fpost/>}/>
-          <Route path = '/update-full-post/:postId' element={<FpostUpdate/>}/>
+              <Route path = '/create-f-job' element={<PosterCompanyInfo/>}/>
+              <Route path = '/full-post/:postId' element={<Fpost/>}/>
+              <Route path = '/update-full-post/:postId' element={<FpostUpdate/>}/>
+              <Route path='/post/:postId' element={<Post/>}/>
+            </>
+          }
 
           
-
-
-          <Route path='/post/:postId' element={<Post/>}/>
+          <Route path="/company" element={<PosterCompanyInfo />} />
+          <Route path="/finish" element={<Finish />} />
           
         </Route>
         
