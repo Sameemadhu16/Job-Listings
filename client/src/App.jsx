@@ -27,6 +27,7 @@ import SeekerDashboard from './pages/Seeker.Dashboard';
 import SeekerProfile from './components/Seeker.Profile';
 import PrivateRoute from './components/PrivateRoute';
 import Landing from './pages/Landing';
+import Homeh from './pages/Home'
 
 
 
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/landing" element={<Landing />} />
+        
         
         <Route element={<PrivateRoute/>}>
           <Route path="/contact" element={<Contact />} /> 
