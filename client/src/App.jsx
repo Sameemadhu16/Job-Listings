@@ -49,6 +49,7 @@ export default function App() {
         
         
         <Route element={<PrivateRoute/>}>
+        <Route path='/' element={<Home/>}/>
           <Route path="/contact" element={<Contact />} /> 
 
           <Route path="/seeker-dashboard" element={<SeekerDashboard />} />
