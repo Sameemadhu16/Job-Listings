@@ -42,7 +42,7 @@ export default function FpostUpdate() {
                 setImageUploadFailure('Please select an image')
                 return ;
             }
-            
+
             setImageUploadFailure(null);
                 const storage=getStorage(app);
                 const fileName = new Date().getTime()+'-'+file.name;
@@ -155,7 +155,7 @@ export default function FpostUpdate() {
           <div className='flex gap-4 items-center justify-between border-4
           border-blue-500 border-dotted p-3'
           > 
-            <FileInput type="file" name='image' id='image' accept='image/*' onChange={handleChange} />
+            <FileInput type="file" name='image' id='image' accept='image/*' onChange={(e) => setFile(e.target.files[0])}/>
             <button type='button' className='bg-blue-500 hover:bg-blue-600 text-white px-2 py-2 rounded-lg' size='sm' onClick={handleUploadImage} disabled={imageUploadProgress}>
            {
             imageUploadProgress  ? (<div>
