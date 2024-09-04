@@ -46,7 +46,7 @@ return (
                 <br />
                 <span className='text-slate-900'>{post.title}</span>
             </div>
-            <div className='font-extrabold text-4xl mx-20 text-black flex gap-2 items-center justify-center'>
+            <div className='font-extrabold text-2xl mx-20 text-black flex gap-2 items-center justify-center'>
                     LKR.{post.salary}
             </div>
             <Label className='border-2 border-blue-700 py-1 px-2 text-blue-700'>{post.type == 'full' ? 'FULL TIME' : 'PART TIME'}</Label>
