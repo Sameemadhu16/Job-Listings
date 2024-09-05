@@ -32,8 +32,8 @@ const Home = () => {
                 setPosts(data.posts);
                 setTPosts(data.totalPosts);
                 setLoading(false);
-                const part = data.posts.filter(post => post.type === 'part');
                 
+                const part = data.posts.filter(post => post.type === 'part');
                 const pJob = part.length;
                 setPJob(pJob);
 

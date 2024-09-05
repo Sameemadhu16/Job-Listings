@@ -53,7 +53,7 @@ export default function SeekerDashAppliedjobs() {
 
   return (
     <div className="flex flex-col w-full shadow-md p-2 rounded-md dark:bg-gray-800">
-      <h1 className="p-6 font-bold text-slate-600">Applied Jobs</h1>
+      <h1 className="p-6 font-bold text-slate-600 dark:text-white">Applied Jobs</h1>
       {userappliedjobs.length > 0 && (
         <Table hoverable>
           <Table.Head>
@@ -66,7 +66,7 @@ export default function SeekerDashAppliedjobs() {
           {userappliedjobs.map((appliedjob) => (
             <Table.Body className="divide-y" key={appliedjob._id}>
               <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <Table.Cell className="flex gap-2 items-center">
+                <Table.Cell className="flex gap-2 items-center dark:text-white">
                   <img
                     src={
                       appliedjob.img ||
@@ -78,12 +78,12 @@ export default function SeekerDashAppliedjobs() {
                   {appliedjob.title}
                 </Table.Cell>
                 <Table.Cell>
-                  <Label className="border-2 border-blue-700 py-1 px-2 text-blue-700">
+                  <Label className="border-2 border-blue-700 dark:text-blue-200 dark:border-blue-200 py-1 px-2 text-blue-700">
                     {appliedjob.type === 'full' ? 'FULL' : 'PART'}
                   </Label>
                 </Table.Cell>
-                <Table.Cell>{new Date(appliedjob.createdAt).toLocaleDateString()}</Table.Cell>
-                <Table.Cell>{appliedjob.companyName}</Table.Cell>
+                <Table.Cell className='dark:text-white'>{new Date(appliedjob.createdAt).toLocaleDateString()}</Table.Cell>
+                <Table.Cell className='dark:text-white'>{appliedjob.companyName}</Table.Cell>
                 <Table.Cell>
                   <Button 
                     gradientDuoTone="purpleToBlue"

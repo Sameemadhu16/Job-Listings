@@ -55,7 +55,7 @@ export default function SeekerDashLatestjobs() {
 
   return (
     <div className="flex flex-col w-full shadow-md p-2 rounded-md dark:bg-gray-800 dark:text-white">
-      <h1 className="p-6 font-bold text-slate-600">Latest Jobs</h1>
+      <h1 className="p-6 font-bold text-slate-600 dark:text-white">Latest Jobs</h1>
       {posts && posts.length > 0 && (
       <Table hoverable>
       {posts.map((post)=>(
@@ -69,8 +69,8 @@ export default function SeekerDashLatestjobs() {
                   className="w-10 h-10 rounded-full bg:gray-500"
                 />
                 <div>
-                  <h3 className="font-semibold text-md text-slate-800 mb-2">{post.title}</h3>
-                  <Label className="border-2 border-blue-700 py-1 px-2 text-blue-700 mt-3">
+                  <h3 className="font-semibold text-md text-slate-800 mb-2 dark:text-white">{post.title}</h3>
+                  <Label className="border-2 border-blue-700 py-1 px-2 text-blue-700 mt-3 dark:text-blue-200 dark:border-blue-200">
                     {post.type === 'full' ? 'FULL' : 'PART'}
                   </Label>
                   <div className='flex gap-4 mt-2'>
@@ -78,19 +78,19 @@ export default function SeekerDashLatestjobs() {
                     {
                       post.type == 'part' && 
                         <>
-                          <div className='flex items-center'>
+                          <div className='flex items-center dark:text-white'>
                         <HiLocationMarker />
                         {post.venue}
                       </div>
 
-                        <div className='flex items-center mt-2'>
+                        <div className='flex items-center mt-2 dark:text-white'>
                         <HiCurrencyDollar />
                         LKR{post.salary}
                       </div>
                         </>
                       
                     }
-                    <div className='flex items-center gap-1'>
+                    <div className='flex items-center gap-1 dark:text-white'>
                       <HiClock />
                       {new Date(post.createdAt).toLocaleDateString()}
                     </div>
