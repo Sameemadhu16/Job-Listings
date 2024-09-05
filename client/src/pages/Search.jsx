@@ -54,7 +54,7 @@ export default function Search() {
 
     return (
 
-        <div className="bg-blue-50 min-h-screen">
+        <div className="bg-blue-50 dark:bg-slate-700 min-h-screen">
              {loading && (
                 <div className="flex justify-center items-center min-h-screen">
                     <Spinner className="text-center" />
@@ -64,17 +64,17 @@ export default function Search() {
             <main className="max-w-4xl mx-auto py-12">
 
             
-                <h1 className="text-center text-3xl font-bold text-blue-800">
+                <h1 className="text-center text-3xl font-bold text-blue-800 dark:text-slate-200">
                     Finding jobs made easy
                 </h1>
-                <p className="text-center text-lg text-gray-600">Search. Explore. Choose.</p>
+                <p className="text-center text-lg text-gray-600 dark:text-white">Search. Explore. Choose.</p>
 
                 
 
                 {/* Search results */}
-                <div className="bg-white shadow-md rounded-md p-6 mt-10">
-                <h2 className="font-semibold text-lg mb-4">
-                    Search results for : <span className="text-blue-500 italic">
+                <div className="bg-white dark:bg-blue-950 shadow-md rounded-md p-6 mt-10">
+                <h2 className="font-semibold text-lg mb-4 dark:text-white">
+                    Search results for : <span className="text-blue-500 dark:text-blue-300 italic">
                         "{activeTab === 'all' ? 'ALL' : activeTab === 'full' ? 'FULL TIME' : 'PART TIME'}"
                     </span>
                 </h2>
@@ -83,7 +83,7 @@ export default function Search() {
                     <div className="flex space-x-6 mb-6 border-b-2 pb-2">
                         <button
                             className={`${
-                                activeTab === 'all' ? 'text-blue-700 font-semibold border-b-2 border-blue-700' : 'text-gray-500'
+                                activeTab === 'all' ? 'text-blue-700 dark:text-blue-200 font-semibold border-b-2 border-blue-200' : 'text-gray-500 dark:text-gray-300'
                             }`}
                             onClick={showAllJobs}
                         >
@@ -91,7 +91,7 @@ export default function Search() {
                         </button>
                         <button
                             className={`${
-                                activeTab === 'full' ? 'text-blue-700 font-semibold border-b-2 border-blue-700' : 'text-gray-500'
+                                activeTab === 'full' ? 'text-blue-700 dark:text-blue-200 font-semibold border-b-2 border-blue-200' : 'text-gray-500 dark:text-gray-300'
                             }`}
                             onClick={getFullTime}
                         >
@@ -99,7 +99,7 @@ export default function Search() {
                         </button>
                         <button
                             className={`${
-                                activeTab === 'part' ? 'text-blue-700 font-semibold border-b-2 border-blue-700' : 'text-gray-500'
+                                activeTab === 'part' ? 'text-blue-700 dark:text-blue-200 font-semibold border-b-2 border-blue-200' : 'text-gray-500 dark:text-gray-300'
                             }`}
                             onClick={getPartTime}
                         >
