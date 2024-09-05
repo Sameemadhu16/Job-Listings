@@ -83,7 +83,7 @@ const Home = () => {
   return (
 
     
-    <div className="relative flex flex-col items-center bg-blue-50 min-h-screen p-4 lg:p-10">
+    <div className="relative flex flex-col items-center bg-blue-50 dark:bg-slate-700 min-h-screen p-4 lg:p-10">
       {loading && (
                 <div className="flex justify-center items-center min-h-screen">
                     <Spinner className="text-center" />
@@ -93,16 +93,16 @@ const Home = () => {
         <div className="flex flex-col lg:flex-row justify-between items-center w-full lg:w-10/12 mx-auto">
             {/* Text Section */}
             <div className="text-center lg:text-left lg:w-1/2">
-                <h1 className="text-4xl font-bold text-gray-900 leading-tight">
+                <h1 className="text-4xl font-bold text-gray-900 dark:text-white leading-tight">
                     Secure Your Career Path. You’re Worth It.
                 </h1>
-                <p className="mt-4 text-lg text-gray-700">
+                <p className="mt-4 text-lg text-gray-700 dark:text-slate-200">
                     Empowering Ambitious Job Seekers with Comprehensive Tools and
                     Resources to Discover, Apply, and Secure Their Dream Jobs.
                 </p>
                 <div className=" mt-6  flex flex-col items-center lg:flex-row gap-2">
                     
-                    <button onClick={hanldeNavigate}   className="px-10 text-blue-800 font-bold text-lg rounded-lg">
+                    <button onClick={hanldeNavigate}   className="px-10 text-blue-800 dark:text-blue-200 font-bold text-lg rounded-lg">
                     Explore...
                     </button>
                 </div>
@@ -130,7 +130,7 @@ const Home = () => {
     
 
                 {/* Job Posts Info Box */}
-                <div className="absolute top-0 right-0 bg-white p-2 rounded shadow-md mt-4 mr-10">
+                <div className="absolute top-0 right-0 bg-white dark:bg-slate-200 p-2 rounded shadow-md mt-4 mr-10">
                     <span className="block text-sm z-10 font-medium text-gray-800">
                     {tPosts}+ All Jobs Post 
                     </span>
@@ -140,33 +140,33 @@ const Home = () => {
         </div>
 
       {/* Footer Statistics Section */}
-      <footer className="w-full bg-white py-6 mt-20 shadow-lg ">
+      <footer className="w-full bg-white dark:bg-slate-800 py-6 mt-20 shadow-lg ">
         <div className="flex justify-around w-full lg:w-10/12 mx-auto">
           <div className="text-center">
             <div className=" flex items-center gap-1">
                 <FaBriefcase className="text-blue-500" size={24} />
-                <span className="block text-2xl font-bold text-gray-800">{fJob}+</span>
+                <span className="block text-2xl font-bold text-gray-800 dark:text-slate-200">{fJob}+</span>
             </div>
-            <span className="text-gray-500">Full Time Jobs</span>
+            <span className="text-gray-500 dark:text-white">Full Time Jobs</span>
           </div>
           <div className="text-center ">
             <div className="flex items-center gap-1">
                 <FaBriefcase className="text-blue-500" size={24} />
-                <span className="block text-2xl font-bold text-gray-800">{pJob}+</span>
+                <span className="block text-2xl font-bold text-gray-800 dark:text-slate-200">{pJob}+</span>
             </div>
-            <span className="text-gray-500">Part Time Jobs</span>
+            <span className="text-gray-500 dark:text-white">Part Time Jobs</span>
           </div>
           <div className="text-center">
             <div className="flex items-center gap-1">
                 <FaUserTie className="text-blue-500" size={24} />
-                <span className="block text-2xl font-bold text-gray-800">{users}+</span>
+                <span className="block text-2xl font-bold text-gray-800 dark:text-slate-200">{users}+</span>
             </div>
-            <span className="text-gray-500">Users</span>
+            <span className="text-gray-500 dark:text-white">Users</span>
           </div>
         </div>
       </footer>
 
-    <div className="flex gap-2 mt-3">
+    <div className="flex flex-wrap gap-2 mt-3 justify-center">
       {
         first.map((post)=>(
           <JobPostCard post={post}/>

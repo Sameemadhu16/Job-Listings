@@ -3,9 +3,9 @@ import { Label } from 'flowbite-react';
 
 const JobPostCard = ({post}) => {
   return (
-    <div className="w-1/2 rounded overflow-hidden shadow-lg bg-white hover:scale-105 cursor-pointer transition-transform duration-150">
+    <div className="w-[300px] rounded overflow-hidden shadow-lg bg-white hover:scale-105 cursor-pointer transition-transform duration-150">
       <img
-        className="w-full h-48 object-cover"
+        className="w-full h-48 object-cover p-3"
         src={post.image}// Replace with your image URL
         alt="Blog post"
       />
