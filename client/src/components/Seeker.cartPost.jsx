@@ -1,13 +1,16 @@
-import { Button } from 'flowbite-react';
+import { Button, Label } from 'flowbite-react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CompanyDetailsModal from './Seeker.CompanyDetailsModal';
+import SeekerPartTimeDetailsModel from './Seeker.PartTimeDetailsModel';
 import { useSelector } from 'react-redux';
 import DashComments from './Seeker.commentsection';
+
 
 export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, post }) {
   const { currentUser } = useSelector((state) => state.user);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenPart, setIsModalOpenPart] = useState(false);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [cartPostIdToDelete, setCartPostIdToDelete] = useState('');
   const [showAlert, setShowAlert] = useState(false);
@@ -17,10 +20,21 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
   const handleModalOpen = () => {
     setIsModalOpen(true);
   };
+  
 
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+
+  const handleModalOpenPart = () => {
+    setIsModalOpenPart(true);
+  };
+
+  const handleModalClosePart = () => {
+    setIsModalOpenPart(false);
+  };
+
+  
 
   const handleCommentModalOpen = () => {
     setIsCommentModalOpen(true);
@@ -92,6 +106,11 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
     handleModalOpen();
     handleAppliedjobs();
   };
+
+  const handleContactClick = () => {
+    handleModalOpenPart();
+    handleAppliedjobs();
+  }
   
 
   const date = new Date(post.createdAt);
@@ -112,7 +131,7 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
   };
 
   return (
-    <div className='group relative w-full sm:w-[380px] border border-teal-500 hover:border-2 h-[380px] overflow-hidden rounded-lg transition-all'>
+    <div className='group relative w-full sm:w-[300px] border border-blue-500 hover:border-2 h-[380px] overflow-hidden rounded-lg transition-all'>
       {/* Alert message */}
     {showAlert && (
       <div className="absolute top-0 left-0 right-0 bg-green-500 text-white text-center p-2 z-50">
@@ -126,35 +145,46 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
           className='h-[260px] w-full object-cover group-hover:h-[200px] transition-all duration-300 z-20'
         />
       </Link>
-      <div className='p-3 flex flex-col gap-2'>
+      <div className='p-2 flex flex-col gap-2'>
         <p className='text-lg font-semibold line-clamp-2'>{post.title}</p>
-        <span className='italic text-sm'>{post.companyName}</span>
+        <div className='flex text-center items-center justify-between'>
+        <span className='italic text-sm font-semibold'>{post.companyName}</span>
+        <Label className= 'border-2 border-blue-700 dark:border-blue-200 py-2 px-1 text-blue-700 dark:text-blue-200'>{post.type == 'full' ? 'FULL TIME' : 'PART TIME'}</Label>
+        </div>
         <div className='flex p-2 font-semibold text-sm justify-between'>
           <p>{time}</p>
           <p>{formatDate(post.createdAt)}</p>
         </div>
         {showApply && showDelete && (
           <div className='flex items-center text-center gap-2 ml-5'>
-            <Button className='px-8 bg-slate-500' onClick={handleCommentModalOpen}>
+            <button className='px-5 bg-slate-500 hover:bg-slate-600 text-white py-2 rounded-lg' onClick={handleCommentModalOpen}>
               comments
-            </Button>
-            <Button className='px-10' onClick={handleApplyButtonClick}>
-              Apply
-            </Button>
+            </button>
+            {
+              post.type == 'full' ? (
+                <button className='px-9 bg-blue-500 hover:bg-blue-600 py-2 rounded-lg text-white' onClick={handleApplyButtonClick}>
+                  Apply
+                </button>
+              ):(
+                <button className='px-9 py-2 text-white  bg-blue-500  hover:bg-blue-600 rounded-lg' onClick={handleContactClick}>
+                  Contact
+                </button>
+              )
+            }
+            
           </div>
+
+          
         )}
         {ShowAddcart && (
-          <Button className='px-20' onClick={handleCart}>
+          <button className='px-20 py-2 text-white  bg-blue-500  hover:bg-blue-600 rounded-lg' onClick={handleCart}>
             Add to cart
-          </Button>
+          </button>
         )}
-        {showApply && !showDelete && (
-          <Button className='px-20' onClick={handleModalOpen}>
-            Apply
-          </Button>
-        )}
+        
       </div>
-      <CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} showSendCVLink={true} />
+      <CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} showSendCVLink={true} post={post}/>
+      <SeekerPartTimeDetailsModel isOpen={isModalOpenPart} onClose={handleModalClosePart}post={post}/>
       <DashComments isOpen={isCommentModalOpen} onClose={handleCommentModalClose} postId={post._id}/>
     </div>
   );

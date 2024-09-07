@@ -21,6 +21,18 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    birthday: {
+        type: String,
+        default:'undefine',
+    },
+    maritalStatus: {
+        type: String,
+        default:'undefine',
+    },
+    gender: {
+        type: String,
+        default:'undefine',
+    },
 
 
 
@@ -32,7 +44,7 @@ const userSchema = new mongoose.Schema({
 
         mobileNumber: {
 
-       
+    
             type: String,
         },
         

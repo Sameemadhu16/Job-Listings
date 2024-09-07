@@ -32,7 +32,7 @@ export default function PostCards({ post }) {
         <img src={post.image} alt="post-image" />
       </div>
       <div className="flex flex-col flex-wrap p-2">
-        <p className="font-bold text-center mt-2 text-3xl">{post.title}</p>
+        <p className="font-bold text-center mt-2 text-3xl ">{post.title}</p>
         <p className="text-sm mt-2">{post.description}</p>
         <p className="text-sm mt-2">{post.companyName}</p>
         <p className="text-sm mt-2">{post.essential}</p>

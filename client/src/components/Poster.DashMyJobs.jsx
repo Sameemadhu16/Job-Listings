@@ -7,34 +7,14 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 export default function PosterDashMyJobs() {
+
     const{currentUser} = useSelector((state) =>state.user);
     const [userPosts,setUserPosts]= useState([]);
-    
-   console.log(currentUser._id);
-   const [showMore, setShowMore] = useState(true);
+    const [showMore, setShowMore] = useState(true);
     
 
-   useEffect(() => {
-    const fetchPosts = async () => {
-        try {
-            const res = await fetch(`/api/post/get-posts`);
-            const data = await res.json();
-            if (res.ok) {
-                setUserPosts(data.posts);
-                if (data.posts.length < 9) {
-                    setShowMore(false);
-                }
-            }
-        } catch (error) {
-            console.log(error.message);
-        }
-    };
-    fetchPosts();
-    
-},[currentUser._id]);
-    console.log(userPosts)
 
-   
+
     return (
         
         <div className='flex-wrap gap-4 py-3 mx-auto justify-center w-full items-center p-5'>

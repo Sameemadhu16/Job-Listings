@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
 export default function PosterDashEmployeeProfile() {
-  const { currentUser } = useSelector(state => state.user);
+  const { currentUser,error } = useSelector(state => state.user);
   const [imageFile, setImageFile] = useState(null);
   const [imageFileUrl, setImageFileUrl] = useState(null);
   const filePickerRef = useRef();
@@ -23,7 +23,9 @@ export default function PosterDashEmployeeProfile() {
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
   const [showUploadProgress, setShowUploadProgress] = useState(false);
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
+  const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
+  const [updateUserError, setUpdateUserError] = useState(null);
 
 
 
@@ -73,7 +75,7 @@ export default function PosterDashEmployeeProfile() {
       },
       (error) => {
         setImageFileUploadError("could not upload image (File must be less than 2MB)");
-        setImageFileUploadError(null);
+        //setImageFileUploadError(null);
         setImageFileUrl(null)
       },
       () => {
@@ -94,8 +96,11 @@ export default function PosterDashEmployeeProfile() {
   const handleSubmit = async (e) => {
 
     e.preventDefault();
+    setUpdateUserError(null);
+    setUpdateUserSuccess(null);
 
     if (Object.keys(formData).length === 0) {
+      setUpdateUserError('No changes made');
       return;
     }
     try {
@@ -110,14 +115,17 @@ export default function PosterDashEmployeeProfile() {
       });
       const data = await res.json();
       if (!res.ok) {
-        dispatch(updateFailure(data.message))
+        dispatch(updateFailure(data.message));
+        setUpdateUserError(data.message);
       }
       else {
-        dispatch(updateSuccess(data))
+        dispatch(updateSuccess(data));
+        setUpdateUserSuccess("User's profile updated successfully");
       }
 
     } catch (error) {
-      dispatch(updateFailure(error.message))
+      dispatch(updateFailure(error.message));
+      setUpdateUserError(error.message);
     }
   }
 
@@ -145,7 +153,7 @@ export default function PosterDashEmployeeProfile() {
   return (
     <div className='w-full'>
 
-      <div className="bg-gray-100 p-8 min-h-screen dark:bg-gray-900">
+      <div className="bg-blue-50 p-8 min-h-screen dark:bg-gray-900">
         <div className="w-4xl mx-auto bg-white rounded-lg shadow-md p-6  dark:bg-gray-900">
           {/* Profile Header */}
           <div className="flex items-center justify-between">
@@ -157,7 +165,7 @@ export default function PosterDashEmployeeProfile() {
                 ref={filePickerRef}
                 hidden
               />
-              <div className='relative'>
+              <div className='relative cursor-pointer'>
                 {/* Profile picture */}
                 <Avatar
                   img={imageFileUrl || currentUser.profilePicture}
@@ -212,9 +220,9 @@ export default function PosterDashEmployeeProfile() {
                 <p className="text-gray-600"></p>
               </div>
             </div>
-            <div className='flex'>
-              <Button onClick={handleSubmit} className='m-12 bg-blue-500' >update profile</Button>
-              <Button onClick={() => setShowModal(true)} color={'red'} className='m-12 bg-blue-500' >Delete profile</Button>
+            <div className='flex gap-1'>
+              <button onClick={handleSubmit} className='bg-green-500  h-10 px-1 text-white rounded-lg hover:bg-green-600' >update profile</button>
+              <button onClick={() => setShowModal(true)} color={'red'} className='bg-red-700  h-10 px-1 text-white rounded-lg hover:bg-red-800' >Delete profile</button>
             </div>
 
           </div>
@@ -272,10 +280,10 @@ export default function PosterDashEmployeeProfile() {
               <Card className="mt-6">
                 <h2 className="text-lg font-semibold mb-2">Contact Information</h2>
                 <ul className="text-gray-700">
-                  <li className="flex items-center dark:text-white"><span className="mr-2"><GiWorld /></span> {currentUser.email}</li>
+                  <li className="flex items-center dark:text-white"><span className="mr-2"><GiWorld /></span><span><input id='email' className='dark:bg-gray-800' onChange={handleChange} defaultValue={currentUser.email} /></span> </li>
 
-                  <li className="flex items-center dark:text-white"><span className="mr-2"><IoCall /></span> {currentUser.mobilenumber}</li>
-                  <li className="flex items-center dark:text-white"><span className="mr-2"><MdEmail /></span> {currentUser.fullname}</li>
+                  <li className="flex items-center dark:text-white"><span className="mr-2"><IoCall /></span><span><input id='mobileNumber' className='dark:bg-gray-800' onChange={handleChange} defaultValue={currentUser.mobileNumber} /></span> </li>
+                  
                 </ul>
               </Card>
             </div>
@@ -293,6 +301,17 @@ export default function PosterDashEmployeeProfile() {
 
             </div>
           </div>
+          {updateUserSuccess && (
+        <Alert color='success' className='mt-5'>
+          {updateUserSuccess}
+        </Alert>
+      )}
+      {updateUserError && (
+        <Alert color='failure' className='mt-5'>
+          {updateUserError}
+        </Alert>
+      )}
+      
         </div>
       </div>
       <Modal show={showModal} onClose={() => setShowModal(false)} popup size='md'>

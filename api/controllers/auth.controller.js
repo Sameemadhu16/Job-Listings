@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 
 export const signup = async (req, res, next) => {
 
-    const { username, email, password, role, mobileNumber,cart,appliedjobs } = req.body;
+    const { username, email, password, role, mobileNumber,cart,appliedjobs,companyName,biography,coverLetter } = req.body;
 
 
     if ( !username || !email || !password || !role || !mobileNumber) {
@@ -24,13 +24,13 @@ export const signup = async (req, res, next) => {
         mobileNumber,
 
         role,
-        companyName: role === 'jobPoster' ? companyName : undefined,
-        biography: role === 'jobPoster' ? biography : undefined,
-        coverLetter: role === 'jobPoster' ? coverLetter : undefined,
-        cv: role === 'jobSeeker' ? cv : undefined,
-        skills: role === 'jobSeeker' ? skills : undefined,
-        cart: role === 'jobSeeker' ? cart : undefined,
-        appliedjobs: role === 'jobSeeker' ? appliedjobs : undefined,
+        
+        // biography: role === 'jobPoster' ? biography : " ",
+        // coverLetter: role === 'jobPoster' ? coverLetter : undefined,
+        // cv: role === 'jobSeeker' ? cv : undefined,
+        // skills: role === 'jobSeeker' ? skills : undefined,
+        // cart: role === 'jobSeeker' ? cart : undefined,
+        // appliedjobs: role === 'jobSeeker' ? appliedjobs : undefined,
 
     });
 
@@ -90,7 +90,21 @@ export const signout= async (req, res, next) => {
         .status(200)
         .json('User has been signed out');
     } catch (error) {
-      next(error);
+        next(error);
     }
-  };
+    };
+
+export const getUser = async (req,res,next) => {
+    try{
+        const totalUsers = await User.countDocuments();
+        const users = await User.find().sort({createdAt: -1})
+
+        res.status(200).json({
+            totalUsers,
+            users
+        })
+    }catch (error) {
+        next(error);
+    }
+}
 

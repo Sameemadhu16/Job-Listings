@@ -10,12 +10,42 @@ const postSchema = new mongoose.Schema(
         title:{
             required:true,
             type:String,
-            unique:true
+        },
+        
+        type:{
+            type:String
         },
         essential:{
             type:String
         },
-        selectType:{
+        requirement:{
+            type:String
+        },
+        companyLink:{
+            type:String
+        },
+        companyEmail:{
+            type:String
+        },
+        venue:{
+            type:String
+        },
+        date:{
+            type:Date
+        },
+        sTime :{
+            type:String
+        },
+        eTime:{
+            type:String
+        },
+        salary:{
+            type:String
+        },
+        members:{
+            type:Number
+        },
+        gender:{
             type:String
         },
         description:{
@@ -23,11 +53,14 @@ const postSchema = new mongoose.Schema(
         },
         companyName:{
             type:String,
-            required:true
+            
         },
         image:{
             type:String,
-            default:'https://www.shutterstock.com/image-photo/work-time-art-collage-female-260nw-2361102709.jpg'
+            default:'https://sebringohio.net/wp-content/uploads/2021/03/job_posting.jpg'
+        },
+        number:{
+            type:String,
         }
 
     },{timestamps:true}

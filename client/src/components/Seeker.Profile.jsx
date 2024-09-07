@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Alert, Button, Modal,  TextInput } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { FaEnvelope, FaPhone, FaUserAlt, FaUserCircle } from "react-icons/fa";
 
 import {
   getDownloadURL,
@@ -169,53 +170,99 @@ export default function SeekerProfile() {
 
 
   return (
-    <div className='max-w-lg mx-auto p-3 w-full'>
-      <h1 className='my-7 text-center font-semibold text-3xl'>Profile</h1>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-        <input
-          type='file'
-          accept='image/*'
-          onChange={handleImageChange}
-          ref={filePickerRef}
-          hidden
+<div className='mx-auto p-3 w-full'>
+  
+  {/* Form container with vertical layout */}
+  <form onSubmit={handleSubmit} className='flex flex-col gap-4 '>
+    {/* Profile Details Section */}
+    <div className='w-full rounded-lg flex bg-blue-50 dark:bg-slate-800 p-3'>
+  {/* Profile Picture Section */}
+  <div className='w-1/2 flex items-center justify-center'>
+  
+    <input
+      type='file'
+      accept='image/*'
+      onChange={handleImageChange}
+      ref={filePickerRef}
+      hidden
+    />
+    <div
+      className='relative w-60 h-60 cursor-pointer shadow-xl overflow-hidden rounded-full'
+      onClick={() => filePickerRef.current.click()}
+    >
+      {imageFileUploadProgress && (
+        <CircularProgressbar
+          value={imageFileUploadProgress || 0}
+          text={`${imageFileUploadProgress}%`}
+          strokeWidth={5}
+          styles={{
+            root: {
+              inline_size: '100%',
+              block_size: '100%',
+              position: 'absolute',
+              in_set_block_start: 0,
+              in_set_inline_start: 0,
+            },
+            path: {
+              stroke: `rgba(62, 152, 199, ${imageFileUploadProgress / 100})`,
+            },
+          }}
         />
-        <div
-          className='relative w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full'
-          onClick={() => filePickerRef.current.click()}
-        >
-          {imageFileUploadProgress && (
-            <CircularProgressbar
-              value={imageFileUploadProgress || 0}
-              text={`${imageFileUploadProgress}%`}
-              strokeWidth={5}
-              styles={{
-                root: {
+      )}
+      <img
+        src={imageFileUrl || (currentUser && currentUser.profilePicture) || 'path/to/default/profilePicture.jpg'}
+        alt='seeker'
+        className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${imageFileUploadProgress && imageFileUploadProgress < 100 && 'opacity-60'}`}
+      />
+    </div>
+    {imageFileUploadError && (
+      <Alert color='failure'>{imageFileUploadError}</Alert>
+    )}
+  </div>
 
-                  inline_size: '100%',
-                  block_size: '100%',
-                  position: 'absolute',
-                  in_set_block_start: 0,
-                  in_set_inline_start: 0,
-
-                },
-                path: {
-                  stroke: `rgba(62, 152, 199, ${imageFileUploadProgress / 100})`,
-                },
-              }}
-            />
-          )}
-          <img
-            src={imageFileUrl || (currentUser && currentUser.profilePicture) || 'path/to/default/profilePicture.jpg'}
-
-            alt='seeker'
-
-            className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${imageFileUploadProgress && imageFileUploadProgress < 100 && 'opacity-60'}`}
-          />
+  {/* Profile Details Section */}
+  <div className='w-1/2 flex flex-col rounded-xl bg-blue-100 dark:bg-slate-700 shadow-md z-10 mr-10 p-3 justify-center'>
+    <div className='flex flex-col items-start p-4'>
+      {/* Full Name */}
+      <div className='flex items-center mb-2'>
+        <FaUserCircle className="text-blue-500" size={30}/>
+        <div className="block text-m font-semibold text-gray-700 m-4 rounded-xl bg-slate-200 p-2 w-60">
+          <strong className='font-semibold'>Full Name:</strong><br/><span className='text-slate-500'>{currentUser?.fullname || 'N/A'}</span>
         </div>
-        {imageFileUploadError && (
-          <Alert color='failure'>{imageFileUploadError}</Alert>
-        )}
+      </div>
 
+      {/* Username */}
+      <div className='flex items-center mb-2'>
+        <FaUserAlt className="text-blue-500" size={30}/>
+        <div className="block text-m font-semibold text-gray-700 m-4 rounded-xl bg-slate-200 p-2 w-60">
+          <strong className='font-semibold'>Username:</strong><br/><span className='text-slate-500'>{currentUser?.username || 'N/A'}</span>
+        </div>
+      </div>
+
+      {/* Email */}
+      <div className='flex items-center mb-2'>
+        <FaEnvelope className="text-blue-500" size={30}/>
+        <div className="block text-m font-semibold text-gray-700 m-4 rounded-xl bg-slate-200 p-2 w-60">
+          <strong className='font-semibold'>Email:</strong><br/><span className='text-slate-500'>{currentUser?.email || 'N/A'}</span>
+        </div>
+      </div>
+
+      {/* Mobile Number */}
+      <div className='flex items-center mb-2'>
+        <FaPhone className="text-blue-500" size={30}/>
+        <div className="block text-m font-semibold text-gray-700 m-4 rounded-xl bg-slate-200 p-2 w-60">
+          <strong className='font-semibold'>Mobile Number:</strong><br/><span className='text-slate-500'>{currentUser?.mobilenumber || 'N/A'}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <h1 className='text-center font-bold text-3xl'>Change Your Details</h1>
+
+    {/* Update Section */}
+    <div className='w-3/4 self-center flex flex-col p-12 bg-blue-50 dark:bg-slate-800 rounded-lg'>
+      <div className='p-3'>
         <TextInput
           type='text'
           id='fullname'
@@ -223,7 +270,8 @@ export default function SeekerProfile() {
           defaultValue={currentUser?.fullname}
           onChange={handleChange}
         />
-
+      </div>
+      <div className='p-3'>
         <TextInput
           type='text'
           id='username'
@@ -231,6 +279,8 @@ export default function SeekerProfile() {
           defaultValue={currentUser?.username}
           onChange={handleChange}
         />
+      </div>
+      <div className='p-3'>
         <TextInput
           type='email'
           id='email'
@@ -238,15 +288,16 @@ export default function SeekerProfile() {
           defaultValue={currentUser?.email}
           onChange={handleChange}
         />
+      </div>
+      <div className='p-3'>
         <TextInput
           type='password'
           id='password'
-          placeholder='password'
-
+          placeholder='Password'
           onChange={handleChange}
-          
-
         />
+      </div>
+      <div className='p-3'>
         <TextInput
           type='text'
           id='mobilenumber'
@@ -254,67 +305,69 @@ export default function SeekerProfile() {
           defaultValue={currentUser?.mobilenumber}
           onChange={handleChange}
         />
-
-        <Button
-          type='submit'
-          className='bg-blue-500'
-          outline
-          disabled={loading || imageFileUploading}
-        >
-          {loading ? 'Loading...' : 'Update'}
-        </Button>
-
-
-      </form>
+      </div>
+      <button
+        type='submit'
+        className='bg-blue-500 hover:bg-blue-600 py-2 text-white rounded-lg w-5/6 self-center'
+        outline
+        disabled={loading || imageFileUploading}
+      >
+        {loading ? 'Loading...' : 'Update'}
+      </button>
       <div className='text-red-500 flex justify-between mt-5'>
-        <span onClick={() => setShowModal(true)} className='cursor-pointer'>
+        <span onClick={() => setShowModal(true)} className='cursor-pointer hover:underline'>
           Delete Account
         </span>
-        <span onClick={handleSignout} className='cursor-pointer'>
+        <span onClick={handleSignout} className='cursor-pointer hover:underline'>
           Sign Out
         </span>
       </div>
-      {updateUserSuccess && (
-        <Alert color='success' className='mt-5'>
-          {updateUserSuccess}
-        </Alert>
-      )}
-      {updateUserError && (
-        <Alert color='failure' className='mt-5'>
-          {updateUserError}
-        </Alert>
-      )}
-      {error && (
-        <Alert color='failure' className='mt-5'>
-          {error}
-        </Alert>
-      )}
-      <Modal
-        show={showModal}
-        onClose={() => setShowModal(false)}
-        popup
-        size='md'
-      >
-        <Modal.Header />
-        <Modal.Body>
-          <div className='text-center'>
-            <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
-            <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
-              Are you sure you want to delete your account?
-            </h3>
-            <div className='flex justify-center gap-4'>
-
-              <Button color='failure' onClick={handleDeleteSeeker}>
-
-                Yes, I'm sure
-              </Button>
-              <Button color='gray' onClick={() => setShowModal(false)}>
-                No, cancel
-              </Button>
-            </div>
-          </div>
-        </Modal.Body>
-      </Modal>
     </div>
+  </form>
+
+  {/* Alerts */}
+  {updateUserSuccess && (
+    <Alert color='success' className='mt-5'>
+      {updateUserSuccess}
+    </Alert>
+  )}
+  {updateUserError && (
+    <Alert color='failure' className='mt-5'>
+      {updateUserError}
+    </Alert>
+  )}
+  {error && (
+    <Alert color='failure' className='mt-5'>
+      {error}
+    </Alert>
+  )}
+  
+  {/* Modal */}
+  <Modal
+    show={showModal}
+    onClose={() => setShowModal(false)}
+    popup
+    size='md'
+  >
+    <Modal.Header />
+    <Modal.Body>
+      <div className='text-center'>
+        <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
+        <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
+          Are you sure you want to delete your account?
+        </h3>
+        <div className='flex justify-center gap-4'>
+          <Button color='failure' onClick={handleDeleteSeeker}>
+            Yes, I'm sure
+          </Button>
+          <Button color='gray' onClick={() => setShowModal(false)}>
+            No, cancel
+          </Button>
+        </div>
+      </div>
+    </Modal.Body>
+  </Modal>
+</div>
+
   );
 }
