@@ -93,7 +93,7 @@ const Home = () => {
         <div className="flex flex-col lg:flex-row justify-between items-center w-full lg:w-10/12 mx-auto">
             {/* Text Section */}
             <div className="text-center lg:text-left lg:w-1/2">
-                <h1 className="text-4xl font-bold text-gray-900 dark:text-white leading-tight">
+                <h1 className="text-4xl font-bold text-blue-800 dark:text-white leading-tight">
                     Secure Your Career Path. You’re Worth It.
                 </h1>
                 <p className="mt-4 text-lg text-gray-700 dark:text-slate-200">

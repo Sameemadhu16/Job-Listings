@@ -60,7 +60,7 @@ return (
             <div>
                     <h3 className='font-semibold text-xl flex gap-1 items-center'>
                         <FaPhone/>
-                        Contact: {post.mobileNumber}
+                        Contact: {post.number}
                     </h3>
                     
                 </div>

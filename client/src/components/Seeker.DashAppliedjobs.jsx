@@ -52,7 +52,7 @@ export default function SeekerDashAppliedjobs() {
   }, [currentUser._id]);
 
   return (
-    <div className="flex flex-col w-full shadow-md p-2 rounded-md dark:bg-gray-800">
+    <div className="flex flex-col w-full shadow-md p-2 rounded-md bg-blue-50 dark:bg-gray-800">
       <h1 className="p-6 font-bold text-slate-600 dark:text-white">Applied Jobs</h1>
       {userappliedjobs.length > 0 && (
         <Table hoverable>
