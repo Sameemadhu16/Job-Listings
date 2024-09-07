@@ -52,7 +52,7 @@ export default function SeekerDashAppliedjobs() {
   }, [currentUser._id]);
 
   return (
-    <div className="flex flex-col w-full shadow-md p-2 rounded-md bg-blue-50 dark:bg-gray-800">
+    <div className="flex flex-col w-full shadow-md p-2 rounded-md bg-blue-50 dark:bg-slate-700">
       <h1 className="p-6 font-bold text-slate-600 dark:text-white">Applied Jobs</h1>
       {userappliedjobs.length > 0 && (
         <Table hoverable>
@@ -65,7 +65,7 @@ export default function SeekerDashAppliedjobs() {
           </Table.Head>
           {userappliedjobs.map((appliedjob) => (
             <Table.Body className="divide-y" key={appliedjob._id}>
-              <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+              <Table.Row className="bg-white dark:border-slate-800 dark:bg-gray-800">
                 <Table.Cell className="flex gap-2 items-center dark:text-white">
                   <img
                     src={
