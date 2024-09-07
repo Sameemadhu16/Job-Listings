@@ -91,7 +91,7 @@ export default function PosterCompanyInfo() {
       }
     }
   return (
-    <div className='bg-slate-100'>
+    <div className='bg-slate-100 dark:bg-gray-900'>
       <div className='p-3 max-w-3xl mx-auto min-h-screen '>
       <form className="flex flex-col gap-4 mt-3" onSubmit={handleSubmit}>
         <h1 className='text-3xl font-bold'>
@@ -121,29 +121,32 @@ export default function PosterCompanyInfo() {
           <TextInput type='text'  placeholder='essentail' onChange={(e) => setFormData({ ...formData, essential: e.target.value })}></TextInput>
           <TextInput type='text'  placeholder='requirments' onChange={(e) => setFormData({ ...formData, requirement: e.target.value })}></TextInput>
 
-          <div className='bg-slate-100'>
-        <div className='p-3 max-w-3xl mx-auto bg-gray-100'>
-        <div className="flex flex-col flex-wrap gap-4 m-10" >
-        <div className='flex flex-row gap-2'>
-        <div className='flex flex-wrap gap-2'>
-          <div className='text-sm font-semibold flex flex-col gap-2'>
-          <p className='text-sm font-semibold'>Team Size :</p>
-          <TextInput type="number" name="" id="" max={10} min={1} onChange={(e) => setFormData({ ...formData, members: e.target.value })}/>
-          </div>
-            <div className='text-sm font-semibold flex flex-col gap-2'>
-              <p>Year of Estabilishment :</p>
-              <TextInput placeholder='' type='date' onChange={(e) => setFormData({ ...formData, date: e.target.value })}></TextInput>
-          </div>
-          <div className='text-sm font-semibold flex flex-col gap-2'>
-            <p>Company Website :</p>
-            <TextInput type='url' placeholder='https://example.com' onChange={(e) => setFormData({ ...formData, companyLink: e.target.value })}></TextInput>
-        </div>
+          <div className='bg-slate-100 '>
+            <div className='p-3 max-w-3xl mx-auto bg-gray-100 dark:bg-gray-800'>
+              <div className="flex flex-col flex-wrap gap-4 m-10" >
+                <div className='flex flex-row gap-2'>
 
-        <div className='text-sm font-semibold flex flex-col gap-2'>
-            <p>Company Email :</p>
-            <TextInput type='email' placeholder='email' onChange={(e) => setFormData({ ...formData, companyEmail: e.target.value })}></TextInput>
-        </div>
-        </div>
+                  <div className='flex flex-wrap gap-2'>
+                    <div className='text-sm font-semibold flex flex-col gap-2'>
+                      <p className='text-sm font-semibold'>Team Size :</p>
+                      <TextInput type="number" name="" id="" max={10} min={1} onChange={(e) => setFormData({ ...formData, members: e.target.value })}/>
+                    </div>
+
+                    <div className='text-sm font-semibold flex flex-col gap-2'>
+                      <p>Year of Estabilishment :</p>
+                      <TextInput placeholder='' type='date' onChange={(e) => setFormData({ ...formData, date: e.target.value })}></TextInput>
+                    </div>
+
+                    <div className='text-sm font-semibold flex flex-col gap-2'>
+                      <p>Company Website :</p>
+                      <TextInput type='url' placeholder='https://example.com' onChange={(e) => setFormData({ ...formData, companyLink: e.target.value })}></TextInput>
+                    </div>
+
+                    <div className='text-sm font-semibold flex flex-col gap-2'>
+                        <p>Company Email :</p>
+                        <TextInput type='email' placeholder='email' onChange={(e) => setFormData({ ...formData, companyEmail: e.target.value })}></TextInput>
+                    </div>
+                  </div>
 
         
         </div>
