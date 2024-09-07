@@ -49,8 +49,8 @@ console.log(formData)
 
   return (
     <div className="min-h-screen flex items-center justify-center p-10">
-      <div className="w-full md:w-1/2 lg:w-1/3 bg-white p-10 flex flex-col justify-center rounded-lg shadow-xl">
-        <h1 className="text-center p-10 text-5xl font-bold">Part Time Job</h1>
+      <div className="w-full md:w-1/2 lg:w-1/3 bg-white dark:bg-slate-800 dark:text-white p-10 flex flex-col justify-center rounded-lg shadow-xl">
+        <h1 className="text-center p-10 text-5xl font-bold ">Part Time Job</h1>
         <form onSubmit={handleSubmit}>
 
           <div className="mb-4">
@@ -59,7 +59,7 @@ console.log(formData)
               type="text"
               id="title"
               name="title"
-              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              className="w-full py-2 px-4 border dark:bg-white dark:text-gray-600 border-gray-300 rounded-md"
               placeholder="Title"
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
             />
@@ -71,7 +71,7 @@ console.log(formData)
               type="text"
               id="venue"
               name="venue"
-              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              className="w-full py-2 px-4 border dark:bg-white dark:text-gray-600  border-gray-300 rounded-md"
               placeholder="Venue"
               onChange={(e) => setFormData({ ...formData, venue: e.target.value })}
             />
@@ -83,7 +83,7 @@ console.log(formData)
               type="date"
               id="date"
               name="date"
-              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              className="w-full py-2 px-4 border dark:bg-white dark:text-gray-600 border-gray-300 rounded-md"
               placeholder="Date"
               onChange={(e) => setFormData({ ...formData, date: e.target.value })}
             />
@@ -95,7 +95,7 @@ console.log(formData)
               type="time"
               id="sTime"
               name="sTime"
-              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              className="w-full py-2 px-4 border border-gray-300 rounded-md dark:bg-white dark:text-gray-600"
               onChange={(e) => setFormData({ ...formData, sTime: e.target.value })}
             />
           </div>
@@ -106,8 +106,20 @@ console.log(formData)
               type="time"
               id="eTime"
               name="eTime"
-              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              className="w-full py-2 px-4 border border-gray-300 rounded-md dark:bg-white dark:text-gray-600"
               onChange={(e) => setFormData({ ...formData, eTime: e.target.value })}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="salary">Number</label>
+            <input
+              type="text"
+              id="number"
+              name="number"
+              placeholder='Number'
+              className="w-full py-2 px-4 border border-gray-300 rounded-md dark:bg-white dark:text-gray-600"
+              onChange={(e) => setFormData({ ...formData, salary: e.target.value })}
             />
           </div>
 
@@ -117,7 +129,8 @@ console.log(formData)
               type="text"
               id="salary"
               name="salary"
-              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              placeholder='Salary'
+              className="w-full py-2 px-4 border border-gray-300 rounded-md dark:bg-white dark:text-gray-600"
               onChange={(e) => setFormData({ ...formData, salary: e.target.value })}
             />
           </div>
@@ -131,7 +144,7 @@ console.log(formData)
                 name="members"
                 max={10}
                 min={1}
-                className="w-full py-2 px-4 border border-gray-300 rounded-md"
+                className="w-full py-2 px-4 border border-gray-300 rounded-md dark:bg-white dark:text-gray-600"
                 onChange={(e) => setFormData({ ...formData, members: e.target.value })}
               />
             </div>
@@ -141,7 +154,7 @@ console.log(formData)
               <select
                 id="gender"
                 name="gender"
-                className="w-full py-2 px-4 border border-gray-300 rounded-md"
+                className="w-full py-2 px-4 border border-gray-300 rounded-md dark:bg-white dark:text-gray-600"
                 onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
               >
                 <option value="both">Both</option>
