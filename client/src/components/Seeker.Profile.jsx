@@ -173,7 +173,7 @@ export default function SeekerProfile() {
 <div className='mx-auto p-3 w-full'>
   
   {/* Form container with vertical layout */}
-  <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+  <form onSubmit={handleSubmit} className='flex flex-col gap-4 '>
     {/* Profile Details Section */}
     <div className='w-full rounded-lg flex bg-blue-50 dark:bg-slate-800 p-3'>
   {/* Profile Picture Section */}
@@ -258,9 +258,10 @@ export default function SeekerProfile() {
   </div>
 </div>
 
+    <h1 className='text-center font-bold text-3xl'>Change Your Details</h1>
 
     {/* Update Section */}
-    <div className='w-full flex flex-col p-12 bg-blue-50 dark:bg-slate-800 rounded-lg'>
+    <div className='w-3/4 self-center flex flex-col p-12 bg-blue-50 dark:bg-slate-800 rounded-lg'>
       <div className='p-3'>
         <TextInput
           type='text'
