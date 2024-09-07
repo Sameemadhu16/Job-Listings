@@ -30,16 +30,18 @@ export default function SeekerDashCart() {
 
   return (
     <div>
-      <div className="flex flex-row flex-wrap gap-2 p-3">
-        {userCart.length > 0 && (
-        userCart.map((post) => (
-          <SeekerCartPost
-            key={post._id}
-            post={post}
-            showApply={true} 
-            showDelete={true} 
-          />
-        )))}
+      <div className="flex flex-row flex-wrap gap-2 p-3 bg-blue-50">
+          <div className='flex  flex-wrap gap-2 items-center justify-center'>
+          {userCart.length > 0 && (
+          userCart.map((post) => (
+            <SeekerCartPost
+              key={post._id}
+              post={post}
+              showApply={true} 
+              showDelete={true} 
+            />
+          )))}
+        </div>
       </div>
     </div>
   );

@@ -131,7 +131,7 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
   };
 
   return (
-    <div className='group relative w-full sm:w-[400px] border border-blue-500 hover:border-2 h-[400px] overflow-hidden rounded-lg transition-all'>
+    <div className='group relative w-full sm:w-[300px] border border-blue-500 hover:border-2 h-[380px] overflow-hidden rounded-lg transition-all'>
       {/* Alert message */}
     {showAlert && (
       <div className="absolute top-0 left-0 right-0 bg-green-500 text-white text-center p-2 z-50">
@@ -149,7 +149,7 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
         <p className='text-lg font-semibold line-clamp-2'>{post.title}</p>
         <div className='flex text-center items-center justify-between'>
         <span className='italic text-sm font-semibold'>{post.companyName}</span>
-        <Label className='border-2 border-blue-700 py-1 px-2 text-blue-700'>{post.type == 'full' ? 'FULL TIME' : 'PART TIME'}</Label>
+        <Label className= 'border-2 border-blue-700 dark:border-blue-200 py-2 px-1 text-blue-700 dark:text-blue-200'>{post.type == 'full' ? 'FULL TIME' : 'PART TIME'}</Label>
         </div>
         <div className='flex p-2 font-semibold text-sm justify-between'>
           <p>{time}</p>
@@ -157,16 +157,16 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
         </div>
         {showApply && showDelete && (
           <div className='flex items-center text-center gap-2 ml-5'>
-            <button className='px-8 bg-slate-500 hover:bg-slate-600 text-white py-2 rounded-lg' onClick={handleCommentModalOpen}>
+            <button className='px-5 bg-slate-500 hover:bg-slate-600 text-white py-2 rounded-lg' onClick={handleCommentModalOpen}>
               comments
             </button>
             {
               post.type == 'full' ? (
-                <button className='px-10 bg-blue-500 hover:bg-blue-600 py-2 rounded-lg text-white' onClick={handleApplyButtonClick}>
+                <button className='px-9 bg-blue-500 hover:bg-blue-600 py-2 rounded-lg text-white' onClick={handleApplyButtonClick}>
                   Apply
                 </button>
               ):(
-                <button className='px-10 py-2 text-white  bg-blue-500  hover:bg-blue-600 rounded-lg' onClick={handleContactClick}>
+                <button className='px-9 py-2 text-white  bg-blue-500  hover:bg-blue-600 rounded-lg' onClick={handleContactClick}>
                   Contact
                 </button>
               )
