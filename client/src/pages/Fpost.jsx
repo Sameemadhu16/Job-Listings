@@ -81,7 +81,7 @@ export default function Fpost() {
         {error && <p className='text-center my-7 text-2xl text-red-600'>something went wrong!</p>}
         {post && !loading && !error &&(
             <>
-            <div className='flex items-center justify-center'>
+            <div className='flex items-center justify-center mt-5'>
                 <img src={post.image} alt="" className='max-w-full max-h-full' />
             </div>
             
@@ -89,8 +89,8 @@ export default function Fpost() {
             <h1 className='text-3xl font-semibold'>
                 {post.title}
             </h1>
-            <p className='flex items-center text-center  gap-1 text-slate-600  text-sm'>
-                <FaPaperPlane className='text-green-700' />
+            <p className='flex items-center text-center  gap-1 text-slate-600 dark:text-white  text-sm'>
+                <FaPaperPlane className='text-green-700 dark:text-white' />
                 {post.companyName}
             </p>
             <div className='flex gap-4 py-3'>
@@ -105,11 +105,11 @@ export default function Fpost() {
             </div>
             
             <ul className='flex gap-4 text-green-800 text-sm flex-wrap items-center font-semibold mt-4'>
-                <li className='flex items-center gap-1 whitespace-nowrap '>
+                <li className='flex items-center gap-1 whitespace-nowrap dark:text-white'>
                     <FaCalendar className='text-lg' />
                         Date : {new Date(post.date).toLocaleDateString()}
                 </li>
-                <li className='flex items-center gap-1 whitespace-nowrap '>
+                <li className='flex items-center gap-1 whitespace-nowrap dark:text-white'>
                 <FaUser className='text-lg' />
                     Members : {post.members}
                 </li>

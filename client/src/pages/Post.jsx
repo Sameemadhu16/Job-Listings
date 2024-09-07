@@ -81,7 +81,7 @@ export default function Post() {
         {error && <p className='text-center my-7 text-2xl text-red-600'>something went wrong!</p>}
         {post && !loading && !error &&(
             <>
-            <div className='flex items-center justify-center'>
+            <div className='flex items-center justify-center mt-10'>
                 <img src={post.image} alt="" className='max-w-full max-h-full' />
             </div>
             
@@ -89,8 +89,8 @@ export default function Post() {
             <h1 className='text-3xl font-semibold'>
                 {post.title}{' - LKR '}{post.salary}
             </h1>
-            <p className='flex items-center text-center  gap-1 text-slate-600  text-sm'>
-                <FaMapMarkerAlt className='text-green-700' />
+            <p className='flex items-center text-center  gap-1 text-slate-600 text-sm dark:text-slate-200'>
+                <FaMapMarkerAlt className='text-green-700 dark:text-slate-200' />
                 {post.venue}
             </p>
             <div className='flex gap-4 py-3'>
@@ -105,32 +105,30 @@ export default function Post() {
             </div>
             
             <ul className='flex gap-4 text-green-800 text-sm flex-wrap items-center font-semibold mt-4'>
-                <li className='flex items-center gap-1 whitespace-nowrap '>
-                    <FaCalendar className='text-lg' />
+                <li className='flex items-center gap-1 whitespace-nowrap dark:text-slate-200'>
+                    <FaCalendar className='text-lg ' />
                         Date : {new Date(post.date).toLocaleDateString()}
                 </li>
-                <li className='flex items-center gap-1 whitespace-nowrap '>
-
-                <li className='flex items-center gap-1 whitespace-nowrap '>
-                    <FaClock className='text-lg' />
+                <li className='flex items-center gap-1 whitespace-nowrap dark:text-slate-200'>
+                    <FaClock className='text-lg ' />
                         Start At : {post.sTime}
                 </li>
-
+                <li className='flex items-center gap-1 whitespace-nowrap dark:text-slate-200'>
                     <FaClock className='text-lg' />
                     End At : {post.eTime }
                 </li>
-                <li className='flex items-center gap-1 whitespace-nowrap '>
+                <li className='flex items-center gap-1 whitespace-nowrap dark:text-slate-200'>
                     <FaStopwatch className='text-lg' />
                         Duration : {
                             parseInt(post.sTime) < parseInt(post.eTime) ?  parseInt(post.eTime)-parseInt(post.sTime): 24 - (parseInt(post.sTime) - parseInt(post.eTime))
                         }h
                 </li>
-                <li className='flex items-center gap-1 whitespace-nowrap '>
+                <li className='flex items-center gap-1 whitespace-nowrap dark:text-slate-200'>
                 <FaUser className='text-lg' />
                     Members : {post.members}
                 </li>
 
-                <li className='flex items-center gap-1 whitespace-nowrap '>
+                <li className='flex items-center gap-1 whitespace-nowrap dark:text-slate-200'>
                     <FaMale className='text-lg' />
                     { 
                         post.gender === 'male' ? 'Male' : 

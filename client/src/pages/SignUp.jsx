@@ -61,14 +61,14 @@ const SignUp = () => {
     };
 
     return (
-        <div className='min-h-screen bg-gray-100 flex'>
+        <div className='min-h-screen bg-gray-100 dark:bg-slate-700 flex'>
             <div className="w-full md:w-1/2 bg-white p-10 m-20 mr-16 flex flex-col justify-center rounded-lg shadow-lg">
                 <div className="max-w-md mx-auto">
                     <div className="mb-6">
                         <img src={logo} alt="Logo" className="h-20" />
                     </div>
                     <div className='text-start'>
-                        <h2 className="text-3xl font-bold font-sans">Create an Account</h2>
+                        <h2 className="text-3xl font-bold font-sans dark:text-black">Create an Account</h2>
                         <p className="text-gray-500 mb-6">Simplify Your Job Search and Find the Perfect Opportunity</p>
                     </div>
                 </div>

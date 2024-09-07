@@ -21,7 +21,8 @@ export const createPost = async(req,res,next) => {
             companyEmail,
             essential,
             requirement,
-            image
+            image,
+            number
         } = req.body;
         const userId = req.user.id;
 
@@ -47,6 +48,7 @@ export const createPost = async(req,res,next) => {
             essential,
             description,
             image,
+            number,
             createdBy: req.user._id  // Associate the post with the user who created it
         });
   

@@ -153,7 +153,7 @@ export default function PosterDashEmployeeProfile() {
   return (
     <div className='w-full'>
 
-      <div className="bg-gray-100 p-8 min-h-screen dark:bg-gray-900">
+      <div className="bg-blue-50 p-8 min-h-screen dark:bg-gray-900">
         <div className="w-4xl mx-auto bg-white rounded-lg shadow-md p-6  dark:bg-gray-900">
           {/* Profile Header */}
           <div className="flex items-center justify-between">

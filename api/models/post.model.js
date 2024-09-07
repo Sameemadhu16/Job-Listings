@@ -58,6 +58,9 @@ const postSchema = new mongoose.Schema(
         image:{
             type:String,
             default:'https://sebringohio.net/wp-content/uploads/2021/03/job_posting.jpg'
+        },
+        number:{
+            type:String,
         }
 
     },{timestamps:true}

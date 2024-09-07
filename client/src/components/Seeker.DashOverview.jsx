@@ -10,12 +10,32 @@ import SeekerCartPost from './Seeker.cartPost';
 export default function SeekerDashOverview({}) {
 
   const [posts,setPosts] = useState([]);
+  const [post,setPost] = useState(0);
+  const [pJob,setPJob] = useState(0);
+  const [fJob,setFJob] = useState(0);
 
   useEffect(() =>{
     const fetchPosts = async () => {
-      const res = await fetch('/api/post/get-posts');
-      const data = await res.json();
-      setPosts(data.posts)
+
+      try{
+        const res = await fetch('/api/post/get-posts');
+        const data = await res.json();
+        setPosts(data.posts)
+        
+        setPost(data.posts.length)
+
+        const part = data.posts.filter(post => post.type === 'part');
+        const pJob = part.length;
+        setPJob(pJob);
+
+        const full = data.posts.filter(post => post.type == 'full');
+        const fJob = full.length;
+        setFJob(fJob);
+
+      }catch(error){
+        console.log(error);
+      }
+      
     }
     fetchPosts();
   },[])
@@ -26,13 +46,13 @@ export default function SeekerDashOverview({}) {
 
 
   return (
-    <div className="p-3 md:mx-auto bg-gray-100 dark:bg-[rgb(16,23,42)]">
+    <div className="p-3 md:mx-auto bg-blue-50 dark:bg-[rgb(16,23,42)]">
       <div className="flex-wrap flex gap-4 justify-center ">
         <div className="flex flex-col p-3 dark:bg-slate-800 gap-4 md:w-72 w-full rounded-md shadow-md">
           <div className="flex justify-between">
             <div>
-              <h3 className="text-gray-500 dark:text-white text-md uppercase">Applied Jobs</h3>
-              <p className="text-2xl">10</p>
+              <h3 className="text-gray-500 dark:text-white text-md uppercase">ALL Jobs</h3>
+              <p className="text-2xl">{post}</p>
             </div>
             <HiOutlineUserGroup className="bg-teal-600 text-white rounded-full text-5xl p-3 shadow-lg" />
           </div>
@@ -40,8 +60,8 @@ export default function SeekerDashOverview({}) {
         <div className="flex flex-col p-3 dark:bg-slate-800 gap-4 md:w-72 w-full rounded-md shadow-md">
           <div className="flex justify-between">
             <div>
-              <h3 className="text-gray-500 dark:text-white  text-md uppercase">Rank</h3>
-              <p className="text-2xl">10</p>
+              <h3 className="text-gray-500 dark:text-white  text-md uppercase">Part Time Jobs</h3>
+              <p className="text-2xl">{fJob}</p>
             </div>
             <HiAnnotation className="bg-indigo-600 text-white rounded-full text-5xl p-3 shadow-lg" />
           </div>
@@ -49,8 +69,8 @@ export default function SeekerDashOverview({}) {
         <div className="flex flex-col p-3 dark:bg-slate-800 gap-4 md:w-72 w-full rounded-md shadow-md">
           <div className="flex justify-between">
             <div>
-              <h3 className="text-gray-500 dark:text-white text-md uppercase">Recently Jobs</h3>
-              <p className="text-2xl">10</p>
+              <h3 className="text-gray-500 dark:text-white text-md uppercase">Full Time Jobs</h3>
+              <p className="text-2xl">{pJob}</p>
             </div>
             <HiDocumentText className="bg-lime-600 text-white rounded-full text-5xl p-3 shadow-lg" />
           </div>
