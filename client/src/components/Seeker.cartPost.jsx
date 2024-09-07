@@ -145,7 +145,7 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
           className='h-[260px] w-full object-cover group-hover:h-[200px] transition-all duration-300 z-20'
         />
       </Link>
-      <div className='p-3 flex flex-col gap-2'>
+      <div className='p-2 flex flex-col gap-2'>
         <p className='text-lg font-semibold line-clamp-2'>{post.title}</p>
         <div className='flex text-center items-center justify-between'>
         <span className='italic text-sm font-semibold'>{post.companyName}</span>
