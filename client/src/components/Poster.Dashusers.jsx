@@ -3,7 +3,7 @@ import React from 'react'
 export default function PosterDashuser() {
   return (
     <div>
-      save seekers page
+      applide candidates
     </div>
   )
 }

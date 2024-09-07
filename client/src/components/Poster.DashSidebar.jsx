@@ -50,7 +50,7 @@ export default function PosterDashSidebar() {
           <Link to="/poster-dashboard/saved-candidate">
 
             <Sidebar.Item icon={RiSave3Fill} as="div">
-              Saved Candidate
+              Appiled Candidate
             </Sidebar.Item>
           </Link>
           <Link to="/poster-dashboard/settings">

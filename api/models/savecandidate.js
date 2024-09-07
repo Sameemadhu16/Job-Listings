@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const candidateScheme = new mongoose.Schema({
+const responseScheme = new mongoose.Schema({
         posterId:{
             type:String,
             required: true,
@@ -9,12 +9,22 @@ const candidateScheme = new mongoose.Schema({
         seekerId:{
             type:String,
             required: true,
-        }
+        },
+        postId:{
+            type:String,
+            required:true,
+        },
+        response:{
+            type:String,
+            required:false,
+           
+        },
+        
 
 
 
 },
 { timestamps: true }
 );
-const Savecandidate = mongoose.model("Savecandidate", candidateScheme);
-export default Savecandidate;
+const response = mongoose.model("response", responseScheme);
+export default response;
