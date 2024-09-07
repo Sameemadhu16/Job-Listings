@@ -54,13 +54,13 @@ export default function SeekerDashLatestjobs() {
   };
 
   return (
-    <div className="flex flex-col w-full shadow-md p-2 rounded-md bg-blue-50 dark:bg-gray-800 dark:text-white">
+    <div className="flex flex-col w-full shadow-md p-2 rounded-md bg-blue-50 dark:bg-slate-700 dark:text-white">
       <h1 className="p-6 font-bold text-slate-600 dark:text-white">Latest Jobs</h1>
       {posts && posts.length > 0 && (
       <Table hoverable>
       {posts.map((post)=>(
         <Table.Body className="divide-y">
-          <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+          <Table.Row className="bg-white dark:border-slate-700 dark:bg-gray-800">
             <Table.Cell className='flex justify-between items-center'>
               <div className='flex gap-6'>
                 <img

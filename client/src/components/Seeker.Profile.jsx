@@ -171,12 +171,11 @@ export default function SeekerProfile() {
 
   return (
 <div className='mx-auto p-3 w-full'>
-  <h1 className='my-7 ml-7 text-teal-500 text-left font-bold text-3xl'>Seeker Profile</h1>
   
   {/* Form container with vertical layout */}
-  <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+  <form onSubmit={handleSubmit} className='flex flex-col gap-4 '>
     {/* Profile Details Section */}
-    <div className='w-full rounded-lg flex bg-teal-50 p-3'>
+    <div className='w-full rounded-lg flex bg-blue-50 dark:bg-slate-800 p-3'>
   {/* Profile Picture Section */}
   <div className='w-1/2 flex items-center justify-center'>
   
@@ -222,46 +221,47 @@ export default function SeekerProfile() {
   </div>
 
   {/* Profile Details Section */}
-  <div className='w-1/2 flex flex-col rounded-xl bg-blue-100 shadow-md z-10 mr-10 p-3 justify-center'>
+  <div className='w-1/2 flex flex-col rounded-xl bg-blue-100 dark:bg-slate-700 shadow-md z-10 mr-10 p-3 justify-center'>
     <div className='flex flex-col items-start p-4'>
       {/* Full Name */}
       <div className='flex items-center mb-2'>
-        <FaUserCircle className="text-teal-500" size={30}/>
-        <div className="block text-m font-bold text-gray-700 m-4 rounded-xl bg-slate-200 p-2 w-60">
-          <strong>Full Name:</strong><br/><span className='text-slate-500'>{currentUser?.fullname || 'N/A'}</span>
+        <FaUserCircle className="text-blue-500" size={30}/>
+        <div className="block text-m font-semibold text-gray-700 m-4 rounded-xl bg-slate-200 p-2 w-60">
+          <strong className='font-semibold'>Full Name:</strong><br/><span className='text-slate-500'>{currentUser?.fullname || 'N/A'}</span>
         </div>
       </div>
 
       {/* Username */}
       <div className='flex items-center mb-2'>
-        <FaUserAlt className="text-teal-500" size={30}/>
-        <div className="block text-m font-bold text-gray-700 m-4 rounded-xl bg-slate-200 p-2 w-60">
-          <strong>Username:</strong><br/><span className='text-slate-500'>{currentUser?.username || 'N/A'}</span>
+        <FaUserAlt className="text-blue-500" size={30}/>
+        <div className="block text-m font-semibold text-gray-700 m-4 rounded-xl bg-slate-200 p-2 w-60">
+          <strong className='font-semibold'>Username:</strong><br/><span className='text-slate-500'>{currentUser?.username || 'N/A'}</span>
         </div>
       </div>
 
       {/* Email */}
       <div className='flex items-center mb-2'>
-        <FaEnvelope className="text-teal-500" size={30}/>
-        <div className="block text-m font-bold text-gray-700 m-4 rounded-xl bg-slate-200 p-2 w-60">
-          <strong>Email:</strong><br/><span className='text-slate-500'>{currentUser?.email || 'N/A'}</span>
+        <FaEnvelope className="text-blue-500" size={30}/>
+        <div className="block text-m font-semibold text-gray-700 m-4 rounded-xl bg-slate-200 p-2 w-60">
+          <strong className='font-semibold'>Email:</strong><br/><span className='text-slate-500'>{currentUser?.email || 'N/A'}</span>
         </div>
       </div>
 
       {/* Mobile Number */}
       <div className='flex items-center mb-2'>
-        <FaPhone className="text-teal-500" size={30}/>
-        <div className="block text-m font-bold text-gray-700 m-4 rounded-xl bg-slate-200 p-2 w-60">
-          <strong>Mobile Number:</strong><br/><span className='text-slate-500'>{currentUser?.mobilenumber || 'N/A'}</span>
+        <FaPhone className="text-blue-500" size={30}/>
+        <div className="block text-m font-semibold text-gray-700 m-4 rounded-xl bg-slate-200 p-2 w-60">
+          <strong className='font-semibold'>Mobile Number:</strong><br/><span className='text-slate-500'>{currentUser?.mobilenumber || 'N/A'}</span>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+    <h1 className='text-center font-bold text-3xl'>Change Your Details</h1>
 
     {/* Update Section */}
-    <div className='w-full flex flex-col p-12 bg-teal-50 rounded-lg'>
+    <div className='w-3/4 self-center flex flex-col p-12 bg-blue-50 dark:bg-slate-800 rounded-lg'>
       <div className='p-3'>
         <TextInput
           type='text'
@@ -306,19 +306,19 @@ export default function SeekerProfile() {
           onChange={handleChange}
         />
       </div>
-      <Button
+      <button
         type='submit'
-        className='bg-blue-500'
+        className='bg-blue-500 hover:bg-blue-600 py-2 text-white rounded-lg w-5/6 self-center'
         outline
         disabled={loading || imageFileUploading}
       >
         {loading ? 'Loading...' : 'Update'}
-      </Button>
+      </button>
       <div className='text-red-500 flex justify-between mt-5'>
-        <span onClick={() => setShowModal(true)} className='cursor-pointer'>
+        <span onClick={() => setShowModal(true)} className='cursor-pointer hover:underline'>
           Delete Account
         </span>
-        <span onClick={handleSignout} className='cursor-pointer'>
+        <span onClick={handleSignout} className='cursor-pointer hover:underline'>
           Sign Out
         </span>
       </div>

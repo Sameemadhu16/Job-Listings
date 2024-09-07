@@ -4,6 +4,7 @@ import { HiAnnotation, HiOutlineUserGroup, HiDocumentText } from 'react-icons/hi
 import { Link } from 'react-router-dom';
 import PostCards from './PostCards';
 import SeekerCartPost from './Seeker.cartPost';
+import { Spinner } from 'flowbite-react';
 
 
 
@@ -13,14 +14,26 @@ export default function SeekerDashOverview({}) {
   const [post,setPost] = useState(0);
   const [pJob,setPJob] = useState(0);
   const [fJob,setFJob] = useState(0);
+  const [loading,setLoading] = useState(false);
 
   useEffect(() =>{
     const fetchPosts = async () => {
 
       try{
+        setLoading(true);
+
         const res = await fetch('/api/post/get-posts');
         const data = await res.json();
-        setPosts(data.posts)
+        
+        if(res.ok){
+          setPosts(data.posts);
+          setLoading(false);
+        }
+
+        if(!res.ok){
+          setLoading(false);
+          console.log(data.message);
+        }
         
         setPost(data.posts.length)
 
