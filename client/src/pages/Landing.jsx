@@ -42,28 +42,6 @@ export default function Landing() {
 
   return (
     <div>
-      <style>
-        {`
-        @keyframes fadeInOut {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 1; }
-        }
-
-        @keyframes fadeInOutDelay {
-          0%, 30%, 100% { opacity: 0.3; }
-          60% { opacity: 1; }
-        }
-
-        .animate-fadeInOut {
-          animation: fadeInOut 12s ease-in-out infinite;
-        }
-
-        .animate-fadeInOutDelay {
-          animation: fadeInOutDelay 12s ease-in-out infinite;
-        }
-        `}
-      </style>
-
       <div 
         className='py-28 px-20 text-center'
         style={{
