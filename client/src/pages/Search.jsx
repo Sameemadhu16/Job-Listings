@@ -4,6 +4,7 @@ import { Spinner } from 'flowbite-react';
 
 export default function Search() {
     const [posts, setPosts] = useState([]);
+    const [firstArray,setFirstArray] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showMore, setShowMore] = useState(false);
     const [filteredPosts, setFilteredPosts] = useState([]);
@@ -18,7 +19,8 @@ export default function Search() {
 
                 if (res.ok) {
                     setPosts(data.posts);
-                    setFilteredPosts(data.posts); // Show all jobs by default
+
+                setFilteredPosts(data.posts); // Show all jobs by default
                     if (data.posts.length > 9) {
                         setShowMore(true);
                     }
@@ -39,12 +41,17 @@ export default function Search() {
         setActiveTab('full'); // Update active tab
         const fullTimeJobs = posts.filter((post) => post.type === 'full');
         setFilteredPosts(fullTimeJobs);
+
+        const first = filteredPosts.slice(0,9);
+        setFirstArray(first);
     };
 
     const getPartTime = () => {
         setActiveTab('part'); // Update active tab
         const partTimeJobs = posts.filter((post) => post.type === 'part');
         setFilteredPosts(partTimeJobs);
+
+        
     };
 
     const showAllJobs = () => {
@@ -55,7 +62,7 @@ export default function Search() {
     return (
 
         <div className="bg-blue-50 dark:bg-slate-700 min-h-screen">
-             {loading && (
+            {loading && (
                 <div className="flex justify-center items-center min-h-screen">
                     <Spinner className="text-center" />
                 </div>

@@ -91,7 +91,7 @@ export default function PosterCompanyInfo() {
       }
     }
   return (
-    <div className='bg-slate-100 dark:bg-gray-900'>
+    <div className=' bg-blue-50 dark:bg-gray-900'>
       <div className='p-3 max-w-3xl mx-auto min-h-screen '>
       <form className="flex flex-col gap-4 mt-3" onSubmit={handleSubmit}>
         <h1 className='text-3xl font-bold'>
@@ -122,7 +122,7 @@ export default function PosterCompanyInfo() {
           <TextInput type='text'  placeholder='requirments' onChange={(e) => setFormData({ ...formData, requirement: e.target.value })}></TextInput>
 
           <div className='bg-slate-100 '>
-            <div className='p-3 max-w-3xl mx-auto bg-gray-100 dark:bg-gray-800'>
+            <div className='p-3 max-w-3xl mx-auto bg-blue-50 dark:bg-gray-800'>
               <div className="flex flex-col flex-wrap gap-4 m-10" >
                 <div className='flex flex-row gap-2'>
 

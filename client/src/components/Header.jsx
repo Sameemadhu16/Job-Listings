@@ -81,8 +81,8 @@ export default function Header() {
             <span className="block truncate text-sm font-medium mb-2">{currentUser.email}</span>
             {
               currentUser.role === 'jobSeeker' ?
-              <Label className="text-sm font-bold text-blue-600 border-2 border-blue-400 px-2 py-1">Finder</Label> :
-              <Label className="text-sm font-bold text-blue-600 border-2 border-blue-400 px-2 py-1">Poster</Label>
+              <Label className="text-sm font-bold text-blue-600 border-2 border-blue-400 dark:text-blue-200 dark:border-blue-200 px-2 py-1">Finder</Label> :
+              <Label className="text-sm font-bold text-blue-600 border-2 border-blue-400 dark:text-blue-200 dark:border-blue-200 px-2 py-1">Poster</Label>
             }
 
           </Dropdown.Header>

@@ -7,7 +7,7 @@ export default function About() {
   const [isPosterOpen, setPosterOpen] = useState(false);
 
   return (
-    <div className="bg-gray-100 dark:bg-slate-700 text-gray-800 dark:text-gray-200 min-h-screen py-10">
+    <div className="bg-blue-50 dark:bg-slate-700 text-gray-800 dark:text-gray-200 min-h-screen py-10">
       <div className="max-w-6xl mx-auto p-6">
         {/* Header Section */}
 

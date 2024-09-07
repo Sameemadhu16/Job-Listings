@@ -65,7 +65,7 @@ export default function Contact() {
    //console.log(formData);
    
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 min-h-screen py-10">
+    <div className="bg-blue-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 min-h-screen py-10">
       <div className="max-w-6xl mx-auto p-6">
         
         {/* Header Section */}
