@@ -34,6 +34,7 @@ import Homeh from './pages/Home'
 import Search from './pages/Search';
 
 import { useSelector } from 'react-redux'
+import AdminPage from './pages/AdminPage';
 
 
 
@@ -43,6 +44,7 @@ export default function App() {
   
   const {currentUser}= useSelector((state) => state.user)
   const role = currentUser ? currentUser.role : '';
+  const admin = currentUser ? currentUser.isAdmin : false;
   return (
     <BrowserRouter>
       <Header />
@@ -58,6 +60,11 @@ export default function App() {
           <Route path='/' element={<Home/>}/>
           <Route path="/contact" element={<Contact />} />
           <Route path='/search' element={<Search/>}></Route> 
+          
+          {
+            admin &&
+            <Route path='/admin-dashboard' element={<AdminPage/>} />
+          }
 
           {
             role == 'jobSeeker' && 

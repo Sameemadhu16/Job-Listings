@@ -90,9 +90,9 @@ export const signout= async (req, res, next) => {
         .status(200)
         .json('User has been signed out');
     } catch (error) {
-      next(error);
+        next(error);
     }
-  };
+    };
 
 export const getUser = async (req,res,next) => {
     try{

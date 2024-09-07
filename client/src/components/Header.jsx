@@ -122,6 +122,10 @@ export default function Header() {
         }
         <Navbar.Link href="/contact" className={`${isActive('/contact') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>Customer Supports</Navbar.Link>
         <Navbar.Link href="/about" className={`${isActive('/about') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>About Us</Navbar.Link>
+        {
+          currentUser.isAdmin && 
+          <Navbar.Link href="/admin-dashboard" className={`${isActive('/contact') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>Admin DashBoard</Navbar.Link>
+        }
       </Navbar.Collapse>
       ):("")}
     </Navbar>
