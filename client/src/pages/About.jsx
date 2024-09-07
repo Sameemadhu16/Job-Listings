@@ -7,15 +7,15 @@ export default function About() {
   const [isPosterOpen, setPosterOpen] = useState(false);
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 min-h-screen py-10">
+    <div className="bg-blue-50 dark:bg-slate-700 text-gray-800 dark:text-gray-200 min-h-screen py-10">
       <div className="max-w-6xl mx-auto p-6">
         {/* Header Section */}
 
-        <h1 className="text-4xl text-blue-500 dark:text-green-500 font-bold text-center mb-8 animate-pulse">About Job Pilot</h1>
+        <h1 className="text-4xl text-blue-800  font-bold text-center mb-8 ">About Job Pilot</h1>
         
         {/* Introduction */}
         <p className="text-center text-lg mb-8">
-          Welcome to <span className="font-semibold text-blue-500 dark:text-green-500">Job Pilot</span>! Your trusted platform for connecting <span className="font-semibold text-blue-500 dark:text-green-500">Job Seekers</span> and <span className="font-semibold text-blue-500 dark:text-green-500">Job Posters</span> in an easy-to-use, feature-rich environment.
+          Welcome to <span className="font-semibold text-blue-800 ">Job Pilot</span>! Your trusted platform for connecting <span className="font-semibold text-blue-500 ">Job Seekers</span> and <span className="font-semibold text-blue-500 ">Job Posters</span> in an easy-to-use, feature-rich environment.
 
         </p>
 
@@ -29,7 +29,7 @@ export default function About() {
               onClick={() => setSeekerOpen(!isSeekerOpen)}
             >
 
-              <h2 className="text-2xl font-bold flex items-center text-blue-500 dark:text-green-500">
+              <h2 className="text-2xl font-bold flex items-center text-blue-800 ">
                 <FaUsers className="mr-2" /> For Job Seekers
               </h2>
               <span className='text-red-700 '>{isSeekerOpen ? '-' : '+'}</span>
@@ -49,7 +49,7 @@ export default function About() {
               onClick={() => setPosterOpen(!isPosterOpen)}
             >
 
-              <h2 className="text-2xl font-bold flex items-center text-blue-500 dark:text-green-500">
+              <h2 className="text-2xl font-bold flex items-center text-blue-800 ">
                 <FaBriefcase className="mr-2" /> For Job Posters
               </h2>
               <span className='text-red-700'>{isPosterOpen ? '-' : '+'}</span>
@@ -65,7 +65,7 @@ export default function About() {
           {/* Mission Section */}
           <div className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-lg">
 
-            <h2 className="text-2xl font-bold flex items-center text-blue-500 dark:text-green-500">
+            <h2 className="text-2xl font-bold flex items-center text-blue-800 ">
 
               <FaBullseye className="mr-2" /> Our Mission
             </h2>
@@ -77,25 +77,25 @@ export default function About() {
           {/* Why Choose Us Section */}
           <div className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-lg">
 
-            <h2 className="text-2xl font-bold flex items-center text-blue-500 dark:text-green-500">
+            <h2 className="text-2xl font-bold flex items-center text-blue-800 ">
               <AiOutlineCheckCircle className="mr-2 " /> Why Choose Job Pilot?
 
             </h2>
             <ul className="mt-4 space-y-3">
               <li className="flex items-center space-x-2 hover:text-blue-500 transition duration-300">
-                <AiOutlineCheckCircle className="text-green-500" />
+                <AiOutlineCheckCircle className="text-blue-500" />
                 <span>Seamless job application process for job seekers</span>
               </li>
               <li className="flex items-center space-x-2 hover:text-blue-500 transition duration-300">
-                <AiOutlineCheckCircle className="text-green-500" />
+                <AiOutlineCheckCircle className="text-blue-500" />
                 <span>Efficient job posting and applicant management for employers</span>
               </li>
               <li className="flex items-center space-x-2 hover:text-blue-500 transition duration-300">
-                <AiOutlineCheckCircle className="text-green-500" />
+                <AiOutlineCheckCircle className="text-blue-500" />
                 <span>User-friendly interface with intuitive navigation</span>
               </li>
               <li className="flex items-center space-x-2 hover:text-blue-500 transition duration-300">
-                <AiOutlineCheckCircle className="text-green-500" />
+                <AiOutlineCheckCircle className="text-blue-500" />
                 <span>Regular updates and alerts for new job opportunities</span>
               </li>
             </ul>

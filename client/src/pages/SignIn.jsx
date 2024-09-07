@@ -60,8 +60,8 @@ const SignIn = () => {
 }
 
     return (
-        <div className='min-h-screen bg-gray-100 flex items-center justify-center'>
-            <div className="w-3/4  bg-white p-10 m-20 mr-16 flex flex-col justify-center rounded-lg shadow-lg">
+        <div className='min-h-screen bg-gray-100 dark:bg-slate-700 flex items-center justify-center'>
+            <div className="w-3/4  bg-white  p-10 m-20 mr-16 flex flex-col justify-center rounded-lg shadow-lg">
 
                     <div className='flex flex-col lg:flex-row justify-center items-center gap-5'>
                         <div className='justify-center items-center'>
@@ -70,7 +70,7 @@ const SignIn = () => {
                                     <img src={logo} alt="Logo" className="h-28 " />
                                 </div>
                                 <div className='text-start'>
-                                    <h2 className="text-3xl font-bold font-sans">Welcome Back</h2>
+                                    <h2 className="text-3xl font-bold font-sans dark:text-black">Welcome Back</h2>
                                     <p className="text-gray-500 mb-4 text-sm">Simplify Your Job Search and Find the Perfect Opportunity</p>
                                 </div>
                             </div>

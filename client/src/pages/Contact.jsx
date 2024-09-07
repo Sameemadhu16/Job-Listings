@@ -65,11 +65,11 @@ export default function Contact() {
    //console.log(formData);
    
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 min-h-screen py-10">
+    <div className="bg-blue-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 min-h-screen py-10">
       <div className="max-w-6xl mx-auto p-6">
         
         {/* Header Section */}
-        <h1 className="text-4xl font-bold text-center mb-8 animate-pulse text-blue-500 dark:text-green-500">
+        <h1 className="text-4xl font-bold text-center mb-8  text-blue-800 ">
           Customer Support
         </h1>
         
@@ -80,8 +80,8 @@ export default function Contact() {
         <div className="space-y-12">
           {/* FAQ Section */}
           <div className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-lg">
-            <h2 className="text-3xl font-bold mb-6 flex items-center justify-center text-blue-500 dark:text-green-500">
-              <FaQuestionCircle className="text-blue-500 dark:text-green-500 mr-2" /> Frequently Asked Questions (FAQ)
+            <h2 className="text-3xl font-bold mb-6 flex items-center justify-center text-blue-800 ">
+              <FaQuestionCircle className="text-blue-800  mr-2" /> Frequently Asked Questions (FAQ)
             </h2>
             <div className="space-y-4">
               {/* FAQ Item */}
@@ -136,12 +136,12 @@ export default function Contact() {
 
           {/* Contact Us Section */}
           <div className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-lg">
-            <h2 className="text-3xl font-bold mb-6 flex items-center justify-center text-blue-500 dark:text-green-500">
+            <h2 className="text-3xl font-bold mb-6 flex items-center justify-center text-blue-800 ">
               <FaEnvelope className="mr-2" /> Contact Us
             </h2>
 
             {/* Contact Form */}
-            <form className="space-y-4" onSubmit={handleSubmit}>
+            <form className="space-y-4 " onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-black dark:text-white">
                 <input
                   type="text"
@@ -167,12 +167,14 @@ export default function Contact() {
                 placeholder="Your Message"
                 className="w-full p-3 border border-gray-300 dark:bg-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-32"
               />
+              <div className=''>
               <button
                 type="submit"
-                className="w-full bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition duration-300"
+                className=" bg-blue-500 text-white py-2 w-full rounded-lg font-semibold hover:bg-blue-600 transition duration-300"
               >
                 Submit
               </button>
+              </div>
             </form>
 
             {/* Success/Error Message */}
