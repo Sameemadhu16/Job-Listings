@@ -77,7 +77,7 @@ export default function PosterDashOverview() {
 
     
   return (
-    <div className=' w-full bg-blue-50'>
+    <div className=' w-full bg-blue-50 dark:bg-slate-700'>
     <div className='flex-wrap flex gap-4 m-8'>
         <div className='w-full flex gap-2 items-center justify-center '>
             <div className='flex flex-col p-3 bg-blue-100 gap-4 md:w-72 w-full rounded-md shadow-md'>
