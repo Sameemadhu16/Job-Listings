@@ -220,7 +220,7 @@ const Home = () => {
               key={post._id}
               style={{
                 ...getSlideStyle(index), // Merge the sliding styles
-                backgroundImage: `url('https://www.vpi-inc.com/wp-content/uploads/2017/06/10871_Jobs-Search-Resources_848x400_JUL17-848x400.png')`, // Background image
+                backgroundImage: `url(${post.image})`, // Background image
               }}
               className="flex justify-center items-center bg-cover bg-center rounded-lg shadow-lg"
             >

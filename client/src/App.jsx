@@ -59,7 +59,9 @@ export default function App() {
         <Route element={<PrivateRoute/>}>
           <Route path='/' element={<Home/>}/>
           <Route path="/contact" element={<Contact />} />
-          <Route path='/search' element={<Search/>}></Route> 
+          <Route path='/search' element={<Search/>}></Route>
+          <Route path = '/full-post/:postId' element={<Fpost/>}/>
+          <Route path='/post/:postId' element={<Post/>}/> 
           
           {
             admin &&
@@ -99,9 +101,8 @@ export default function App() {
               <Route path='/create-p-job' element={<CreatePost/>}/>
 
               <Route path = '/create-f-job' element={<PosterCompanyInfo/>}/>
-              <Route path = '/full-post/:postId' element={<Fpost/>}/>
               <Route path = '/update-full-post/:postId' element={<FpostUpdate/>}/>
-              <Route path='/post/:postId' element={<Post/>}/>
+              
             </>
           }
 

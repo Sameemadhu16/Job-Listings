@@ -4,6 +4,11 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from 'flowbite-react';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { app } from '../firebase'; // Make sure your firebase.js or config file is imported properly
+import   {CircularProgressbar} from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+
 
 export default function CreatePost() {
   
@@ -11,10 +16,55 @@ export default function CreatePost() {
   const [publishError,setPublishError] = useState(null);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [imageUploadProgress,setImageUploadProgress] = useState(null);
+  const [imageUploadProgressFailure,setImageUploadFailure] = useState(null);
+  const [file,setFile] = useState(null)
+
+  const handleUploadImage = async()=>{
+    try{
+      if(!file){
+        setImageUploadFailure('Please select an image')
+        return ;
+      }
+      setImageUploadFailure(null);
+      const storage=getStorage(app);
+      const fileName = new Date().getTime()+'-'+file.name;
+      const storageRef = ref(storage,fileName);
+      const uploadTask = uploadBytesResumable(storageRef,file);
+      uploadTask.on(
+        'state_changed',
+        (snapshot) =>{
+          const progress = 
+          (snapshot.bytesTransferred/snapshot.totalBytes) *100;
+          setImageUploadProgress(progress.toFixed(0));
+        },
+        (error) =>{
+          setImageUploadFailure('Image upload fial')
+          setImageUploadProgress(null);
+        },
+        ()=>{
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
+        {
+          setImageUploadProgress(null);
+          setImageUploadFailure(null);
+          setFormData({...formData,image:downloadURL});
+        });
+
+      }
+      )
+
+    }
+    catch(error){
+      console.log(error);
+      setImageUploadFailure("Image upload Failed")
+      setImageUploadProgress(null);
+      console.log(error);
+    }
+  }
   
   const handleSubmit = async (e) =>{
     e.preventDefault();
-console.log(formData)
+
     if (!formData.title || !formData.venue || !formData.date || !formData.sTime || !formData.eTime || !formData.salary,!formData.members, !formData.gender) {
       return setPublishError('All fields are required');
   
@@ -52,6 +102,20 @@ console.log(formData)
       <div className="w-full md:w-1/2 lg:w-1/3 bg-white dark:bg-slate-800 dark:text-white p-10 flex flex-col justify-center rounded-lg shadow-xl">
         <h1 className="text-center p-10 text-5xl font-bold ">Part Time Job</h1>
         <form onSubmit={handleSubmit}>
+
+        <div className='flex gap-4 items-center justify-between border-4
+          border-blue-500 border-dotted p-3'
+          > 
+            <FileInput type="file" accept='image/*' onChange={(e) => setFile(e.target.files[0])}/>
+            <button type='button' onClick={handleUploadImage} className='bg-blue-500 hover:bg-blue-600 px-1 py-2 rounded-lg text-white' size='sm' outline >
+            {
+            imageUploadProgress  ? (
+              <div>
+              <CircularProgressbar className='h-20 text-white bg-white' value={imageUploadProgress} text={`${imageUploadProgress||0}%`}/>
+              </div>):('Upload image')
+            }
+            </button>
+          </div>
 
           <div className="mb-4">
             <label htmlFor="title">Title</label>
