@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { Button , Label } from 'flowbite-react';
 import { HiHeart, HiOutlineBookmark, HiOutlineHeart } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function SeekerCartPost({ post, ShowAddcart }) {
 
   const [favorite,setFavorite] = useState(true);
   const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.user);
+  console.log(currentUser.currentUser)
   
 
   const handleFavorite = () => {
@@ -40,21 +43,24 @@ export default function SeekerCartPost({ post, ShowAddcart }) {
             {post.type === 'full' ? 'FULL TIME' : 'PART TIME'}
           </Label>
           
-          <Button outline gradientDuoTone="tealToBlue" className="flex items-center gap-2" onClick={handleFavorite}>
-            {
-              favorite ? 
-              (<>
-                <HiOutlineHeart className="text-xl" />
-                Add to Favourite
-              </>) : (
-                <>
-                <HiHeart className="text-xl" />
-                Remove from Favourite
-              </>
-              )
+          {
+            currentUser.currentUser.role === 'jobSeeker' && 
+              <Button outline gradientDuoTone="tealToBlue" className="flex items-center gap-2" onClick={handleFavorite}>
+              {
+                favorite ? 
+                (<>
+                  <HiOutlineHeart className="text-xl" />
+                  Add to Favourite
+                </>) : (
+                  <>
+                  <HiHeart className="text-xl" />
+                  Remove from Favourite
+                </>
+                )
 
-            }
-          </Button>
+              }
+            </Button>
+          }
         </div>
       </div>
     </div>

@@ -6,14 +6,16 @@ import { TiNews } from 'react-icons/ti'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {HiOutlineExclamationCircle} from 'react-icons/hi'
+import SeekerCartPost from '../components/Seeker.cartPost'
 
 export default function PosterDashOverview() {
 
     const [showMore, setShowMore] = useState(true);
-    const [userPosts, setUserPosts] = useState([]);
+    const [posts, setPosts] = useState([]);
     const [error,setError] = useState(false);
     const [showModal,setShowModal] = useState(false);
     const [postIdDelete,setPostIdDelete] = useState(' ')
+    const [loading,setLoading] = useState(false)
     const [pJob,setPJob] = useState(0);
     const [fJob,setFJob] = useState(0);
     
@@ -30,7 +32,7 @@ export default function PosterDashOverview() {
 
                 if (res.ok) {
                     
-                    setUserPosts(data.allPost);
+                    setPosts(data.allPost);
                     console.log(data.allPost.length)
 
                     const part = data.allPost.filter(post => post.type === 'part');
@@ -55,6 +57,7 @@ export default function PosterDashOverview() {
     },[currentUser.currentUser._id]);
 
     const deleteJob  = async () => {
+
         try{
             const res =  await fetch(`api/post/delete-post/${postIdDelete}/${currentUser.currentUser._id}`,{
                 method:'DELETE',
@@ -64,7 +67,7 @@ export default function PosterDashOverview() {
             if(!res.ok){
                 console.log(data.message);
             }else{
-                setUserPosts((prev) =>
+                setPosts((prev) =>
                 prev.filter((post)=>post._id !== postIdDelete))
                 setShowModal(false);
             }
@@ -79,84 +82,58 @@ export default function PosterDashOverview() {
   return (
     <div className=' w-full bg-blue-50 dark:bg-slate-700 '>
     <div className='flex-wrap flex gap-4 m-8'>
-        <div className='w-full flex gap-2 items-center justify-evenly '>
-            <div className='flex flex-col p-3 bg-blue-100 gap-4 md:w-72 w-full rounded-md shadow-md'>
-                <div className='flex flex-wrap justify-between'>
-                    <div className=''>
-                        <h3 className='text-black text-xl font-semibold'>{pJob}</h3>
-                        <p className='text-slate-500'>Your Part Time Jobs</p>
-                    </div>
-                    <PiHandbagSimpleLight className='bg-blue-400 text-white rounded-full
-                            text-5xl p-3 shadow-lg'/>
-                </div>
+        
+    <div className='w-full flex gap-4 items-center  px-4 py-6'>
+        <div className='flex flex-col p-4 bg-gradient-to-r from-blue-100 to-blue-200 gap-4 md:w-72 w-full rounded-lg shadow-lg transition-all hover:shadow-xl'>
+            <div className='flex justify-between items-center'>
+            <div>
+                <h3 className='text-black text-3xl font-bold'>{pJob}</h3>
+                <p className='text-slate-600'>Your Part Time Jobs</p>
             </div>
-            <div className='flex flex-col p-3 bg-orange-100 gap-4 md:w-72 w-full rounded-md shadow-md'>
-                <div className='flex flex-wrap justify-between'>
-                    <div className=''>
-                        <h3 className='text-black text-xl font-semibold'>{fJob}</h3>
-                        <p className='text-slate-500'>Your Full Time Jobs</p>
-                    </div>
-                    <TiNews className='bg-orange-400 text-white rounded-full
-                        text-5xl p-3 shadow-lg'/>
-                </div>
+            <PiHandbagSimpleLight className='bg-blue-500 text-white rounded-full text-6xl p-4 shadow-md transition-all transform hover:scale-105' />
             </div>
         </div>
+
+        <div className='flex flex-col p-4 bg-gradient-to-r from-orange-100 to-orange-200 gap-4 md:w-72 w-full rounded-lg shadow-lg transition-all hover:shadow-xl'>
+            <div className='flex justify-between items-center'>
+            <div>
+                <h3 className='text-black text-3xl font-bold'>{fJob}</h3>
+                <p className='text-slate-600'>Your Full Time Jobs</p>
+            </div>
+            <TiNews className='bg-orange-500 text-white rounded-full text-6xl p-4 shadow-md transition-all transform hover:scale-105' />
+            </div>
+        </div>
+        </div>
+
     </div>
     
     <div className='flex flex-wrap gap-4 py-3 mx-auto justify-center m-1 '>
         
             <div className='flex flex-col  shadow-md p-2 rounded-md dark:bg-gray-800 w-full m-20'>
                 <h1 className='font-bold text-xl mb-3 text-center'>Jobs You Created</h1>
-                <Table hoverable className='shadow-md'>
-                        <Table.Head>
-                            <Table.HeadCell>Date updated</Table.HeadCell>
-                            <Table.HeadCell>Post image</Table.HeadCell>
-                            <Table.HeadCell>Post title</Table.HeadCell>
-                            <Table.HeadCell>Type</Table.HeadCell>
-                            <Table.HeadCell>Delete</Table.HeadCell>
-                            
-                        </Table.Head>
-                        {userPosts && userPosts.map((post) => (
-                            <Table.Body className='divide-y'>
-                                <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                                    <Table.Cell>
-                                        {new Date(post.updatedAt).toLocaleDateString()}
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        <Link to={post.type === 'part' ? `/post/${post._id}` : `/full-post/${post._id}`}>
-                                            <img
-                                                src={post.image}
-                                                alt={post.title}
-                                                className='w-20 h-10 object-cover bg-gray-500'
-                                            />
-                                        </Link>
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        <Link
-                                            className='font-medium text-gray-900 dark:text-white'
-                                            to={post.type === 'part' ? `/post/${post._id}` : `/full-post/${post._id}`}
-                                        >
-                                            {post.title}
-                                        </Link>
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        <Link
-                                            className='font-medium text-gray-900 dark:text-white'
-                                            to={post.type === 'part' ? `/post/${post._id}` : `/full-post/${post._id}`}
-                                        >
-                                            {post.type}
-                                        </Link>
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        <button className='bg-red-700 px-2 py-1 rounded-lg text-white hover:bg-opacity-90' type='button' onClick={() => {setShowModal(true) 
-                                            setPostIdDelete(post._id)}}>Delete</button>
-                                    </Table.Cell>
-                                    
-                                    
-                                </Table.Row>
-                            </Table.Body>
-                        ))}
-                    </Table>
+                <div className="flex flex-col items-center w-full max-w-4xl mx-auto bg-white dark:bg-gray-800 shadow-md rounded-lg p-4">
+        {loading ? (
+          <div className="flex justify-center items-center h-64">
+            <Spinner aria-label="Loading" />
+          </div>
+        ) : (
+          <div className="flex flex-wrap gap-6 justify-center w-full">
+            {posts.length > 0 ? (
+              posts.map(post => (
+                <>
+                    <div className="flex justify-center w-full">
+                        <SeekerCartPost key={post._id} post={post} ShowAddcart={true} />
+                    </div>
+                    <button className='bg-red-700 hover:bg-red-800 px-2 py-1 rounded-lg text-white' onClick={() => {setShowModal(true) 
+                        setPostIdDelete(post._id)}}>DELETE</button>
+                </>
+              ))
+            ) : (
+              <p className="text-gray-600 dark:text-gray-400 text-center">No jobs available</p>
+            )}
+          </div>
+        )}
+      </div>
                     
                 </div>
             </div>
