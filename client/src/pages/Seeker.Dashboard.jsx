@@ -24,10 +24,9 @@ export default function SeekerDashboard() {
             <SeekerDashSidebar />
             
         </div>
-        
+        <div className="w-full">
             {/*dashboard comp*/}
             {tab === 'dash' && <SeekerDashOverview />}
-            <div className="w-full">
             {/*applied jobs*/}
             {tab === 'appliedjobs' && <SeekerDashAppliedjobs />}
             {/*latest jobs*/}
@@ -37,7 +36,7 @@ export default function SeekerDashboard() {
             
             {/*profile*/}
             {tab === 'profile' && <SeekerProfile />}
-            </div>
+          </div>
     </div>
 
   )

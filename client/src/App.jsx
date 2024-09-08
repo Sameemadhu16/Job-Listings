@@ -34,6 +34,7 @@ import Homeh from './pages/Home'
 import Search from './pages/Search';
 
 import { useSelector } from 'react-redux'
+import AdminPage from './pages/AdminPage';
 
 
 
@@ -43,6 +44,7 @@ export default function App() {
   
   const {currentUser}= useSelector((state) => state.user)
   const role = currentUser ? currentUser.role : '';
+  const admin = currentUser ? currentUser.isAdmin : false;
   return (
     <BrowserRouter>
       <Header />
@@ -57,7 +59,14 @@ export default function App() {
         <Route element={<PrivateRoute/>}>
           <Route path='/' element={<Home/>}/>
           <Route path="/contact" element={<Contact />} />
-          <Route path='/search' element={<Search/>}></Route> 
+          <Route path='/search' element={<Search/>}></Route>
+          <Route path = '/full-post/:postId' element={<Fpost/>}/>
+          <Route path='/post/:postId' element={<Post/>}/> 
+          
+          {
+            admin &&
+            <Route path='/admin-dashboard' element={<AdminPage/>} />
+          }
 
           {
             role == 'jobSeeker' && 
@@ -92,9 +101,8 @@ export default function App() {
               <Route path='/create-p-job' element={<CreatePost/>}/>
 
               <Route path = '/create-f-job' element={<PosterCompanyInfo/>}/>
-              <Route path = '/full-post/:postId' element={<Fpost/>}/>
               <Route path = '/update-full-post/:postId' element={<FpostUpdate/>}/>
-              <Route path='/post/:postId' element={<Post/>}/>
+              
             </>
           }
 

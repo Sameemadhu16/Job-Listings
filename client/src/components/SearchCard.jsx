@@ -25,9 +25,10 @@ export default function SearchCard({ ShowAddcart, showApply, showDelete, post })
         const handleModalClosePart = () => {
             setIsModalOpenPart(false);
         };
+
         
     return (
-        <Link  className="p-4 bg-blue-50 dark:bg-slate-700 rounded-md flex items-center justify-between shadow hover:scale-105 transition-transform duration-150">
+        <Link to={post.type === 'part' ? `/post/${post._id}` : `/full-post/${post._id}`}  className="p-4 bg-blue-50 dark:bg-slate-700 rounded-md flex items-center justify-between shadow hover:scale-105 transition-transform duration-150">
             <div className="flex items-center ">
                 <img
                 src={post.image}
@@ -44,7 +45,7 @@ export default function SearchCard({ ShowAddcart, showApply, showDelete, post })
                     
                 
             </div>
-            <button className="text-white bg-blue-700 px-2 py-1 rounded-lg  hover:scale-105 transition-transform duration-150" onClick={() =>
+            <button className="text-white bg-blue-700 px-2 py-1 rounded-lg  hover:bg-blue-800" onClick={() =>
                 post.type === 'part'
                 ? handleModalOpenPart(post)
                 : handleModalOpen(post)}>Apply</button>

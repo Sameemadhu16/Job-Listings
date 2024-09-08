@@ -4,7 +4,7 @@ import {HiViewGrid,HiClipboardList, HiBell} from "react-icons/hi"
 import {Link, useLocation} from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import {useSelector} from 'react-redux'
-import { FaShoppingCart } from 'react-icons/fa'
+import { FaHeart, FaShoppingCart } from 'react-icons/fa'
 import { FaUser } from 'react-icons/fa'
 
 export default function SeekerDashSidebar() {
@@ -50,8 +50,8 @@ export default function SeekerDashSidebar() {
 
           <Link to="/seeker-dashboard?tab=cart">
 
-            <Sidebar.Item active={tab === "cart"} icon={FaShoppingCart} as="div">
-              Cart
+            <Sidebar.Item active={tab === "cart"} icon={FaHeart} as="div">
+              Favourite
             </Sidebar.Item>
           </Link>
           
