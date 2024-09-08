@@ -75,16 +75,7 @@ const Home = () => {
     fetchUsers();
   }, []);
 
-  // Part-time job carousel effect
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCurrentPartTimeJob((prev) =>
-  //       prev === pJob - 1 ? 0 : prev + 1
-  //     );
-  //   }, 5000); // Change job every 5 seconds
-
-  //   return () => clearInterval(interval);
-  // }, [pJob]);
+  
 
   const hanldeNavigate = () => {
     navigate("/search");
@@ -209,23 +200,27 @@ const Home = () => {
         {posts
           .filter((post) => post.type === "part")
           .map((post, index) => (
-            <div
-              key={post._id}
-              style={{
-                ...getSlideStyle(index), // Merge the sliding styles
-                backgroundImage: `url('https://www.vpi-inc.com/wp-content/uploads/2017/06/10871_Jobs-Search-Resources_848x400_JUL17-848x400.png')`, // Background image
-              }}
-              className="flex justify-center items-center bg-cover bg-center rounded-lg shadow-lg"
-            >
-              <div className="absolute inset-0 bg-black opacity-50 rounded-lg"></div>
-              <div className="relative z-10 text-center  p-6">
-                <h1 className="text-3xl font-bold text-teal-100 mb-6">{post.title}</h1>
-                <p className="text-lg text-slate-200 font-semibold">Venue: <span className="text-white font-serif text-lg">  {post.venue}</span></p>
-                <p className="text-lg text-slate-200 font-semibold">Date: <span className="text-white font-serif text-lg">{new Date(post.date).toLocaleDateString("en-US", {year: "numeric",month: "long",day: "numeric",})}</span></p>
-                <p className="text-lg text-slate-200 font-semibold">Salary: <span className="text-white font-serif text-lg">{post.salary}</span></p>
-                <div className="flex items-center gap-4">
-                  <p className="text-lg text-slate-200 font-semibold">Start At: <span className="text-white font-serif text-lg">{post.sTime}</span></p>
-                  <p className="text-lg text-slate-200 font-semibold">End At:  <span className="text-white font-serif text-lg">{post.eTime}</span></p>
+            <div className="w-full">
+              <div
+                key={post._id}
+                style={{
+                  ...getSlideStyle(index), // Merge the sliding styles
+                  backgroundImage: `url('https://www.vpi-inc.com/wp-content/uploads/2017/06/10871_Jobs-Search-Resources_848x400_JUL17-848x400.png')`, // Background image
+                }}
+                className="flex justify-center items-center bg-cover bg-center rounded-lg shadow-lg w-1/2"
+              />
+
+              <div>
+                <div className="absolute inset-0 bg-black opacity-50 rounded-lg"></div>
+                <div className="relative z-10 text-center  p-6">
+                  <h1 className="text-3xl font-bold text-teal-100 mb-6">{post.title}</h1>
+                  <p className="text-lg text-slate-200 font-semibold">Venue: <span className="text-white font-serif text-lg">  {post.venue}</span></p>
+                  <p className="text-lg text-slate-200 font-semibold">Date: <span className="text-white font-serif text-lg">{new Date(post.date).toLocaleDateString("en-US", {year: "numeric",month: "long",day: "numeric",})}</span></p>
+                  <p className="text-lg text-slate-200 font-semibold">Salary: <span className="text-white font-serif text-lg">{post.salary}</span></p>
+                  <div className="flex items-center gap-4">
+                    <p className="text-lg text-slate-200 font-semibold">Start At: <span className="text-white font-serif text-lg">{post.sTime}</span></p>
+                    <p className="text-lg text-slate-200 font-semibold">End At:  <span className="text-white font-serif text-lg">{post.eTime}</span></p>
+                  </div>
                 </div>
               </div>
             </div>
