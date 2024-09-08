@@ -251,14 +251,14 @@ export default function SeekerProfile() {
     </div>
 
     <div className='relative'>
-      <label htmlFor='mobilenumber' className='absolute -top-3.5 left-3 bg-white dark:bg-slate-700 dark:text-white px-1 text-blue-600 text-sm'>
+      <label htmlFor='mobileNumber' className='absolute -top-3.5 left-3 bg-white dark:bg-slate-700 dark:text-white px-1 text-blue-600 text-sm'>
         Mobile Number
       </label>
       <input
         type='text'
-        id='mobilenumber'
+        id='mobileNumber'
         placeholder='Mobile Number'
-        defaultValue={currentUser?.mobilenumber}
+        defaultValue={currentUser?.mobileNumber}
         onChange={handleChange}
         className='border-2 border-blue-600 dark:border-slate-100 focus:-blue-800 dark:text-white dark:bg-slate-700 rounded-lg w-full px-4 py-2 focus:outline-none focus:ring-0'
       />
