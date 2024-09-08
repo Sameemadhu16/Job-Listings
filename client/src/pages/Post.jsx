@@ -21,6 +21,7 @@ export default function Post() {
     
     useEffect(() => {
         console.log(postId)
+      
             try{
                 const fetchJobs = async () => {
                     const res = await fetch(`/api/post/get-job/${postId}`)
@@ -30,6 +31,7 @@ export default function Post() {
                     if(res.ok){
                         setLoading(false)
                         setPost(data)
+                      
                         
                         
                     }
@@ -70,85 +72,86 @@ export default function Post() {
             <Spinner size='xl'/>
         </div>
     }
-    
-    
-
-
 
     return (
-        <main>
-        {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
-        {error && <p className='text-center my-7 text-2xl text-red-600'>something went wrong!</p>}
-        {post && !loading && !error &&(
-        <div className='min-h-screen bg-gray-100 dark:bg-slate-700 flex items-center justify-center p-4'>
-            <div className='w-7/8 p-8 bg-slate-200 rounded-lg shadow-lg'>
-                <>
-                <div className='flex items-center justify-center mt-10'>
-                    <img src={post.image} alt="" className='max-w-full min-h-1/2' />
-                </div>
-                
-                <div className='p-4'>
-                <h1 className='text-3xl font-semibold'>
-                    {post.title}{' - LKR '}{post.salary}
-                </h1>
-                <p className='flex items-center text-center  gap-1 text-slate-600 text-sm dark:text-slate-200'>
-                    <FaMapMarkerAlt className='text-green-700 dark:text-slate-200' />
-                    {post.venue}
-                </p>
-                <div className='flex gap-4 py-3'>
-                    <p className='bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md'>
-                    {post.type === 'part' ? 'Part Time' : 'For Sale'}
-                    </p>
-
-                    <button type='button' onClick={handleUpdateClick} className='bg-green-700 w-full max-w-[200px] hover:bg-green-800 text-white text-center p-1 rounded-md'>
-                        Change Details
-                    </button>
-                    
-                </div>
-                
-                <ul className='flex gap-4 text-green-800 text-sm flex-wrap items-center font-semibold mt-4'>
-                    <li className='flex items-center gap-1 whitespace-nowrap dark:text-slate-200'>
-                        <FaCalendar className='text-lg ' />
-                            Date : {new Date(post.date).toLocaleDateString()}
-                    </li>
-                    <li className='flex items-center gap-1 whitespace-nowrap dark:text-slate-200'>
-                        <FaClock className='text-lg ' />
-                            Start At : {post.sTime}
-                    </li>
-                    <li className='flex items-center gap-1 whitespace-nowrap dark:text-slate-200'>
-                        <FaClock className='text-lg' />
-                        End At : {post.eTime }
-                    </li>
-                    <li className='flex items-center gap-1 whitespace-nowrap dark:text-slate-200'>
-                        <FaStopwatch className='text-lg' />
-                            Duration : {
-                                parseInt(post.sTime) < parseInt(post.eTime) ?  parseInt(post.eTime)-parseInt(post.sTime): 24 - (parseInt(post.sTime) - parseInt(post.eTime))
-                            }h
-                    </li>
-                    <li className='flex items-center gap-1 whitespace-nowrap dark:text-slate-200'>
-                    <FaUser className='text-lg' />
-                        Members : {post.members}
-                    </li>
-
-                    <li className='flex items-center gap-1 whitespace-nowrap dark:text-slate-200'>
-                        <FaMale className='text-lg' />
-                        { 
-                            post.gender === 'male' ? 'Male' : 
-                            post.gender === 'female' ? 'Female' : 
-                            'Both'
-                        }
-
-                    </li>
-                </ul>
-                
-            
-                </div>
-
-                </>
-            </div>
-        </div>
-        )}
+    <main>
+  {loading && <p className="text-center my-7 text-2xl">Loading...</p>}
+  {error && <p className="text-center my-7 text-2xl text-red-600">Something went wrong!</p>}
+  {post && !loading && !error && (
+    <div className=" bg-gray-100 dark:bg-slate-700 flex items-start justify-center p-4">
+    {/* Two Column Layout */}
+    <div className="w-full md:w-4/5 lg:w-11/12 grid grid-cols-1 md:grid-cols-2 gap-3 p-8 bg-white dark:bg-slate-800 rounded-lg shadow-lg">
+      
+      {/* Left Column: Image Section */}
+      <div className="flex items-center justify-center">
+        <img src={post.image} alt="" className="rounded-lg shadow-lg object-cover max-w-full h-auto md:h-96" />
+      </div>
+      
+      {/* Right Column: Post Details Section */}
+      <div className="flex flex-col gap-3 justify-center">
         
-    </main>
+          <h1 className="text-3xl font-semibold mb-4 dark:text-white">
+          
+            {post.title} - LKR {post.salary}
+          </h1>
+          <p className="flex items-center text-slate-600 text-sm dark:text-slate-200 mb-4">
+            <FaMapMarkerAlt className="text-green-700 dark:text-slate-200 mr-2" />
+            {post.venue}
+          </p>
+          
+          <div className="flex gap-4 mb-4">
+            <p className="bg-red-900 text-white text-center py-2 px-4 rounded-md">
+              {post.type === 'part' ? 'Part Time' : 'For Sale'}
+            </p>
+  
+            <button type="button" onClick={handleUpdateClick} className="bg-green-700 hover:bg-green-800 text-white py-2 px-4 rounded-md">
+              Change Details
+            </button>
+          </div>
+  
+          <ul className="space-y-3 text-green-800 text-sm font-semibold gap-5">
+            <div className='flex gap-5'>
+                <li className="flex items-center dark:text-slate-200">
+                <FaCalendar className="text-lg mr-2" />
+                Date: {new Date(post.date).toLocaleDateString()}
+                </li>
+                <li className="flex items-center dark:text-slate-200">
+                <FaClock className="text-lg mr-2" />
+                Start At: {post.sTime}
+                </li>
+                <li className="flex items-center dark:text-slate-200">
+                <FaClock className="text-lg mr-2" />
+                End At: {post.eTime}
+                </li>
+
+            </div>
+            <div className='flex gap-5'>
+                <li className="flex items-center dark:text-slate-200">
+                <FaStopwatch className="text-lg mr-2" />
+                Duration: {parseInt(post.sTime) < parseInt(post.eTime) 
+                    ? parseInt(post.eTime) - parseInt(post.sTime)
+                    : 24 - (parseInt(post.sTime) - parseInt(post.eTime))}h
+                </li>
+                <li className="flex items-center dark:text-slate-200">
+                <FaUser className="text-lg mr-2" />
+                Members: {post.members}
+                </li>
+                <li className="flex items-center dark:text-slate-200">
+                <FaMale className="text-lg mr-2" />
+                {post.gender === 'male' ? 'Male' : post.gender === 'female' ? 'Female' : 'Both'}
+                </li>
+            </div>
+          </ul>
+        
+  
+      </div>
+    </div>
+  </div>
+  
+  )}
+</main>
+
+
+
     )
 }
