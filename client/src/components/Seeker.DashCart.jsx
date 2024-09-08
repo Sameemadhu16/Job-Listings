@@ -31,7 +31,7 @@ export default function SeekerDashCart() {
   return (
     <div>
       <div className="flex flex-row flex-wrap gap-2 p-3 bg-blue-50 dark:bg-slate-700">
-          <div className='flex  flex-wrap gap-2 items-center justify-center'>
+          <div className='flex mt-6 gap-6 flex-wrap items-center ml-3 justify-center'>
           {userCart.length > 0 && (
           userCart.map((post) => (
             <SeekerCartPost
