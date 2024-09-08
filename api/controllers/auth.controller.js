@@ -97,17 +97,16 @@ export const signout= async (req, res, next) => {
 export const getUser = async (req,res,next) => {
     try{
 
-        const userId = req.params.comment.userid;
-        console.log("auth con");
+        //const userId = req.params.co
         
         const totalUsers = await User.countDocuments();
         const users = await User.find().sort({createdAt: -1})
-        const user = await User.findById(userId);
+        //const user = await User.findById(userId);
 
         res.status(200).json({
             totalUsers,
             users,
-            user
+           //user
         })
     }catch (error) {
         next(error);

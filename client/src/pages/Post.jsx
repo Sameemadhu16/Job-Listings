@@ -104,9 +104,12 @@ export default function Post() {
               {post.type === 'part' ? 'Part Time' : 'For Sale'}
             </p>
   
-            <button type="button" onClick={handleUpdateClick} className="bg-green-700 hover:bg-green-800 text-white py-2 px-4 rounded-md">
+          {
+            currentUser.role === 'jobPoster' && 
+              <button type="button" onClick={handleUpdateClick} className="bg-green-700 hover:bg-green-800 text-white py-2 px-4 rounded-md">
               Change Details
             </button>
+          }
           </div>
   
           <ul className="space-y-3 text-green-800 text-sm font-semibold gap-5">
