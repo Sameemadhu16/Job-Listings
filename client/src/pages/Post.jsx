@@ -105,7 +105,7 @@ export default function Post() {
             </p>
   
           {
-            currentUser.role === 'jobPoster' && 
+            currentUser.currentUser.role === "jobPoster" && 
               <button type="button" onClick={handleUpdateClick} className="bg-green-700 hover:bg-green-800 text-white py-2 px-4 rounded-md">
               Change Details
             </button>
