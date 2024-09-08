@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Checkbox, Label, TextInput, Card, Alert, Spinner } from 'flowbite-react';
+import {  Spinner } from 'flowbite-react';
 import { signInStart,signInSuccess,signInFailure } from '../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -26,7 +26,6 @@ const SignIn = () => {
     if (!formData.email || !formData.password || !formData.confirmPassword) {
         return setErrorMessage('All feilds are required')
     }
-
     // Password confirmation check
     if (formData.password !== formData.confirmPassword) {
         return setErrorMessage('Passwords does not match');
