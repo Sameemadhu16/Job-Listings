@@ -83,12 +83,11 @@ export default function App() {
               <Route path="/poster-dashboard" element={<PosterDashboard />}>
               <Route index element={<PosterDashOverview />} />
               <Route path="employeeprofile" element={<PosterDashEmployeeProfile />} />
-              <Route path="my-jobs" element={<PosterDashMyJobs />}>
+              <Route path="my-jobs" element={<PosterDashMyJobs />}/>
               <Route index element={<PosterCompanyInfo />} />
-              <Route path="founding" element={<PosterFoundInfo />} />
-              <Route path="social-media" element={<PosterSocialMediaInfo />} />
-              <Route path="account-setting" element={<PosterCompanyInfo />} />
-              </Route>
+              <Route path='create-p-job' element={<CreatePost/>}/>
+              
+              
               <Route path="saved-candidate" element={<PosterDashSavedCandidate />}></Route>
               <Route path="settings" element={<PosterSetting />}>
               <Route index element={<PosterCompanyInfo />} />
@@ -98,7 +97,7 @@ export default function App() {
               <Route path="/parttime-job-post" element={<PartTimeJobPost />} />
               <Route path="/fulltime-job-post" element={<FulltimeJobPost />} />
               <Route path='/update-post/:postId' element={<UpdatePost/>}/>
-              <Route path='/create-p-job' element={<CreatePost/>}/>
+              
 
               <Route path = '/create-f-job' element={<PosterCompanyInfo/>}/>
               <Route path = '/update-full-post/:postId' element={<FpostUpdate/>}/>
