@@ -18,7 +18,7 @@ export default function FooterCom() {
               <li><a href="#" className="hover:text-gray-400">Method</a></li>
               <li><a href="#" className="hover:text-gray-400">Services</a></li>
               <li><a href="#" className="hover:text-gray-400">About Job Listing</a></li>
-              <li><a href="#" className="hover:text-gray-400">Contact</a></li>
+              <li><a href="/contact" className="hover:text-gray-400">Contact</a></li>
               
             </ul>
           </div>
