@@ -19,6 +19,30 @@ const responseScheme = new mongoose.Schema({
             required:false,
            
         },
+        name:{
+            type:String,
+            required:true,
+        },
+        address:{
+            type:String,
+            required:false,
+           
+        },
+        age:{
+            type:String,
+            required:false,
+           
+        },
+        nic:{
+            type:String,
+            required:false,
+           
+        },
+        email:{
+            type:String,
+            required:false,
+           
+        },
         
 
 
@@ -26,5 +50,5 @@ const responseScheme = new mongoose.Schema({
 },
 { timestamps: true }
 );
-const response = mongoose.model("response", responseScheme);
-export default response;
+const resp = mongoose.model("resp", responseScheme);
+export default resp;

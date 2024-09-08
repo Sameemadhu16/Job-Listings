@@ -1,20 +1,42 @@
-import response from "../models/savecandidate.js"
+import mongoose from "mongoose";
+import resp from "../models/savecandidate.js"
 
-export const createseekerresponse  = async(req,res,next)=>{
+export const applyForJob  = async(req,res,next)=>{
+    const {posterId,seekerId,postId,response,name,address,age,nic,email} = req.body;
     try {
-        const seekerresponse = await response.findById(
-            req.params.postId,req.params.userId,
-            
-            {
-                $set:{
-                    response:req.body.response,
-                }
-            }
+        const application = new resp({
+            posterId,seekerId,postId,response,name,address,age,nic,email
+        }
         )
+        const savedApplication = await application.save();
+        res.send(200).json({savedApplication});
     } catch (error) {
         next(error)
     }
 }
+
+export const allApplications = async (req, res, next) => {
+    try {
+      const allApplicants = await resp.find({});
+      res.status(200).json({ allApplicants });
+    } catch (error) {
+      next(error);
+    }
+  };
+  
+
+export const findApplicant = async(req,res,next)=>{
+    const seekerId = req.params;
+    try{
+        const seeker = await resp.find(seekerId);
+        res.status(200).json({seeker});
+    }catch(error){
+        next(error)
+    }
+}
+
+
+
 
 export const createposterresponse  = async(req,res,next)=>{
     
