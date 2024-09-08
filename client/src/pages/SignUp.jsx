@@ -166,7 +166,7 @@ const SignUp = () => {
                     <div className="hidden md:block w-1/2 items-center justify-center ">
                         <div className="text-center">
                             <img
-                                src="https://news.umanitoba.ca/wp-content/uploads/2021/11/Career-Month-3-UM-Today--1200x799.png"
+                                src="https://www.freepik.com/premium-ai-image/job-hiring-poster_308293987.htm#fromView=search&page=1&position=24&uuid=84ad1b1f-acc0-4985-b5cf-531f56b269d2"
                                 alt="Illustration"
                                 className="mx-auto rounded-lg shadow-lg"
                             />
