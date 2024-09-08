@@ -1,3 +1,4 @@
+import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
 import { errorHandler } from "../utils/error.js";
 import bcryptjs from 'bcryptjs'
@@ -5,7 +6,7 @@ import bcryptjs from 'bcryptjs'
 export const getJobPosters = async (req, res, next) => {
 
 
-    //check jobposter true or false
+   
 
     try {
         const jobposter = await User.find({ role: 'jobPoster' })
@@ -103,6 +104,7 @@ export const deleteJobposter = async (req, res, next) => {
 
     try {
         await User.findByIdAndDelete(req.params.userId);
+        
 
         res.status(200).json({ message: "Jobposter delete Successfully" })
 

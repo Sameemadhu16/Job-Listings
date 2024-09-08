@@ -77,9 +77,9 @@ export default function PosterDashOverview() {
 
     
   return (
-    <div className=' w-full bg-blue-50 dark:bg-slate-700'>
+    <div className=' w-full bg-blue-50 dark:bg-slate-700 '>
     <div className='flex-wrap flex gap-4 m-8'>
-        <div className='w-full flex gap-2 items-center justify-center '>
+        <div className='w-full flex gap-2 items-center justify-evenly '>
             <div className='flex flex-col p-3 bg-blue-100 gap-4 md:w-72 w-full rounded-md shadow-md'>
                 <div className='flex flex-wrap justify-between'>
                     <div className=''>
@@ -104,8 +104,8 @@ export default function PosterDashOverview() {
     </div>
     
     <div className='flex flex-wrap gap-4 py-3 mx-auto justify-center m-1 '>
-        <div className='flex flex-wrap gap-4 py-3 mx-auto justify-center w-full ml-2 mr-2 '>
-            <div className='flex flex-col md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800 justify-center w-full'>
+        
+            <div className='flex flex-col  shadow-md p-2 rounded-md dark:bg-gray-800 w-full m-20'>
                 <h1 className='font-bold text-xl mb-3 text-center'>Jobs You Created</h1>
                 <Table hoverable className='shadow-md'>
                         <Table.Head>
@@ -160,7 +160,7 @@ export default function PosterDashOverview() {
                     
                 </div>
             </div>
-        </div>
+        
 
         <Modal show = {showModal} onClose={() => setShowModal(false)} popupsize='md'>
             <Modal.Header/>
