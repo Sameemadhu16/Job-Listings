@@ -12,6 +12,7 @@ import jobseekerRoutes from './routes/jobseeker.route.js'
 import jobposterRoutes from './routes/jobposter.route.js'
 import responseRoutes from './routes/savecandidate.js'
 import cors from 'cors'
+
 dotenv.config();
 
 mongoose.connect("mongodb+srv://ilakshitha7921:ilakshitha7921@cluster0.gfhczos.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")

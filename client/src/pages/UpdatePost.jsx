@@ -90,9 +90,9 @@ export default function CreatePost() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-10">
-      <div className="w-full md:w-1/2 lg:w-1/3 bg-white p-10 flex flex-col justify-center rounded-lg shadow-xl">
-        <h1 className="text-center p-10 text-5xl font-bold">Change Job details</h1>
+    <div className="min-h-screen dark:bg-slate-700 flex items-center justify-center p-10">
+      <div className="w-full dark:bg-slate-600 md:w-1/2 lg:w-1/3 bg-white p-10 flex flex-col justify-center rounded-lg shadow-xl">
+        <h1 className="text-center p-10 text-4xl font-bold">Change Job details</h1>
         <form onSubmit={handleSubmit}>
 
           <div className="mb-4">
@@ -101,7 +101,7 @@ export default function CreatePost() {
               type="text"
               id="title"
               name="title"
-              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              className="w-full py-2 dark:text-slate-500 px-4 border border-gray-300 rounded-md"
               placeholder="Title"
               onChange={handleChange}
               value={post.title}
@@ -114,7 +114,7 @@ export default function CreatePost() {
               type="text"
               id="venue"
               name="venue"
-              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              className="w-full py-2 dark:text-slate-500 px-4 border border-gray-300 rounded-md"
               placeholder="Venue"
               onChange={handleChange}
               value={post.venue}
@@ -127,7 +127,7 @@ export default function CreatePost() {
               type="date"
               id="date"
               name="date"
-              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              className="w-full dark:text-slate-500 py-2 px-4 border border-gray-300 rounded-md"
               placeholder="Date"
               onChange={handleChange}
             />
@@ -140,7 +140,7 @@ export default function CreatePost() {
               id="sTime"
               name="sTime"
               value={post.sTime}
-              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              className="w-full py-2 px-4 border dark:text-slate-500 border-gray-300 rounded-md"
               onChange={handleChange}
             />
           </div>
@@ -152,7 +152,7 @@ export default function CreatePost() {
               id="eTime"
               name="eTime"
               value={post.eTime}
-              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              className="w-full py-2 px-4 border dark:text-slate-500 border-gray-300 rounded-md"
               onChange={handleChange}
             />
           </div>
@@ -164,7 +164,7 @@ export default function CreatePost() {
               id="salary"
               name="salary"
               value={post.salary}
-              className="w-full py-2 px-4 border border-gray-300 rounded-md"
+              className="w-full py-2 px-4 border dark:text-slate-500 border-gray-300 rounded-md"
               onChange={handleChange}
             />
           </div>
@@ -179,7 +179,7 @@ export default function CreatePost() {
                 max={10}
                 min={1}
                 value={post.members}
-                className="w-full py-2 px-4 border border-gray-300 rounded-md"
+                className="w-full py-2 dark:text-slate-500 px-4 border border-gray-300 rounded-md"
                 onChange={handleChange}
               />
             </div>
@@ -191,7 +191,7 @@ export default function CreatePost() {
                 id="gender"
                 name="gender"
                 value={post.gender}
-                className="w-full py-2 px-4 border border-gray-300 rounded-md"
+                className="w-full py-2 px-4 border dark:text-slate-500 border-gray-300 rounded-md"
                 onChange={handleChange}
               >
                 <option value="both">Both</option>

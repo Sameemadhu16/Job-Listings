@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import seekerImage from "../images/seeker.jpg";
 import ringsImage from "../images/ring-r.png";
 import { Spinner } from "flowbite-react";
-import { FaBriefcase, FaUserTie, FaMapMarkerAlt } from "react-icons/fa";
+import { FaBriefcase, FaUserTie, FaMapMarkerAlt, FaLocationArrow, FaCalendarTimes, FaPlayCircle, FaHourglassEnd, FaHourglassStart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import JobPostCard from "../components/JobPostCard";
 
@@ -62,7 +62,6 @@ const Home = () => {
     
     
 
-
   useEffect(() => {
     setLoading(true);
     const fetchUsers = async () => {
@@ -81,16 +80,7 @@ const Home = () => {
     fetchUsers();
   }, []);
 
-  // Part-time job carousel effect
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCurrentPartTimeJob((prev) =>
-  //       prev === pJob - 1 ? 0 : prev + 1
-  //     );
-  //   }, 5000); // Change job every 5 seconds
-
-  //   return () => clearInterval(interval);
-  // }, [pJob]);
+  
 
   const hanldeNavigate = () => {
     navigate("/search");
@@ -127,8 +117,7 @@ const Home = () => {
   };
 
   return (
-
-    <div className="relative flex flex-col items-center bg-blue-50 dark:bg-slate-700 min-h-screen p-4 lg:p-10">
+    <div className="relative flex flex-col items-center  dark:bg-slate-700 bg-blue-50 min-h-screen p-4 lg:p-10">
       {loading && (
         <div className="flex justify-center items-center min-h-screen">
           <Spinner className="text-center" />
@@ -218,21 +207,51 @@ const Home = () => {
           .map((post, index) => (
             <div
               key={post._id}
-              style={{
-                ...getSlideStyle(index), // Merge the sliding styles
-                backgroundImage: `url(${post.image})`, // Background image
-              }}
-              className="flex justify-center items-center bg-cover bg-center rounded-lg shadow-lg"
+              className="w-full flex items-center dark:bg-slate-600 bg-slate-50 p-8 shadow-lg rounded-lg" // Changed to flex-row for left-right layout
+              style={{ ...getSlideStyle(index) }} // Keep animation unchanged
             >
-              <div className="absolute inset-0 bg-black opacity-50 rounded-lg"></div>
-              <div className="relative z-10 text-center  p-6">
-                <h1 className="text-3xl font-bold text-teal-100 mb-6">{post.title}</h1>
-                <p className="text-lg text-slate-200 font-semibold">Venue: <span className="text-white font-serif text-lg">  {post.venue}</span></p>
-                <p className="text-lg text-slate-200 font-semibold">Date: <span className="text-white font-serif text-lg">{new Date(post.date).toLocaleDateString("en-US", {year: "numeric",month: "long",day: "numeric",})}</span></p>
-                <p className="text-lg text-slate-200 font-semibold">Salary: <span className="text-white font-serif text-lg">{post.salary}</span></p>
-                <div className="flex items-center gap-4">
-                  <p className="text-lg text-slate-200 font-semibold">Start At: <span className="text-white font-serif text-lg">{post.sTime}</span></p>
-                  <p className="text-lg text-slate-200 font-semibold">End At:  <span className="text-white font-serif text-lg">{post.eTime}</span></p>
+              {/* Left Column: Job Image */}
+              <div
+                style={{
+                  backgroundImage: `url(${post.image})`, // Background image
+                }}
+                className="w-1/2 h-full bg-cover bg-center rounded-l-lg shadow-lg"
+              >
+                {/* Additional content or overlay can be added here if needed */}
+              </div>
+
+              {/* Right Column: Job Details */}
+              <div className="w-1/2 h-full p-6 bg-gradient-to-r from-white to-gray-200 dark:from-slate-500 dark:to-slate-50 rounded-r-lg shadow-lg ">
+                <div className="justify-center">
+                  <h1 className="text-3xl mt-10 font-bold dark:text-black text-gray-600 mb-6">{post.title}</h1>
+                  <p className="text-lg text-slate-500 font-semibold flex gap-3 text-center mb-6">
+                    <FaLocationArrow className="dark:text-slate-700 text-cyan-700" size={24}/>
+                    <span className="dark:text-slate-700 text-slate-400 font-serif text-lg">{post.venue}</span>
+                  </p>
+                  <p className="text-lg text-slate-500 font-semibold flex gap-3 text-center mb-6">
+                    <FaCalendarTimes className="dark:text-slate-700 text-cyan-700" size={24}/>
+                    <span className="dark:text-slate-700 text-slate-400 font-serif text-lg">
+                      {new Date(post.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </span>
+                  </p>
+                  
+                  <div className="flex  gap-6">
+                    <p className="text-lg text-slate-500 font-semibold flex gap-3 text-center mb-6">
+                      <FaHourglassStart className="dark:text-slate-700 text-cyan-700" size={24}/>
+                      <span className="dark:text-slate-700 text-slate-400 font-serif text-lg">{post.sTime}</span>
+                    </p>
+                    <p className="text-lg text-slate-500 font-semibold flex gap-3 text-center mb-6">
+                      <FaHourglassEnd className="dark:text-slate-700 text-cyan-700" size={24}/>
+                      <span className="dark:text-slate-700 text-slate-400 font-serif text-lg">{post.eTime}</span>
+                    </p>
+                  </div>
+                  <p className="text-xl dark:text-slate-700 text-slate-500 font-bold flex gap-3 text-center mb-6">
+                    Salary: <span className="dark:text-slate-700 text-slate-400 font-serif text-xl">LKR {post.salary}</span>
+                  </p>
                 </div>
               </div>
             </div>

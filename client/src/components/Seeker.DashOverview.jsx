@@ -80,7 +80,7 @@ export default function SeekerDashOverview() {
       </div>
 
 
-      <div className="flex flex-col items-center w-full max-w-4xl mx-auto bg-white dark:bg-gray-800 shadow-md rounded-lg p-4">
+      <div className="flex flex-col items-center w-full max-w-4xl mx-auto bg-gray-100 dark:bg-gray-800 shadow-md rounded-lg p-4">
         <h1 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-4">Latest Jobs</h1>
         {loading ? (
           <div className="flex justify-center items-center h-64">
@@ -90,7 +90,7 @@ export default function SeekerDashOverview() {
           <div className="flex flex-wrap gap-6 justify-center w-full">
             {posts.length > 0 ? (
               posts.map(post => (
-                <div className="flex justify-center w-full">
+                <div className="flex justify-center w-full gap-4">
                   <SeekerCartPost key={post._id} post={post} ShowAddcart={true} />
                 </div>
               ))

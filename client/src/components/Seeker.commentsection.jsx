@@ -15,6 +15,7 @@ export default function DashComments({ isOpen, onClose, postId }) {
   const [commentToDelete, setcommentToDelete] = useState(null);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     if (comment.length > 200) {
       return;
@@ -111,7 +112,12 @@ export default function DashComments({ isOpen, onClose, postId }) {
   };
 
 return (
-    <Modal show={isOpen} onClose={onClose} size='lg'>
+    <Modal show={isOpen}
+    onClose={(e) => {
+      e.stopPropagation(); // Prevent click from closing the modal
+      onClose(); // Handle modal close
+    }}
+    size='lg'>
       <Modal.Header>
         Comments
       </Modal.Header>

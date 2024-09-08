@@ -92,8 +92,8 @@ export const getJobSeekerByID = async(req,res,next) =>{
   console.log(req.user)
 
   try {
-    const jobseeker = await User.findById(req.user.id);
-
+    const jobseeker = await User.findById(req.params.userId);
+    
 
     if (jobseeker.role!="jobSeeker"){
         return next(404, "job seeker not found");
