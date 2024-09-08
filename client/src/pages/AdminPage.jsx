@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Spinner , Modal , Button } from 'flowbite-react';
 import {HiOutlineExclamationCircle} from 'react-icons/hi'
 import AdminCard from '../components/AdminCard';
+import { useSelector } from 'react-redux';
 
 export default function AdminPage() {
 
@@ -10,7 +11,9 @@ export default function AdminPage() {
     const [posts, setPosts] = useState([]);
     const [users,setUsers] = useState([]);
     const [showMore, setShowMore] = useState(false);
-    const [activeTab, setActiveTab] = useState('users'); // New state for active tab
+    const [activeTab, setActiveTab] = useState('users');
+    const [postIdDelete, setPostIdDelete] = useState(''); // New state for active tab
+    const { currentUser } = useSelector((state) => state.user);
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -94,7 +97,7 @@ export default function AdminPage() {
     const handleDelete = async () => {
         
         try{
-            const res =  await fetch(`api/post/delete-post/${postIdDelete}/${currentUser.currentUser._id}`,{
+            const res =  await fetch(`api/post/delete-post/${postIdDelete}/${currentUser._id}`,{
                 method:'DELETE',
             });
             const data = await res.json();
@@ -107,7 +110,7 @@ export default function AdminPage() {
                 setShowModal(false);
             }
         }catch(error){
-            setError(error);
+            console.log(error);
         }
     }
 
@@ -170,7 +173,10 @@ export default function AdminPage() {
                         {filteredPosts.map((post) => (
                             <div className='flex flex-col gap-1'>
                                 <AdminCard key={post._id} post={post} />
-                                <button className='bg-red-700 hover:bg-red-800 py-1 text-white rounded-lg w-1/4' onClick={setShowModal}>Delete</button>
+                                <button className='bg-red-700 hover:bg-red-800 py-1 text-white rounded-lg w-1/4' onClick={() => {
+                                                setShowModal(true);
+                                                setPostIdDelete(post._id);
+                                            }}>Delete</button>
                             </div>
                         ))}
                     </div>
