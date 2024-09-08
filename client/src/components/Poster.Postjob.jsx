@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import SettingNavBar from './CreatePostNavBar'
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import PosterCompanyInfo from './Poster.CompanyInfo';
+
 
 export default function PosterPostjob() {
 

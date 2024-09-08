@@ -91,10 +91,10 @@ export default function PosterCompanyInfo() {
       }
     }
   return (
-    <div className=' bg-blue-50 dark:bg-gray-900'>
-      <div className='p-3 max-w-3xl mx-auto min-h-screen '>
+    <div className='bg-blue-50 dark:bg-gray-900 dark:text-'>
+      <div className='p-3 max-w-3xl mx-auto min-h-screen  bg-blue-50'>
       <form className="flex flex-col gap-4 mt-3" onSubmit={handleSubmit}>
-        <h1 className='text-3xl font-bold'>
+        <h1 className='text-3xl font-bold mt-5'>
             Create Full Time Job 
         </h1>
           <div className='flex flex-col gap-4 sm:flex-row justify-between'>
