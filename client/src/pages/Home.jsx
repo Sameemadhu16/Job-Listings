@@ -47,7 +47,7 @@ const Home = () => {
                 const sortedFull = full.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
                 // Get the first 3 most recent posts
-                const recentFullPosts = sortedFull.slice(0, 6);
+                const recentFullPosts = sortedFull.slice(0, 8);
                 setFirst(recentFullPosts)
                 
             }

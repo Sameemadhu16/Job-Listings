@@ -98,7 +98,7 @@ export const updateJobposter = async (req, res, next) => {
 
 
 export const deleteJobposter = async (req, res, next) => {
-    if (!req.user.role == "jobPoster" && req.user.id !== req.params.userId) {
+    if ((!req.user.role == "jobPoster" && req.user.id !== req.params.userId)||!req.user.isAdmin) {
         return next(errorHandler(403, "You are not allowed to delete this user"))
     }
 

@@ -5,7 +5,7 @@ import CompanyDetailsModal from './Seeker.CompanyDetailsModal';
 import SeekerPartTimeDetailsModel from './Seeker.PartTimeDetailsModel';
 
 export default function AdminCard({ ShowAddcart, showApply, showDelete, post }) {
-console.log(post)
+//console.log(post)
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalOpenPart, setIsModalOpenPart] = useState(false);
 
