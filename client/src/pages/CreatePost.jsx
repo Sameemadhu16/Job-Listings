@@ -98,7 +98,8 @@ export default function CreatePost() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-10 bg-blue-50">
+    <div className="min-h-screen flex items-center justify-center p-10 bg-blue-50 w-full
+    ">
       <div className="w-full md:w-1/2 lg:w-1/3 bg-white dark:bg-slate-800 dark:text-white p-10 flex flex-col justify-center rounded-lg shadow-xl">
         <h1 className="text-center p-10 text-5xl font-bold ">Part Time Job</h1>
         <form onSubmit={handleSubmit}>

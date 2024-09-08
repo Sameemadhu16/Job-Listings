@@ -9,6 +9,7 @@ export default function SeekerDashOverview() {
   const [pJob, setPJob] = useState(0);
   const [fJob, setFJob] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [alert, showAlert] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -19,11 +20,13 @@ export default function SeekerDashOverview() {
 
         if (res.ok) {
           setPosts(data.posts);
+          setLoading(false);
           setPost(data.posts.length);
           setPJob(data.posts.filter(post => post.type === 'part').length);
           setFJob(data.posts.filter(post => post.type === 'full').length);
         } else {
           console.log(data.message);
+          setLoading(false);
         }
         setLoading(false);
       } catch (error) {
