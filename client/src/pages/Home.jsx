@@ -185,8 +185,8 @@ const Home = () => {
         </div>
 
       {/* Footer Statistics Section */}
-      <footer className="w-full bg-white dark:bg-slate-800 py-6 mt-20 shadow-lg ">
-        <div className="flex justify-around w-full lg:w-10/12 mx-auto">
+      <footer className="w-5/6 bg-white dark:bg-slate-800 py-6 mt-20 shadow-lg">
+        <div className="flex justify-around w-3/4 lg:w-10/12 mx-auto">
           <div className="text-center">
             <div className=" flex items-center gap-1">
                 <FaBriefcase className="text-blue-500" size={24} />
@@ -212,7 +212,7 @@ const Home = () => {
       </footer>
 
       {/* Part-time job carousel */}
-      <div className="relative w-3/4 flex justify-center overflow-hidden h-96 mt-6 mb-6">
+      <div className="relative w-5/6 flex justify-center overflow-hidden h-[500px] mt-6 mb-6">
         {posts
           .filter((post) => post.type === "part")
           .map((post, index) => (
@@ -220,7 +220,7 @@ const Home = () => {
               key={post._id}
               style={{
                 ...getSlideStyle(index), // Merge the sliding styles
-                backgroundImage: `url('https://www.vpi-inc.com/wp-content/uploads/2017/06/10871_Jobs-Search-Resources_848x400_JUL17-848x400.png')`, // Background image
+                backgroundImage: `url(${post.image})`, // Background image
               }}
               className="flex justify-center items-center bg-cover bg-center rounded-lg shadow-lg"
             >
@@ -239,7 +239,7 @@ const Home = () => {
           ))}
       </div>
 
-      <div className="flex flex-wrap gap-2 mt-3 justify-center">
+      <div className="flex flex-wrap gap-4 mt-3 justify-center">
         {first.map((post) => (
           <JobPostCard post={post} key={post._id} />
         ))}
