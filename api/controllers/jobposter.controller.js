@@ -104,7 +104,7 @@ export const deleteJobposter = async (req, res, next) => {
 
     try {
         await User.findByIdAndDelete(req.params.userId);
-        await Post.findByIdAndDelete(req.params.userId);
+        
 
         res.status(200).json({ message: "Jobposter delete Successfully" })
 
