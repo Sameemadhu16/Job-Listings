@@ -61,17 +61,17 @@ const SignIn = () => {
 
     return (
         <div className='min-h-screen bg-gray-100 dark:bg-slate-700 flex items-center justify-center'>
-            <div className="w-3/4  bg-white  p-10 m-20 mr-16 flex flex-col justify-center rounded-lg shadow-lg">
+            
 
-                    <div className='flex flex-col lg:flex-row justify-center items-center gap-5'>
-                        <div className='justify-center items-center'>
-                            <div className="max-w-md ">
+                    <div className='flex flex-col dark:bg-slate-600 lg:flex-row justify-center items-center w-3/4  rounded-lg shadow-lg'>
+                        <div className='w-1/2 dark:bg-slate-600 dark:text-black bg-white p-8 z-10 rounded-lg rounded-r-none'>
+                            <div className="max-w-md dark:text-white">
                                 <div className="">
                                     <img src={logo} alt="Logo" className="h-28 " />
                                 </div>
                                 <div className='text-start'>
-                                    <h2 className="text-3xl font-bold font-sans dark:text-black">Welcome Back</h2>
-                                    <p className="text-gray-500 mb-4 text-sm">Simplify Your Job Search and Find the Perfect Opportunity</p>
+                                    <h2 className="text-3xl font-bold font-sans">Welcome Back</h2>
+                                    <p className="text-gray-500 dark:text-gray-300 mb-4 text-sm">Simplify Your Job Search and Find the Perfect Opportunity</p>
                                 </div>
                             </div>
                             <form onSubmit={handleSubmit} className='w-full mb-6' >
@@ -128,27 +128,28 @@ const SignIn = () => {
                                     )}
                                     </button>
                             </form>
+                            <div className="text-center mt-4">
+                                <p className="text-gray-600 dark:text-gray-300">
+                                    Create an new Account{' '}
+                                    <a href="/sign-up" className="text-blue-500 font-semibold hover:underline">
+                                        Create an Account
+                                    </a>
+                                </p>
+                            </div>
                         </div>
-                    <div className="hidden md:block w-1/2 items-center justify-center ">
-                            <div className="text-center">
+                    <div className="hidden md:block w-1/2 items-center justify-center h-auto">
+                            <div className="text-center -mt-6 items-start rounded-lg">
                                 <img
-                                    src="https://news.umanitoba.ca/wp-content/uploads/2021/11/Career-Month-3-UM-Today--1200x799.png"
+                                    src="https://mir-s3-cdn-cf.behance.net/project_modules/max_632/49bcfd78364175.5ca3009cb692f.gif"
                                     alt="Illustration"
-                                    className="mx-auto rounded-lg shadow-lg w-3/4"
+                                    className="mx-auto w-full rounded-lg"
                         />
                             </div>
                     </div>
                 </div>
 
-                    <div className="text-center mt-4">
-                        <p className="text-gray-600">
-                            Create an new Account{' '}
-                            <a href="/sign-up" className="text-blue-500 font-semibold hover:underline">
-                                Create an Account
-                            </a>
-                        </p>
-                    </div>
-            </div>
+                    
+            
         </div>
   );
 };

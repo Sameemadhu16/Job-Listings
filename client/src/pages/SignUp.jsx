@@ -62,16 +62,16 @@ const SignUp = () => {
 
     return (
         <div className='min-h-screen bg-gray-100 dark:bg-slate-700 flex justify-center items-center'>
-            <div className="w-3/4  bg-white  p-10 m-20 mr-16 flex flex-col justify-center items-center rounded-lg shadow-lg">
-                <div className='flex flex-col lg:flex-row justify-center items-center gap-8'>
-                    <div className='justify-center items-center'>
-                        <div className="max-w-md mx-auto">
+            
+                <div className='flex flex-col  dark:bg-slate-600 lg:flex-row justify-center items-center w-3/4  rounded-lg shadow-lg'>
+                    <div className='w-1/2 dark:text-black  dark:bg-slate-600 bg-white p-8 z-10 rounded-lg rounded-r-none'>
+                        <div className="max-w-md mx-auto  dark:text-white">
                             <div className="mb-1">
                                 <img src={logo} alt="Logo" className="h-20" />
                             </div>
                             <div className='text-start'>
-                                <h2 className="text-3xl font-bold font-sans dark:text-black">Create an Account</h2>
-                                <p className="text-gray-500 mb-6">Simplify Your Job Search and Find the Perfect Opportunity</p>
+                                <h2 className="text-3xl font-bold font-sans ">Create an Account</h2>
+                                <p className="text-gray-500 dark:text-gray-300 mb-4 text-sm">Simplify Your Job Search and Find the Perfect Opportunity</p>
                             </div>
                         </div>
 
@@ -163,26 +163,28 @@ const SignUp = () => {
                                 )}
                             </button>
                         </form>
+                        <div className="text-center mt-4">
+                            <p className="text-gray-600 dark:text-gray-300">
+                                Already have an account?{' '}
+                                <a href="/sign-in" className="text-blue-500 font-semibold hover:underline">
+                                    Log In
+                                </a>
+                            </p>
+                        </div>
                     </div>
-                    <div className="hidden md:block w-1/2 items-center justify-center mr-24 mt-36">
+                    <div className="hidden md:block w-1/2 items-center justify-center h-auto">
                         <div className="text-center -mt-6 items-start rounded-lg">
                             <img
-                                src="https://news.umanitoba.ca/wp-content/uploads/2021/11/Career-Month-1-UM-Today.png"
-                                alt="Illustration"
-                                className="mx-auto rounded-lg shadow-lg"
+                            src="https://media.licdn.com/dms/image/D4E12AQEJfOREP1iNFg/article-cover_image-shrink_600_2000/0/1683060943298?e=2147483647&v=beta&t=W9T9z7fNUB66tdNxn0_dt2m155B4qJXnwNzRZ2r8QbI"
+                            alt="Illustration"
+                            className="mx-auto w-full rounded-lg"
                             />
                         </div>
                     </div>
+
                 </div>
-                <div className="text-center mt-4">
-                    <p className="text-gray-600">
-                        Already have an account?{' '}
-                        <a href="/sign-in" className="text-blue-500 font-semibold hover:underline">
-                            Log In
-                        </a>
-                    </p>
-                </div>
-            </div>
+                
+            
         </div>
     );
 };
