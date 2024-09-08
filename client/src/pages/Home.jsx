@@ -221,7 +221,7 @@ const Home = () => {
               </div>
 
               {/* Right Column: Job Details */}
-              <div className="w-1/2 h-full p-6 bg-gradient-to-r from-purple-50 to-purple-100 dark:from-slate-500 dark:to-slate-50 rounded-r-lg shadow-lg ">
+              <div className="w-1/2 h-full p-6 bg-gradient-to-r from-white to-gray-200 dark:from-slate-500 dark:to-slate-50 rounded-r-lg shadow-lg ">
                 <div className="justify-center">
                   <h1 className="text-3xl mt-10 font-bold dark:text-black text-gray-600 mb-6">{post.title}</h1>
                   <p className="text-lg text-slate-500 font-semibold flex gap-3 text-center mb-6">
