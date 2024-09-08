@@ -40,7 +40,7 @@ export default function AdminPage() {
         };
 
         fetchPosts();
-    }, []);
+    }, [showModal]);
 
     useEffect(() => {
         try{
