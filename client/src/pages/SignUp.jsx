@@ -61,129 +61,130 @@ const SignUp = () => {
     };
 
     return (
-        <div className='min-h-screen bg-gray-100  dark:bg-slate-700 flex'>
-            <div className="w-full  bg-white dark:bg-slate-800 p-10 m-20 mr-16 flex flex-col justify-center rounded-lg shadow-lg">
-                <div className="max-w-md mx-auto">
-                    <div className="mb-6">
-                        <img src={logo} alt="Logo" className="h-20" />
-                    </div>
-                    <div className='text-start'>
-                        <h2 className="text-3xl font-bold font-sans  dark:text-white">Create an Account</h2>
-                        <p className="text-gray-500 dark:text-gray-300 mb-6">Simplify Your Job Search and Find the Perfect Opportunity</p>
-                    </div>
-                </div>
-
-                <div className='flex flex-col lg:flex-row justify-center items-center gap-5'>
-                    <form onSubmit={handleSubmit} className='w-3/4 mb-6'>
-                        <div className="mb-4">
-                            <input
-                                type="text"
-                                id="username"
-                                name="username"
-                                className="w-full py-2 px-4 border border-gray-300 rounded-md dark:text-black"
-                                placeholder="Name"
-                                onChange={handleChange}
-                            />
+        <div className='min-h-screen bg-gray-100 dark:bg-slate-700 flex justify-center items-center'>
+            
+                <div className='flex flex-col  dark:bg-slate-600 lg:flex-row justify-center items-center w-3/4  rounded-lg shadow-lg'>
+                    <div className='w-1/2 dark:text-black  dark:bg-slate-600 bg-white p-8 z-10 rounded-lg rounded-r-none'>
+                        <div className="max-w-md mx-auto  dark:text-white">
+                            <div className="mb-1">
+                                <img src={logo} alt="Logo" className="h-20" />
+                            </div>
+                            <div className='text-start'>
+                                <h2 className="text-3xl font-bold font-sans ">Create an Account</h2>
+                                <p className="text-gray-500 dark:text-gray-300 mb-4 text-sm">Simplify Your Job Search and Find the Perfect Opportunity</p>
+                            </div>
                         </div>
 
-                        <div className="mb-4">
-                            <input
-                                type="email"
-                                id="email"
-                                name="email" 
-                                className="w-full py-2 px-4 border border-gray-300 rounded-md dark:text-black"
-                                placeholder="Email"
-                                onChange={handleChange}
-                            />
-                        </div>
+                        <form onSubmit={handleSubmit}>
+                            <div className="mb-4">
+                                <input
+                                    type="text"
+                                    id="username"
+                                    name="username"
+                                    className="w-full py-2 px-4 border border-gray-300 rounded-md"
+                                    placeholder="Name"
+                                    onChange={handleChange}
+                                />
+                            </div>
 
-                        <div className="mb-4">
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                className="w-full py-2 px-4 border border-gray-300 rounded-md dark:text-black"
-                                placeholder="Password"
-                                onChange={handleChange}
-                            />
-                        </div>
+                            <div className="mb-4">
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    className="w-full py-2 px-4 border border-gray-300 rounded-md"
+                                    placeholder="Email"
+                                    onChange={handleChange}
+                                />
+                            </div>
 
-                        <div className="mb-4">
-                            <input
-                                type="password"
-                                id="confirmPassword"
-                                name="confirmPassword"
-                                className="w-full py-2 px-4 border border-gray-300 rounded-md dark:text-black"
-                                placeholder="Confirm Password"
-                                onChange={handleChange}
-                            />
-                        </div>
+                            <div className="mb-4">
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    className="w-full py-2 px-4 border border-gray-300 rounded-md"
+                                    placeholder="Password"
+                                    onChange={handleChange}
+                                />
+                            </div>
 
-                        <div className="mb-4">
-                            <input
-                                type="text"
-                                id="mobileNumber"
-                                name="mobileNumber"
-                                className="w-full py-2 px-4 border border-gray-300 rounded-md dark:text-black"
-                                placeholder="Mobile Number"
-                                onChange={handleChange}
-                            />
-                        </div>
+                            <div className="mb-4">
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    className="w-full py-2 px-4 border border-gray-300 rounded-md"
+                                    placeholder="Confirm Password"
+                                    onChange={handleChange}
+                                />
+                            </div>
 
-                        <div className="mb-4">
-                            <select
-                                id="role"
-                                name="role"
-                                className="w-full py-2 px-4 border border-gray-300 rounded-md dark:text-black"
-                                onChange={handleChange}
+                            <div className="mb-4">
+                                <input
+                                    type="text"
+                                    id="mobileNumber"
+                                    name="mobileNumber"
+                                    className="w-full py-2 px-4 border border-gray-300 rounded-md"
+                                    placeholder="Mobile Number"
+                                    onChange={handleChange}
+                                />
+                            </div>
+
+                            <div className="mb-4">
+                                <select
+                                    id="role"
+                                    name="role"
+                                    className="w-full py-2 px-4 border border-gray-300 rounded-md"
+                                    onChange={handleChange}
+                                >
+                                    <option value="">Select Role</option>
+                                    <option value="jobSeeker">Find job</option>
+                                    <option value="jobPoster">Post job</option>
+                                </select>
+                            </div>
+
+                            {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
+
+                            <button
+                                type="submit"
+                                className={`w-full py-2 px-4 bg-blue-500 text-white rounded-md font-semibold transition duration-300 ease-in-out ${
+                                    loading ? 'cursor-not-allowed opacity-75' : 'hover:bg-blue-600'
+                                }`}
+                                disabled={loading}
                             >
-                                <option value="">Select Role</option>
-                                <option value="jobSeeker">Find job</option>
-                                <option value="jobPoster">Post job</option>
-                            </select>
+                                {loading ? (
+                                    <div className="flex items-center justify-center">
+                                        <Spinner size="sm" />
+                                        <span className="pl-3">Loading...</span>
+                                    </div>
+                                ) : (
+                                    'Register'
+                                )}
+                            </button>
+                        </form>
+                        <div className="text-center mt-4">
+                            <p className="text-gray-600 dark:text-gray-300">
+                                Already have an account?{' '}
+                                <a href="/sign-in" className="text-blue-500 font-semibold hover:underline">
+                                    Log In
+                                </a>
+                            </p>
                         </div>
-
-                        {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
-
-                        <button
-                            type="submit"
-                            className={`w-full py-2 px-4 bg-blue-500 text-white rounded-md font-semibold transition duration-300 ease-in-out ${
-                                loading ? 'cursor-not-allowed opacity-75' : 'hover:bg-blue-600'
-                            }`}
-                            disabled={loading}
-                        >
-                            {loading ? (
-                                <div className="flex items-center justify-center">
-                                    <Spinner size="sm" />
-                                    <span className="pl-3">Loading...</span>
-                                </div>
-                            ) : (
-                                'Register'
-                            )}
-                        </button>
-                    </form>
-
-                    <div className="hidden md:block w-1/2 items-center justify-center ">
-                        <div className="text-center">
+                    </div>
+                    <div className="hidden md:block w-1/2 items-center justify-center h-auto">
+                        <div className="text-center -mt-6 items-start rounded-lg">
                             <img
-                                src="https://www.freepik.com/premium-ai-image/job-hiring-poster_308293987.htm#fromView=search&page=1&position=24&uuid=84ad1b1f-acc0-4985-b5cf-531f56b269d2"
-                                alt="Illustration"
-                                className="mx-auto rounded-lg shadow-lg"
+                            src="https://media.licdn.com/dms/image/D4E12AQEJfOREP1iNFg/article-cover_image-shrink_600_2000/0/1683060943298?e=2147483647&v=beta&t=W9T9z7fNUB66tdNxn0_dt2m155B4qJXnwNzRZ2r8QbI"
+                            alt="Illustration"
+                            className="mx-auto w-full rounded-lg"
                             />
                         </div>
                     </div>
-                </div>
 
-                <div className="text-center mt-4">
-                    <p className="text-gray-600 dark:text-gray-200">
-                        Already have an account?{' '}
-                        <a href="/sign-in" className="text-blue-500 font-semibold hover:underline">
-                            Log In
-                        </a>
-                    </p>
                 </div>
-            </div>
-
+                
+            
         </div>
     );
 };

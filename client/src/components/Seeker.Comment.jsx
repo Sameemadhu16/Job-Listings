@@ -12,8 +12,12 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
   useEffect(() => {
     const getUser = async () => {
       try {
+        console.log(comment);
+        console.log();
+        
         const res = await fetch(`/api/jobseeker/get/${comment.userId}`);
         const data = await res.json();
+        console.log(data);
         if (res.ok) {
           setUser(data);
         }
