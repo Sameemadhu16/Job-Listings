@@ -1,51 +1,35 @@
-import { Button, Label } from 'flowbite-react';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import CompanyDetailsModal from './Seeker.CompanyDetailsModal';
-import SeekerPartTimeDetailsModel from './Seeker.PartTimeDetailsModel';
+import { Button, Label } from 'flowbite-react';
+import { HiHeart, HiOutlineHeart } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { FaComment, FaPaperPlane } from 'react-icons/fa';
 import DashComments from './Seeker.commentsection';
+import CompanyDetailsModal from './Seeker.CompanyDetailsModal';
 
-
-export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, post }) {
+export default function SeekerCartPost({ post, ShowAddcart, showApply, showDelete }) {
   const { currentUser } = useSelector((state) => state.user);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalOpenPart, setIsModalOpenPart] = useState(false);
-  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
-  const [cartPostIdToDelete, setCartPostIdToDelete] = useState('');
+  const [favorite, setFavorite] = useState(true);
+  const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState(false);
+  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
 
-
-  const handleModalOpen = () => {
-    setIsModalOpen(true);
-  };
-  
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleModalOpenPart = () => {
-    setIsModalOpenPart(true);
-  };
-
-  const handleModalClosePart = () => {
-    setIsModalOpenPart(false);
-  };
-
-  
-
-  const handleCommentModalOpen = () => {
-    setIsCommentModalOpen(true);
+  const handleCommentModalOpen = (event) => {
+    event.stopPropagation(); // Prevent parent click navigation
+    setIsCommentModalOpen(true); // Set comment modal open
   };
 
   const handleCommentModalClose = () => {
-    setIsCommentModalOpen(false);
+    setIsCommentModalOpen(false); // Close comment modal
   };
-
-  const handleCart = async () => {
+  const handleFavorite = async (event) => {
+    event.stopPropagation(); // Prevent event from triggering parent click handler
     try {
+      setFavorite(!favorite);
+
+      // Add item to cart
       if (!currentUser || !currentUser._id) {
         throw new Error('User ID not available');
       }
@@ -65,17 +49,21 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
 
       console.log('Post added to cart successfully');
       setShowAlert(true);
-
-          // Hide the alert after 3 seconds
+      // Hide the alert after 3 seconds
       setTimeout(() => {
         setShowAlert(false);
       }, 3000);
-      
+
+      // Navigate to cart page
+      // navigate('/seeker-dashboard?tab=cart');
+
     } catch (error) {
       console.error('Error adding post to cart:', error.message);
       // Handle error: display error message or perform other actions
     }
   };
+
+
   const handleAppliedjobs = async () => {
     try {
       if (!currentUser || !currentUser._id) {
@@ -102,90 +90,99 @@ export default function SeekerCartPost({ ShowAddcart, showApply, showDelete, pos
     }
     
   };
+
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+  
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
   const handleApplyButtonClick = () => {
     handleModalOpen();
     handleAppliedjobs();
   };
 
-  const handleContactClick = () => {
-    handleModalOpenPart();
-    handleAppliedjobs();
-  }
-  
-
-  const date = new Date(post.createdAt);
-
-  const time = date.toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true,
-  });
-
-  const formatDate = (dateString) => {
-    const options = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    };
-    return new Intl.DateTimeFormat('en-US', options).format(new Date(dateString));
+  const handleNavigate = () => {
+    post.type === 'full' ? navigate(`/full-post/${post._id}`) : navigate(`/post/${post._id}`);
   };
 
   return (
-    <div className='group relative w-full sm:w-[300px] border border-blue-500 hover:border-2 h-[380px] overflow-hidden rounded-lg transition-all'>
-      {/* Alert message */}
-    {showAlert && (
-      <div className="absolute top-0 left-0 right-0 bg-green-500 text-white text-center p-2 z-50">
-        Item added to cart!
-      </div>
-    )}
-      <Link to={''}>
-        <img
-          src={post.image}
-          alt='post-cover'
-          className='h-[260px] w-full object-cover group-hover:h-[200px] transition-all duration-300 z-20'
-        />
-      </Link>
-      <div className='p-2 flex flex-col gap-2'>
-        <p className='text-lg font-semibold line-clamp-2'>{post.title}</p>
-        <div className='flex text-center items-center justify-between'>
-        <span className='italic text-sm font-semibold'>{post.companyName}</span>
-        <Label className= 'border-2 border-blue-700 dark:border-blue-200 py-2 px-1 text-blue-700 dark:text-blue-200'>{post.type == 'full' ? 'FULL TIME' : 'PART TIME'}</Label>
+    <div  className="bg-slate-50 w-5/6 dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition-transform hover:scale-105 cursor-pointer relative">
+      {showAlert && (
+        <div className="absolute top-0 left-0 right-0 bg-green-500 text-white text-center p-2 z-50">
+          Item added to cart!
         </div>
-        <div className='flex p-2 font-semibold text-sm justify-between'>
-          <p>{time}</p>
-          <p>{formatDate(post.createdAt)}</p>
-        </div>
-        {showApply && showDelete && (
-          <div className='flex items-center text-center gap-2 ml-5'>
-            <button className='px-5 bg-slate-500 hover:bg-slate-600 text-white py-2 rounded-lg' onClick={handleCommentModalOpen}>
-              comments
-            </button>
-            {
-              post.type == 'full' ? (
-                <button className='px-9 bg-blue-500 hover:bg-blue-600 py-2 rounded-lg text-white' onClick={handleApplyButtonClick}>
-                  Apply
-                </button>
-              ):(
-                <button className='px-9 py-2 text-white  bg-blue-500  hover:bg-blue-600 rounded-lg' onClick={handleContactClick}>
-                  Contact
-                </button>
-              )
-            }
+      )}
+      <img
+        src={post.image || 'https://via.placeholder.com/300'}
+        alt={post.title}
+        className="w-full h-40 object-cover"
+        onClick={handleNavigate}
+      />
+      <div className="p-4">
+        <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+          {post.title}
+        </h2>
+        <p className="text-gray-600 dark:text-gray-300 mb-2">{post.company}</p>
+        <p className="text-gray-500 dark:text-gray-400 mb-4">{post.description}</p>
+        <div className="flex justify-between items-center">
+          <Label className="border-2 border-blue-700 dark:border-blue-200 py-2 px-1 text-blue-700 dark:text-blue-200">
+            {post.type === 'full' ? 'FULL TIME' : 'PART TIME'}
+          </Label>
+          {ShowAddcart && (
+            <Button outline gradientDuoTone="tealToBlue" className="flex items-center gap-2" onClick={handleFavorite}>
+              {favorite ? (
+                <>
+                  <HiOutlineHeart className="text-xl" />
+                  Add to Favourite
+                </>
+              ) : (
+                <>
+                  <HiHeart className="text-xl" />
+                  Remove from Favourite
+                </>
+              )}
+            </Button>
+          )}
+          <div className='flex'>
+          {showApply && showDelete && (
+            <Button
+              outline
+              gradientDuoTone="tealToBlue"
+              className="flex items-center gap-2"
+              onClick={handleCommentModalOpen}
+            >
+              <div className='text-center flex items-center'>
+                <FaComment className="text-xl m-1" />
+                Comments
+              </div>
+            </Button>
             
+          )}
+          {showApply && showDelete && post.type == 'full' && (
+            <Button
+              outline
+              gradientDuoTone="tealToBlue"
+              className="flex items-center gap-2"
+              onClick={handleApplyButtonClick}
+            >
+              <div className='text-center flex items-center'>
+                <FaPaperPlane className="text-xl m-1" />
+                Apply
+              </div>
+            </Button>
+            
+          )}
           </div>
-
-          
-        )}
-        {ShowAddcart && (
-          <button className='px-20 py-2 text-white  bg-blue-500  hover:bg-blue-600 rounded-lg' onClick={handleCart}>
-            Add to cart
-          </button>
-        )}
-        
+        </div>
       </div>
+
+      {/* Comment Modal */}
+      <DashComments isOpen={isCommentModalOpen} onClose={handleCommentModalClose} postId={post._id} />
       <CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} showSendCVLink={true} post={post}/>
-      <SeekerPartTimeDetailsModel isOpen={isModalOpenPart} onClose={handleModalClosePart}post={post}/>
-      <DashComments isOpen={isCommentModalOpen} onClose={handleCommentModalClose} postId={post._id}/>
     </div>
   );
 }
