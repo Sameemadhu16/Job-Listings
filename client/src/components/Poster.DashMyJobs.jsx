@@ -92,7 +92,7 @@ export default function PosterDashMyJobs() {
     return (
 
         <div className=' w-full bg-blue-50 dark:bg-gray-900 dark:text-white'>
-            <form className=" w-fit mx-auto space-y-4  mt-5" onSubmit={handleSubmit}>
+            <form className=" w-fit mx-auto space-y-4 p-5" onSubmit={handleSubmit}>
                 <h1 className='text-3xl font-bold'>
                     Create Full Time Job
                 </h1>
@@ -119,7 +119,7 @@ export default function PosterDashMyJobs() {
                 <TextInput type='text' placeholder='essentail' onChange={(e) => setFormData({ ...formData, essential: e.target.value })}></TextInput>
                 <TextInput type='text' placeholder='requirments' onChange={(e) => setFormData({ ...formData, requirement: e.target.value })}></TextInput>
 
-                <div className=''>
+                <div className='mb-5'>
                     <div className='p-3 max-w-3xl mx-auto bg-blue-50 dark:bg-gray-800'>
                         <div className="flex flex-col flex-wrap gap-4 m-10" >
                             <div className='flex flex-row gap-2'>
@@ -156,7 +156,7 @@ export default function PosterDashMyJobs() {
                         </div>
                     </div>
                 </div>
-                <button type='submit' className='w-full bg-blue-500 hover:bg-blue-600 py-2 rounded-lg text-white'>Post Job</button>
+                <button type='submit' className='w-full bg-blue-500 hover:bg-blue-600 py-2 rounded-lg text-white '>Post Job</button>
                 {publishError && <p className="text-red-500 mt-3">{publishError}</p>}
             </form>
         </div>
