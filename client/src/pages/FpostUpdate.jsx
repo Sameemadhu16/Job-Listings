@@ -115,6 +115,7 @@ export default function FpostUpdate() {
                         name='title'
                         onChange={handleChange}
                         value={post.title}
+                        
                     />
 
                     <p className='font-semibold'>Banner Image:</p>

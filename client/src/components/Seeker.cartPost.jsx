@@ -55,7 +55,7 @@ export default function SeekerCartPost({ post, ShowAddcart, showApply, showDelet
       }, 3000);
 
       // Navigate to cart page
-      navigate('/seeker-dashboard?tab=cart');
+      // navigate('/seeker-dashboard?tab=cart');
 
     } catch (error) {
       console.error('Error adding post to cart:', error.message);
