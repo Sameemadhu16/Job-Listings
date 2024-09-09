@@ -15,7 +15,7 @@ export default function SeekerCartPost({ post, ShowAddcart, showApply, showDelet
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
+console.log(currentUser.role)
   const handleCommentModalOpen = (event) => {
     event.stopPropagation(); // Prevent parent click navigation
     setIsCommentModalOpen(true); // Set comment modal open
@@ -132,7 +132,7 @@ export default function SeekerCartPost({ post, ShowAddcart, showApply, showDelet
           <Label className="border-2 border-blue-700 dark:border-blue-200 py-2 px-1 text-blue-700 dark:text-blue-200">
             {post.type === 'full' ? 'FULL TIME' : 'PART TIME'}
           </Label>
-          {ShowAddcart && (
+          {ShowAddcart && currentUser.role === 'jobSeeker' && (
             <Button outline gradientDuoTone="tealToBlue" className="flex items-center gap-2" onClick={handleFavorite}>
               {favorite ? (
                 <>
@@ -147,7 +147,8 @@ export default function SeekerCartPost({ post, ShowAddcart, showApply, showDelet
               )}
             </Button>
           )}
-          <div className='flex'>
+          
+            <div className='flex'>
           {showApply && showDelete && (
             <Button
               outline
@@ -177,6 +178,7 @@ export default function SeekerCartPost({ post, ShowAddcart, showApply, showDelet
             
           )}
           </div>
+          
         </div>
       </div>
 
