@@ -280,7 +280,7 @@ export default function PosterDashEmployeeProfile() {
               <Card className="mt-6">
                 <h2 className="text-lg font-semibold mb-2">Contact Information</h2>
                 <ul className="text-gray-700">
-                  <li className="flex items-center dark:text-white"><span className="mr-2"><GiWorld /></span><span><input id='email' className='dark:bg-gray-800' onChange={handleChange} defaultValue={currentUser.email} /></span> </li>
+                  <li className="flex items-center dark:text-white"><span className="mr-2"><GiWorld /></span><span className='w-full'><input id='email' className='dark:bg-gray-800 w-full' onChange={handleChange} defaultValue={currentUser.email} /></span> </li>
 
                   <li className="flex items-center dark:text-white"><span className="mr-2"><IoCall /></span><span><input id='mobileNumber' className='dark:bg-gray-800' onChange={handleChange} defaultValue={currentUser.mobileNumber} /></span> </li>
                   
