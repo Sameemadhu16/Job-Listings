@@ -131,7 +131,7 @@ export default function SeekerProfile() {
         dispatch(deleteUserFailure(data.message));
       } else {
         dispatch(deleteUserSuccess(data));
-        navigate('/sign-in');
+        navigate('/sign-up');
       }
     } catch (error) {
       dispatch(deleteUserFailure(error.message));

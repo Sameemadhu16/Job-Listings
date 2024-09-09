@@ -12,6 +12,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import { updateStart, updateSuccess, updateFailure, deleteUserFailure, deleteUserSuccess } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
 
 export default function PosterDashEmployeeProfile() {
   const { currentUser,error } = useSelector(state => state.user);
@@ -26,6 +27,7 @@ export default function PosterDashEmployeeProfile() {
   const [showModal, setShowModal] = useState(false);
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
   const [updateUserError, setUpdateUserError] = useState(null);
+  const navigate = useNavigate();
 
 
 
@@ -139,6 +141,7 @@ export default function PosterDashEmployeeProfile() {
 
       if (res.ok) {
         dispatch(deleteUserSuccess(data.message))
+        navigate('/sign-up')
       } else {
         dispatch(deleteUserFailure(data))
       }
