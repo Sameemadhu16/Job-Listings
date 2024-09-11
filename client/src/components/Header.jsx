@@ -96,9 +96,9 @@ export default function Header() {
           <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
         </Dropdown>
           ):(
-            <Link to='/sign-up'>
+            <Link to='/sign-in'>
             <button className="bg-blue-500 px-3 py-2 rounded-lg text-white hover:bg-blue-600" focus-outline>
-              Register
+              Login
             </button>
           </Link> 
   )}

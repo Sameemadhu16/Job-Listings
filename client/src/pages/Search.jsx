@@ -2,99 +2,91 @@ import React, { useEffect, useState } from 'react';
 import SearchCard from '../components/SearchCard';
 import { Spinner, TextInput } from 'flowbite-react';
 import { FaSearch } from 'react-icons/fa';
-import { useLocation } from 'react-router-dom';
+import { useLocation , useNavigate, useParams } from 'react-router-dom';
 
 export default function Search() {
     const [posts, setPosts] = useState([]);
-    const [sidebarData, setSidebarData] = useState({
-        searchTerm: '',
-        sort: 'desc',
-        category: 'uncategorized',
-    });
     const [loading, setLoading] = useState(false);
     const [filteredPosts, setFilteredPosts] = useState([]);
     const [activeTab, setActiveTab] = useState('all');
-    const [visiblePosts, setVisiblePosts] = useState(5);
+    const [visiblePosts, setVisiblePosts] = useState(8);
     const location = useLocation();
-    //const history = useHistory();
+    const [searchTerm,setSearchTerm] = useState('');
+    const [formData,setFormData] = useState({
+        searchTerm: '',
+        sort: 'createdAt',
+        category: 'uncateogory'
+    });
+    const [showMore,setShowMore] = useState(false);
 
     useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                setLoading(true);
-                const res = await fetch('/api/post/get-posts');
-                const data = await res.json();
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchTermFromUrl = urlParams.get('searchTerm');
+        const sortUrl = urlParams.get('sort');
 
-                if (res.ok) {
-                    setPosts(data.posts);
-                    setFilteredPosts(data.posts); // Show all jobs by default
-                } else {
-                    console.log(data.message);
-                }
+        if(searchTermFromUrl || sortUrl) {
+            setFormData({
+                ...formData,
+                searchTerm:searchTermFromUrl,
+                sort:sortUrl,
+            });
+        }
+        const fetchPost = async () => {
+            setLoading(true);
+            const searchQuery = urlParams.toString();
+            const res = await fetch(`/api/post/get-posts?${searchQuery}`)
+            const data = await res.json();
+
+            if(!res.ok){
                 setLoading(false);
-            } catch (error) {
-                console.log(error.message);
-                setLoading(false);
+                console.log(data.message);
+                return;
             }
-        };
+            if(res.ok){
+                setLoading(false);
+                setPosts(data.posts);
+                setFilteredPosts(data.posts);
 
-        fetchPosts();
-    }, []);
+                // Filter posts based on search term from URL
+            if (searchTermFromUrl) {
+                const filtered = data.posts.filter(post =>
+                    post.title.toLowerCase().includes(searchTermFromUrl.toLowerCase())
+                );
+                setFilteredPosts(filtered);
+            }
 
-    useEffect(() => {
-        const urlParams = new URLSearchParams(location.search);
-        const SearchTermFromUrl = urlParams.get('searchTerm') || '';
-        const sortFromUrl = urlParams.get('sort') || 'desc';
-        const categoryFromUrl = urlParams.get('category') || 'uncategorized';
-
-        setSidebarData({
-            searchTerm: SearchTermFromUrl,
-            sort: sortFromUrl,
-            category: categoryFromUrl,
-        });
-
-        // Filter posts based on search term, sort order, and category
-        const filtered = posts.filter((post) =>
-            post.title.toLowerCase().includes(SearchTermFromUrl.toLowerCase())
-        );
-        setFilteredPosts(filtered);
-    }, [location.search, posts]);
+                if(posts.length === 8){
+                    setShowMore(true);
+                }else {
+                    setShowMore(false);
+                }
+            }
+        }
+        fetchPost();
+        
+    },[location.search]);
 
     const handleChange = (e) => {
-        const { id, value } = e.target;
-        setSidebarData({ ...sidebarData, [id]: value });
-    };
+        if(e.target.id === 'searchTerm') {
+            setFormData({...formData, searchTerm: e.target.value});
+        }
+        
+    }
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
 
-    //     // Update the URL with new search params
-    //     const urlParams = new URLSearchParams();
-    //     if (sidebarData.searchTerm) {
-    //         urlParams.set('searchTerm', sidebarData.searchTerm);
-    //     }
-    //     if (sidebarData.sort) {
-    //         urlParams.set('sort', sidebarData.sort);
-    //     }
-    //     if (sidebarData.category) {
-    //         urlParams.set('category', sidebarData.category);
-    //     }
-
-    //     history.push({ search: urlParams.toString() });
-    // };
 
     const getFullTime = () => {
         setActiveTab('full');
         const fullTimeJobs = posts.filter((post) => post.type === 'full');
         setFilteredPosts(fullTimeJobs);
-        setVisiblePosts(5);
+        setVisiblePosts(8);
     };
 
     const getPartTime = () => {
         setActiveTab('part');
         const partTimeJobs = posts.filter((post) => post.type === 'part');
         setFilteredPosts(partTimeJobs);
-        setVisiblePosts(5);
+        setVisiblePosts(8);
     };
 
     const showAllJobs = () => {
@@ -104,8 +96,24 @@ export default function Search() {
     };
 
     const handleShowMore = () => {
-        setVisiblePosts((prev) => prev + 5);
+        setVisiblePosts((prev) => prev + 8);
     };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        //console.log(searchTerm);
+        const urlParams = new URLSearchParams(window.location.search);
+        urlParams.set('searchTerm',searchTerm);
+
+         // Update the URL with the new query parameters without refreshing the page
+        window.history.pushState(null, '', `?${urlParams.toString()}`);
+
+        const filtered = posts.filter(post =>
+            post.title.toLowerCase().includes(formData.searchTerm.toLowerCase())
+        );
+        
+        setFilteredPosts(filtered);  // Update the state with filtered posts
+    }
 
     return (
         <div className="bg-blue-50 dark:bg-slate-700 min-h-screen">
@@ -120,18 +128,15 @@ export default function Search() {
                 </h1>
                 <p className="text-center text-lg text-gray-600 dark:text-white">Search. Explore. Choose.</p>
 
-                <form  className="ml-28 flex text-center items-center gap-3">
+                <form onSubmit={handleSubmit} className="ml-28 flex text-center items-center gap-3">
                     <TextInput
                         placeholder="Search..."
                         id="searchTerm"
                         type="text"
-                        value={sidebarData.searchTerm}
-                        onChange={handleChange}
                         className="pl-10 w-3/4"
+                        value={formData.searchTerm}
+                        onChange={(e) => setFormData({...formData, searchTerm: e.target.value})}  // Update formData
                     />
-                    <button type="submit">
-                        <FaSearch className="text-gray-400 cursor-pointer" />
-                    </button>
                 </form>
 
                 <div className="bg-white dark:bg-blue-950 shadow-md rounded-md p-6 mt-10">
