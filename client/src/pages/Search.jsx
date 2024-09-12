@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SearchCard from '../components/SearchCard';
 import { Spinner, TextInput } from 'flowbite-react';
 import { FaSearch } from 'react-icons/fa';
-import { useLocation , useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 export default function Search() {
     const [posts, setPosts] = useState([]);
@@ -11,109 +11,85 @@ export default function Search() {
     const [activeTab, setActiveTab] = useState('all');
     const [visiblePosts, setVisiblePosts] = useState(8);
     const location = useLocation();
-    const [searchTerm,setSearchTerm] = useState('');
-    const [formData,setFormData] = useState({
+    const [searchTerm, setSearchTerm] = useState('');
+    const [formData, setFormData] = useState({
         searchTerm: '',
         sort: 'createdAt',
-        category: 'uncateogory'
+        category: 'uncategorized',
     });
-    const [showMore,setShowMore] = useState(false);
+    const [showMore, setShowMore] = useState(false);
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         const searchTermFromUrl = urlParams.get('searchTerm');
         const sortUrl = urlParams.get('sort');
 
-        if(searchTermFromUrl || sortUrl) {
+        if (searchTermFromUrl || sortUrl) {
             setFormData({
                 ...formData,
-                searchTerm:searchTermFromUrl,
-                sort:sortUrl,
+                searchTerm: searchTermFromUrl,
+                sort: sortUrl,
             });
         }
-        const fetchPost = async () => {
+
+        const fetchPosts = async () => {
             setLoading(true);
             const searchQuery = urlParams.toString();
-            const res = await fetch(`/api/post/get-posts?${searchQuery}`)
+            const res = await fetch(`/api/post/get-posts?${searchQuery}`);
             const data = await res.json();
 
-            if(!res.ok){
+            if (!res.ok) {
                 setLoading(false);
                 console.log(data.message);
                 return;
             }
-            if(res.ok){
-                setLoading(false);
-                setPosts(data.posts);
-                setFilteredPosts(data.posts);
 
-                // Filter posts based on search term from URL
+            setLoading(false);
+            setPosts(data.posts);
+            setFilteredPosts(data.posts);
+
             if (searchTermFromUrl) {
-                const filtered = data.posts.filter(post =>
-                    post.title.toLowerCase().includes(searchTermFromUrl.toLowerCase())
-                );
-                setFilteredPosts(filtered);
+                filterPosts(searchTermFromUrl, activeTab, data.posts);
             }
 
-                if(posts.length === 8){
-                    setShowMore(true);
-                }else {
-                    setShowMore(false);
-                }
-            }
+            setShowMore(data.posts.length === 8);
+        };
+
+        fetchPosts();
+    }, [location.search, activeTab]);
+
+    const filterPosts = (searchTerm, activeTab, postsToFilter) => {
+        let filtered = postsToFilter.filter(post =>
+            post.title.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+        if (activeTab === 'full') {
+            filtered = filtered.filter(post => post.type === 'full');
+        } else if (activeTab === 'part') {
+            filtered = filtered.filter(post => post.type === 'part');
         }
-        fetchPost();
-        
-    },[location.search]);
 
-    const handleChange = (e) => {
-        if(e.target.id === 'searchTerm') {
-            setFormData({...formData, searchTerm: e.target.value});
-        }
-        
-    }
-
-
-
-    const getFullTime = () => {
-        setActiveTab('full');
-        const fullTimeJobs = posts.filter((post) => post.type === 'full');
-        setFilteredPosts(fullTimeJobs);
-        setVisiblePosts(8);
-    };
-
-    const getPartTime = () => {
-        setActiveTab('part');
-        const partTimeJobs = posts.filter((post) => post.type === 'part');
-        setFilteredPosts(partTimeJobs);
-        setVisiblePosts(8);
-    };
-
-    const showAllJobs = () => {
-        setActiveTab('all');
-        setFilteredPosts(posts);
-        setVisiblePosts(8);
-    };
-
-    const handleShowMore = () => {
-        setVisiblePosts((prev) => prev + 8);
+        setFilteredPosts(filtered);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        //console.log(searchTerm);
         const urlParams = new URLSearchParams(window.location.search);
-        urlParams.set('searchTerm',searchTerm);
+        urlParams.set('searchTerm', formData.searchTerm);
 
-         // Update the URL with the new query parameters without refreshing the page
         window.history.pushState(null, '', `?${urlParams.toString()}`);
 
-        const filtered = posts.filter(post =>
-            post.title.toLowerCase().includes(formData.searchTerm.toLowerCase())
-        );
-        
-        setFilteredPosts(filtered);  // Update the state with filtered posts
-    }
+        filterPosts(formData.searchTerm, activeTab, posts);
+    };
+
+    const handleTabClick = (tab) => {
+        setActiveTab(tab);
+        filterPosts(formData.searchTerm, tab, posts);
+    };
+
+    const handleShowMore = () => {
+        setVisiblePosts(prev => prev + 8);
+    };
 
     return (
         <div className="bg-blue-50 dark:bg-slate-700 min-h-screen">
@@ -135,13 +111,13 @@ export default function Search() {
                         type="text"
                         className="pl-10 w-3/4"
                         value={formData.searchTerm}
-                        onChange={(e) => setFormData({...formData, searchTerm: e.target.value})}  // Update formData
+                        onChange={(e) => setFormData({ ...formData, searchTerm: e.target.value })}
                     />
                 </form>
 
                 <div className="bg-white dark:bg-blue-950 shadow-md rounded-md p-6 mt-10">
                     <h2 className="font-semibold text-lg mb-4 dark:text-white">
-                        Search results for:{' '}
+                        Search results for: 
                         <span className="text-blue-500 dark:text-blue-300 italic">
                             "{activeTab === 'all' ? 'ALL' : activeTab === 'full' ? 'FULL TIME' : 'PART TIME'}"
                         </span>
@@ -154,7 +130,7 @@ export default function Search() {
                                     ? 'text-blue-700 dark:text-blue-200 font-semibold border-b-2 border-blue-200'
                                     : 'text-gray-500 dark:text-gray-300'
                             }`}
-                            onClick={showAllJobs}
+                            onClick={() => handleTabClick('all')}
                         >
                             All
                         </button>
@@ -164,7 +140,7 @@ export default function Search() {
                                     ? 'text-blue-700 dark:text-blue-200 font-semibold border-b-2 border-blue-200'
                                     : 'text-gray-500 dark:text-gray-300'
                             }`}
-                            onClick={getFullTime}
+                            onClick={() => handleTabClick('full')}
                         >
                             Full Time
                         </button>
@@ -174,7 +150,7 @@ export default function Search() {
                                     ? 'text-blue-700 dark:text-blue-200 font-semibold border-b-2 border-blue-200'
                                     : 'text-gray-500 dark:text-gray-300'
                             }`}
-                            onClick={getPartTime}
+                            onClick={() => handleTabClick('part')}
                         >
                             Part Time
                         </button>
@@ -186,18 +162,19 @@ export default function Search() {
                         ))}
                     </div>
                 </div>
-                {
-                    filteredPosts.length === 0 ? (<p className='mt-2 font-bold'>NO RESULT FOUND...</p>) : (
-                        
-                        visiblePosts < filteredPosts.length && (
-                            <p
-                                className="text-center font-bold mt-3 text-blue-500 hover:underline cursor-pointer"
-                                onClick={handleShowMore}
-                            >
-                                SHOW MORE
-                            </p>
-                    ))
-                }
+
+                {filteredPosts.length === 0 ? (
+                    <p className='mt-2 font-bold'>NO RESULT FOUND...</p>
+                ) : (
+                    visiblePosts < filteredPosts.length && (
+                        <p
+                            className="text-center font-bold mt-3 text-blue-500 hover:underline cursor-pointer"
+                            onClick={handleShowMore}
+                        >
+                            SHOW MORE
+                        </p>
+                    )
+                )}
             </main>
         </div>
     );
