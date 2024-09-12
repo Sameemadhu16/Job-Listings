@@ -34,7 +34,8 @@ export default function CreatePost() {
     salary: '',
     members: '',
     gender: '',
-    image:''
+    image:'',
+    description:''
   });
 
   const handleUploadImage = async () => {
@@ -165,6 +166,19 @@ export default function CreatePost() {
                             <img src={post.image} alt='upload' className='h-20 object-cover' />
                         )}
                     </div>
+
+          <div className="mb-4">
+            <label htmlFor="description">Description</label>
+            <input
+              type="text"
+              id="description"
+              name="descrpition"
+              className="w-full py-2 px-4 border dark:bg-white dark:text-gray-600 border-gray-300 rounded-md"
+              placeholder="Description"
+              value={post.description}
+              onChange={handleChange}
+            />
+          </div>
 
           <div className="mb-4">
             <label htmlFor="venue">Venue</label>

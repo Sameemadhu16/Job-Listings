@@ -145,8 +145,7 @@ export default function Post() {
                 </li>
             </div>
           </ul>
-        
-  
+          <p className='mt-3 dark:text-gray-300 text-gray-600 font-semibold'><span className=' dark:text-white font-bold'>Description : </span>{post.description}</p>
       </div>
     </div>
   </div>
