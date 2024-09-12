@@ -112,6 +112,14 @@ export default function PosterDashMyJobs() {
                                 </div>) : ('Upload image')
                         }
                     </button>
+                    {
+                        formData.image && 
+                        <img 
+                        src={formData.image} 
+                        alt="Selected" 
+                        className="w-20 h-20 object-cover rounded-lg shadow-md" 
+                        />
+                    }
                 </div>
                 <p className='font-semibold'>Description :</p>
                 <Textarea placeholder='Write down your company here.Let the candidate know who we are' onChange={(e) => setFormData({ ...formData, description: e.target.value })}></Textarea>

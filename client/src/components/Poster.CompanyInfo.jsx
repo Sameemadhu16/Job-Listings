@@ -61,7 +61,7 @@ export default function PosterCompanyInfo() {
   }
   const handleSubmit = async (e) => {
       e.preventDefault();
-    
+    console.log(formData);
       if (!formData.title || !formData.companyName || !formData.essential || !formData.requirement || !formData.members) {
         return setPublishError('All fields are required');
     }
@@ -114,6 +114,10 @@ export default function PosterCompanyInfo() {
               </div>):('Upload image')
             }
             </button>
+            {
+              formData.image 
+            
+            }
           </div>
           <p className='font-semibold'>Description :</p>
           <Textarea placeholder='Write down your company here.Let the candidate know who we are' onChange={(e) => setFormData({ ...formData, description: e.target.value })}></Textarea>

@@ -33,7 +33,7 @@ export default function PosterDashOverview() {
                 if (res.ok) {
                     
                     setPosts(data.allPost);
-                    console.log(data.allPost.length)
+                    
 
                     const part = data.allPost.filter(post => post.type === 'part');
                     const pJob = part.length;
@@ -44,12 +44,12 @@ export default function PosterDashOverview() {
                     setFJob(fJob);
 
                     
-                    if (data.posts.length < 9) {
+                    if (data.posts.length < 1) {
                         setShowMore(false);
                     }
                 }
             } catch (error) {
-                setError(error)
+                setError(error);
             }
         };
         fetchPosts();
@@ -83,9 +83,9 @@ export default function PosterDashOverview() {
     <div className=' w-full bg-blue-50 dark:bg-slate-700 '>
     <div className='flex-wrap flex gap-4 m-8'>
         
-    <div className='w-full flex gap-4 items-center  px-4 py-6'>
+    <div className='w-full flex gap-4 items-center justify-center  px-4 py-6'>
         <div className='flex flex-col p-4 bg-gradient-to-r from-blue-100 to-blue-200 gap-4 md:w-72 w-full rounded-lg shadow-lg transition-all hover:shadow-xl'>
-            <div className='flex justify-between items-center'>
+            <div className='flex justify-between items-center mx-auto'>
             <div>
                 <h3 className='text-black text-3xl font-bold'>{pJob}</h3>
                 <p className='text-slate-600'>Your Part Time Jobs</p>
@@ -134,9 +134,12 @@ export default function PosterDashOverview() {
           </div>
         )}
       </div>
-                    
-                </div>
-            </div>
+                
+    </div>
+    {
+        showMore && <p className='font-bold text-blue-700 hover:underline cursor-pointer'>SHOW MORE</p>
+    }
+</div>
         
 
         <Modal show = {showModal} onClose={() => setShowModal(false)} popupsize='md'>

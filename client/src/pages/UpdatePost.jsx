@@ -5,17 +5,25 @@ import 'react-quill/dist/quill.snow.css';
 import { useParams } from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { getDownloadURL, getStorage, uploadBytesResumable, ref } from 'firebase/storage';
+import { app } from '../firebase';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+
 
 
 
 export default function CreatePost() {
 
   const [publishError,setPublishError] = useState(null);
+  const [imageUploadProgress, setImageUploadProgress] = useState(null);
+  const [imageUploadFailure, setImageUploadFailure] = useState(null);
   const {postId} = useParams();
   const {currentUser}= useSelector((state)=>state.user);
   const navigate = useNavigate();
   const [loading,setLoading] = useState(false);
-  const userId = currentUser._id
+  const userId = currentUser._id;
+  const [file, setFile] = useState(null);
 
   const [post, setPost] = useState({
     title: '',
@@ -25,8 +33,41 @@ export default function CreatePost() {
     eTime: '',
     salary: '',
     members: '',
-    gender: ''
+    gender: '',
+    image:'',
+    description:''
   });
+
+  const handleUploadImage = async () => {
+    if (!file) {
+        setImageUploadFailure('Please select an image');
+        return;
+    }
+    setImageUploadFailure(null);
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + '-' + file.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setImageUploadProgress(progress.toFixed(0));
+        },
+        (error) => {
+            setImageUploadFailure('Image upload failed');
+            setImageUploadProgress(null);
+        },
+        () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                setPost({ ...post, image: downloadURL });
+                setImageUploadProgress(null);
+                setImageUploadFailure(null);
+            });
+        }
+    );
+};
 
   useEffect(() => {
     console.log(postId)
@@ -90,9 +131,9 @@ export default function CreatePost() {
   };
 
   return (
-    <div className="min-h-screen dark:bg-slate-700 flex items-center justify-center p-10">
-      <div className="w-full dark:bg-slate-600 md:w-1/2 lg:w-1/3 bg-white p-10 flex flex-col justify-center rounded-lg shadow-xl">
-        <h1 className="text-center p-10 text-4xl font-bold">Change Job details</h1>
+    <div className="min-h-screen bg-blue-100 dark:bg-slate-700 flex items-center justify-center p-10">
+      <div className="w-full bg-blue-50 dark:bg-slate-600 md:w-1/2 lg:w-2/3  p-10 flex flex-col justify-center rounded-lg shadow-xl">
+        <h1 className="text-center p-10 text-4xl font-bold">Change Job Details</h1>
         <form onSubmit={handleSubmit}>
 
           <div className="mb-4">
@@ -105,6 +146,37 @@ export default function CreatePost() {
               placeholder="Title"
               onChange={handleChange}
               value={post.title}
+            />
+          </div>
+
+          <div className='flex gap-4 items-center justify-between border-4 border-blue-500 border-dotted p-3'>
+                        <FileInput type="file" name='image' accept='image/*' onChange={(e) => setFile(e.target.files[0])} />
+                        <button
+                            type='button'
+                            className='bg-blue-500 hover:bg-blue-600 text-white px-2 py-2 rounded-lg'
+                            size='sm'
+                            onClick={handleUploadImage}
+                            disabled={imageUploadProgress}
+                        >
+                            {imageUploadProgress ? (
+                                <CircularProgressbar className='h-20 bg-white' value={imageUploadProgress} text={`${imageUploadProgress || 0}%`} />
+                            ) : ('Upload image')}
+                        </button>
+                        {post.image && (
+                            <img src={post.image} alt='upload' className='h-20 object-cover' />
+                        )}
+                    </div>
+
+          <div className="mb-4">
+            <label htmlFor="description">Description</label>
+            <input
+              type="text"
+              id="description"
+              name="descrpition"
+              className="w-full py-2 px-4 border dark:bg-white dark:text-gray-600 border-gray-300 rounded-md"
+              placeholder="Description"
+              value={post.description}
+              onChange={handleChange}
             />
           </div>
 

@@ -115,6 +115,14 @@ export default function CreatePost() {
                   </div>) : ('Upload image')
               }
             </button>
+            {
+              formData.image && 
+              <img 
+              src={formData.image} 
+              alt="Selected" 
+              className="w-20 h-20 object-cover rounded-lg shadow-md" 
+            />
+            }
           </div>
 
           <div className="mb-4">
@@ -126,6 +134,18 @@ export default function CreatePost() {
               className="w-full py-2 px-4 border dark:bg-white dark:text-gray-600 border-gray-300 rounded-md"
               placeholder="Title"
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="description">Description</label>
+            <input
+              type="text"
+              id="description"
+              name="descrition"
+              className="w-full py-2 px-4 border dark:bg-white dark:text-gray-600 border-gray-300 rounded-md"
+              placeholder="Description"
+              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             />
           </div>
 

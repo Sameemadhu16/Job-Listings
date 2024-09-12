@@ -46,6 +46,7 @@ const SignIn = () => {
       if (res.ok) {
         dispatch(signInSuccess(data));
         
+        
         if(data.role === 'jobPoster'){
             navigate('/poster-dashboard?tab=profile');
         }else{
@@ -53,8 +54,14 @@ const SignIn = () => {
         }
             
         }
+
+        if(!res.ok){
+            dispatch(signInFailure(data));
+            setErrorMessage(data.message)
+        }
     } catch (error) {
         dispatch(signInFailure(error.message));
+        setErrorMessage(error.message);
     }
 }
 

@@ -76,11 +76,11 @@ export default function Landing() {
       </div>
 
       <div className='text-center py-20'>
-        <h2 className='text-3xl font-bold text-slate-700'>
-          What You'll Find in Our <span className='text-teal-500'> Resource Center</span>
+        <h2 className='text-3xl font-bold text-slate-700 dark:text-white'>
+          What You'll Find in Our <span className='text-teal-500 dark:text-blue-300'> Resource Center</span>
         </h2>
       </div>
-      <div className="flex gap-2 mt-3">
+      <div className="flex flex-wrap mx-auto justify-center gap-4 mt-3 mb-3 p-2">
       {
         first.map((post)=>(
           <JobPostCard post={post}/>

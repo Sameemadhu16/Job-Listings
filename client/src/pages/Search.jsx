@@ -2,109 +2,93 @@ import React, { useEffect, useState } from 'react';
 import SearchCard from '../components/SearchCard';
 import { Spinner, TextInput } from 'flowbite-react';
 import { FaSearch } from 'react-icons/fa';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 export default function Search() {
     const [posts, setPosts] = useState([]);
-    const [sidebarData, setSidebarData] = useState({
-        searchTerm: '',
-        sort: 'desc',
-        category: 'uncategorized',
-    });
     const [loading, setLoading] = useState(false);
     const [filteredPosts, setFilteredPosts] = useState([]);
     const [activeTab, setActiveTab] = useState('all');
-    const [visiblePosts, setVisiblePosts] = useState(5);
+    const [visiblePosts, setVisiblePosts] = useState(8);
     const location = useLocation();
-    //const history = useHistory();
+    const [searchTerm, setSearchTerm] = useState('');
+    const [formData, setFormData] = useState({
+        searchTerm: '',
+        sort: 'createdAt',
+        category: 'uncategorized',
+    });
+    const [showMore, setShowMore] = useState(false);
 
     useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                setLoading(true);
-                const res = await fetch('/api/post/get-posts');
-                const data = await res.json();
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchTermFromUrl = urlParams.get('searchTerm');
+        const sortUrl = urlParams.get('sort');
 
-                if (res.ok) {
-                    setPosts(data.posts);
-                    setFilteredPosts(data.posts); // Show all jobs by default
-                } else {
-                    console.log(data.message);
-                }
+        if (searchTermFromUrl || sortUrl) {
+            setFormData({
+                ...formData,
+                searchTerm: searchTermFromUrl,
+                sort: sortUrl,
+            });
+        }
+
+        const fetchPosts = async () => {
+            setLoading(true);
+            const searchQuery = urlParams.toString();
+            const res = await fetch(`/api/post/get-posts?${searchQuery}`);
+            const data = await res.json();
+
+            if (!res.ok) {
                 setLoading(false);
-            } catch (error) {
-                console.log(error.message);
-                setLoading(false);
+                console.log(data.message);
+                return;
             }
+
+            setLoading(false);
+            setPosts(data.posts);
+            setFilteredPosts(data.posts);
+
+            if (searchTermFromUrl) {
+                filterPosts(searchTermFromUrl, activeTab, data.posts);
+            }
+
+            setShowMore(data.posts.length === 8);
         };
 
         fetchPosts();
-    }, []);
+    }, [location.search, activeTab]);
 
-    useEffect(() => {
-        const urlParams = new URLSearchParams(location.search);
-        const SearchTermFromUrl = urlParams.get('searchTerm') || '';
-        const sortFromUrl = urlParams.get('sort') || 'desc';
-        const categoryFromUrl = urlParams.get('category') || 'uncategorized';
-
-        setSidebarData({
-            searchTerm: SearchTermFromUrl,
-            sort: sortFromUrl,
-            category: categoryFromUrl,
-        });
-
-        // Filter posts based on search term, sort order, and category
-        const filtered = posts.filter((post) =>
-            post.title.toLowerCase().includes(SearchTermFromUrl.toLowerCase())
+    const filterPosts = (searchTerm, activeTab, postsToFilter) => {
+        let filtered = postsToFilter.filter(post =>
+            post.title.toLowerCase().includes(searchTerm.toLowerCase())
         );
+
+        if (activeTab === 'full') {
+            filtered = filtered.filter(post => post.type === 'full');
+        } else if (activeTab === 'part') {
+            filtered = filtered.filter(post => post.type === 'part');
+        }
+
         setFilteredPosts(filtered);
-    }, [location.search, posts]);
-
-    const handleChange = (e) => {
-        const { id, value } = e.target;
-        setSidebarData({ ...sidebarData, [id]: value });
     };
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const urlParams = new URLSearchParams(window.location.search);
+        urlParams.set('searchTerm', formData.searchTerm);
 
-    //     // Update the URL with new search params
-    //     const urlParams = new URLSearchParams();
-    //     if (sidebarData.searchTerm) {
-    //         urlParams.set('searchTerm', sidebarData.searchTerm);
-    //     }
-    //     if (sidebarData.sort) {
-    //         urlParams.set('sort', sidebarData.sort);
-    //     }
-    //     if (sidebarData.category) {
-    //         urlParams.set('category', sidebarData.category);
-    //     }
+        window.history.pushState(null, '', `?${urlParams.toString()}`);
 
-    //     history.push({ search: urlParams.toString() });
-    // };
-
-    const getFullTime = () => {
-        setActiveTab('full');
-        const fullTimeJobs = posts.filter((post) => post.type === 'full');
-        setFilteredPosts(fullTimeJobs);
-        setVisiblePosts(5);
+        filterPosts(formData.searchTerm, activeTab, posts);
     };
 
-    const getPartTime = () => {
-        setActiveTab('part');
-        const partTimeJobs = posts.filter((post) => post.type === 'part');
-        setFilteredPosts(partTimeJobs);
-        setVisiblePosts(5);
-    };
-
-    const showAllJobs = () => {
-        setActiveTab('all');
-        setFilteredPosts(posts);
-        setVisiblePosts(5);
+    const handleTabClick = (tab) => {
+        setActiveTab(tab);
+        filterPosts(formData.searchTerm, tab, posts);
     };
 
     const handleShowMore = () => {
-        setVisiblePosts((prev) => prev + 5);
+        setVisiblePosts(prev => prev + 8);
     };
 
     return (
@@ -120,23 +104,20 @@ export default function Search() {
                 </h1>
                 <p className="text-center text-lg text-gray-600 dark:text-white">Search. Explore. Choose.</p>
 
-                <form  className="ml-28 flex text-center items-center gap-3">
+                <form onSubmit={handleSubmit} className="ml-28 flex text-center items-center gap-3">
                     <TextInput
                         placeholder="Search..."
                         id="searchTerm"
                         type="text"
-                        value={sidebarData.searchTerm}
-                        onChange={handleChange}
                         className="pl-10 w-3/4"
+                        value={formData.searchTerm}
+                        onChange={(e) => setFormData({ ...formData, searchTerm: e.target.value })}
                     />
-                    <button type="submit">
-                        <FaSearch className="text-gray-400 cursor-pointer" />
-                    </button>
                 </form>
 
                 <div className="bg-white dark:bg-blue-950 shadow-md rounded-md p-6 mt-10">
                     <h2 className="font-semibold text-lg mb-4 dark:text-white">
-                        Search results for:{' '}
+                        Search results for: 
                         <span className="text-blue-500 dark:text-blue-300 italic">
                             "{activeTab === 'all' ? 'ALL' : activeTab === 'full' ? 'FULL TIME' : 'PART TIME'}"
                         </span>
@@ -149,7 +130,7 @@ export default function Search() {
                                     ? 'text-blue-700 dark:text-blue-200 font-semibold border-b-2 border-blue-200'
                                     : 'text-gray-500 dark:text-gray-300'
                             }`}
-                            onClick={showAllJobs}
+                            onClick={() => handleTabClick('all')}
                         >
                             All
                         </button>
@@ -159,7 +140,7 @@ export default function Search() {
                                     ? 'text-blue-700 dark:text-blue-200 font-semibold border-b-2 border-blue-200'
                                     : 'text-gray-500 dark:text-gray-300'
                             }`}
-                            onClick={getFullTime}
+                            onClick={() => handleTabClick('full')}
                         >
                             Full Time
                         </button>
@@ -169,7 +150,7 @@ export default function Search() {
                                     ? 'text-blue-700 dark:text-blue-200 font-semibold border-b-2 border-blue-200'
                                     : 'text-gray-500 dark:text-gray-300'
                             }`}
-                            onClick={getPartTime}
+                            onClick={() => handleTabClick('part')}
                         >
                             Part Time
                         </button>
@@ -181,13 +162,18 @@ export default function Search() {
                         ))}
                     </div>
                 </div>
-                {visiblePosts < filteredPosts.length && (
-                    <p
-                        className="text-center font-bold mt-3 text-blue-500 hover:underline cursor-pointer"
-                        onClick={handleShowMore}
-                    >
-                        SHOW MORE
-                    </p>
+
+                {filteredPosts.length === 0 ? (
+                    <p className='mt-2 font-bold'>NO RESULT FOUND...</p>
+                ) : (
+                    visiblePosts < filteredPosts.length && (
+                        <p
+                            className="text-center font-bold mt-3 text-blue-500 hover:underline cursor-pointer"
+                            onClick={handleShowMore}
+                        >
+                            SHOW MORE
+                        </p>
+                    )
                 )}
             </main>
         </div>

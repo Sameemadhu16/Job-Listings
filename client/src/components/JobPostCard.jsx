@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
 import { Label } from 'flowbite-react';
+import { useNavigate } from 'react-router-dom';
 
 const JobPostCard = ({ post }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const characterLimit = 100; // Set your character limit here
+  const navigate = useNavigate();
 
   const toggleReadMore = () => {
     setIsExpanded(!isExpanded);
   };
 
+  const handleNavigate = () => {
+    navigate(`full-post/${post._id}`)
+  }
+
   return (
-    <div className="w-[300px] rounded overflow-hidden shadow-lg bg-white dark:bg-slate-600 hover:scale-105 cursor-pointer transition-transform duration-150">
+    <div className="w-[300px] rounded overflow-hidden shadow-lg bg-white dark:bg-slate-600 hover:scale-105 cursor-pointer transition-transform duration-150" >
       <img
         className="w-full h-48 object-cover p-3"
         src={post.image} // Replace with your image URL
         alt="Job post"
+        onClick={handleNavigate}
       />
       <div className="p-6">
         <h2 className="font-bold text-xl mb-2 dark:text-white">{post.title}</h2>
