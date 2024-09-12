@@ -84,9 +84,9 @@ export default function Fpost() {
         {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
         {error && <p className='text-center my-7 text-2xl text-red-600'>something went wrong!</p>}
         {post && !loading && !error &&(
-        <div className=" bg-gray-100 dark:bg-slate-700 flex items-start justify-center p-4">
+        <div className=" bg-blue-100 dark:bg-slate-700 flex items-start justify-center p-4">
             {/* Two Column Layout */}
-            <div className="w-full md:w-4/5 lg:w-11/12 grid grid-cols-1 md:grid-cols-2 gap-5 p-8 bg-white dark:bg-slate-800 rounded-lg shadow-lg">
+            <div className="w-full md:w-4/5 lg:w-11/12 grid grid-cols-1 md:grid-cols-2 gap-5 p-8 bg-blue-50 dark:bg-slate-800 rounded-lg shadow-lg">
                 {/* Left Column: Image Section */}
                 <div className='"flex items-center justify-center"'>
                     <img src={post.image} alt="" className='max-w-full max-h-full' />

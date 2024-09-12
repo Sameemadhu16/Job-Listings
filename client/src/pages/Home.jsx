@@ -19,46 +19,44 @@ const Home = () => {
   const [currentPartTimeJob, setCurrentPartTimeJob] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
 
-    useEffect(()=>{
-        const fetchPosts = async () => {
-            setLoading(true);
-            setShowMore(false);
-            const res = await fetch(`/api/post/get-posts`);
-            const data = await res.json();
-            
-            
-            if(res.ok){
-                setShowMore(true);
-                setPosts(data.posts);
-                setTPosts(data.totalPosts);
-                setLoading(false);
-                
-                const part = data.posts.filter(post => post.type === 'part');
-                const pJob = part.length;
-                setPJob(pJob);
-
-                const full = data.posts.filter(post => post.type == 'full');
-                const fJob = full.length;
-                setFJob(fJob);
-
-                
-
-                // Sort by 'createdAt' (assuming 'createdAt' is a date string)
-                const sortedFull = full.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-                // Get the first 3 most recent posts
-                const recentFullPosts = sortedFull.slice(0, 8);
-                setFirst(recentFullPosts)
-                
-            }
-            if(!res.ok){
-              console.log(data.message);
-              setLoading(false);
-            }
-        };
-        fetchPosts();
-    },[posts._id])
-
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      setShowMore(false);
+      const res = await fetch(`/api/post/get-posts`);
+      const data = await res.json();
+  
+      if (res.ok) {
+        setPosts(data.posts);
+        setTPosts(data.totalPosts);
+        setLoading(false);
+  
+        const part = data.posts.filter((post) => post.type === "part");
+        const pJob = part.length;
+        setPJob(pJob);
+  
+        const full = data.posts.filter((post) => post.type === "full");
+        const fJob = full.length;
+        setFJob(fJob);
+  
+        // Sort by 'createdAt' (assuming 'createdAt' is a date string)
+        const sortedFull = full.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  
+        // Get the first 8 most recent posts
+        const initialPosts = sortedFull.slice(0, 4);
+        setFirst(initialPosts);
+  
+        // If there are more than 8 posts, allow "Show More"
+        if (fJob > 8) {
+          setShowMore(true);
+        }
+      } else {
+        console.log(data.message);
+        setLoading(false);
+      }
+    };
+    fetchPosts();
+  }, []); 
     
     
 
@@ -114,6 +112,17 @@ const Home = () => {
       top: 0,
       left: 0,
     };
+  };
+
+  const handleShowMore = () => {
+    if (showMore) {
+      // Show all posts when "Show More" is clicked
+      setFirst(posts.filter((post) => post.type === "full"));
+    } else {
+      // Collapse to show only the first 8 when clicked again
+      setFirst(posts.filter((post) => post.type === "full").slice(0, 4));
+    }
+    setShowMore(!showMore);
   };
 
   return (
@@ -263,8 +272,9 @@ const Home = () => {
           <JobPostCard post={post} key={post._id} />
         ))}
       </div>
-
-      
+    {
+      showMore && <p className="mt-3 font-bold text-blue-700 cursor-pointer hover:underline" onClick={handleShowMore}>SHOW MORE</p>
+    }
     </div>
   );
 };

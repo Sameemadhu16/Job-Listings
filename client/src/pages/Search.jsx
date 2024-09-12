@@ -92,7 +92,7 @@ export default function Search() {
     const showAllJobs = () => {
         setActiveTab('all');
         setFilteredPosts(posts);
-        setVisiblePosts(5);
+        setVisiblePosts(8);
     };
 
     const handleShowMore = () => {
@@ -186,14 +186,18 @@ export default function Search() {
                         ))}
                     </div>
                 </div>
-                {visiblePosts < filteredPosts.length && (
-                    <p
-                        className="text-center font-bold mt-3 text-blue-500 hover:underline cursor-pointer"
-                        onClick={handleShowMore}
-                    >
-                        SHOW MORE
-                    </p>
-                )}
+                {
+                    filteredPosts.length === 0 ? (<p className='mt-2 font-bold'>NO RESULT FOUND...</p>) : (
+                        
+                        visiblePosts < filteredPosts.length && (
+                            <p
+                                className="text-center font-bold mt-3 text-blue-500 hover:underline cursor-pointer"
+                                onClick={handleShowMore}
+                            >
+                                SHOW MORE
+                            </p>
+                    ))
+                }
             </main>
         </div>
     );

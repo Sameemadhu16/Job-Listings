@@ -33,7 +33,7 @@ export default function PosterDashOverview() {
                 if (res.ok) {
                     
                     setPosts(data.allPost);
-                    console.log(data.allPost.length)
+                    
 
                     const part = data.allPost.filter(post => post.type === 'part');
                     const pJob = part.length;
@@ -44,12 +44,12 @@ export default function PosterDashOverview() {
                     setFJob(fJob);
 
                     
-                    if (data.posts.length < 9) {
+                    if (data.posts.length < 1) {
                         setShowMore(false);
                     }
                 }
             } catch (error) {
-                setError(error)
+                setError(error);
             }
         };
         fetchPosts();
@@ -134,9 +134,12 @@ export default function PosterDashOverview() {
           </div>
         )}
       </div>
-                    
-                </div>
-            </div>
+                
+    </div>
+    {
+        showMore && <p className='font-bold text-blue-700 hover:underline cursor-pointer'>SHOW MORE</p>
+    }
+</div>
         
 
         <Modal show = {showModal} onClose={() => setShowModal(false)} popupsize='md'>

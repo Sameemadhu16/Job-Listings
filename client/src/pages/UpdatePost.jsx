@@ -130,9 +130,9 @@ export default function CreatePost() {
   };
 
   return (
-    <div className="min-h-screen dark:bg-slate-700 flex items-center justify-center p-10">
-      <div className="w-full dark:bg-slate-600 md:w-1/2 lg:w-2/3 bg-white p-10 flex flex-col justify-center rounded-lg shadow-xl">
-        <h1 className="text-center p-10 text-4xl font-bold">Change Job details</h1>
+    <div className="min-h-screen bg-blue-100 dark:bg-slate-700 flex items-center justify-center p-10">
+      <div className="w-full bg-blue-50 dark:bg-slate-600 md:w-1/2 lg:w-2/3  p-10 flex flex-col justify-center rounded-lg shadow-xl">
+        <h1 className="text-center p-10 text-4xl font-bold">Change Job Details</h1>
         <form onSubmit={handleSubmit}>
 
           <div className="mb-4">

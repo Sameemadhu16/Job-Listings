@@ -104,7 +104,7 @@ export default function FpostUpdate() {
     };
 
     return (
-        <div className='bg-slate-100 dark:bg-slate-700'>
+        <div className='bg-blue-100 dark:bg-slate-700'>
             <div className='p-3 max-w-3xl mx-auto min-h-screen'>
                 <form className="flex flex-col gap-4 mt-3" onSubmit={handleSubmit}>
                     <h1 className='text-3xl font-bold'>Change Job Details</h1>
