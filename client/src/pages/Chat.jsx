@@ -4,6 +4,7 @@ import { Avatar , TextInput , Label } from 'flowbite-react';
 import { FiSend, FiHash } from 'react-icons/fi'; // React icons for hash and send button
 import io from 'socket.io-client'
 import { useLocation } from 'react-router-dom';
+import Message from '../components/Message';
 
 const socket = io.connect("http://localhost:4500")
 
@@ -11,7 +12,6 @@ export default function Chat() {
 
     const currentUser = useSelector(state=> state.user);
     const [messages, setMessages] = useState([]);
-    const [typing, setTyping] = useState(false);
     const [post,setPost] = useState([]);
     const [user,setUser] = useState([]);
     const location = useLocation();
@@ -79,7 +79,10 @@ export default function Chat() {
                                 </div>
                             </div>
                             <div className='min-h-screen bg-gray-100'>
-                                {/* chat body */}
+                                <div className='p-10 flex flex-col gap-3'>
+                                    <Message/>
+                                    <Message/>
+                                </div>
                             </div>
                             <div>
                                 <form className="flex items-center w-full p-2 bg-white border-t border-gray-200">
