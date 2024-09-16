@@ -74,6 +74,10 @@ export default function Fpost() {
             <Spinner size='xl'/>
         </div>
     }
+
+    const navigateToChat = () => {
+        navigate(`/chatbox?id=${postId}`);
+    }
     
     
 
@@ -106,11 +110,15 @@ export default function Fpost() {
                         {post.type === 'part' ? 'Part Time' : 'Full Time'}
                         </p>
                         
-                        {currentUser.currentUser.role == "jobPoster" && (
-                        <button type='button' onClick={handleUpdateClick} className='bg-green-700 w-full max-w-[200px] hover:bg-green-800 text-white text-center p-1 rounded-md'>
+                        {currentUser.currentUser.role == "jobPoster" ? 
+                        (<button type='button' onClick={handleUpdateClick} className='bg-green-700 w-full max-w-[200px] hover:bg-green-800 text-white text-center p-1 rounded-md'>
                             Change Details
-                        </button>
-                        )}
+                        </button>):(
+                            <button type='button' onClick={navigateToChat} className='bg-green-700 w-full max-w-[200px] hover:bg-green-800 text-white text-center p-1 rounded-md'>
+                                Chat With Poster
+                            </button>
+                        )
+                        }
                     </div>
             
                     <ul className='flex gap-4 text-green-800 text-sm flex-wrap items-center font-semibold mt-4'>

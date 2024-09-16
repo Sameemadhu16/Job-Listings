@@ -39,7 +39,7 @@ const io = new Server(httpServer, {
 });
 
 io.on('connection', (socket) => {
-  console.log('A user connected', socket.id);
+  console.log('A user connected : ', socket.id);
 
   // Handle socket events here
   socket.on('disconnect', () => {
@@ -50,6 +50,11 @@ io.on('connection', (socket) => {
     console.log('Message received: ', msg);
     io.emit('chatMessage', msg); // Broadcast message to all clients
   });
+
+  socket.on('typing', (isTyping) => {
+    socket.broadcast.emit('typing', isTyping); // Notify others about typing
+  });
+  
 });
 
 // Middleware

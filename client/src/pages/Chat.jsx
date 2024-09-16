@@ -1,12 +1,64 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Avatar , TextInput , Label } from 'flowbite-react';
 import { FiSend, FiHash } from 'react-icons/fi'; // React icons for hash and send button
+import io from 'socket.io-client'
+import { useLocation } from 'react-router-dom';
+
+const socket = io.connect("http://localhost:4500")
 
 export default function Chat() {
 
     const currentUser = useSelector(state=> state.user);
-console.log(currentUser)
+    const [messages, setMessages] = useState([]);
+    const [typing, setTyping] = useState(false);
+    const [post,setPost] = useState([]);
+    const [user,setUser] = useState([]);
+    const location = useLocation();
+    const [userId,setUserId] = useState('');
+    const searchParams = new URLSearchParams(location.search);
+    const postId = searchParams.get('id');
+
+    useEffect(()=> {
+        try{
+            const fetchPost = async ()=>{
+                const res = await fetch(`/api/post/get-job/${postId}`)
+                const data = await res.json();
+
+                if(res.ok){
+                    setPost(data)
+                    setUserId(data.userId)
+                }
+                if(!res.ok){
+                    console.log(data.message);
+                }
+            }
+            fetchPost();            
+        }catch(error){
+            console.log(error.message)
+        }
+    },[postId])
+
+    useEffect(()=> {
+        try{
+            const fetchUser = async ()=>{
+                const res = await fetch(`/api/auth/get-user/${userId}`)
+                const data = await res.json();
+
+                if(res.ok){
+                    setUser(data.user)
+                    console.log(user.profilePicture)
+                }
+                if(!res.ok){
+                    console.log(data.message);
+                }
+            }
+            fetchUser();            
+        }catch(error){
+            console.log(error.message)
+        }
+    },[userId])
+
     return (
         <div className='min-h-screen'>
             <div className='p-10 bg-blue-50 '>
@@ -17,10 +69,10 @@ console.log(currentUser)
                         <div className='bg-white rounded-lg'>
                             <div className='p-5 border-b-2 border-b-slate-400'>
                                 <div className='flex items-center gap-2'>
-                                    <Avatar alt="User settings" img={currentUser.currentUser.profilePicture} rounded />
-                                    <p>{currentUser.currentUser.username}</p>
+                                    <Avatar alt="User settings" img={user.profilePicture} rounded />
+                                    <p>{user.username}</p>
                                     {
-                                        currentUser.role === 'jobSeeker' ?
+                                        user.role === 'jobSeeker' ?
                                         <Label className="text-sm font-bold text-blue-600 border-2 border-blue-400 dark:text-blue-200 dark:border-blue-200 px-2 py-1">Finder</Label> :
                                         <Label className="text-sm font-bold text-blue-600 border-2 border-blue-400 dark:text-blue-200 dark:border-blue-200 px-2 py-1">Poster</Label>
                                     }
