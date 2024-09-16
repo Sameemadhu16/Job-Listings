@@ -32,6 +32,7 @@ import FpostUpdate from './pages/FpostUpdate';
 import Landing from './pages/Landing';
 import Homeh from './pages/Home'
 import Search from './pages/Search';
+import Chat from './pages/Chat';
 
 import { useSelector } from 'react-redux'
 import AdminPage from './pages/AdminPage';
@@ -57,6 +58,7 @@ export default function App() {
         
         
         <Route element={<PrivateRoute/>}>
+          <Route path='chatbox' element={<Chat/>}/>
           <Route path='/' element={<Home/>}/>
           <Route path="/contact" element={<Contact />} />
           <Route path='/search' element={<Search/>}></Route>
