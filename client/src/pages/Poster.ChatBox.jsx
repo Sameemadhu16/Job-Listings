@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Avatar, TextInput, Label } from 'flowbite-react';
 import { FiSend, FiHash } from 'react-icons/fi'; // React icons for hash and send button
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Message from '../components/Message';
 
-export default function Chat() {
+export default function PosterChatBox() {
 
     const currentUser = useSelector(state => state.user);
     const [message, setMessage] = useState('');
@@ -13,10 +13,7 @@ export default function Chat() {
     const [messages, setMessages] = useState([]);
     const [post, setPost] = useState([]);
     const [user, setUser] = useState([]);
-    const location = useLocation();
-    const [userId, setUserId] = useState('');
-    const searchParams = new URLSearchParams(location.search);
-    const postId = searchParams.get('id');
+    const {postId , sendId} = useParams();
 
     const [formData, setFormData] = useState({
         sendId: currentUser.currentUser._id,
@@ -24,30 +21,11 @@ export default function Chat() {
         message: ''
     });
 
-    useEffect(() => {
-        try {
-            const fetchPost = async () => {
-                const res = await fetch(`/api/post/get-job/${postId}`);
-                const data = await res.json();
-
-                if (res.ok) {
-                    setPost(data);
-                    setUserId(data.userId);
-                }
-                if (!res.ok) {
-                    console.log(data.message);
-                }
-            };
-            fetchPost();
-        } catch (error) {
-            console.log(error.message);
-        }
-    }, [postId]);
 
     useEffect(() => {
         try {
             const fetchUser = async () => {
-                const res = await fetch(`/api/auth/get-user/${userId}`);
+                const res = await fetch(`/api/auth/get-user/${sendId}`);
                 const data = await res.json();
 
                 if (res.ok) {
@@ -57,11 +35,11 @@ export default function Chat() {
                     console.log(data.message);
                 }
             };
-            if (userId) fetchUser(); // Fetch user only if userId is available
+            if (sendId) fetchUser(); // Fetch user only if userId is available
         } catch (error) {
             console.log(error.message);
         }
-    }, [userId]);
+    }, [sendId]);
 
     // Handle input change for the message field
     const handleInputChange = (e) => {
@@ -77,7 +55,7 @@ export default function Chat() {
     
         try {
             formData.postId = postId
-            formData.reciveId = userId
+            formData.reciveId = sendId
             
             const res = await fetch(`/api/message/create-message/${currentUser.currentUser._id}/${formData.reciveId}`, {
                 method: 'POST',
@@ -110,7 +88,7 @@ export default function Chat() {
         const getMessage = async () => {
             try {
                 // Fetch messages using the current user's ID and the selected user's ID
-                const res = await fetch(`/api/message/get-message/${currentUser.currentUser._id}/${user._id}/${postId}`);
+                const res = await fetch(`/api/message/get-poster-message/${sendId}/${postId}`);
                 const data = await res.json();
     
                 // Check if the response is successful

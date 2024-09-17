@@ -23,12 +23,8 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!formData.email || !formData.password || !formData.confirmPassword) {
+    if (!formData.email || !formData.password) {
         return setErrorMessage('All feilds are required')
-    }
-    // Password confirmation check
-    if (formData.password !== formData.confirmPassword) {
-        return setErrorMessage('Passwords does not match');
     }
 
     try {
@@ -100,17 +96,6 @@ const SignIn = () => {
                                         name="password"
                                         className="w-full py-2 px-4 border border-gray-300 rounded-md"
                                         placeholder="Password"
-                                        onChange={handleChange}
-                                    />
-                                </div>
-
-                                <div className="mb-4">
-                                    <input
-                                        type="password"
-                                        id="confirmPassword"
-                                        name="confirmPassword"
-                                        className="w-full py-2 px-4 border border-gray-300 rounded-md"
-                                        placeholder="Confirm Password"
                                         onChange={handleChange}
                                     />
                                 </div>

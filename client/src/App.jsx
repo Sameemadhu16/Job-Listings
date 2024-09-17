@@ -37,6 +37,7 @@ import Chat from './pages/Chat';
 import { useSelector } from 'react-redux'
 import AdminPage from './pages/AdminPage';
 import ChatList from './pages/ChatList';
+import PosterChatBox from './pages/Poster.ChatBox';
 
 
 
@@ -59,7 +60,6 @@ export default function App() {
         
         
         <Route element={<PrivateRoute/>}>
-          <Route path='/chatbox' element={<Chat/>}/>
           <Route path='/' element={<Home/>}/>
           <Route path="/contact" element={<Contact />} />
           <Route path='/search' element={<Search/>}></Route>
@@ -75,6 +75,7 @@ export default function App() {
           {
             role == 'jobSeeker' && 
             <>
+              <Route path='/chatbox' element={<Chat/>}/>
               <Route path="/seeker-dashboard" element={<SeekerDashboard />} />
               <Route path="/seeker-dashboard?tab=profile" element={<SeekerProfile/>} />
             </>
@@ -84,7 +85,7 @@ export default function App() {
           {
             role == 'jobPoster' && 
             <>
-              
+              <Route path='/poster-chat-box/:postId/:sendId' element={<PosterChatBox/>}/>
               <Route path="/poster-dashboard" element={<PosterDashboard />}>
               <Route index element={<PosterDashOverview />} />
               <Route path="employeeprofile" element={<PosterDashEmployeeProfile />} />
