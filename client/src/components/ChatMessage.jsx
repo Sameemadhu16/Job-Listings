@@ -62,7 +62,7 @@ const ChatMessage = ({ message }) => {
 
     return (
         <div
-            className="flex items-center justify-between p-4 bg-white dark:bg-slate-700 rounded-lg shadow-md cursor-pointer"
+            className="flex items-center justify-between p-4 bg-white dark:bg-slate-700 rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-150"
             onClick={handleNavigate}
         >
             <div className="flex items-center space-x-4">
