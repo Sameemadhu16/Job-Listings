@@ -49,11 +49,13 @@ export default function ChatList() {
 
                 <div className="bg-white dark:bg-blue-950 shadow-md rounded-md p-6 mt-10">
 
-                    <div className="space-y-4">
+                    <div className="space-y-4 font-bold">
                         {
-                            reciveMessages.map((message)=>(
-                                <ChatMessage message={message}/>
-                            ))
+                            reciveMessages.length === 0 ? 'NO CHAT YET...' : 
+                                reciveMessages.map((message)=>(
+                                    <ChatMessage message={message}/>
+                                ))
+                            
                         }
                     </div>
                 </div>
