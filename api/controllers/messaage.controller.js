@@ -2,7 +2,6 @@ import Message from "../models/message.model.js";
 import { errorHandler } from "../utils/error.js";
 
 export const createMessage = async(req,res,next)=>{
-    console.log(req.body);
     
     try{
         const {message,sendId , reciveId , postId } = req.body;
