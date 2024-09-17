@@ -87,7 +87,7 @@ export const signout= async (req, res, next) => {
     }
     };
 
-export const getUser = async (req,res,next) => {
+export const getUsers = async (req,res,next) => {
     try{
 
         //const userId = req.params.co
@@ -103,6 +103,19 @@ export const getUser = async (req,res,next) => {
         })
     }catch (error) {
         next(error);
+    }
+}
+
+export const getUser = async (req,res,next) => {
+    try{
+        const userId = req.params.userId
+        const user = await User.findById(userId);
+
+        res.status(200).json({
+            user
+        })
+    }catch(error){
+        next(error)
     }
 }
 

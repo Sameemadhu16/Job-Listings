@@ -32,9 +32,11 @@ import FpostUpdate from './pages/FpostUpdate';
 import Landing from './pages/Landing';
 import Homeh from './pages/Home'
 import Search from './pages/Search';
+import Chat from './pages/Chat';
 
 import { useSelector } from 'react-redux'
 import AdminPage from './pages/AdminPage';
+import ChatList from './pages/ChatList';
 
 
 
@@ -57,11 +59,13 @@ export default function App() {
         
         
         <Route element={<PrivateRoute/>}>
+          <Route path='/chatbox' element={<Chat/>}/>
           <Route path='/' element={<Home/>}/>
           <Route path="/contact" element={<Contact />} />
           <Route path='/search' element={<Search/>}></Route>
           <Route path = '/full-post/:postId' element={<Fpost/>}/>
           <Route path='/post/:postId' element={<Post/>}/> 
+          <Route path='/chat-list' element={<ChatList/>}/>
           
           {
             admin &&
@@ -80,6 +84,7 @@ export default function App() {
           {
             role == 'jobPoster' && 
             <>
+              
               <Route path="/poster-dashboard" element={<PosterDashboard />}>
               <Route index element={<PosterDashOverview />} />
               <Route path="employeeprofile" element={<PosterDashEmployeeProfile />} />

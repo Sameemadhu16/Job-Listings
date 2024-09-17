@@ -113,6 +113,7 @@ export default function Header() {
         <Navbar.Link href="/"className={`${isActive('/') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>Home</Navbar.Link>
         
         <Navbar.Link href="/search" className={`${isActive('/search') ? 'text-blue-500 dark:text-white ' : 'text-gray-500'}`}>Find job</Navbar.Link>
+        <Navbar.Link href="/chat-list" className={`${isActive('/chat-list') ? 'text-blue-500 dark:text-white ' : 'text-gray-500'}`}>Chat List</Navbar.Link>
         <Navbar.Link href="/contact" className={`${isActive('/contact') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>Customer Supports</Navbar.Link>
         <Navbar.Link href="/about" className={`${isActive('/about') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>About Us</Navbar.Link>
         {

@@ -162,5 +162,4 @@ export const getPostById = async (req, res, next) => {
     catch (error) {
       next(error); // Pass any errors to the error handler middleware
     }
-  };
-  
+};
