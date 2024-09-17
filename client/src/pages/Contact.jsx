@@ -90,7 +90,7 @@ export default function Contact() {
                   className="flex justify-between items-center cursor-pointer"
                   onClick={() => toggleQuestion(1)}
                 >
-                  <h3 className="text-lg font-bold">How do I apply for a job on Job Pilot?</h3>
+                  <h3 className="text-lg font-bold">How do I apply for a job on Job Listings?</h3>
                   <span>{openQuestion === 1 ? '-' : '+'}</span>
                 </div>
                 {openQuestion === 1 && (
@@ -196,10 +196,10 @@ export default function Contact() {
                 <FaPhone className="mr-2" /> +94 111 111 111
               </p>
               <p className="flex items-center justify-center text-lg">
-                <FaMapMarkerAlt className="mr-2" /> 1234 Job Pilot Street, Colombo, Sri Lanka
+                <FaMapMarkerAlt className="mr-2" /> 1234 Job Listings Street, Colombo, Sri Lanka
               </p>
               <p className="flex items-center justify-center text-lg">
-                <FaEnvelope className="mr-2" /> support@jobpilot.com
+                <FaEnvelope className="mr-2" /> support@joblistings.com
               </p>
             </div>
           </div>

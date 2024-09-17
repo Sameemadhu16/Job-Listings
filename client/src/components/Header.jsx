@@ -96,9 +96,9 @@ export default function Header() {
           <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
         </Dropdown>
           ):(
-            <Link to='/sign-up'>
+            <Link to='/sign-in'>
             <button className="bg-blue-500 px-3 py-2 rounded-lg text-white hover:bg-blue-600" focus-outline>
-              Register
+              Login
             </button>
           </Link> 
   )}
@@ -113,6 +113,7 @@ export default function Header() {
         <Navbar.Link href="/"className={`${isActive('/') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>Home</Navbar.Link>
         
         <Navbar.Link href="/search" className={`${isActive('/search') ? 'text-blue-500 dark:text-white ' : 'text-gray-500'}`}>Find job</Navbar.Link>
+        <Navbar.Link href="/chat-list" className={`${isActive('/chat-list') ? 'text-blue-500 dark:text-white ' : 'text-gray-500'}`}>Chat List</Navbar.Link>
         <Navbar.Link href="/contact" className={`${isActive('/contact') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>Customer Supports</Navbar.Link>
         <Navbar.Link href="/about" className={`${isActive('/about') ? 'text-blue-500 dark:text-white' : 'text-gray-500'}`}>About Us</Navbar.Link>
         {

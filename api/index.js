@@ -6,11 +6,11 @@ import seekerRoutes from './routes/seeker.route.js'
 import cookieParser from 'cookie-parser';
 import postRoutes from './routes/post.route.js'
 import contactRoutes from './routes/contact.route.js'
-
 import commentRoutes from './routes/comment.route.js'
 import jobseekerRoutes from './routes/jobseeker.route.js'
 import jobposterRoutes from './routes/jobposter.route.js'
 import responseRoutes from './routes/savecandidate.js'
+import messageRoutes from './routes/message.route.js'
 import cors from 'cors'
 
 dotenv.config();
@@ -50,9 +50,8 @@ app.use('/api/post',postRoutes);
 app.use('/api/jobseeker',jobseekerRoutes);
 app.use('/api/comment', commentRoutes)
 app.use('/api/post', postRoutes);
-
-
 app.use('/api/contact', contactRoutes);
+app.use('/api/message',messageRoutes)
 
 
 
@@ -67,5 +66,3 @@ app.use((err, req, res, next) => {
   });
 
 });
-
-

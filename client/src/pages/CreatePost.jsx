@@ -6,115 +6,123 @@ import { useNavigate } from 'react-router-dom';
 import { Spinner } from 'flowbite-react';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { app } from '../firebase'; // Make sure your firebase.js or config file is imported properly
-import   {CircularProgressbar} from 'react-circular-progressbar';
+import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 
 export default function CreatePost() {
-  
-  const [formData,setFormData] = useState([]);
-  const [publishError,setPublishError] = useState(null);
+
+  const [formData, setFormData] = useState([]);
+  const [publishError, setPublishError] = useState(null);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [imageUploadProgress,setImageUploadProgress] = useState(null);
-  const [imageUploadProgressFailure,setImageUploadFailure] = useState(null);
-  const [file,setFile] = useState(null)
+  const [imageUploadProgress, setImageUploadProgress] = useState(null);
+  const [imageUploadProgressFailure, setImageUploadFailure] = useState(null);
+  const [file, setFile] = useState(null)
 
-  const handleUploadImage = async()=>{
-    try{
-      if(!file){
+  const handleUploadImage = async () => {
+    try {
+      if (!file) {
         setImageUploadFailure('Please select an image')
-        return ;
+        return;
       }
       setImageUploadFailure(null);
-      const storage=getStorage(app);
-      const fileName = new Date().getTime()+'-'+file.name;
-      const storageRef = ref(storage,fileName);
-      const uploadTask = uploadBytesResumable(storageRef,file);
+      const storage = getStorage(app);
+      const fileName = new Date().getTime() + '-' + file.name;
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
       uploadTask.on(
         'state_changed',
-        (snapshot) =>{
-          const progress = 
-          (snapshot.bytesTransferred/snapshot.totalBytes) *100;
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           setImageUploadProgress(progress.toFixed(0));
         },
-        (error) =>{
+        (error) => {
           setImageUploadFailure('Image upload fial')
           setImageUploadProgress(null);
         },
-        ()=>{
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
-        {
-          setImageUploadProgress(null);
-          setImageUploadFailure(null);
-          setFormData({...formData,image:downloadURL});
-        });
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setImageUploadProgress(null);
+            setImageUploadFailure(null);
+            setFormData({ ...formData, image: downloadURL });
+          });
 
-      }
+        }
       )
 
     }
-    catch(error){
+    catch (error) {
       console.log(error);
       setImageUploadFailure("Image upload Failed")
       setImageUploadProgress(null);
       console.log(error);
     }
   }
-  
-  const handleSubmit = async (e) =>{
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.title || !formData.venue || !formData.date || !formData.sTime || !formData.eTime || !formData.salary,!formData.members, !formData.gender) {
+    if (!formData.title || !formData.venue || !formData.date || !formData.sTime || !formData.eTime || !formData.salary, !formData.members, !formData.gender) {
       return setPublishError('All fields are required');
-  
-}
-    try{
 
-        formData.type = 'part';
-        const res = await fetch('/api/post/create-post',{
-        method:'POST',
-        headers:{
-          'Content-Type':'application/json'
+    }
+    try {
+
+      formData.type = 'part';
+      const res = await fetch('/api/post/create-post', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
         },
-        body:JSON.stringify(formData),
+        body: JSON.stringify(formData),
       });
-      
+
       const data = await res.json();
-      if(!res.ok){
+      if (!res.ok) {
         setPublishError(data.message);
         return;
       }
-    
-      if(res.ok){
+
+      if (res.ok) {
 
         setPublishError(null);
         navigate('/poster-dashboard?tab=profile');
       }
     }
-    catch(error){
+    catch (error) {
       setPublishError('something went wrong')
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-10 bg-blue-50">
-      <div className="w-full md:w-1/2 lg:w-1/3 bg-white dark:bg-slate-800 dark:text-white p-10 flex flex-col justify-center rounded-lg shadow-xl">
-        <h1 className="text-center p-10 text-5xl font-bold ">Part Time Job</h1>
-        <form onSubmit={handleSubmit}>
+    <div className="min-h-screen flex items-center justify-center  bg-blue-50 dark:bg-slate-900 w-full">
+      <div className="w-full md:w-2/3  dark:bg-slate-900 dark:text-white  p-10 flex flex-col justify-center rounded-lg ">
 
-        <div className='flex gap-4 items-center justify-between border-4
+        <h1 className="text-left  text-3xl font-bold mb-5">Part Time Job</h1>
+        <form onSubmit={handleSubmit} className='w-full'>
+
+          <div className='flex gap-4 items-center justify-between border-4
           border-blue-500 border-dotted p-3'
-          > 
-            <FileInput type="file" accept='image/*' onChange={(e) => setFile(e.target.files[0])}/>
+          >
+            <FileInput type="file" accept='image/*' onChange={(e) => setFile(e.target.files[0])} />
             <button type='button' onClick={handleUploadImage} className='bg-blue-500 hover:bg-blue-600 px-1 py-2 rounded-lg text-white' size='sm' outline >
-            {
-            imageUploadProgress  ? (
-              <div>
-              <CircularProgressbar className='h-20 text-white bg-white' value={imageUploadProgress} text={`${imageUploadProgress||0}%`}/>
-              </div>):('Upload image')
-            }
+              {
+                imageUploadProgress ? (
+                  <div>
+                    <CircularProgressbar className='h-20 text-white bg-white' value={imageUploadProgress} text={`${imageUploadProgress || 0}%`} />
+                  </div>) : ('Upload image')
+              }
             </button>
+            {
+              formData.image && 
+              <img 
+              src={formData.image} 
+              alt="Selected" 
+              className="w-20 h-20 object-cover rounded-lg shadow-md" 
+            />
+            }
           </div>
 
           <div className="mb-4">
@@ -126,6 +134,18 @@ export default function CreatePost() {
               className="w-full py-2 px-4 border dark:bg-white dark:text-gray-600 border-gray-300 rounded-md"
               placeholder="Title"
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="description">Description</label>
+            <input
+              type="text"
+              id="description"
+              name="descrition"
+              className="w-full py-2 px-4 border dark:bg-white dark:text-gray-600 border-gray-300 rounded-md"
+              placeholder="Description"
+              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             />
           </div>
 
@@ -230,9 +250,8 @@ export default function CreatePost() {
 
           <button
             type="submit"
-            className={`w-full py-2 px-4 bg-blue-500 text-white rounded-md font-semibold transition duration-300 ease-in-out ${
-              loading ? 'cursor-not-allowed opacity-75' : 'hover:bg-blue-600'
-            }`}
+            className={`w-full py-2 px-4 bg-blue-500 text-white rounded-md font-semibold transition duration-300 ease-in-out ${loading ? 'cursor-not-allowed opacity-75' : 'hover:bg-blue-600'
+              }`}
             disabled={loading}
           >
             {loading ? (

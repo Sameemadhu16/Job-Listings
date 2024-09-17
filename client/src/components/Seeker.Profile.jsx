@@ -131,7 +131,7 @@ export default function SeekerProfile() {
         dispatch(deleteUserFailure(data.message));
       } else {
         dispatch(deleteUserSuccess(data));
-        navigate('/sign-in');
+        navigate('/sign-up');
       }
     } catch (error) {
       dispatch(deleteUserFailure(error.message));
@@ -157,127 +157,161 @@ export default function SeekerProfile() {
 
   return (
     <div className='bg-blue-50 dark:bg-slate-800'>
-        <div className='max-w-4xl mx-auto p-6 '>
-      {/* Profile Section */}
-      <div className='bg-white dark:bg-slate-700 rounded-lg p-6'>
-        <h1 className='text-3xl font-bold text-center mb-6 text-blue-800 dark:text-gray-100'>My Profile</h1>
-        <div className='flex flex-col md:flex-row items-center md:justify-between mb-8'>
-          {/* Profile Picture */}
-          <div className='flex items-center gap-5'>
-            
-            <div className='relative w-40 h-40 rounded-full overflow-hidden shadow-lg cursor-pointer mb-4 flex items-center justify-center'
-            >
-              {imageFileUploadProgress && (
-                <CircularProgressbar
-                  value={imageFileUploadProgress}
-                  text={`${imageFileUploadProgress}%`}
-                  styles={{
-                    path: { stroke: `rgba(62, 152, 199, ${imageFileUploadProgress / 100})` },
-                  }}
+      <div className='max-w-4xl mx-auto p-6 '>
+        {/* Profile Section */}
+        <div className='bg-white dark:bg-slate-700 rounded-lg p-6'>
+          <h1 className='text-3xl font-bold text-center mb-6 text-blue-800 dark:text-gray-100'>My Profile</h1>
+          <div className='flex flex-col md:flex-row items-center md:justify-between mb-8'>
+            {/* Profile Picture */}
+            <div className='flex items-center gap-5'>
+
+              <div className='relative w-40 h-40 rounded-full overflow-hidden shadow-lg cursor-pointer mb-4 flex items-center justify-center'
+              >
+                {imageFileUploadProgress && (
+                  <CircularProgressbar
+                    value={imageFileUploadProgress}
+                    text={`${imageFileUploadProgress}%`}
+                    styles={{
+                      path: { stroke: `rgba(62, 152, 199, ${imageFileUploadProgress / 100})` },
+                    }}
+                  />
+                )}
+                <img
+                  src={imageFileUrl || currentUser?.profilePicture || 'path/to/default/avatar.jpg'}
+                  alt='Profile'
+                  className='w-full h-full object-cover self-center'
                 />
-              )}
-              <img
-                src={imageFileUrl || currentUser?.profilePicture || 'path/to/default/avatar.jpg'}
-                alt='Profile'
-                className='w-full h-full object-cover self-center'
-              />
+              </div>
+              {imageFileUploadError && <Alert color='failure'>{imageFileUploadError}</Alert>}
+              <input type='file' accept='image/*' onChange={handleImageChange} ref={filePickerRef} hidden />
+              <div>
+                <button onClick={() => filePickerRef.current.click()} className='bg-slate-300 px-2 py-2 rounded-lg text-black hover:bg-slate-400'>Change Photo</button>
+                <p className='text-sm'>JPG or PNG max file size 2MB</p>
+              </div>
             </div>
-            {imageFileUploadError && <Alert color='failure'>{imageFileUploadError}</Alert>}
-            <input type='file' accept='image/*' onChange={handleImageChange} ref={filePickerRef} hidden />
-            <div>
-              <button onClick={() => filePickerRef.current.click()} className='bg-slate-300 px-2 py-2 rounded-lg text-black hover:bg-slate-400'>Change Photo</button>
-              <p className='text-sm'>JPG or PNG max file size 2MB</p>
-            </div>
+
+
           </div>
 
-        
+          {/* Update Form */}
+          <form onSubmit={handleSubmit} className='flex flex-col space-y-6'>
+            <div className='relative'>
+              <label htmlFor='fullname' className='absolute -top-3.5 left-3 bg-white dark:bg-slate-700 dark:text-white px-1 text-blue-600 text-sm'>
+                Full Name
+              </label>
+              <input
+                type='text'
+                id='fullname'
+                placeholder='Full Name'
+                defaultValue={currentUser?.fullname}
+                onChange={handleChange}
+                className='border-2 border-blue-600 dark:border-slate-100 focus:border-blue-800 dark:text-white dark:bg-slate-700 rounded-lg w-full px-4 py-2 focus:outline-none focus:ring-0'
+              />
+            </div>
+
+            <div className='relative'>
+              <label htmlFor='username' className='absolute -top-3.5 left-3 bg-white dark:bg-slate-700 dark:text-white px-1 text-blue-600 text-sm'>
+                Username
+              </label>
+              <input
+                type='text'
+                id='username'
+                placeholder='Username'
+                defaultValue={currentUser?.username}
+                onChange={handleChange}
+                className='border-2 border-blue-600 dark:border-slate-100 focus:border-blue-800 dark:text-white dark:bg-slate-700 rounded-lg w-full px-4 py-2 focus:outline-none focus:ring-0'
+              />
+            </div>
+
+            <div className='relative'>
+              <label htmlFor='email' className='absolute -top-3.5 left-3 bg-white dark:bg-slate-700 dark:text-white px-1 text-blue-600 text-sm'>
+                Email
+              </label>
+              <input
+                type='email'
+                id='email'
+                placeholder='Email'
+                defaultValue={currentUser?.email}
+                onChange={handleChange}
+                className='border-2 border-blue-600 dark:border-slate-100 focus:border-blue-800 dark:text-white dark:bg-slate-700 rounded-lg w-full px-4 py-2 focus:outline-none focus:ring-0'
+              />
+            </div>
+
+            <div className='relative'>
+              <label htmlFor='password' className='absolute -top-3.5 left-3 bg-white dark:bg-slate-700 dark:text-white px-1 text-blue-600 text-sm'>
+                Password
+              </label>
+              <input
+                type='password'
+                id='password'
+                placeholder='Password'
+                onChange={handleChange}
+                className='border-2 border-blue-600 dark:border-slate-100 focus:border-blue-800 dark:text-white dark:bg-slate-700 rounded-lg w-full px-4 py-2 focus:outline-none focus:ring-0'
+              />
+            </div>
+
+            <div className='relative'>
+              <label htmlFor='mobileNumber' className='absolute -top-3.5 left-3 bg-white dark:bg-slate-700 dark:text-white px-1 text-blue-600 text-sm'>
+                Mobile Number
+              </label>
+              <input
+                type='text'
+                id='mobileNumber'
+                placeholder='Mobile Number'
+                defaultValue={currentUser?.mobileNumber}
+                onChange={handleChange}
+                className='border-2 border-blue-600 dark:border-slate-100 focus:-blue-800 dark:text-white dark:bg-slate-700 rounded-lg w-full px-4 py-2 focus:outline-none focus:ring-0'
+              />
+            </div>
+
+            <button
+              type='submit'
+              className='w-full md:w-auto bg-blue-500 hover:bg-blue-600 px-4 py-2 text-white rounded-lg'
+            >
+              Update Profile
+            </button>
+          </form>
+          <div className='w-full md:w-auto bg-red-500 hover:bg-red-600 px-4 py-2 text-white rounded-lg mt-3 text-center'>
+            <button
+              onClick={() => setShowModal(true)}
+              >
+              Delete Account
+            </button>
+
+          </div>
+
+
+          {/* Status Alerts */}
+          {updateUserSuccess && <Alert color='success' className='mt-2'>{updateUserSuccess}</Alert>}
+          {updateUserError && <Alert color='failure' className='mt-2'>{updateUserError}</Alert>}
+
+          <Modal
+            show={showModal}
+            onClose={() => setShowModal(false)}
+            popup
+            size='md'
+          >
+            <Modal.Header />
+            <Modal.Body>
+              <div className='text-center'>
+                <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
+                <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
+                  Are you sure you want to delete your account?
+                </h3>
+                <div className='flex justify-center gap-4'>
+                  <Button color='failure' onClick={handleDeleteSeeker}>
+                    Yes, I'm sure
+                  </Button>
+                  <Button color='gray' onClick={() => setShowModal(false)}>
+                    No, cancel
+                  </Button>
+                </div>
+              </div>
+            </Modal.Body>
+          </Modal>
+
         </div>
-
-        {/* Update Form */}
-        <form onSubmit={handleSubmit} className='flex flex-col space-y-6'>
-    <div className='relative'>
-      <label htmlFor='fullname' className='absolute -top-3.5 left-3 bg-white dark:bg-slate-700 dark:text-white px-1 text-blue-600 text-sm'>
-        Full Name
-      </label>
-      <input
-        type='text'
-        id='fullname'
-        placeholder='Full Name'
-        defaultValue={currentUser?.fullname}
-        onChange={handleChange}
-        className='border-2 border-blue-600 dark:border-slate-100 focus:border-blue-800 dark:text-white dark:bg-slate-700 rounded-lg w-full px-4 py-2 focus:outline-none focus:ring-0'
-      />
-    </div>
-
-    <div className='relative'>
-      <label htmlFor='username' className='absolute -top-3.5 left-3 bg-white dark:bg-slate-700 dark:text-white px-1 text-blue-600 text-sm'>
-        Username
-      </label>
-      <input
-        type='text'
-        id='username'
-        placeholder='Username'
-        defaultValue={currentUser?.username}
-        onChange={handleChange}
-        className='border-2 border-blue-600 dark:border-slate-100 focus:border-blue-800 dark:text-white dark:bg-slate-700 rounded-lg w-full px-4 py-2 focus:outline-none focus:ring-0'
-      />
-    </div>
-
-    <div className='relative'>
-      <label htmlFor='email' className='absolute -top-3.5 left-3 bg-white dark:bg-slate-700 dark:text-white px-1 text-blue-600 text-sm'>
-        Email
-      </label>
-      <input
-        type='email'
-        id='email'
-        placeholder='Email'
-        defaultValue={currentUser?.email}
-        onChange={handleChange}
-        className='border-2 border-blue-600 dark:border-slate-100 focus:border-blue-800 dark:text-white dark:bg-slate-700 rounded-lg w-full px-4 py-2 focus:outline-none focus:ring-0'
-      />
-    </div>
-
-    <div className='relative'>
-      <label htmlFor='password' className='absolute -top-3.5 left-3 bg-white dark:bg-slate-700 dark:text-white px-1 text-blue-600 text-sm'>
-        Password
-      </label>
-      <input
-        type='password'
-        id='password'
-        placeholder='Password'
-        onChange={handleChange}
-        className='border-2 border-blue-600 dark:border-slate-100 focus:border-blue-800 dark:text-white dark:bg-slate-700 rounded-lg w-full px-4 py-2 focus:outline-none focus:ring-0'
-      />
-    </div>
-
-    <div className='relative'>
-      <label htmlFor='mobilenumber' className='absolute -top-3.5 left-3 bg-white dark:bg-slate-700 dark:text-white px-1 text-blue-600 text-sm'>
-        Mobile Number
-      </label>
-      <input
-        type='text'
-        id='mobilenumber'
-        placeholder='Mobile Number'
-        defaultValue={currentUser?.mobilenumber}
-        onChange={handleChange}
-        className='border-2 border-blue-600 dark:border-slate-100 focus:-blue-800 dark:text-white dark:bg-slate-700 rounded-lg w-full px-4 py-2 focus:outline-none focus:ring-0'
-      />
-    </div>
-
-    <button
-      type='submit'
-      className='w-full md:w-auto bg-blue-500 hover:bg-blue-600 px-4 py-2 text-white rounded-lg'
-    >
-      Update Profile
-    </button>
-</form>
-
-
-        {/* Status Alerts */}
-        {updateUserSuccess && <Alert color='success' className='mt-2'>{updateUserSuccess}</Alert>}
-        {updateUserError && <Alert color='failure' className='mt-2'>{updateUserError}</Alert>}
       </div>
-  </div>
     </div>
   );
 }

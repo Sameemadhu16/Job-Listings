@@ -12,6 +12,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import { updateStart, updateSuccess, updateFailure, deleteUserFailure, deleteUserSuccess } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
 
 export default function PosterDashEmployeeProfile() {
   const { currentUser,error } = useSelector(state => state.user);
@@ -26,6 +27,7 @@ export default function PosterDashEmployeeProfile() {
   const [showModal, setShowModal] = useState(false);
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
   const [updateUserError, setUpdateUserError] = useState(null);
+  const navigate = useNavigate();
 
 
 
@@ -139,6 +141,7 @@ export default function PosterDashEmployeeProfile() {
 
       if (res.ok) {
         dispatch(deleteUserSuccess(data.message))
+        navigate('/sign-up')
       } else {
         dispatch(deleteUserFailure(data))
       }
@@ -280,7 +283,7 @@ export default function PosterDashEmployeeProfile() {
               <Card className="mt-6">
                 <h2 className="text-lg font-semibold mb-2">Contact Information</h2>
                 <ul className="text-gray-700">
-                  <li className="flex items-center dark:text-white"><span className="mr-2"><GiWorld /></span><span><input id='email' className='dark:bg-gray-800' onChange={handleChange} defaultValue={currentUser.email} /></span> </li>
+                  <li className="flex items-center dark:text-white"><span className="mr-2"><GiWorld /></span><span className='w-full'><input id='email' className='dark:bg-gray-800 w-full' onChange={handleChange} defaultValue={currentUser.email} /></span> </li>
 
                   <li className="flex items-center dark:text-white"><span className="mr-2"><IoCall /></span><span><input id='mobileNumber' className='dark:bg-gray-800' onChange={handleChange} defaultValue={currentUser.mobileNumber} /></span> </li>
                   

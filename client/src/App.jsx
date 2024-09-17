@@ -32,9 +32,11 @@ import FpostUpdate from './pages/FpostUpdate';
 import Landing from './pages/Landing';
 import Homeh from './pages/Home'
 import Search from './pages/Search';
+import Chat from './pages/Chat';
 
 import { useSelector } from 'react-redux'
 import AdminPage from './pages/AdminPage';
+import ChatList from './pages/ChatList';
 
 
 
@@ -57,11 +59,13 @@ export default function App() {
         
         
         <Route element={<PrivateRoute/>}>
+          <Route path='/chatbox' element={<Chat/>}/>
           <Route path='/' element={<Home/>}/>
           <Route path="/contact" element={<Contact />} />
           <Route path='/search' element={<Search/>}></Route>
           <Route path = '/full-post/:postId' element={<Fpost/>}/>
           <Route path='/post/:postId' element={<Post/>}/> 
+          <Route path='/chat-list' element={<ChatList/>}/>
           
           {
             admin &&
@@ -80,15 +84,15 @@ export default function App() {
           {
             role == 'jobPoster' && 
             <>
+              
               <Route path="/poster-dashboard" element={<PosterDashboard />}>
               <Route index element={<PosterDashOverview />} />
               <Route path="employeeprofile" element={<PosterDashEmployeeProfile />} />
-              <Route path="my-jobs" element={<PosterDashMyJobs />}>
+              <Route path="my-jobs" element={<PosterDashMyJobs />}/>
               <Route index element={<PosterCompanyInfo />} />
-              <Route path="founding" element={<PosterFoundInfo />} />
-              <Route path="social-media" element={<PosterSocialMediaInfo />} />
-              <Route path="account-setting" element={<PosterCompanyInfo />} />
-              </Route>
+              <Route path='create-p-job' element={<CreatePost/>}/>
+              
+              
               <Route path="saved-candidate" element={<PosterDashSavedCandidate />}></Route>
               <Route path="settings" element={<PosterSetting />}>
               <Route index element={<PosterCompanyInfo />} />
@@ -98,7 +102,7 @@ export default function App() {
               <Route path="/parttime-job-post" element={<PartTimeJobPost />} />
               <Route path="/fulltime-job-post" element={<FulltimeJobPost />} />
               <Route path='/update-post/:postId' element={<UpdatePost/>}/>
-              <Route path='/create-p-job' element={<CreatePost/>}/>
+              
 
               <Route path = '/create-f-job' element={<PosterCompanyInfo/>}/>
               <Route path = '/update-full-post/:postId' element={<FpostUpdate/>}/>

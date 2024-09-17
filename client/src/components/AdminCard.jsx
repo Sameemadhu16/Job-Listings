@@ -5,7 +5,7 @@ import CompanyDetailsModal from './Seeker.CompanyDetailsModal';
 import SeekerPartTimeDetailsModel from './Seeker.PartTimeDetailsModel';
 
 export default function AdminCard({ ShowAddcart, showApply, showDelete, post }) {
-console.log(post)
+//console.log(post)
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalOpenPart, setIsModalOpenPart] = useState(false);
 
@@ -58,10 +58,7 @@ console.log(post)
                     
                 
             </div>
-            <button className="text-white bg-blue-700 hover:bg-blue-800 px-2 py-1 rounded-lg" onClick={() =>
-                post.type === 'part'
-                ? handleModalOpenPart(post)
-                : handleModalOpen(post)}>Apply</button>
+            
             <CompanyDetailsModal isOpen={isModalOpen} onClose={handleModalClose} showSendCVLink={true} post={post}/>
             <SeekerPartTimeDetailsModel isOpen={isModalOpenPart} onClose={handleModalClosePart}post={post}/>
         </Link>

@@ -11,11 +11,11 @@ export default function About() {
       <div className="max-w-6xl mx-auto p-6">
         {/* Header Section */}
 
-        <h1 className="text-4xl text-blue-800  font-bold text-center mb-8 ">About Job Pilot</h1>
+        <h1 className="text-4xl text-blue-800  font-bold text-center mb-8 ">About Job Listings</h1>
         
         {/* Introduction */}
         <p className="text-center text-lg mb-8">
-          Welcome to <span className="font-semibold text-blue-800 ">Job Pilot</span>! Your trusted platform for connecting <span className="font-semibold text-blue-500 ">Job Seekers</span> and <span className="font-semibold text-blue-500 ">Job Posters</span> in an easy-to-use, feature-rich environment.
+          Welcome to <span className="font-semibold text-blue-800 ">Job Listings</span>! Your trusted platform for connecting <span className="font-semibold text-blue-500 ">Job Seekers</span> and <span className="font-semibold text-blue-500 ">Job Posters</span> in an easy-to-use, feature-rich environment.
 
         </p>
 
@@ -57,7 +57,7 @@ export default function About() {
             </div>
             {isPosterOpen && (
               <p className="mt-4 text-lg leading-7 animate-fade-in">
-                Job Pilot provides an easy-to-use platform for job posters to post vacancies, manage applications, and connect with top talent. Whether you are a startup or a large company, our system simplifies finding the right candidates.
+                Job Listings provides an easy-to-use platform for job posters to post vacancies, manage applications, and connect with top talent. Whether you are a startup or a large company, our system simplifies finding the right candidates.
               </p>
             )}
           </div>
@@ -70,7 +70,7 @@ export default function About() {
               <FaBullseye className="mr-2" /> Our Mission
             </h2>
             <p className="mt-4 text-lg leading-7 animate-fade-in">
-              At Job Pilot, we strive to bridge the gap between employers and job seekers. Our mission is to provide a platform that empowers individuals to achieve their career goals while helping companies find the talent they need for success.
+              At Job Listings, we strive to bridge the gap between employers and job seekers. Our mission is to provide a platform that empowers individuals to achieve their career goals while helping companies find the talent they need for success.
             </p>
           </div>
 
@@ -78,7 +78,7 @@ export default function About() {
           <div className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-lg">
 
             <h2 className="text-2xl font-bold flex items-center text-blue-800 ">
-              <AiOutlineCheckCircle className="mr-2 " /> Why Choose Job Pilot?
+              <AiOutlineCheckCircle className="mr-2 " /> Why Choose Job Listings?
 
             </h2>
             <ul className="mt-4 space-y-3">

@@ -61,7 +61,7 @@ export default function PosterCompanyInfo() {
   }
   const handleSubmit = async (e) => {
       e.preventDefault();
-    
+    console.log(formData);
       if (!formData.title || !formData.companyName || !formData.essential || !formData.requirement || !formData.members) {
         return setPublishError('All fields are required');
     }
@@ -91,10 +91,10 @@ export default function PosterCompanyInfo() {
       }
     }
   return (
-    <div className=' bg-blue-50 dark:bg-gray-900'>
-      <div className='p-3 max-w-3xl mx-auto min-h-screen '>
+    <div className='bg-blue-50 dark:bg-gray-900 dark:text-'>
+      <div className='p-3 max-w-3xl mx-auto min-h-screen  bg-blue-50'>
       <form className="flex flex-col gap-4 mt-3" onSubmit={handleSubmit}>
-        <h1 className='text-3xl font-bold'>
+        <h1 className='text-3xl font-bold mt-5'>
             Create Full Time Job 
         </h1>
           <div className='flex flex-col gap-4 sm:flex-row justify-between'>
@@ -114,6 +114,10 @@ export default function PosterCompanyInfo() {
               </div>):('Upload image')
             }
             </button>
+            {
+              formData.image 
+            
+            }
           </div>
           <p className='font-semibold'>Description :</p>
           <Textarea placeholder='Write down your company here.Let the candidate know who we are' onChange={(e) => setFormData({ ...formData, description: e.target.value })}></Textarea>
