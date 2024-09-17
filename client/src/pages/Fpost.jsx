@@ -23,7 +23,7 @@ export default function Fpost() {
     const userId = currentUser.currentUser._id
     
     useEffect(() => {
-        console.log(postId)
+        
             try{
                 const fetchJobs = async () => {
                     const res = await fetch(`/api/post/get-job/${postId}`)
