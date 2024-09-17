@@ -78,6 +78,8 @@ export default function Fpost() {
     const navigateToChat = () => {
         navigate(`/chatbox?id=${postId}`);
     }
+
+    
     
     
 
@@ -114,7 +116,7 @@ export default function Fpost() {
                         (<button type='button' onClick={handleUpdateClick} className='bg-green-700 w-full max-w-[200px] hover:bg-green-800 text-white text-center p-1 rounded-md'>
                             Change Details
                         </button>):(
-                            <button type='button' onClick={navigateToChat} className='bg-green-700 w-full max-w-[200px] hover:bg-green-800 text-white text-center p-1 rounded-md'>
+                            <button type='button' onClick={navigateToChat} className='bg-blue-800 w-full max-w-[200px] hover:bg-blue-900 text-white text-center p-1 rounded-md'>
                                 Chat With Poster
                             </button>
                         )

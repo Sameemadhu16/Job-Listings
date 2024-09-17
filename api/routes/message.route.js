@@ -5,6 +5,6 @@ import { createMessage, getMessage } from "../controllers/messaage.controller.js
 const router = express.Router()
 
 router.post('/create-message/:senderId/:reciverId',verifyToken,createMessage);
-router.get('/get-message/:senderId/:reciveId',verifyToken,getMessage);
+router.get('/get-message/:senderId/:reciveId/:postId',verifyToken,getMessage);
 
 export default router

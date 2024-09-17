@@ -10,7 +10,7 @@ export default function Chat() {
     const currentUser = useSelector(state => state.user);
     const [message, setMessage] = useState('');
     const [publishError, setPublishError] = useState(null);
-    const [sendMessages, setSendMessages] = useState([]);
+    const [messages, setMessages] = useState([]);
     const [post, setPost] = useState([]);
     const [user, setUser] = useState([]);
     const location = useLocation();
@@ -109,13 +109,12 @@ export default function Chat() {
         const getMessage = async () => {
             try {
                 // Fetch messages using the current user's ID and the selected user's ID
-                const res = await fetch(`/api/message/get-message/${currentUser.currentUser._id}/${user._id}`);
+                const res = await fetch(`/api/message/get-message/${currentUser.currentUser._id}/${user._id}/${postId}`);
                 const data = await res.json();
     
                 // Check if the response is successful
                 if (res.ok) {
-                    setSendMessages(data.sendMessages); // Assuming 'data' contains the messages, update the messages state
-                    console.log(data.sendMessages)
+                    setMessages(data.messages); // Assuming 'data' contains the messages, update the messages state
                 } else {
                     console.log(data.message); // Log the error message if the request fails
                 }
@@ -153,13 +152,11 @@ export default function Chat() {
                             </div>
                             <div className='min-h-screen bg-gray-100'>
                                 <div className='p-10 flex flex-col gap-3'>
-                                    <Message />
-                                    <Message />
-                                    <Message />
-                                    <Message />
-                                    <Message />
-                                    <Message />
-                                    <Message />
+                                    {
+                                        messages.map((sendMessage)=>(
+                                            <Message key={sendMessage._id} sendMessage={sendMessage} />
+                                        ))
+                                    }
                                 </div>
                             </div>
                             <div>

@@ -26,24 +26,25 @@ export const createMessage = async(req,res,next)=>{
 
 export const getMessage = async (req, res, next) => {
     try {
-        // Get sender and receiver IDs (ensure correct IDs are used)
-        const sendId = req.user.id; // assuming this is the logged-in user's ID
-        const receiveId = req.params.receiveId || req.body.receiveId; // get receiver's ID from params or body
+        const userId = req.user.id; // assuming req.user.id is the authenticated user's ID
+        const postId = req.params.postId; // correctly extract postId from req.params
 
-        // Fetch messages concurrently using Promise.all()
-        const [sendMessages, receiveMessages] = await Promise.all([
-            Message.find({ sendId, receiveId }), // Messages sent by the current user
-            Message.find({ sendId: receiveId, receiveId: sendId }) // Messages received by the current user
-        ]);
+        // Fetch messages where the user is either the sender or receiver
+        const messages = await Message.find({
+            postId,
+            $or: [{ sendId: userId }, { reciveId: userId }]
+        });
 
-        // Return the messages
-        res.status(200).json({
-            success: true,
-            sendMessages,  // Sent messages
-            receiveMessages // Received messages
+        // const sendMessages = messages.filter(message => message.sendId === userId)
+        // const reciveMessages = messages.filter(message => message.reciveId === userId)
+
+        // Return the found messages as a response
+        return res.status(200).json({
+            messages
         });
 
     } catch (error) {
         next(error); // Handle error via middleware
     }
 };
+
