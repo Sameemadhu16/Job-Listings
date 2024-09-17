@@ -22,6 +22,7 @@ export default function ChatList() {
                 }
                 if(res.ok){
                     setReciveMessages(data.receivedMessages)
+                    console.log(reciveMessages[0])
                 }
                 
             } catch (error) {
@@ -30,7 +31,7 @@ export default function ChatList() {
         };
     
         fetchReceivedMessages();
-      }, []);
+    }, []);
 
     return (
         <div className="bg-blue-50 dark:bg-slate-700 min-h-screen">
