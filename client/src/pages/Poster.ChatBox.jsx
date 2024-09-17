@@ -112,16 +112,16 @@ export default function PosterChatBox() {
 
     return (
         <div className='min-h-screen'>
-            <div className='p-10 bg-blue-50 '>
-                <h1 className='text-3xl font-semibold text-black'>Chat</h1>
-                <p className='text-slate-600 mt-2'>Connect and chat with users in real-time, where every conversation brings us closer together!</p>
+            <div className='p-10 bg-blue-50 dark:bg-slate-700'>
+                <h1 className='text-3xl font-semibold text-black dark:text-white'>Chat</h1>
+                <p className='text-slate-600 dark:text-slate-200 mt-2'>Connect and chat with users in real-time, where every conversation brings us closer together!</p>
                 <div className='flex justify-center items-center'>
                     <div className='w-full md:w-3/4 flex flex-col mt-10'>
-                        <div className='bg-white rounded-lg'>
+                        <div className='bg-white dark:bg-slate-600 rounded-lg'>
                             <div className='p-5 border-b-2 border-b-slate-400'>
                                 <div className='flex items-center gap-2'>
                                     <Avatar alt="User settings" img={user.profilePicture} rounded />
-                                    <p>{user.username}</p>
+                                    <p className='dark:text-white'>{user.username}</p>
                                     {
                                         user.role === 'jobSeeker' ?
                                             <Label className="text-sm font-bold text-blue-600 border-2 border-blue-400 dark:text-blue-200 dark:border-blue-200 px-2 py-1">Finder</Label> :
@@ -129,7 +129,7 @@ export default function PosterChatBox() {
                                     }
                                 </div>
                             </div>
-                            <div className='min-h-screen bg-gray-100'>
+                            <div className='min-h-screen bg-gray-100 dark:bg-slate-600'>
                                 <div className='p-10 flex flex-col gap-3'>
                                     {
                                         messages.map((sendMessage)=>(
