@@ -2,6 +2,7 @@ import React,{useEffect , useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ChatMessage = ({ message }) => {
+    console.log(message)
 
     const navigate = useNavigate();
     const [post,setPost]=useState([]);
@@ -44,18 +45,11 @@ const ChatMessage = ({ message }) => {
                 <div>
                 <div className="flex items-center">
                     <span className="font-semibold text-gray-800">{post.title}</span>
-                    <span className="text-xs text-gray-500 ml-2">{new Date(message.createdAt).toLocaleDateString()}</span>
-                    <span className="text-xs text-gray-500 ml-2">{new Date(message.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                    <span className="text-xs text-gray-500 ml-2">{new Date(message.messages[message.messages.length-1].createdAt).toLocaleDateString()}</span>
+                    <span className="text-xs text-gray-500 ml-2">{new Date(message.messages[message.messages.length-1].createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
-                <p className="text-sm text-gray-600">{message.message}</p>
+                <p className="text-sm text-gray-600">{message.messages[message.messages.length-1].message}</p>
                 </div>
-            </div>
-            <div className="relative">
-                {/* {unreadCount > 0 && (
-                <div className="w-6 h-6 flex items-center justify-center text-white text-sm bg-red-500 rounded-full">
-                    unreadCount
-                </div>
-                )} */}
             </div>
             </div>
         );
