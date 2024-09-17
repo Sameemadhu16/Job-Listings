@@ -2,7 +2,7 @@ import React from 'react';
 
 const ChatMessage = () => {
   return (
-        <div className="max-w-md mx-auto my-4">
+        <div className="max-w-md my-4">
         {/* Chat message container */}
             <div className="flex space-x-3">
                 {/* Avatar placeholder */}
