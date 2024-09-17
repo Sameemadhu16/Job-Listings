@@ -45,7 +45,7 @@ const ChatMessage = ({ message }) => {
                 <div className="flex items-center">
                     <span className="font-semibold text-gray-800">{post.title}</span>
                     <span className="text-xs text-gray-500 ml-2">{new Date(message.createdAt).toLocaleDateString()}</span>
-                    <span className="text-xs text-gray-500 ml-2">{new Date(message.createdAt).toLocaleTimeString()}</span>
+                    <span className="text-xs text-gray-500 ml-2">{new Date(message.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
                 <p className="text-sm text-gray-600">{message.message}</p>
                 </div>

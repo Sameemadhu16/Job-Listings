@@ -47,7 +47,7 @@ const ChatMessage = ({sendMessage}) => {
                 {/* Timestamp */}
                 <div className="mt-1 text-xs text-gray-500 flex flex-row justify-between">
                     <p>{new Date(sendMessage.createdAt).toLocaleDateString()}</p>
-                    <p>{new Date(sendMessage.createdAt).toLocaleTimeString()}</p>
+                    <p>{new Date(sendMessage.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                 </div>
                 </div>
             </div>
