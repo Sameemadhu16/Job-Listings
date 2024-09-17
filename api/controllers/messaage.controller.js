@@ -48,3 +48,19 @@ export const getMessage = async (req, res, next) => {
     }
 };
 
+export const getReciveMessage = async ( req,res,next)=> {
+    try{
+        const reciveId = req.user.id
+        const rMessages = await Message.find({
+            reciveId
+        })
+
+        return res.status(200).json({
+            receivedMessages: rMessages
+        })
+
+    }catch(error){
+        next(error)
+    }
+}
+

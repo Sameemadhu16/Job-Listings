@@ -76,8 +76,12 @@ export default function Chat() {
         e.preventDefault();
     
         try {
-            formData.reciveId = userId
             formData.postId = postId
+            if(currentUser.currentUser.role === 'jobPoster'){
+                formData.reciveId = messages[0].sendId
+            }else{
+                formData.reciveId = userId
+            }
             const res = await fetch(`/api/message/create-message/${currentUser.currentUser._id}/${formData.receiveId}`, {
                 method: 'POST',
                 headers: {
