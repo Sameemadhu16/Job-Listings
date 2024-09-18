@@ -59,12 +59,12 @@ export default function Header() {
       <div className="flex md:order-2">
 
         <Button
-          className='w-12 h-10 hidden sm:inline mr-2'
+          className='w-12 h-10 hidden sm:inline mr-2 focus:ring-0 bg-wite hover:bg-blue-200 text-blue-500'
           color='gray'
           pill
           onClick={() => dispatch(toggleTheme())}
         >
-          {theme === 'light' ? <FaSun /> : <FaMoon />}
+          {theme === "light" ? <FaMoon /> : <FaSun />}
         </Button>
 
 
@@ -103,9 +103,9 @@ export default function Header() {
           </Link> 
   )}
         {
-          currentUser ? (
-            <Navbar.Toggle className=""/>
-          ):('')
+          currentUser && (
+            <Navbar.Toggle className="ml-2 text-blue-500 hover:bg-blue-200"/>
+          )
         }
       </div>
       {currentUser ? (

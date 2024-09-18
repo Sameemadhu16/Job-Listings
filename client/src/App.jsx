@@ -38,6 +38,7 @@ import { useSelector } from 'react-redux'
 import AdminPage from './pages/AdminPage';
 import ChatList from './pages/ChatList';
 import PosterChatBox from './pages/Poster.ChatBox';
+import NotFound from './pages/NotFound';
 
 
 
@@ -57,6 +58,7 @@ export default function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/landing" element={<Landing />} />
+        <Route path='*' element={<NotFound/>}/>
         
         
         <Route element={<PrivateRoute/>}>

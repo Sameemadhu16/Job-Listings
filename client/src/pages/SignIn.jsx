@@ -28,19 +28,19 @@ const SignIn = () => {
     }
 
     try {
-      dispatch(signInStart());
-      const res = await fetch('/api/auth/signin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if (data.success === false) {
-        dispatch(signInFailure(data.message));
-      }
+        dispatch(signInStart());
+        const res = await fetch('/api/auth/signin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
+        });
+        const data = await res.json();
+        if (data.success === false) {
+            dispatch(signInFailure(data.message));
+        }
 
-      if (res.ok) {
-        dispatch(signInSuccess(data));
+        if (res.ok) {
+            dispatch(signInSuccess(data));
         
         
         if(data.role === 'jobPoster'){
@@ -69,7 +69,7 @@ const SignIn = () => {
                         <div className='w-1/2 dark:bg-slate-600 dark:text-black bg-white p-8 z-10 rounded-lg rounded-r-none'>
                             <div className="max-w-md dark:text-white">
                                 <div className="">
-                                    <img src={logo} alt="Logo" className="h-28 " />
+                                    <img src={logo} alt="Logo" className="h-28 rounded-full" />
                                 </div>
                                 <div className='text-start'>
                                     <h2 className="text-3xl font-bold font-sans">Welcome Back</h2>

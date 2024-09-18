@@ -67,7 +67,7 @@ const SignUp = () => {
                     <div className='w-1/2 dark:text-black  dark:bg-slate-600 bg-white p-8 z-10 rounded-lg rounded-r-none'>
                         <div className="max-w-md mx-auto  dark:text-white">
                             <div className="mb-1">
-                                <img src={logo} alt="Logo" className="h-20" />
+                                <img src={logo} alt="Logo" className="h-20 rounded-full" />
                             </div>
                             <div className='text-start'>
                                 <h2 className="text-3xl font-bold font-sans ">Create an Account</h2>
