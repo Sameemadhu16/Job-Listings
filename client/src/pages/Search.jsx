@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SearchCard from '../components/SearchCard';
 import { Spinner, TextInput } from 'flowbite-react';
 import { FaSearch } from 'react-icons/fa';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 export default function Search() {
     const [posts, setPosts] = useState([]);
@@ -11,7 +11,6 @@ export default function Search() {
     const [activeTab, setActiveTab] = useState('all');
     const [visiblePosts, setVisiblePosts] = useState(8);
     const location = useLocation();
-    const [searchTerm, setSearchTerm] = useState('');
     const [formData, setFormData] = useState({
         searchTerm: '',
         sort: 'createdAt',
@@ -25,11 +24,11 @@ export default function Search() {
         const sortUrl = urlParams.get('sort');
 
         if (searchTermFromUrl || sortUrl) {
-            setFormData({
-                ...formData,
-                searchTerm: searchTermFromUrl,
-                sort: sortUrl,
-            });
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                searchTerm: searchTermFromUrl || '',
+                sort: sortUrl || 'createdAt',
+            }));
         }
 
         const fetchPosts = async () => {
@@ -46,27 +45,22 @@ export default function Search() {
 
             setLoading(false);
             setPosts(data.posts);
-            setFilteredPosts(data.posts);
-
-            if (searchTermFromUrl) {
-                filterPosts(searchTermFromUrl, activeTab, data.posts);
-            }
-
+            filterPosts(searchTermFromUrl || '', activeTab, data.posts);
             setShowMore(data.posts.length === 8);
         };
 
         fetchPosts();
     }, [location.search, activeTab]);
 
-    const filterPosts = (searchTerm, activeTab, postsToFilter) => {
-        let filtered = postsToFilter.filter(post =>
+    const filterPosts = (searchTerm = '', activeTab, postsToFilter) => {
+        let filtered = postsToFilter.filter((post) =>
             post.title.toLowerCase().includes(searchTerm.toLowerCase())
         );
 
         if (activeTab === 'full') {
-            filtered = filtered.filter(post => post.type === 'full');
+            filtered = filtered.filter((post) => post.type === 'full');
         } else if (activeTab === 'part') {
-            filtered = filtered.filter(post => post.type === 'part');
+            filtered = filtered.filter((post) => post.type === 'part');
         }
 
         setFilteredPosts(filtered);
@@ -88,7 +82,7 @@ export default function Search() {
     };
 
     const handleShowMore = () => {
-        setVisiblePosts(prev => prev + 8);
+        setVisiblePosts((prev) => prev + 8);
     };
 
     return (

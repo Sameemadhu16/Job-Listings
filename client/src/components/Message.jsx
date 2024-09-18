@@ -37,15 +37,15 @@ const ChatMessage = ({sendMessage}) => {
                 {/* Message content */}
                 <div className="flex-1">
                 {/* User name */}
-                <div className="text-sm font-bold text-gray-900">{user.username}</div>
+                <div className="text-sm font-bold text-gray-900 dark:text-slate-200">{user.username}</div>
                 
                 {/* Message text */}
-                <div className="mt-1 text-sm text-gray-700 bg-blue-100 rounded-lg p-3">
+                <div className="mt-1 text-sm text-gray-700 bg-blue-100 dark:bg-blue-800 dark:text-white rounded-lg p-3">
                     {sendMessage.message}
                 </div>
                 
                 {/* Timestamp */}
-                <div className="mt-1 text-xs text-gray-500 flex flex-row justify-between">
+                <div className="mt-1 text-xs text-gray-500 dark:text-slate-200 flex flex-row justify-between">
                     <p>{new Date(sendMessage.createdAt).toLocaleDateString()}</p>
                     <p>{new Date(sendMessage.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                 </div>

@@ -173,8 +173,8 @@ const Home = () => {
     
 
                 {/* Job Posts Info Box */}
-                <div className="absolute top-0 right-0 bg-white dark:bg-slate-200 p-2 rounded shadow-md mt-4 mr-10">
-                    <span className="block text-sm z-10 font-medium text-gray-800">
+                <div className="absolute top-0 right-0 bg-white dark:bg-slate-200 p-2 rounded shadow-md mt-4 mr-10 hover:scale-105 cursor-pointer transition-transform duration-150">
+                    <span className="block text-sm z-10 font-medium text-gray-800 ">
                     {tPosts}+ All Jobs Post 
                     </span>
                 </div>

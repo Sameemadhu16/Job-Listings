@@ -62,9 +62,9 @@ const ChatMessage = ({ message }) => {
 
     return (
         <div
-            className="flex items-center justify-between p-4 bg-white rounded-lg shadow-md cursor-pointer"
-            onClick={handleNavigate}
-        >
+            className="flex items-center justify-between p-4 bg-white dark:bg-slate-700 rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-150"
+            onClick={handleNavigate}>
+                
             <div className="flex items-center space-x-4">
                 <img
                     src={post.image}
@@ -73,15 +73,15 @@ const ChatMessage = ({ message }) => {
                 />
                 <div>
                     <div className="flex items-center">
-                        <span className="font-semibold text-gray-800">{post.title}</span>
-                        <span className="text-xs text-gray-500 ml-2">
+                        <span className="font-semibold text-gray-800 dark:text-white">{post.title}</span>
+                        <span className="text-xs text-gray-500 dark:text-slate-200 ml-2">
                             {new Date(lastMessage.createdAt).toLocaleDateString()}
                         </span>
-                        <span className="text-xs text-gray-500 ml-2">
+                        <span className="text-xs text-gray-500 dark:text-slate-200 ml-2">
                             {new Date(lastMessage.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </span>
                     </div>
-                    <p className="text-sm text-gray-600">{lastMessage.message}</p>
+                    <p className="text-sm text-gray-600 dark:text-slate-100">{lastMessage.message.length > 20 ? lastMessage.message.slice(0,20)+"..." : lastMessage.message}</p>
                 </div>
             </div>
         </div>

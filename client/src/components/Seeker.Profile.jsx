@@ -189,8 +189,6 @@ export default function SeekerProfile() {
                 <p className='text-sm'>JPG or PNG max file size 2MB</p>
               </div>
             </div>
-
-
           </div>
 
           {/* Update Form */}
