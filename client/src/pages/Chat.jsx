@@ -139,8 +139,15 @@ export default function Chat() {
     return (
         <div className='min-h-screen'>
             <div className='p-10 bg-blue-50 dark:bg-slate-700'>
-                <h1 className='text-3xl font-semibold text-black dark:text-white'>Chat</h1>
-                <p className='text-slate-600 dark:text-slate-200 mt-2'>Connect and chat with users in real-time, where every conversation brings us closer together!</p>
+                <div className='text-center flex flex-col items-center justify-center'>
+                    <div className='flex flex-row text-center items-center gap-1'>
+                        <p className='text-3xl font-bold text-blue-800 dark:text-white'>
+                            Chat With 
+                        </p>
+                        <Label className="text-sm font-bold text-blue-600 border-2 border-blue-400 dark:text-blue-200 dark:border-blue-200 px-2 py-1">Poster</Label>
+                    </div>
+                    <p className='text-slate-600 dark:text-slate-200 mt-2'>Connect and chat with users in real-time, where every conversation brings us closer together!</p>
+                </div>
                 <div className='flex justify-center items-center'>
                     <div className='w-full md:w-3/4 flex flex-col mt-10'>
                         <div className='bg-white dark:bg-slate-800 rounded-lg'>
