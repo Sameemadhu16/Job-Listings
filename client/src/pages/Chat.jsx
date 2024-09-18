@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { Avatar, TextInput, Label } from 'flowbite-react';
+import { Avatar, TextInput, Label , Spinner } from 'flowbite-react';
 import { FiSend, FiHash } from 'react-icons/fi'; // React icons for hash and send button
 import { useLocation } from 'react-router-dom';
 import Message from '../components/Message';
@@ -17,6 +17,7 @@ export default function Chat() {
     const [userId, setUserId] = useState('');
     const searchParams = new URLSearchParams(location.search);
     const postId = searchParams.get('id');
+    const [loading,setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
         sendId: currentUser.currentUser._id,
@@ -27,15 +28,18 @@ export default function Chat() {
     useEffect(() => {
         try {
             const fetchPost = async () => {
+                setLoading(true);
                 const res = await fetch(`/api/post/get-job/${postId}`);
                 const data = await res.json();
 
                 if (res.ok) {
                     setPost(data);
                     setUserId(data.userId);
+                    setLoading(false);
                 }
                 if (!res.ok) {
                     console.log(data.message);
+                    setLoading(false);
                 }
             };
             fetchPost();
@@ -152,6 +156,11 @@ export default function Chat() {
                                 </div>
                             </div>
                             <div className='min-h-screen bg-gray-100 dark:bg-slate-600'>
+                            {loading && (
+                                <div className="flex justify-center items-center min-h-screen">
+                                    <Spinner className="text-center" />
+                                </div>
+                            )}
                                 <div className='p-10 flex flex-col gap-3'>
                                     {
                                         messages.map((sendMessage)=>(
@@ -161,9 +170,9 @@ export default function Chat() {
                                 </div>
                             </div>
                             <div>
-                                <form className="flex items-center w-full p-2 bg-white border-t border-gray-200" onSubmit={sendMessage}>
+                                <form className="flex items-center w-full p-2 bg-white dark:bg-slate-800 border-t border-gray-200" onSubmit={sendMessage}>
                                     {/* Icon on the left */}
-                                    <FiHash className="text-gray-400 text-xl mx-2" />
+                                    <FiHash className="text-gray-400 dark:text-white text-xl mx-2" />
 
                                     {/* Input field */}
                                     <input
@@ -172,11 +181,11 @@ export default function Chat() {
                                         value={formData.message}
                                         id='message'
                                         onChange={handleInputChange}
-                                        className="flex-grow bg-transparent border-none focus:ring-0 focus:outline-none text-sm text-gray-600 placeholder-gray-400 px-2"
+                                        className="flex-grow bg-transparent border-none focus:ring-0 focus:outline-none text-sm text-gray-600 dark:text-white placeholder-gray-400 dark:placeholder-white px-2"
                                     />
 
                                     {/* Send button */}
-                                    <button type="submit" className="text-blue-500 hover:bg-blue-100 p-2 rounded-full">
+                                    <button type="submit" className="text-blue-500 dark:text-white dark:hover:bg-slate-700 hover:bg-blue-100 p-2 rounded-full">
                                         <FiSend className="text-xl" />
                                     </button>
                                 </form>
