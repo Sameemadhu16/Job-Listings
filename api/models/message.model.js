@@ -21,6 +21,9 @@ const messageShema = new mongoose.Schema(
         message:{
             type:String,
         },
+        file:{
+            type:String,
+        }
     },{timestamps:true}
 );
 

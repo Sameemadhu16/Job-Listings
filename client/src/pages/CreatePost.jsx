@@ -39,7 +39,7 @@ export default function CreatePost() {
           setImageUploadProgress(progress.toFixed(0));
         },
         (error) => {
-          setImageUploadFailure('Image upload fial')
+          setImageUploadFailure('Image upload fail')
           setImageUploadProgress(null);
         },
         () => {

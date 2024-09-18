@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Avatar, TextInput, Label , Spinner } from 'flowbite-react';
-import { FiSend, FiHash } from 'react-icons/fi'; // React icons for hash and send button
+import { FiSend, FiHash ,FiPaperclip } from 'react-icons/fi'; // React icons for hash and send button
 import { useParams } from 'react-router-dom';
 import Message from '../components/Message';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { app } from '../firebase'; // Make sure your firebase.js or config file is imported properly
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 export default function PosterChatBox() {
 
@@ -15,13 +19,56 @@ export default function PosterChatBox() {
     const [user, setUser] = useState([]);
     const {postId , sendId} = useParams();
     const [loading,setLoading] = useState(false);
+    const [file,setFile] = useState(null);
+    const [downloadUrl,setDownloadUrl] = useState(null)
     const [formData, setFormData] = useState({
         sendId: currentUser.currentUser._id,
         reciveId:'',
-        message: ''
+        message: '',
+        file:''
     });
+    const [fileUploadProgress, setFileUploadProgress] = useState(null);
+    const [fileUploadProgressFailure, setFileUploadFailure] = useState(null);
 
+    const uploadFile = async () => {
+        try{
+            setFileUploadFailure(null);
+            const storage = getStorage(app);
+            const fileName = new Date().getTime() + '_' + file.name;
+            const storageRef = ref(storage,fileName)
 
+            const uploadTask = uploadBytesResumable(storageRef, file);
+            uploadTask.on(
+                'state_changed',
+                (snapshot) => {
+                const progress =
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    setFileUploadProgress(progress.toFixed(0));
+                },
+                (error) => {
+                setFileUploadFailure('File upload fail')
+                setFileUploadProgress(null);
+                setFile(null)
+                },
+                () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    setFileUploadProgress(null);
+                    setFileUploadFailure(null);
+                    setFormData({ ...formData, file: downloadURL });
+                    
+                });
+
+                },
+            )
+        }
+        catch (error) {
+            console.log(error);
+            setFileUploadFailure("File upload Failed")
+            setFileUploadProgress(null);
+            setFile(null)
+            console.log(error);
+        }
+    }
     useEffect(() => {
         try {
             const fetchUser = async () => {
@@ -60,6 +107,7 @@ export default function PosterChatBox() {
             formData.postId = postId
             formData.reciveId = sendId
             
+            
             const res = await fetch(`/api/message/create-message/${currentUser.currentUser._id}/${formData.reciveId}`, {
                 method: 'POST',
                 headers: {
@@ -84,6 +132,11 @@ export default function PosterChatBox() {
             console.error("Failed to send message:", error);
             setPublishError("Failed to send message. Please try again.");
         }
+    };
+
+    // Trigger file input click
+    const handleIconClick = () => {
+        document.getElementById('fileInput').click();
     };
     
 
@@ -112,7 +165,9 @@ export default function PosterChatBox() {
     
     }, [currentUser.currentUser._id, user._id]); // Add user._id to the dependency array
     
-
+    
+        
+    
     return (
         <div className='min-h-screen'>
             <div className='p-10 bg-blue-50 dark:bg-slate-700'>
@@ -167,6 +222,47 @@ export default function PosterChatBox() {
                                         onChange={handleInputChange}
                                         className="flex-grow bg-transparent border-none focus:ring-0 focus:outline-none text-sm text-gray-600 dark:text-white placeholder-gray-400 dark:placeholder-white px-2"
                                     />
+
+                                    {/* Hidden file input */}
+                                    <input
+                                        type="file"
+                                        accept="image/* , .pdf"
+                                        id="fileInput"
+                                        onChange={(e) => setFile(e.target.files[0])}
+                                        style={{ display: 'none' }} // Hide the file input
+                                    />
+
+                                    {/* Icon to trigger file input */}
+                                    {
+                                        file ? (
+                                            <button type='button' onClick={uploadFile}>
+                                                {
+                                                    fileUploadProgress ? (
+                                                        <div>
+                                                            <CircularProgressbar className='h-10 text-white bg-white' value={fileUploadProgress} text={`${fileUploadProgress || 0}%`} />
+                                                        </div>
+                                                    ) : (
+                                                        formData.file ? (
+                                                            formData.file.endsWith('.png','jpg','jpeg') ? (
+                                                                <span>{formData.file.split('/').pop()}</span> // Display PDF file name
+                                                            ) : (
+                                                                <img src={formData.file} className="w-10 h-10 object-cover rounded-full shadow-md" alt="Uploaded" /> // Display image
+                                                            )
+                                                        ) : (
+                                                            'Upload File'
+                                                        )
+                                                    )
+                                                }
+                                            </button>
+
+                                        ):(
+                                            <button type='button' className="text-blue-500 dark:text-white hover:bg-blue-100 dark:hover:bg-slate-700 p-2 rounded-full">
+                                                <FiPaperclip 
+                                            onClick={handleIconClick} 
+                                            className="text-xl"/>
+                                            </button>
+                                        )
+                                    }
 
                                     {/* Send button */}
                                     <button type="submit" className="text-blue-500 dark:text-white hover:bg-blue-100 dark:hover:bg-slate-700 p-2 rounded-full">
