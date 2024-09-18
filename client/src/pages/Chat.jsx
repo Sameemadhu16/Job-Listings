@@ -143,7 +143,7 @@ export default function Chat() {
                 <p className='text-slate-600 dark:text-slate-200 mt-2'>Connect and chat with users in real-time, where every conversation brings us closer together!</p>
                 <div className='flex justify-center items-center'>
                     <div className='w-full md:w-3/4 flex flex-col mt-10'>
-                        <div className='bg-white dark:bg-slate-600 rounded-lg'>
+                        <div className='bg-white dark:bg-slate-800 rounded-lg'>
                             <div className='p-5 border-b-2 border-b-slate-400'>
                                 <div className='flex items-center gap-2'>
                                     <Avatar alt="User settings" img={user.profilePicture} rounded />
