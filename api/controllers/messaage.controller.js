@@ -4,12 +4,14 @@ import { errorHandler } from "../utils/error.js";
 export const createMessage = async(req,res,next)=>{
     
     try{
-        const {message,sendId , reciveId , postId } = req.body;
+        const {message,sendId , reciveId , postId , file , image } = req.body;
         const newMessage = new Message({
             message,
             sendId,
             reciveId,
-            postId
+            postId,
+            file,
+            image
         });
 
         const savedMessage = await newMessage.save();
