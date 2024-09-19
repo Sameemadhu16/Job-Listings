@@ -25,7 +25,7 @@ const ChatMessage = ({sendMessage}) => {
         }
     }, [userId]);
 
-  return (
+    return (
         <div className="max-w-md my-4">
         {/* Chat message container */}
             <div className="flex space-x-3">
@@ -41,7 +41,10 @@ const ChatMessage = ({sendMessage}) => {
                 
                 {/* Message text */}
                 <div className="mt-1 text-sm text-gray-700 bg-blue-100 dark:bg-blue-800 dark:text-white rounded-lg p-3">
-                    {sendMessage.message}
+                    {
+                        sendMessage.image != '' && <img src={sendMessage.image} className='h-20'/>
+                    }
+                    <p>{sendMessage.message}</p>
                 </div>
                 
                 {/* Timestamp */}
