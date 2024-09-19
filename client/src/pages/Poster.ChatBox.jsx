@@ -12,7 +12,7 @@ import { Worker } from '@react-pdf-viewer/core';
 import { Viewer } from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
-import PdfViewerComponent from '../components/PdfViewComponents';
+
 
 export default function PosterChatBox() {
 
@@ -26,12 +26,12 @@ export default function PosterChatBox() {
     const [loading,setLoading] = useState(false);
     const [file,setFile] = useState(null);
     const [pdfFile,setPdfFile] = useState(null)
-    const [downloadUrl,setDownloadUrl] = useState(null)
     const [formData, setFormData] = useState({
         sendId: currentUser.currentUser._id,
         reciveId:'',
         message: '',
-        file:''
+        file:'',
+        image:''
     });
     const [fileUploadProgress, setFileUploadProgress] = useState(null);
     const [imageUploadProgress, setImageUploadProgress] = useState(null);
@@ -159,7 +159,9 @@ export default function PosterChatBox() {
             formData.postId = postId
             formData.reciveId = sendId
             
-            
+            if(formData.message === '' && formData.file === '' && formData.image === ''){
+                return;
+            }
             const res = await fetch(`/api/message/create-message/${currentUser.currentUser._id}/${formData.reciveId}`, {
                 method: 'POST',
                 headers: {
