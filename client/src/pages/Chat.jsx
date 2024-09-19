@@ -181,7 +181,7 @@ export default function Chat() {
                                         value={formData.message}
                                         id='message'
                                         onChange={handleInputChange}
-                                        className="flex-grow bg-transparent border-none focus:ring-0 focus:outline-none text-sm text-gray-600 dark:text-white placeholder-gray-400 dark:placeholder-white px-2"
+                                        className="flex-grow bg-transparent border-none focus:ring-0 focus:outline-none text-sm text-gray-600 dark:text-white placeholder-gray-400 dark:placeholder-white dark:bg-slate-700 px-2"
                                     />
 
                                     {/* Send button */}
