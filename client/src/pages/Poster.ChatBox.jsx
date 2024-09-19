@@ -8,6 +8,11 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/
 import { app } from '../firebase'; // Make sure your firebase.js or config file is imported properly
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { Worker } from '@react-pdf-viewer/core';
+import { Viewer } from '@react-pdf-viewer/default-layout';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+import PdfViewerComponent from '../components/PdfViewComponents';
 
 export default function PosterChatBox() {
 
@@ -29,11 +34,15 @@ export default function PosterChatBox() {
         file:''
     });
     const [fileUploadProgress, setFileUploadProgress] = useState(null);
+    const [imageUploadProgress, setImageUploadProgress] = useState(null);
     const [fileUploadProgressFailure, setFileUploadFailure] = useState(null);
+    const [imageUploadProgressFailure, setImageUploadFailure] = useState(null);
+    const [numPages, setNumPages] = useState();
+    const [pageNumber, setPageNumber] = useState(1);
 
     const uploadImage = async () => {
         try{
-            setFileUploadFailure(null);
+            setImageUploadFailure(null);
             const storage = getStorage(app);
             const fileName = new Date().getTime() + '_' + file.name;
             const storageRef = ref(storage,fileName)
@@ -44,17 +53,17 @@ export default function PosterChatBox() {
                 (snapshot) => {
                 const progress =
                     (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    setFileUploadProgress(progress.toFixed(0));
+                    setImageUploadProgress(progress.toFixed(0));
                 },
                 (error) => {
-                setFileUploadFailure('File upload fail')
-                setFileUploadProgress(null);
+                setImageUploadFailure('File upload fail')
+                setImageUploadProgress(null);
                 setFile(null)
                 },
                 () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    setFileUploadProgress(null);
-                    setFileUploadFailure(null);
+                    setImageUploadProgress(null);
+                    setImageUploadFailure(null);
                     setFormData({ ...formData, image: downloadURL });
                     
                 });
@@ -64,8 +73,8 @@ export default function PosterChatBox() {
         }
         catch (error) {
             console.log(error);
-            setFileUploadFailure("File upload Failed")
-            setFileUploadProgress(null);
+            setImageUploadFailure("File upload Failed")
+            setImageUploadProgress(null);
             setFile(null)
             console.log(error);
         }
@@ -169,6 +178,7 @@ export default function PosterChatBox() {
     
             setPublishError(null);
             setFile(null);
+            setPdfFile(null)
             setFormData(prevFormData => ({
                 ...prevFormData,
                 message: '',
@@ -222,6 +232,7 @@ export default function PosterChatBox() {
             setPdfFile(file); // If the file input has an ID of 'file', set the PDF file state
         }
     };
+
     
     return ( 
         <div className='min-h-screen'>
@@ -264,7 +275,7 @@ export default function PosterChatBox() {
                                 </div>
                             </div>
                             <div>
-                                <form className="flex items-center w-full p-2 bg-white dark:bg-slate-800 border-t border-gray-200 dark:border-gray-400" onSubmit={sendMessage}>
+                                <form className="flex gap-1 items-center w-full p-2 bg-white dark:bg-slate-800 border-t border-gray-200 dark:border-gray-400" onSubmit={sendMessage}>
                                     {/* Icon on the left */}
                                     <FiHash className="text-gray-400 dark:text-white text-xl mx-2" />
 
@@ -300,11 +311,11 @@ export default function PosterChatBox() {
                                         file ? (
                                             <button type='button' onClick={uploadImage}>
                                                 {
-                                                    fileUploadProgress ? (
+                                                    imageUploadProgress ? (
                                                         <CircularProgressbar
-                                                            className='h-10 text-white bg-white'
-                                                            value={fileUploadProgress}
-                                                            text={`${fileUploadProgress || 0}%`}
+                                                            className='h-10 text-white bg-white dark:bg-slate-800'
+                                                            value={imageUploadProgress}
+                                                            text={`${imageUploadProgress || 0}%`}
                                                         />
                                                     ) : (
                                                         formData.image ? (
@@ -314,7 +325,9 @@ export default function PosterChatBox() {
                                                                 alt="Uploaded"
                                                             />
                                                         ) : (
-                                                            'Upload'
+                                                            <p className='font-bold text-blue-800 dark:text-white'>
+                                                                UPLOAD
+                                                            </p>
                                                         )
                                                     )
                                                 }
@@ -341,19 +354,19 @@ export default function PosterChatBox() {
                                                     {
                                                         fileUploadProgress ? (
                                                             <CircularProgressbar
-                                                                className='h-10 text-white bg-white'
+                                                                className='h-10 text-white bg-white dark:bg-slate-800'
                                                                 value={fileUploadProgress}
                                                                 text={`${fileUploadProgress || 0}%`}
                                                             />
                                                         ) : (
                                                             formData.file ? (
-                                                                <img
-                                                                    src={formData.image}
-                                                                    className="w-10 h-10 object-cover rounded-full shadow-md"
-                                                                    alt="Uploaded"
-                                                                />
+                                                                <div className='rounded-full shadow-md cursor-pointer'>
+                                                                    <iframe src={formData.file} className='w-10 h-10 object-cover rounded-full border-none'></iframe> 
+                                                                </div>
                                                             ) : (
-                                                                'Upload'
+                                                                <p className='font-bold text-blue-800 dark:text-white'>
+                                                                    UPLOAD
+                                                                </p>
                                                             )
                                                         )
                                                     }
