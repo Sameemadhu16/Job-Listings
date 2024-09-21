@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Avatar, TextInput, Label , Spinner } from 'flowbite-react';
-import { FiSend, FiHash } from 'react-icons/fi'; // React icons for hash and send button
+import { FiSend, FiHash ,FiPaperclip, FiFile } from 'react-icons/fi'; // React icons for hash and send button
 import { useParams } from 'react-router-dom';
 import Message from '../components/Message';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { app } from '../firebase'; // Make sure your firebase.js or config file is imported properly
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import { Worker } from '@react-pdf-viewer/core';
+import { Viewer } from '@react-pdf-viewer/default-layout';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+
 
 export default function PosterChatBox() {
 
@@ -15,13 +24,103 @@ export default function PosterChatBox() {
     const [user, setUser] = useState([]);
     const {postId , sendId} = useParams();
     const [loading,setLoading] = useState(false);
+    const [file,setFile] = useState(null);
+    const [pdfFile,setPdfFile] = useState(null)
     const [formData, setFormData] = useState({
         sendId: currentUser.currentUser._id,
         reciveId:'',
-        message: ''
+        message: '',
+        file:'',
+        image:''
     });
+    const [fileUploadProgress, setFileUploadProgress] = useState(null);
+    const [imageUploadProgress, setImageUploadProgress] = useState(null);
+    const [fileUploadProgressFailure, setFileUploadFailure] = useState(null);
+    const [imageUploadProgressFailure, setImageUploadFailure] = useState(null);
+    const [numPages, setNumPages] = useState();
+    const [pageNumber, setPageNumber] = useState(1);
 
+    const uploadImage = async () => {
+        try{
+            setImageUploadFailure(null);
+            const storage = getStorage(app);
+            const fileName = new Date().getTime() + '_' + file.name;
+            const storageRef = ref(storage,fileName)
 
+            const uploadTask = uploadBytesResumable(storageRef, file);
+            uploadTask.on(
+                'state_changed',
+                (snapshot) => {
+                const progress =
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    setImageUploadProgress(progress.toFixed(0));
+                },
+                (error) => {
+                setImageUploadFailure('File upload fail')
+                setImageUploadProgress(null);
+                setFile(null)
+                },
+                () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    setImageUploadProgress(null);
+                    setImageUploadFailure(null);
+                    setFormData({ ...formData, image: downloadURL });
+                    
+                });
+
+                },
+            )
+        }
+        catch (error) {
+            console.log(error);
+            setImageUploadFailure("File upload Failed")
+            setImageUploadProgress(null);
+            setFile(null)
+            console.log(error);
+        }
+    }
+
+    const uploadFile = async () => {
+        try{
+            setFileUploadFailure(null);
+            const storage = getStorage(app);
+            const fileName = new Date().getTime() + '_' + pdfFile.name;
+            const storageRef = ref(storage,fileName)
+
+            const uploadTask = uploadBytesResumable(storageRef, pdfFile);
+            uploadTask.on(
+                'state_changed',
+                (snapshot) => {
+                const progress =
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    setFileUploadProgress(progress.toFixed(0));
+                },
+                (error) => {
+                setFileUploadFailure('File upload fail')
+                setFileUploadProgress(null);
+                setPdfFile(null)
+                },
+                () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    setFileUploadProgress(null);
+                    setFileUploadFailure(null);
+                    setFormData({ ...formData, file: downloadURL });
+                    
+                });
+
+                },
+            )
+        }
+        catch (error) {
+            console.log(error);
+            setFileUploadFailure("File upload Failed")
+            setFileUploadProgress(null);
+            setPdfFile(null)
+            console.log(error);
+        }
+    }
+
+    
     useEffect(() => {
         try {
             const fetchUser = async () => {
@@ -60,6 +159,9 @@ export default function PosterChatBox() {
             formData.postId = postId
             formData.reciveId = sendId
             
+            if(formData.message === '' && formData.file === '' && formData.image === ''){
+                return;
+            }
             const res = await fetch(`/api/message/create-message/${currentUser.currentUser._id}/${formData.reciveId}`, {
                 method: 'POST',
                 headers: {
@@ -72,18 +174,28 @@ export default function PosterChatBox() {
     
             if (!res.ok) {
                 setPublishError(data.message);
+                setFile(null)
                 return;
             }
     
             setPublishError(null);
+            setFile(null);
+            setPdfFile(null)
             setFormData(prevFormData => ({
                 ...prevFormData,
-                message: ''
+                message: '',
+                file:'',
+                image:''
             }));
         } catch (error) {
             console.error("Failed to send message:", error);
             setPublishError("Failed to send message. Please try again.");
         }
+    };
+
+    // Trigger file input click
+    const handleIconClick = (id) => {
+        document.getElementById(id).click();
     };
     
 
@@ -112,14 +224,32 @@ export default function PosterChatBox() {
     
     }, [currentUser.currentUser._id, user._id]); // Add user._id to the dependency array
     
+    
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        
+        if (e.target.id === 'image') {
+            setFile(file); // If the file input has an ID of 'image', set the file state
+        } else if (e.target.id === 'file') {
+            setPdfFile(file); // If the file input has an ID of 'file', set the PDF file state
+        }
+    };
 
-    return (
+    
+    return ( 
         <div className='min-h-screen'>
             <div className='p-10 bg-blue-50 dark:bg-slate-700'>
-                <h1 className='text-3xl font-semibold text-black dark:text-white'>Chat</h1>
-                <p className='text-slate-600 dark:text-slate-200 mt-2'>Connect and chat with users in real-time, where every conversation brings us closer together!</p>
-                <div className='flex justify-center items-center'>
-                    <div className='w-full md:w-3/4 flex flex-col mt-10'>
+                <div className='text-center flex flex-col items-center justify-center'>
+                    <div className='flex flex-row text-center items-center gap-1'>
+                        <p className='text-3xl font-bold text-blue-800 dark:text-white'>
+                            Chat With 
+                        </p>
+                        <Label className="text-sm font-bold text-blue-600 border-2 border-blue-400 dark:text-blue-200 dark:border-blue-200 px-2 py-1">Finder</Label>
+                    </div>
+                    <p className='text-slate-600 dark:text-slate-200 mt-2'>Connect and chat with users in real-time, where every conversation brings us closer together!</p>
+                </div>
+                <div className='flex justify-center items-center '>
+                    <div className='w-full md:w-3/4 flex flex-col mt-10 shadow-lg'>
                         <div className='bg-white dark:bg-slate-800 rounded-lg'>
                             <div className='p-5 border-b-2 border-b-slate-400'>
                                 <div className='flex items-center gap-2'>
@@ -147,7 +277,7 @@ export default function PosterChatBox() {
                                 </div>
                             </div>
                             <div>
-                                <form className="flex items-center w-full p-2 bg-white dark:bg-slate-800 border-t border-gray-200 dark:border-gray-400" onSubmit={sendMessage}>
+                                <form className="flex gap-1 items-center w-full p-2 bg-white dark:bg-slate-800 border-t border-gray-200 dark:border-gray-400" onSubmit={sendMessage}>
                                     {/* Icon on the left */}
                                     <FiHash className="text-gray-400 dark:text-white text-xl mx-2" />
 
@@ -161,16 +291,119 @@ export default function PosterChatBox() {
                                         className="flex-grow bg-transparent border-none focus:ring-0 focus:outline-none text-sm text-gray-600 dark:text-white placeholder-gray-400 dark:placeholder-white px-2"
                                     />
 
-                                    {/* Send button */}
-                                    <button type="submit" className="text-blue-500 dark:text-white hover:bg-blue-100 dark:hover:bg-slate-700 p-2 rounded-full">
-                                        <FiSend className="text-xl" />
-                                    </button>
-                                </form>
+                                    {/* Hidden file input */}
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        id="image"
+                                        onChange={handleFileChange}
+                                        style={{ display: 'none' }} // Hide the file input
+                                    />
+
+                                    <input
+                                        type="file"
+                                        accept=".pdf"
+                                        id="file"
+                                        onChange={handleFileChange}
+                                        style={{ display: 'none' }} // Hide the file input
+                                    />
+
+                                    
+                                    {
+                                        file ? (
+                                            <button type='button' onClick={uploadImage}>
+                                                {
+                                                    imageUploadProgress ? (
+                                                        <CircularProgressbar
+                                                            className='h-10 text-white bg-white dark:bg-slate-800'
+                                                            value={imageUploadProgress}
+                                                            text={`${imageUploadProgress || 0}%`}
+                                                        />
+                                                    ) : (
+                                                        formData.image ? (
+                                                            <img
+                                                                src={formData.image}
+                                                                className="w-10 h-10 object-cover rounded-full shadow-md"
+                                                                alt="Uploaded"
+                                                            />
+                                                        ) : (
+                                                            <p className='font-bold text-blue-800 dark:text-white'>
+                                                                UPLOAD
+                                                            </p>
+                                                        )
+                                                    )
+                                                }
+                                            </button>
+
+                                        ):(
+                                            <div className='relative group'>
+                                                <button type='button' className="text-blue-500 dark:text-white hover:bg-blue-100 dark:hover:bg-slate-700 p-2 rounded-full">
+                                                    <FiPaperclip 
+                                                    onClick={()=>handleIconClick('image')} 
+                                                    className="text-xl"/>
+                                                </button>
+                                                <span className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 text-xs text-white bg-gray-800 rounded py-1 px-2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                    Attach Image
+                                                </span>
+
+                                            </div>
+                                        )
+                                    }
+
+                                        {
+                                            pdfFile ? (
+                                                <button type='button' onClick={uploadFile}>
+                                                    {
+                                                        fileUploadProgress ? (
+                                                            <CircularProgressbar
+                                                                className='h-10 text-white bg-white dark:bg-slate-800'
+                                                                value={fileUploadProgress}
+                                                                text={`${fileUploadProgress || 0}%`}
+                                                            />
+                                                        ) : (
+                                                            formData.file ? (
+                                                                <div className='rounded-full shadow-md cursor-pointer'>
+                                                                    <iframe src={formData.file} className='w-10 h-10 object-cover rounded-full border-none'></iframe> 
+                                                                </div>
+                                                            ) : (
+                                                                <p className='font-bold text-blue-800 dark:text-white'>
+                                                                    UPLOAD
+                                                                </p>
+                                                            )
+                                                        )
+                                                    }
+                                                </button>
+
+                                            ):(
+                                                <div className='relative group'>
+                                                    <button type='button' className="text-blue-500 dark:text-white hover:bg-blue-100 dark:hover:bg-slate-700 p-2 rounded-full">
+                                                        <FiFile 
+                                                        onClick={()=>handleIconClick('file')} 
+                                                        className="text-xl"/>
+                                                    </button>
+                                                    <span className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 text-xs text-white bg-gray-800 rounded py-1 px-2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                        Attach Document
+                                                    </span>
+
+                                                </div>
+                                            )
+                                        }
+
+                                        <div className='relative group'>
+                                            {/* Send button */}
+                                            <button type="submit" className="text-blue-500 dark:text-white hover:bg-blue-100 dark:hover:bg-slate-700 p-2 rounded-full">
+                                                <FiSend className="text-xl" />
+                                            </button>
+                                            <span className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 text-xs text-white bg-gray-800 rounded py-1 px-2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                Send Message
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
-}
+        );
+    }
