@@ -36,6 +36,7 @@ export default function Chat() {
     const [fileUploadProgressFailure, setFileUploadFailure] = useState(null);
     const [imageUploadProgressFailure, setImageUploadFailure] = useState(null);
 
+
     const uploadImage = async () => {
         try{
             setImageUploadFailure(null);
@@ -142,6 +143,7 @@ export default function Chat() {
                     setPost(data);
                     setUserId(data.userId);
                     setLoading(false);
+                    
                 }
                 if (!res.ok) {
                     console.log(data.message);
@@ -172,6 +174,10 @@ export default function Chat() {
             console.log(error.message);
         }
     }, [userId]);
+    
+    const getSuggestionStyle =async () => {
+        return hasSuggestions ? "dark:bg-slate-600" : "dark:bg-slate-700";
+    };
 
     // Handle input change for the message field
     const handleInputChange = (e) => {
@@ -219,11 +225,13 @@ export default function Chat() {
                 file:'',
                 image:''
             }));
+            setHasSuggestions(true);
         } catch (error) {
             console.error("Failed to send message:", error);
             setPublishError("Failed to send message. Please try again.");
         }
     };
+
     
 
     useEffect(() => {
@@ -304,7 +312,8 @@ export default function Chat() {
                                         value={formData.message}
                                         id='message'
                                         onChange={handleInputChange}
-                                        className="flex-grow bg-transparent border-none focus:ring-0 focus:outline-none text-sm text-gray-600 dark:text-white placeholder-gray-400 dark:placeholder-white px-2"
+                                        className={`flex-grow bg-transparent border-none focus:ring-0 focus:outline-none text-sm text-gray-600 dark:text-white placeholder-gray-400 dark:placeholder-white dark:bg-slate-700 px-2`}
+                                        autoComplete="off" 
                                     />
 
                                     {/* Hidden file input */}
@@ -407,7 +416,7 @@ export default function Chat() {
 
                                         <div className='relative group'>
                                             {/* Send button */}
-                                            <button type="submit" className="text-blue-500 dark:text-white hover:bg-blue-100 dark:hover:bg-slate-700 p-2 rounded-full">
+                                            <button type="submit" className={`text-blue-500 dark:text-white hover:bg-blue-100 p-2 rounded-full`} >
                                                 <FiSend className="text-xl" />
                                             </button>
                                             <span className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 text-xs text-white bg-gray-800 rounded py-1 px-2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">

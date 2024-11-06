@@ -12,6 +12,7 @@ import jobposterRoutes from './routes/jobposter.route.js'
 import responseRoutes from './routes/savecandidate.js'
 import messageRoutes from './routes/message.route.js'
 import cors from 'cors'
+import Message from './models/message.model.js';
 
 dotenv.config();
 
@@ -20,6 +21,9 @@ mongoose.connect("mongodb+srv://ilakshitha7921:ilakshitha7921@cluster0.gfhczos.m
 
   .then(() => {
     console.log('MongoDB is conected');
+    // Message.deleteMany({})
+    //   .then(() => console.log('Messages deleted'))
+    //    .catch(err => console.log('Error deleting messages:', err));
   })
   .catch((err) => {
     console.log(err);
