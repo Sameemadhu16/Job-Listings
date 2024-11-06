@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Spinner } from 'flowbite-react';
 import logo from '../images/Jobpilot.png';
 
+
 const SignUp = () => {
     const [formData, setFormData] = useState({
         username: '',
@@ -190,3 +191,4 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
