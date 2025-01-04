@@ -1,4 +1,4 @@
-🚀Introducing JobListings – Your Ultimate Job Connection Platform!
+Introducing JobListings – Your Ultimate Job Connection Platform!
 
 Finding the perfect job or candidate has never been easier! JobListings is a modern platform that connects job seekers and employers seamlessly. Whether you’re looking to hire top talent or find your dream job, JobListings has got you covered.
 🌟Why JobListings Stands Out:
